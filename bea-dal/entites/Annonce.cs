@@ -7,10 +7,9 @@ namespace bea_dal.map {
     
     public class Annonce {
         public Annonce() { }
-        public int annonceId { get; set; }
-        public Posteur posteur { get; set; }
-        public string titre { get; set; }
-        public string corps { get; set; }
-        public string posteurFk { get; set; }
+        public virtual int annonceId { get; set; }
+        public virtual Posteur posteur { get; set; }
+        public virtual string titre { get; set; }
+        public virtual string corps { get; set; }
     }
 }

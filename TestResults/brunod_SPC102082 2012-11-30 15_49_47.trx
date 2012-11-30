@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="160318c7-004a-4e47-b7df-68d6a18f6330" name="brunod@SPC102082 2012-11-30 15:49:47" runUser="NOUMEA\brunod" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="7a1f95b2-75af-44d0-be03-c0722d747bca">
+    <Deployment userDeploymentRoot="C:\dev\bea\bea-web\TestResults" useDefaultDeploymentRoot="false" runDeploymentRoot="brunod_SPC102082 2012-11-30 15_49_47">
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\MySql.Data.6.5.4\lib\net40\MySql.Data.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\bea-web.Tests\bin\Debug\MySql.Data.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\FluentNHibernate.1.3.0.733\lib\FluentNHibernate.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\bea-dal\bin\Debug\bea-dal.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\NHibernate.3.3.2.4000\lib\Net35\NHibernate.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\bea-web\bin\bea-web.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll" />
+      <DeploymentItem filename="C:\dev\bea\bea-web\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2012-11-30T15:49:47.5674558+11:00" queuing="2012-11-30T15:49:48.3354558+11:00" start="2012-11-30T15:49:48.3844558+11:00" finish="2012-11-30T15:50:39.8424558+11:00" />
+  <ResultSummary outcome="Error">
+    <Counters total="1" executed="1" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="SPC102082" outcome="Error" timestamp="2012-11-30T15:50:39.8414558+11:00">
+        <Text>Test host process exited unexpectedly.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="PosteurMapConstructorTest" storage="c:\dev\bea\bea-web\bea-web.tests\bin\debug\bea-web.tests.dll" id="ed27aa71-0830-1598-1d3c-3505a9545a83">
+      <Execution id="008532d9-0d12-4264-9d78-8f8e8eba11c2" />
+      <TestMethod codeBase="C:/dev/bea/bea-web/bea-web.Tests/bin/Debug/bea-web.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="bea_web.Tests.PosteurMapTest, bea-web.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="PosteurMapConstructorTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="ed27aa71-0830-1598-1d3c-3505a9545a83" executionId="008532d9-0d12-4264-9d78-8f8e8eba11c2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="008532d9-0d12-4264-9d78-8f8e8eba11c2" testId="ed27aa71-0830-1598-1d3c-3505a9545a83" testName="PosteurMapConstructorTest" computerName="SPC102082" duration="00:00:51.4280000" startTime="2012-11-30T15:49:48.4144558+11:00" endTime="2012-11-30T15:50:39.8424558+11:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="008532d9-0d12-4264-9d78-8f8e8eba11c2">
+    </UnitTestResult>
+  </Results>
+</TestRun>
