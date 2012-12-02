@@ -2,4 +2,4 @@ TestResults/*
 packages/*
 */bin/*
 */obj/*
-
+*.suo
