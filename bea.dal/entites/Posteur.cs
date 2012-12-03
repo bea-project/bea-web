@@ -3,7 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 
 
-namespace bea_dal.map {
+namespace bea.dal.map {
     
     public class Posteur {
         public Posteur()

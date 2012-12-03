@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using NHibernate;
 using NHibernate.Linq;
 
-namespace bea_dal
+namespace bea.dal
 {
     /// <typeparam name="T">Any entity that can be mapped to a Fluent NHibernate entity.</typeparam>
     public class Repository<T> : IDisposable where T : class

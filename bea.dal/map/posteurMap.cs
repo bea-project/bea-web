@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using FluentNHibernate.Mapping;
 
-namespace bea_dal.map
+namespace bea.dal.map
 {
-
-
     public class PosteurMap : ClassMap<Posteur>
     {
-
         public PosteurMap()
         {
             Table("posteur");

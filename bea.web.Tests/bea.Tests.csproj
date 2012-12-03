@@ -66,9 +66,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
@@ -120,20 +117,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Shadow Include="Test References\bea-dal.accessor" />
+    <Shadow Include="Test References\bea.dal.accessor" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\bea-dal\bea-dal.csproj">
+    <ProjectReference Include="..\bea.dal\bea.dal.csproj">
       <Project>{E758260E-04BD-49C6-974A-D3EB9322716F}</Project>
       <Name>bea-dal</Name>
     </ProjectReference>
-    <ProjectReference Include="..\bea-web\bea-web.csproj">
+    <ProjectReference Include="..\bea.web\bea.web.csproj">
       <Project>{5FB8F688-2104-4A45-B0C4-26A5746D6DBD}</Project>
       <Name>bea-web</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

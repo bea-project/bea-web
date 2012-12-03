@@ -1,14 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea-web", "bea-web\bea-web.csproj", "{5FB8F688-2104-4A45-B0C4-26A5746D6DBD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.web", "bea.web\bea.web.csproj", "{5FB8F688-2104-4A45-B0C4-26A5746D6DBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.Tests", "bea-web.Tests\bea.Tests.csproj", "{F1090E55-AC8F-4BA1-8C0D-90E4C0569762}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.Tests", "bea.web.Tests\bea.Tests.csproj", "{F1090E55-AC8F-4BA1-8C0D-90E4C0569762}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E758260E-04BD-49C6-974A-D3EB9322716F} = {E758260E-04BD-49C6-974A-D3EB9322716F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea-dal", "bea-dal\bea-dal.csproj", "{E758260E-04BD-49C6-974A-D3EB9322716F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.dal", "bea.dal\bea.dal.csproj", "{E758260E-04BD-49C6-974A-D3EB9322716F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E9B4D713-60C2-43EA-BF9D-3E7A75387A6C}"
 	ProjectSection(SolutionItems) = preProject

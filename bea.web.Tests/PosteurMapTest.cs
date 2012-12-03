@@ -1,11 +1,11 @@
-﻿using bea_dal.map;
+﻿using bea.dal.map;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using bea_dal;
+using bea.dal;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace bea_web.Tests
+namespace bea.web.Tests
 {
     
     
