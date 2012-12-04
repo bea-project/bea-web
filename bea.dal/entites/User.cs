@@ -16,5 +16,12 @@ namespace bea.dal.entities
         public virtual string email { get; set; }
         public virtual string password { get; set; }
         public virtual IList<Ad> ads { get; set; }
+
+        //Add the Ad to the user and set the Ad created by to this
+        public virtual void AddAd(Ad adToBeAdded)
+        {
+            this.ads.Add(adToBeAdded);
+            adToBeAdded.createdBy = this;
+        }
     }
 }

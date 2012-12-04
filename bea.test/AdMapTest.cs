@@ -19,13 +19,11 @@ namespace bea.test
             User bruno = new Repository<User>(Session).FilterBy(x => x.email.Equals("bruno.deprez@gmail.com")).First();
             toBeAdded.title = "Machine a cafe";
             toBeAdded.body = "Magnifique machine Nespresso dedicacee par Georges Clooney";
-            toBeAdded.createdBy = bruno;
-            bruno.ads.Add(toBeAdded);
+            bruno.AddAd(toBeAdded);
             Session.Save(toBeAdded);
             Session.SaveOrUpdate(bruno);
             Session.Flush();
             Assert.IsTrue(bruno.ads.Count == 2);
-
         }
     }
 }

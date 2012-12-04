@@ -12,8 +12,45 @@ namespace bea.test
     public class UserMapTest : InMemoryData
     {
         [TestMethod]
+        public void AddUserWithoutPassword()
+        {
+            //Password is set to be non nullable, the save should throw an exception, and the user should not be added
+            User userToBeAdded = new User();
+            userToBeAdded.email = "userToBeAdded@bea.com";
+            try
+            {
+                Session.Save(userToBeAdded);
+                Session.Flush();
+            }
+            catch (Exception e)
+            {}
+            
+            IQueryable<User> userToBeAddedFromDb = new Repository<User>(Session).FilterBy(x => x.email.Equals("userToBeAdded@bea.com"));
+            Assert.IsTrue(userToBeAddedFromDb.Count() == 0);
+        }
+
+        [TestMethod]
+        public void AddUserWithoutEmail()
+        {
+            //Password is set to be non nullable, the save should throw an exception, and the user should not be added
+            User userToBeAdded = new User();
+            userToBeAdded.password = "userToBeAddedPwd";
+            try
+            {
+                Session.Save(userToBeAdded);
+                Session.Flush();
+            }
+            catch (Exception e)
+            { }
+
+            IQueryable<User> userToBeAddedFromDb = new Repository<User>(Session).FilterBy(x => x.email.Equals("userToBeAdded@bea.com"));
+            Assert.IsTrue(userToBeAddedFromDb.Count() == 0);
+        }
+
+        [TestMethod]
         public void AddUser()
         {
+            //This user has both email and assword, the save should work and the user added to the database
             User userToBeAdded = new User();
             userToBeAdded.email = "userToBeAdded@bea.com";
             userToBeAdded.password = "userToBeAddedPwd";
@@ -28,6 +65,7 @@ namespace bea.test
         {
             //Time to kill Nico !!
             User nico = new Repository<User>(Session).FilterBy(x => x.email.Equals("nicolas.raynaud@gmail.com")).First();
+            Assert.IsNotNull(nico);
             Session.Delete(nico);
             Session.Flush();
             List<User> isNicoStillAlive = new Repository<User>(Session).FilterBy(x => x.email.Equals("nicolas.raynaud@gmail.com")).ToList<User>();
@@ -37,8 +75,18 @@ namespace bea.test
         [TestMethod]
         public void RemoveUserWithAds()
         {
-            // TODO Make sure all the ads of a user are deleted before deleting it
-            // Should be done at database level to ensure 100% data integrity
+            //Time to kill Bruno
+            //Bruno has the only Ad of the database, deleting him should set the total number of ads of the db to 0
+
+            IQueryable<Ad> ads = new Repository<Ad>(Session).All();
+            Assert.IsTrue(ads.Count() == 1);
+
+            User bruno = new Repository<User>(Session).FilterBy(x => x.email.Equals("bruno.deprez@gmail.com")).First();
+            Assert.IsNotNull(bruno);
+            Session.Delete(bruno);
+            Session.Flush();
+            ads = new Repository<Ad>(Session).All();
+            Assert.IsTrue(ads.Count() == 0);
         }
     }
 }
