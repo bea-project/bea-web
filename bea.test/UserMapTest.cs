@@ -24,7 +24,7 @@ namespace bea.test
         }
         
         [TestMethod]
-        public void RemoveUser()
+        public void RemoveUserWithoutAds()
         {
             //Time to kill Nico !!
             User nico = new Repository<User>(Session).FilterBy(x => x.email.Equals("nicolas.raynaud@gmail.com")).First();
@@ -32,6 +32,13 @@ namespace bea.test
             Session.Flush();
             List<User> isNicoStillAlive = new Repository<User>(Session).FilterBy(x => x.email.Equals("nicolas.raynaud@gmail.com")).ToList<User>();
             Assert.IsTrue(isNicoStillAlive.Count() == 0);
+        }
+
+        [TestMethod]
+        public void RemoveUserWithAds()
+        {
+            // TODO Make sure all the ads of a user are deleted before deleting it
+            // Should be done at database level to ensure 100% data integrity
         }
     }
 }
