@@ -1,11 +1,12 @@
-﻿using bea.dal.map;
+﻿using bea.dal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using bea.dal;
+using bea.dal.entities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace bea.web.Tests
+
+namespace bea.Tests
 {
     
     
@@ -14,7 +15,7 @@ namespace bea.web.Tests
     ///to contain all PosteurMapTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class PosteurMapTest
+    public abstract class PosteurMapTest : InMemoryData
     {
         private TestContext testContextInstance;
 
@@ -82,19 +83,28 @@ namespace bea.web.Tests
 
         /// <summary>
         ///</summary>
-        [TestMethod()]
-        public void PosteurAnnoncesDataBaseMapping()
-        {
-            NHibernateHelper helper = new NHibernateHelper();
-            Assert.IsNotNull(helper);
-            UnitOfWork unitOfWork = new UnitOfWork(helper.SessionFactory);
-            Assert.IsNotNull(unitOfWork);
-            Repository<Posteur> repo = new Repository<Posteur>(unitOfWork.Session);
-            Assert.IsNotNull(repo);
-            List<Posteur> posteurs = repo.All().ToList();
-            Assert.IsTrue(posteurs.Count > 0);
-            Posteur posteur = posteurs[0];
-            Assert.IsTrue(posteur.annonces.Count > 0);
-        }
+        //[TestMethod()]
+        //public void PosteurAnnoncesDataBaseMapping()
+        //{
+        //    NHibernateHelper helper = new NHibernateHelper();
+        //    Assert.IsNotNull(helper);
+        //    UnitOfWork unitOfWork = new UnitOfWork(helper.SessionFactory);
+        //    Assert.IsNotNull(unitOfWork);
+        //    Repository<Posteur> repo = new Repository<Posteur>(unitOfWork.Session);
+        //    Assert.IsNotNull(repo);
+        //    List<Posteur> posteurs = repo.All().ToList();
+        //    Assert.IsTrue(posteurs.Count > 0);
+        //    Posteur posteur = posteurs[0];
+        //    Assert.IsTrue(posteur.annonces.Count > 0);
+        //}
+
+        //[TestMethod()]
+        //public void PosteurInMemoryDataBaseMapping()
+        //{
+        //    Repository<Posteur> repo = new Repository<Posteur>(Session);
+        //    Assert.IsNotNull(repo);
+        //    List<Posteur> posteurs = repo.All().ToList();
+        //    Assert.IsTrue(posteurs.Count > 0);
+        //}
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using FluentNHibernate.Mapping;
+using bea.dal.entities;
 
 namespace bea.dal.map
 {
