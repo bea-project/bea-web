@@ -61,12 +61,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="entites\Ad.cs" />
+    <Compile Include="entites\location\City.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="entites\location\Province.cs" />
     <Compile Include="entites\User.cs" />
     <Compile Include="InMemoryData.cs" />
     <Compile Include="InMemoryDatabase.cs" />
     <Compile Include="map\AdMap.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="map\location\CityMap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="map\location\ProvinceMap.cs" />
     <Compile Include="map\UserMap.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -86,6 +94,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

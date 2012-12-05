@@ -14,6 +14,7 @@ namespace bea.dal.map
             Id(x => x.userId).GeneratedBy.Identity();
             Map(x => x.email).Not.Nullable();
             Map(x => x.password).Not.Nullable();
+            Map(x => x.creationDate);
             HasMany<Ad>(x => x.ads).AsBag().Cascade.All();
         }
     }

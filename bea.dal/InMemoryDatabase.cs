@@ -8,6 +8,8 @@ using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using bea.dal.entities;
+using bea.dal.entites.location;
+using bea.dal.map;
 
 namespace bea.dal
 {
@@ -28,8 +30,7 @@ namespace bea.dal
         {
             return Fluently.Configure()
               .Database(SQLiteConfiguration.Standard.InMemory().ShowSql())
-              .Mappings(M => M.FluentMappings.AddFromAssemblyOf<User>() )
-              .Mappings(M => M.FluentMappings.AddFromAssemblyOf<Ad>())
+              .Mappings(m => m.FluentMappings.AddFromAssemblyOf<User>())
               .ExposeConfiguration(Cfg => _configuration = Cfg)
               .BuildSessionFactory();
         }
