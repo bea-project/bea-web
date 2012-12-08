@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using bea.dal.entities;
 
-namespace bea.dal.entities
+namespace bea.domain
 {
     public class User
     {

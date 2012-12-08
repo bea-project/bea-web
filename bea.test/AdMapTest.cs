@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using bea.dal;
-using bea.dal.entities;
-using bea.dal.entites.location;
+using bea.domain;
+using bea.domain.location;
 
 namespace bea.test
 {

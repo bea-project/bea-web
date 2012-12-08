@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using bea.dal.entites.location;
+using bea.domain.location;
 
-namespace bea.dal.entities
+namespace bea.domain
 {
     public class Ad
     {

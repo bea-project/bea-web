@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using bea.dal.entities;
 
-namespace bea.dal.entites.location
+namespace bea.domain.location
 {
     public class City
     {

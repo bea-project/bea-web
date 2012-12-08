@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using bea.dal.entities;
-using bea.dal.entites.location;
+using bea.domain;
+using bea.domain.location;
 
 namespace bea.dal
 {

@@ -3,7 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using bea.dal.entities;
+using bea.domain;
 using bea.dal;
 
 namespace bea.test
@@ -22,7 +22,7 @@ namespace bea.test
                 Session.Save(userToBeAdded);
                 Session.Flush();
             }
-            catch (Exception e)
+            catch
             {}
             
             IQueryable<User> userToBeAddedFromDb = new Repository<User>(Session).FilterBy(x => x.email.Equals("userToBeAdded@bea.com"));
@@ -40,7 +40,7 @@ namespace bea.test
                 Session.Save(userToBeAdded);
                 Session.Flush();
             }
-            catch (Exception e)
+            catch
             { }
 
             IQueryable<User> userToBeAddedFromDb = new Repository<User>(Session).FilterBy(x => x.email.Equals("userToBeAdded@bea.com"));

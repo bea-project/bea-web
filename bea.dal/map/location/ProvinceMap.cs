@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using bea.domain.location;
 using FluentNHibernate.Mapping;
-using bea.dal.entites.location;
 
 namespace bea.dal.map.location
 {
