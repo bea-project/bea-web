@@ -8,7 +8,7 @@ using bea.test.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 
-namespace bea.test.dal
+namespace bea.test.dal.map
 {
     [TestClass]
     public class UserMapTest : DataAccessTestBase
@@ -18,8 +18,8 @@ namespace bea.test.dal
         {
             //Password is set to be non nullable, the save should throw an exception, and the user should not be added
             User userToBeAdded = new User() {
-                email = "userToBeAdded@bea.com",
-                password = "secret"
+                Email = "userToBeAdded@bea.com",
+                Password = "secret"
             };
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
             Repository<User> repo = new Repository<User>(sessionFactory.GetCurrentSession());
@@ -28,8 +28,8 @@ namespace bea.test.dal
             {
                 sessionFactory.GetCurrentSession().Save(userToBeAdded);
 
-                sessionFactory.GetCurrentSession().Get<User>(userToBeAdded.userId);
-                IQueryable<User> userToBeAddedFromDb = repo.FilterBy(x => x.email.Equals("userToBeAdded@bea.com"));
+                sessionFactory.GetCurrentSession().Get<User>(userToBeAdded.UserId);
+                IQueryable<User> userToBeAddedFromDb = repo.FilterBy(x => x.Email.Equals("userToBeAdded@bea.com"));
                 Assert.IsTrue(userToBeAddedFromDb.Count() == 1);
             }
         }
@@ -40,8 +40,8 @@ namespace bea.test.dal
             //Password is set to be non nullable, the save should throw an exception, and the user should not be added
             User userToBeAdded = new User()
             {
-                email = "userToBeAdded@bea.com",
-                password = "secret"
+                Email = "userToBeAdded@bea.com",
+                Password = "secret"
             };
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
             Repository<User> repo = new Repository<User>(sessionFactory.GetCurrentSession());
@@ -50,8 +50,8 @@ namespace bea.test.dal
             {
                 sessionFactory.GetCurrentSession().Save(userToBeAdded);
 
-                sessionFactory.GetCurrentSession().Get<User>(userToBeAdded.userId);
-                IQueryable<User> userToBeAddedFromDb = repo.FilterBy(x => x.email.Equals("userToBeAdded@bea.com"));
+                sessionFactory.GetCurrentSession().Get<User>(userToBeAdded.UserId);
+                IQueryable<User> userToBeAddedFromDb = repo.FilterBy(x => x.Email.Equals("userToBeAdded@bea.com"));
                 Assert.IsTrue(userToBeAddedFromDb.Count() == 1);
             }
         }

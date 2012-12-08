@@ -11,11 +11,9 @@ namespace bea.dal.map.location
     {
         public CityMap()
         {
-            Table("city");
-            Id(x => x.cityId).GeneratedBy.Identity();
-            Map(x => x.label).Not.Nullable();
-            HasMany<Ad>(x => x.ads).AsBag();
-            //HasMany<District>(x => x.districts).AsBag();
+            Id(x => x.Id).GeneratedBy.Identity();
+            Map(x => x.Label).Not.Nullable();
+            HasMany<Ad>(x => x.Ads).AsBag();
         }
     }
 }

@@ -8,15 +8,12 @@ namespace bea.domain
 {
     public class Ad
     {
-        public Ad() {
-            this.creationDate = DateTime.Now;
-        }
-        public virtual int adId { get; set; }
-        public virtual User createdBy { get; set; }
-        public virtual DateTime creationDate { get; set; }
-        public virtual string title { get; set; }
-        public virtual string body { get; set; }
-        public virtual List<string> pictures { get; set; }
-        public virtual City location { get; set; }
+        public virtual int Id { get; set; }
+        public virtual User CreatedBy { get; set; }
+        public virtual DateTime CreationDate { get; set; }
+        public virtual string Title { get; set; }
+        public virtual string Body { get; set; }
+        public virtual List<string> Pictures { get; set; }
+        public virtual City City { get; set; }
     }
 }

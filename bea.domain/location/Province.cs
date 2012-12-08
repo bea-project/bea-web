@@ -17,7 +17,7 @@ namespace bea.domain.location
         public virtual void AddCity(City city)
         {
             this.cities.Add(city);
-            city.province = this;
+            city.Province = this;
         }
     }
 }

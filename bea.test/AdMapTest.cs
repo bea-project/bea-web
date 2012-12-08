@@ -18,18 +18,18 @@ namespace bea.test
             //User Bruno has one Ad, adding another one should bring his Ad list size to 2
             //This ad is located in Noumea, it should bring Noumea's number of ad to 2
             Ad toBeAdded = new Ad();
-            User bruno = new Repository<User>(Session).FilterBy(x => x.email.Equals("bruno.deprez@gmail.com")).First();
-            City noumea = new Repository<City>(Session).FilterBy(x => x.label.Equals("Noumea")).First();
-            toBeAdded.title = "Machine a cafe";
-            toBeAdded.body = "Magnifique machine Nespresso dedicacee par Georges Clooney";
+            User bruno = new Repository<User>(Session).FilterBy(x => x.Email.Equals("bruno.deprez@gmail.com")).First();
+            City noumea = new Repository<City>(Session).FilterBy(x => x.Label.Equals("Noumea")).First();
+            toBeAdded.Title = "Machine a cafe";
+            toBeAdded.Body = "Magnifique machine Nespresso dedicacee par Georges Clooney";
             bruno.AddAd(toBeAdded);
             noumea.AddAd(toBeAdded);
             Session.Save(toBeAdded);
             Session.SaveOrUpdate(bruno);
             Session.SaveOrUpdate(noumea);
             Session.Flush();
-            Assert.IsTrue(bruno.ads.Count == 2);
-            Assert.IsTrue(noumea.ads.Count == 2);
+            Assert.IsTrue(bruno.Ads.Count == 2);
+            Assert.IsTrue(noumea.Ads.Count == 2);
         }
     }
 }

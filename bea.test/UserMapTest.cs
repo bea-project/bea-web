@@ -16,7 +16,7 @@ namespace bea.test
         {
             //Password is set to be non nullable, the save should throw an exception, and the user should not be added
             User userToBeAdded = new User();
-            userToBeAdded.email = "userToBeAdded@bea.com";
+            userToBeAdded.Email = "userToBeAdded@bea.com";
             try
             {
                 Session.Save(userToBeAdded);
@@ -25,7 +25,7 @@ namespace bea.test
             catch
             {}
             
-            IQueryable<User> userToBeAddedFromDb = new Repository<User>(Session).FilterBy(x => x.email.Equals("userToBeAdded@bea.com"));
+            IQueryable<User> userToBeAddedFromDb = new Repository<User>(Session).FilterBy(x => x.Email.Equals("userToBeAdded@bea.com"));
             Assert.IsTrue(userToBeAddedFromDb.Count() == 0);
         }
 
@@ -34,7 +34,7 @@ namespace bea.test
         {
             //Password is set to be non nullable, the save should throw an exception, and the user should not be added
             User userToBeAdded = new User();
-            userToBeAdded.password = "userToBeAddedPwd";
+            userToBeAdded.Password = "userToBeAddedPwd";
             try
             {
                 Session.Save(userToBeAdded);
@@ -43,7 +43,7 @@ namespace bea.test
             catch
             { }
 
-            IQueryable<User> userToBeAddedFromDb = new Repository<User>(Session).FilterBy(x => x.email.Equals("userToBeAdded@bea.com"));
+            IQueryable<User> userToBeAddedFromDb = new Repository<User>(Session).FilterBy(x => x.Email.Equals("userToBeAdded@bea.com"));
             Assert.IsTrue(userToBeAddedFromDb.Count() == 0);
         }
 
@@ -52,11 +52,11 @@ namespace bea.test
         {
             //This user has both email and assword, the save should work and the user added to the database
             User userToBeAdded = new User();
-            userToBeAdded.email = "userToBeAdded@bea.com";
-            userToBeAdded.password = "userToBeAddedPwd";
+            userToBeAdded.Email = "userToBeAdded@bea.com";
+            userToBeAdded.Password = "userToBeAddedPwd";
             Session.Save(userToBeAdded);
             Session.Flush();
-            IQueryable<User> userToBeAddedFromDb = new Repository<User>(Session).FilterBy(x => x.email.Equals("userToBeAdded@bea.com"));
+            IQueryable<User> userToBeAddedFromDb = new Repository<User>(Session).FilterBy(x => x.Email.Equals("userToBeAdded@bea.com"));
             Assert.IsTrue(userToBeAddedFromDb.Count() == 1);
         }
         
@@ -64,11 +64,11 @@ namespace bea.test
         public void RemoveUserWithoutAds()
         {
             //Time to kill Nico !!
-            User nico = new Repository<User>(Session).FilterBy(x => x.email.Equals("nicolas.raynaud@gmail.com")).First();
+            User nico = new Repository<User>(Session).FilterBy(x => x.Email.Equals("nicolas.raynaud@gmail.com")).First();
             Assert.IsNotNull(nico);
             Session.Delete(nico);
             Session.Flush();
-            List<User> isNicoStillAlive = new Repository<User>(Session).FilterBy(x => x.email.Equals("nicolas.raynaud@gmail.com")).ToList<User>();
+            List<User> isNicoStillAlive = new Repository<User>(Session).FilterBy(x => x.Email.Equals("nicolas.raynaud@gmail.com")).ToList<User>();
             Assert.IsTrue(isNicoStillAlive.Count() == 0);
         }
 
@@ -81,7 +81,7 @@ namespace bea.test
             IQueryable<Ad> ads = new Repository<Ad>(Session).All();
             Assert.IsTrue(ads.Count() == 1);
 
-            User bruno = new Repository<User>(Session).FilterBy(x => x.email.Equals("bruno.deprez@gmail.com")).First();
+            User bruno = new Repository<User>(Session).FilterBy(x => x.Email.Equals("bruno.deprez@gmail.com")).First();
             Assert.IsNotNull(bruno);
             Session.Delete(bruno);
             Session.Flush();

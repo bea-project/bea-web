@@ -156,9 +156,21 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\bea.core\bea.core.csproj">
+      <Project>{984f2a39-d038-437a-95fc-0aae21adce4b}</Project>
+      <Name>bea.core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\bea.dal\bea.dal.csproj">
       <Project>{e758260e-04bd-49c6-974a-d3eb9322716f}</Project>
       <Name>bea.dal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\bea.domain\bea.domain.csproj">
+      <Project>{79c4229d-2a62-4fca-be59-60edbb6bf747}</Project>
+      <Name>bea.domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\bea.services\bea.services.csproj">
+      <Project>{2da715f9-c9ad-453a-b819-08997d81125d}</Project>
+      <Name>bea.services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -11,11 +11,11 @@ namespace bea.dal.map
         public UserMap()
         {
             Table("user");
-            Id(x => x.userId).GeneratedBy.Identity();
-            Map(x => x.email).Not.Nullable();
-            Map(x => x.password).Not.Nullable();
-            Map(x => x.creationDate);
-            HasMany<Ad>(x => x.ads).AsBag().Cascade.All();
+            Id(x => x.UserId).GeneratedBy.Identity();
+            Map(x => x.Email).Not.Nullable();
+            Map(x => x.Password).Not.Nullable();
+            Map(x => x.CreationDate);
+            HasMany<Ad>(x => x.Ads).AsBag().Cascade.All();
         }
     }
 }

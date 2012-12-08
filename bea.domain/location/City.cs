@@ -9,18 +9,18 @@ namespace bea.domain.location
     {
         public City()
         {
-            this.ads = new List<Ad>();
+            this.Ads = new List<Ad>();
         }
-        public virtual int cityId { get; set; }
-        public virtual string label { get; set; }
-        public virtual Province province { get; set; }
-        public virtual IList<Ad> ads { get; set; }
-        //public virtual IList<District> districts { get; set; }
+
+        public virtual int Id { get; set; }
+        public virtual string Label { get; set; }
+        public virtual Province Province { get; set; }
+        public virtual IList<Ad> Ads { get; set; }
 
         public virtual void AddAd(Ad ad)
         {
-            this.ads.Add(ad);
-            ad.location = this;
+            this.Ads.Add(ad);
+            ad.City = this;
         }
     }
 }

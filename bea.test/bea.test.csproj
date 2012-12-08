@@ -45,6 +45,9 @@
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NHibernate.3.3.2.4000\lib\Net35\NHibernate.dll</HintPath>
@@ -70,7 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdMapTest.cs" />
-    <Compile Include="dal\UserMapTest.cs" />
+    <Compile Include="dal\repository\AdRepositoryTest.cs" />
+    <Compile Include="dal\map\UserMapTest.cs" />
+    <Compile Include="services\AdServicesTest.cs" />
     <Compile Include="TestHelper\DataAccessTestBase.cs" />
     <Compile Include="TestHelper\SQLiteSessionFactoryFactory.cs" />
     <Compile Include="InMemoryTest.cs" />
@@ -105,7 +110,12 @@
       <Project>{79c4229d-2a62-4fca-be59-60edbb6bf747}</Project>
       <Name>bea.domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\bea.services\bea.services.csproj">
+      <Project>{2da715f9-c9ad-453a-b819-08997d81125d}</Project>
+      <Name>bea.services</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <PropertyGroup>

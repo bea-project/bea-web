@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.domain", "bea.domain\be
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.core", "bea.core\bea.core.csproj", "{984F2A39-D038-437A-95FC-0AAE21ADCE4B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.services", "bea.services\bea.services.csproj", "{2DA715F9-C9AD-453A-B819-08997D81125D}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = bea1.vsmdi
@@ -56,6 +58,10 @@ Global
 		{984F2A39-D038-437A-95FC-0AAE21ADCE4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{984F2A39-D038-437A-95FC-0AAE21ADCE4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{984F2A39-D038-437A-95FC-0AAE21ADCE4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DA715F9-C9AD-453A-B819-08997D81125D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DA715F9-C9AD-453A-B819-08997D81125D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DA715F9-C9AD-453A-B819-08997D81125D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DA715F9-C9AD-453A-B819-08997D81125D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
