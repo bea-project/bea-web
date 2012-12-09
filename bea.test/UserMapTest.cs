@@ -3,10 +3,10 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using bea.domain;
-using bea.dal;
+using Bea.Domain;
+using Bea.Dal;
 
-namespace bea.test
+namespace Bea.Test
 {
     [TestClass]
     public class UserMapTest : InMemoryData

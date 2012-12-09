@@ -6,7 +6,7 @@ using NHibernate;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
 
-namespace bea.dal
+namespace Bea.Dal
 {
     public class NHibernateHelper
     {

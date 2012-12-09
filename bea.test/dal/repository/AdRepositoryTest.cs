@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using bea.domain;
-using bea.domain.location;
-using bea.test.TestHelper;
-using bea_dal.repository;
+using Bea.Domain;
+using Bea.Domain.location;
+using Bea.Test.TestHelper;
+using Bea.Dal.repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 
-namespace bea.test.dal.repository
+namespace Bea.Test.dal.repository
 {
     [TestClass]
     public class AdRepositoryTest : DataAccessTestBase
@@ -18,7 +18,7 @@ namespace bea.test.dal.repository
         public void CountAdsByCity_2Citiesand3Ad_Return2elements()
         {
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
-            Repository repo = new Repository(sessionFactory);
+            Repository repo = new Repository(sessionFactory.GetCurrentSession());
             AdRepository adRepo = new AdRepository(sessionFactory);
 
             using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())

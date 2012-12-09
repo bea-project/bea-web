@@ -7,9 +7,9 @@ using NHibernate;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
-using bea.dal.map;
+using Bea.Dal.map;
 
-namespace bea.dal
+namespace Bea.Dal
 {
     public abstract class InMemoryDatabase : IDisposable
     {

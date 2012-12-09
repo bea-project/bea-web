@@ -7,8 +7,8 @@
     <ProjectGuid>{2DA715F9-C9AD-453A-B819-08997D81125D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>bea.services</RootNamespace>
-    <AssemblyName>bea.services</AssemblyName>
+    <RootNamespace>Bea.Services</RootNamespace>
+    <AssemblyName>Bea.Services</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -43,13 +43,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\bea.core\bea.core.csproj">
+    <ProjectReference Include="..\Bea.Core\Bea.Core.csproj">
       <Project>{984f2a39-d038-437a-95fc-0aae21adce4b}</Project>
-      <Name>bea.core</Name>
+      <Name>Bea.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\bea.domain\bea.domain.csproj">
+    <ProjectReference Include="..\Bea.Domain\Bea.Domain.csproj">
       <Project>{79c4229d-2a62-4fca-be59-60edbb6bf747}</Project>
-      <Name>bea.domain</Name>
+      <Name>Bea.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using bea.core.dal;
-using bea.core.services;
-using bea.domain;
-using bea.domain.location;
+using Bea.Core.dal;
+using Bea.Core.services;
+using Bea.Domain;
+using Bea.Domain.location;
 
-namespace bea.services
+namespace Bea.Services
 {
     public class AdServices : IAdServices
     {

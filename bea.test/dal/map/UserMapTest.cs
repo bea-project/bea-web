@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using bea.dal;
-using bea.domain;
-using bea.test.TestHelper;
+using Bea.Dal;
+using Bea.Domain;
+using Bea.Test.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 
-namespace bea.test.dal.map
+namespace Bea.Test.dal.map
 {
     [TestClass]
     public class UserMapTest : DataAccessTestBase

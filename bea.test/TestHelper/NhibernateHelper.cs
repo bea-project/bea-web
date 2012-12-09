@@ -1,11 +1,11 @@
-﻿using bea.dal.configuration;
+﻿using Bea.Dal.configuration;
 using NHibernate;
 
-namespace bea.test.TestHelper
+namespace Bea.Test.TestHelper
 {
     public class NhibernateHelper
     {
-        private static AbstractSessionFactoryFactory _sff = new SQLiteSessionFactoryFactory();
+        private static AbstractSessionFactoryFactory _sff = new SQLiteTestSessionFactoryFactory(true);
         private static ISessionFactory _sessionFactory;
 
         public static ISessionFactory SessionFactory
@@ -14,19 +14,10 @@ namespace bea.test.TestHelper
             {
                 if (_sessionFactory == null)
                 {
-                    _sessionFactory = _sff.SessionFactory;
+                    _sessionFactory = _sff.GetSessionFactory();
                 }
 
                 return _sessionFactory;
-            }
-        }
-
-
-        public static NHibernate.Cfg.Configuration Configuration
-        {
-            get
-            {
-                return _sff.Configuration;
             }
         }
     }

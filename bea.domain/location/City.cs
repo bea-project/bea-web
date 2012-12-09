@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace bea.domain.location
+namespace Bea.Domain.location
 {
     public class City
     {

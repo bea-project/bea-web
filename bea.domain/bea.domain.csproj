@@ -7,8 +7,8 @@
     <ProjectGuid>{79C4229D-2A62-4FCA-BE59-60EDBB6BF747}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>bea.domain</RootNamespace>
-    <AssemblyName>bea.domain</AssemblyName>
+    <RootNamespace>Bea.Domain</RootNamespace>
+    <AssemblyName>Bea.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

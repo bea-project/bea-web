@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.web", "bea.web\bea.web.csproj", "{5FB8F688-2104-4A45-B0C4-26A5746D6DBD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Web", "Bea.Web\Bea.Web.csproj", "{5FB8F688-2104-4A45-B0C4-26A5746D6DBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.dal", "bea.dal\bea.dal.csproj", "{E758260E-04BD-49C6-974A-D3EB9322716F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Dal", "Bea.Dal\Bea.Dal.csproj", "{E758260E-04BD-49C6-974A-D3EB9322716F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E9B4D713-60C2-43EA-BF9D-3E7A75387A6C}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E9B4D7
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.test", "bea.test\bea.test.csproj", "{8EF8FE0C-F0CA-494E-9974-20D1FB360CDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Test", "Bea.Test\Bea.Test.csproj", "{8EF8FE0C-F0CA-494E-9974-20D1FB360CDC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E758260E-04BD-49C6-974A-D3EB9322716F} = {E758260E-04BD-49C6-974A-D3EB9322716F}
 	EndProjectSection
@@ -23,11 +23,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Local.testsettings = Local.testsettings
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.domain", "bea.domain\bea.domain.csproj", "{79C4229D-2A62-4FCA-BE59-60EDBB6BF747}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Domain", "Bea.Domain\Bea.Domain.csproj", "{79C4229D-2A62-4FCA-BE59-60EDBB6BF747}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.core", "bea.core\bea.core.csproj", "{984F2A39-D038-437A-95FC-0AAE21ADCE4B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Core", "Bea.Core\Bea.Core.csproj", "{984F2A39-D038-437A-95FC-0AAE21ADCE4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bea.services", "bea.services\bea.services.csproj", "{2DA715F9-C9AD-453A-B819-08997D81125D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Services", "Bea.Services\Bea.Services.csproj", "{2DA715F9-C9AD-453A-B819-08997D81125D}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

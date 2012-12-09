@@ -4,3 +4,4 @@ packages/*
 */obj/*
 *.suo
 .nuget/*
+*.log

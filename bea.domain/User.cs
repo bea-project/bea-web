@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace bea.domain
+namespace Bea.Domain
 {
     public class User
     {

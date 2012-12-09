@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using bea.domain;
+using Bea.Domain;
 using FluentNHibernate.Mapping;
 
-namespace bea.dal.map
+namespace Bea.Dal.map
 {
     public class UserMap : ClassMap<User>
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace bea.core.dal
+namespace Bea.Core.dal
 {
     public interface IRepository
     {

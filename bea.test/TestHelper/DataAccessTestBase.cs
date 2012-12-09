@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate.Context;
 using NHibernate.Tool.hbm2ddl;
 
-namespace bea.test.TestHelper
+namespace Bea.Test.TestHelper
 {
     [TestClass]
     public class DataAccessTestBase
@@ -15,7 +15,6 @@ namespace bea.test.TestHelper
         public void MyTestInitialize()
         {
             CurrentSessionContext.Bind(NhibernateHelper.SessionFactory.OpenSession());
-            new SchemaExport(NhibernateHelper.Configuration).Execute(true, true, false, NhibernateHelper.SessionFactory.GetCurrentSession().Connection, null);
         }
 
         [TestCleanup()]

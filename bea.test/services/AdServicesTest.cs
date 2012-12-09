@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using bea.core.dal;
-using bea.domain.location;
-using bea.services;
-using bea.test.TestHelper;
+using Bea.Core.dal;
+using Bea.Domain.location;
+using Bea.Services;
+using Bea.Test.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace bea.test.services
+namespace Bea.Test.services
 {
     [TestClass]
     public class AdServicesTest : DataAccessTestBase

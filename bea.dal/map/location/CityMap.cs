@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using bea.domain;
-using bea.domain.location;
+using Bea.Domain;
+using Bea.Domain.location;
 using FluentNHibernate.Mapping;
 
-namespace bea.dal.map.location
+namespace Bea.Dal.map.location
 {
     public class CityMap : ClassMap<City>
     {

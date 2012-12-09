@@ -3,11 +3,11 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using bea.dal;
-using bea.domain;
-using bea.domain.location;
+using Bea.Dal;
+using Bea.Domain;
+using Bea.Domain.location;
 
-namespace bea.test
+namespace Bea.Test
 {
     [TestClass]
     public class AdMapTest:InMemoryData

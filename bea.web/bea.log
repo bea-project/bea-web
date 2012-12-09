@@ -1,0 +1,408 @@
+2012-12-09 14:30:22,828 [5] INFO  NHibernate.Cfg.Environment [(null)] - NHibernate 3.3.1.4000 (3.3.2.GA)
+2012-12-09 14:30:22,846 [5] INFO  NHibernate.Cfg.Environment [(null)] - hibernate-configuration section not found in application configuration file
+2012-12-09 14:30:22,847 [5] INFO  NHibernate.Cfg.Environment [(null)] - Bytecode provider name : lcg
+2012-12-09 14:30:22,848 [5] INFO  NHibernate.Cfg.Environment [(null)] - Using reflection optimizer
+2012-12-09 14:30:22,981 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Bea.Domain.Ad, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Ad`"><id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Id" /><generator class="identity" /></id><property name="Title" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Title" not-null="true" /></property><property name="Body" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Body" not-null="true" /></property><many-to-one class="Bea.Domain.User, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="CreatedBy"><column name="CreatedBy_id" not-null="true" /></many-to-one><many-to-one class="Bea.Domain.location.City, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="City"><column name="City_id" not-null="true" /></many-to-one></class></hibernate-mapping>
+2012-12-09 14:30:23,068 [5] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:30:23,104 [5] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapping class: Bea.Domain.Ad -> Ad
+2012-12-09 14:30:23,123 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: Id -> Id, type: Int32
+2012-12-09 14:30:23,134 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: Title -> Title, type: String
+2012-12-09 14:30:23,135 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: Body -> Body, type: String
+2012-12-09 14:30:23,142 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: CreatedBy -> CreatedBy_id, type: Bea.Domain.User
+2012-12-09 14:30:23,143 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: City -> City_id, type: Bea.Domain.location.City
+2012-12-09 14:30:23,151 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Bea.Domain.location.City, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`City`"><id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Id" /><generator class="identity" /></id><bag name="Ads"><key><column name="City_id" /></key><one-to-many class="Bea.Domain.Ad, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" /></bag><property name="Label" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Label" not-null="true" /></property></class></hibernate-mapping>
+2012-12-09 14:30:23,178 [5] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:30:23,180 [5] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapping class: Bea.Domain.location.City -> City
+2012-12-09 14:30:23,180 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: Id -> Id, type: Int32
+2012-12-09 14:30:23,193 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: Ads, type: System.Collections.Generic.ICollection`1[[Bea.Domain.Ad, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]](Bea.Domain.location.City.Ads)
+2012-12-09 14:30:23,194 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: Label -> Label, type: String
+2012-12-09 14:30:23,195 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Bea.Domain.location.Province, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="province"><id name="Id" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Id" /><generator class="identity" /></id><bag name="Cities"><key><column name="Province_id" /></key><one-to-many class="Bea.Domain.location.City, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" /></bag><property name="Label" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Label" not-null="true" /></property></class></hibernate-mapping>
+2012-12-09 14:30:23,210 [5] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:30:23,211 [5] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapping class: Bea.Domain.location.Province -> province
+2012-12-09 14:30:23,212 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: Id -> Id, type: Int32
+2012-12-09 14:30:23,213 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: Cities, type: System.Collections.Generic.ICollection`1[[Bea.Domain.location.City, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]](Bea.Domain.location.Province.Cities)
+2012-12-09 14:30:23,213 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: Label -> Label, type: String
+2012-12-09 14:30:23,214 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - Mapping XML:
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"><class xmlns="urn:nhibernate-mapping-2.2" name="Bea.Domain.User, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="user"><id name="UserId" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="UserId" /><generator class="identity" /></id><bag cascade="all" name="Ads"><key><column name="User_id" /></key><one-to-many class="Bea.Domain.Ad, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" /></bag><property name="Email" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Email" not-null="true" /></property><property name="Password" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="Password" not-null="true" /></property><property name="CreationDate" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"><column name="CreationDate" /></property></class></hibernate-mapping>
+2012-12-09 14:30:23,230 [5] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:30:23,231 [5] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapping class: Bea.Domain.User -> user
+2012-12-09 14:30:23,232 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: UserId -> UserId, type: Int32
+2012-12-09 14:30:23,233 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: Ads, type: System.Collections.Generic.ICollection`1[[Bea.Domain.Ad, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]](Bea.Domain.User.Ads)
+2012-12-09 14:30:23,233 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: Email -> Email, type: String
+2012-12-09 14:30:23,234 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: Password -> Password, type: String
+2012-12-09 14:30:23,234 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped property: CreationDate -> CreationDate, type: DateTime
+2012-12-09 14:30:23,236 [5] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:30:23,239 [5] INFO  NHibernate.Cfg.Configuration [(null)] - checking mappings queue
+2012-12-09 14:30:23,240 [5] INFO  NHibernate.Cfg.Configuration [(null)] - processing one-to-many association mappings
+2012-12-09 14:30:23,241 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Second pass for collection: Bea.Domain.location.City.Ads
+2012-12-09 14:30:23,243 [5] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - mapping collection: Bea.Domain.location.City.Ads -> Ad
+2012-12-09 14:30:23,247 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped collection key: City_id, one-to-many: Bea.Domain.Ad
+2012-12-09 14:30:23,248 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Second pass for collection: Bea.Domain.location.Province.Cities
+2012-12-09 14:30:23,249 [5] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - mapping collection: Bea.Domain.location.Province.Cities -> City
+2012-12-09 14:30:23,250 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped collection key: Province_id, one-to-many: Bea.Domain.location.City
+2012-12-09 14:30:23,250 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Second pass for collection: Bea.Domain.User.Ads
+2012-12-09 14:30:23,250 [5] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - mapping collection: Bea.Domain.User.Ads -> Ad
+2012-12-09 14:30:23,251 [5] DEBUG NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapped collection key: User_id, one-to-many: Bea.Domain.Ad
+2012-12-09 14:30:23,251 [5] INFO  NHibernate.Cfg.Configuration [(null)] - processing one-to-one association property references
+2012-12-09 14:30:23,252 [5] INFO  NHibernate.Cfg.Configuration [(null)] - processing foreign key constraints
+2012-12-09 14:30:23,254 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - resolving reference to class: Bea.Domain.User
+2012-12-09 14:30:23,256 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - resolving reference to class: Bea.Domain.location.City
+2012-12-09 14:30:23,257 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - resolving reference to class: Bea.Domain.User
+2012-12-09 14:30:23,258 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - resolving reference to class: Bea.Domain.location.Province
+2012-12-09 14:30:23,258 [5] INFO  NHibernate.Cfg.Configuration [(null)] - processing filters (second pass)
+2012-12-09 14:30:23,270 [5] INFO  NHibernate.Cfg.Configuration [(null)] - checking mappings queue
+2012-12-09 14:30:23,271 [5] INFO  NHibernate.Cfg.Configuration [(null)] - processing one-to-many association mappings
+2012-12-09 14:30:23,271 [5] INFO  NHibernate.Cfg.Configuration [(null)] - processing one-to-one association property references
+2012-12-09 14:30:23,272 [5] INFO  NHibernate.Cfg.Configuration [(null)] - processing foreign key constraints
+2012-12-09 14:30:23,272 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - resolving reference to class: Bea.Domain.User
+2012-12-09 14:30:23,273 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - resolving reference to class: Bea.Domain.location.City
+2012-12-09 14:30:23,273 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - resolving reference to class: Bea.Domain.User
+2012-12-09 14:30:23,274 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - resolving reference to class: Bea.Domain.location.Province
+2012-12-09 14:30:23,274 [5] INFO  NHibernate.Cfg.Configuration [(null)] - processing filters (second pass)
+2012-12-09 14:30:23,286 [5] INFO  NHibernate.Connection.ConnectionProviderFactory [(null)] - Initializing connection provider: Bea.Dal.configuration.CustomLongLastingSQLiteConnectionProvider, Bea.Dal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2012-12-09 14:30:23,288 [5] INFO  NHibernate.Connection.ConnectionProvider [(null)] - Configuring ConnectionProvider
+2012-12-09 14:30:23,290 [5] DEBUG NHibernate.Connection.DriverConnectionProvider [(null)] - Obtaining IDbConnection from Driver
+2012-12-09 14:30:23,320 [5] DEBUG NHibernate.Tool.hbm2ddl.SchemaExport [(null)] - 
+    PRAGMA foreign_keys = OFF
+2012-12-09 14:30:23,322 [5] DEBUG NHibernate.Tool.hbm2ddl.SchemaExport [(null)] - 
+    drop table if exists "Ad"
+2012-12-09 14:30:23,323 [5] DEBUG NHibernate.Tool.hbm2ddl.SchemaExport [(null)] - 
+    drop table if exists "City"
+2012-12-09 14:30:23,323 [5] DEBUG NHibernate.Tool.hbm2ddl.SchemaExport [(null)] - 
+    drop table if exists province
+2012-12-09 14:30:23,324 [5] DEBUG NHibernate.Tool.hbm2ddl.SchemaExport [(null)] - 
+    drop table if exists user
+2012-12-09 14:30:23,324 [5] DEBUG NHibernate.Tool.hbm2ddl.SchemaExport [(null)] - 
+    PRAGMA foreign_keys = ON
+2012-12-09 14:30:23,326 [5] DEBUG NHibernate.Tool.hbm2ddl.SchemaExport [(null)] - 
+    create table "Ad" (
+        Id  integer primary key autoincrement,
+       Title TEXT not null,
+       Body TEXT not null,
+       CreatedBy_id INT not null,
+       City_id INT not null,
+       User_id INT,
+       constraint FKCDE6B7DF1F350147 foreign key (CreatedBy_id) references user,
+       constraint FKCDE6B7DF70959C34 foreign key (City_id) references "City",
+       constraint FKCDE6B7DFC2C87501 foreign key (User_id) references user
+    )
+2012-12-09 14:30:23,327 [5] DEBUG NHibernate.Tool.hbm2ddl.SchemaExport [(null)] - 
+    create table "City" (
+        Id  integer primary key autoincrement,
+       Label TEXT not null,
+       Province_id INT,
+       constraint FK8AEE0323796C5255 foreign key (Province_id) references province
+    )
+2012-12-09 14:30:23,328 [5] DEBUG NHibernate.Tool.hbm2ddl.SchemaExport [(null)] - 
+    create table province (
+        Id  integer primary key autoincrement,
+       Label TEXT not null
+    )
+2012-12-09 14:30:23,329 [5] DEBUG NHibernate.Tool.hbm2ddl.SchemaExport [(null)] - 
+    create table user (
+        UserId  integer primary key autoincrement,
+       Email TEXT not null,
+       Password TEXT not null,
+       CreationDate DATETIME
+    )
+2012-12-09 14:30:23,329 [5] DEBUG NHibernate.Connection.ConnectionProvider [(null)] - Disposing of ConnectionProvider.
+2012-12-09 14:30:23,330 [5] INFO  NHibernate.Cfg.Configuration [(null)] - checking mappings queue
+2012-12-09 14:30:23,331 [5] INFO  NHibernate.Cfg.Configuration [(null)] - processing one-to-many association mappings
+2012-12-09 14:30:23,331 [5] INFO  NHibernate.Cfg.Configuration [(null)] - processing one-to-one association property references
+2012-12-09 14:30:23,332 [5] INFO  NHibernate.Cfg.Configuration [(null)] - processing foreign key constraints
+2012-12-09 14:30:23,332 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - resolving reference to class: Bea.Domain.User
+2012-12-09 14:30:23,332 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - resolving reference to class: Bea.Domain.location.City
+2012-12-09 14:30:23,333 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - resolving reference to class: Bea.Domain.User
+2012-12-09 14:30:23,333 [5] DEBUG NHibernate.Cfg.Configuration [(null)] - resolving reference to class: Bea.Domain.location.Province
+2012-12-09 14:30:23,334 [5] INFO  NHibernate.Cfg.Configuration [(null)] - processing filters (second pass)
+2012-12-09 14:30:23,344 [5] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:30:23,348 [5] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:30:23,370 [5] INFO  NHibernate.Exceptions.SQLExceptionConverterFactory [(null)] - Using dialect defined converter
+2012-12-09 14:30:23,371 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Generate SQL with comments: disabled
+2012-12-09 14:30:23,372 [5] INFO  NHibernate.Connection.ConnectionProviderFactory [(null)] - Initializing connection provider: Bea.Dal.configuration.CustomLongLastingSQLiteConnectionProvider, Bea.Dal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2012-12-09 14:30:23,373 [5] INFO  NHibernate.Connection.ConnectionProvider [(null)] - Configuring ConnectionProvider
+2012-12-09 14:30:23,374 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Transaction factory: NHibernate.Transaction.AdoNetWithDistributedTransactionFactory
+2012-12-09 14:30:23,374 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Optimize cache for minimal puts: False
+2012-12-09 14:30:23,375 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Connection release mode: on_close
+2012-12-09 14:30:23,376 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Default batch fetch size: 1
+2012-12-09 14:30:23,376 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - echoing all SQL to stdout
+2012-12-09 14:30:23,377 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Statistics: disabled
+2012-12-09 14:30:23,377 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Deleted entity synthetic identifier rollback: disabled
+2012-12-09 14:30:23,378 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Query translator: NHibernate.Hql.Ast.ANTLR.ASTQueryTranslatorFactory
+2012-12-09 14:30:23,379 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Query language substitutions: {'true'='1', 'false'='0'}
+2012-12-09 14:30:23,381 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - cache provider: NHibernate.Cache.NoCacheProvider, NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4
+2012-12-09 14:30:23,382 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Order SQL inserts for batching: disabled
+2012-12-09 14:30:23,383 [5] DEBUG NHibernate.Cfg.SettingsFactory [(null)] - Wrap result sets: disabled
+2012-12-09 14:30:23,383 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Batcher factory: NHibernate.AdoNet.NonBatchingBatcherFactory, NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4
+2012-12-09 14:30:23,384 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Default entity-mode: Poco
+2012-12-09 14:30:23,385 [5] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Named query checking : enabled
+2012-12-09 14:30:23,395 [5] INFO  NHibernate.Impl.SessionFactoryImpl [(null)] - building session factory
+2012-12-09 14:30:23,397 [5] DEBUG NHibernate.Impl.SessionFactoryImpl [(null)] - Session factory constructed with filter configurations : {}
+2012-12-09 14:30:23,398 [5] DEBUG NHibernate.Impl.SessionFactoryImpl [(null)] - instantiating session factory with properties: {'use_reflection_optimizer'='True', 'connection.provider'='Bea.Dal.configuration.CustomLongLastingSQLiteConnectionProvider, Bea.Dal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null', 'connection.driver_class'='NHibernate.Driver.SQLite20Driver, NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4', 'dialect'='NHibernate.Dialect.SQLiteDialect, NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4', 'hibernate.dialect'='NHibernate.Dialect.SQLiteDialect, NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4', 'query.substitutions'='true=1;false=0', 'connection.release_mode'='on_close', 'show_sql'='true', 'connection.connection_string'='Data Source=:memory:;Version=3;New=True;', 'current_session_context_class'='NHibernate.Context.WebSessionContext, NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4'}
+2012-12-09 14:30:23,447 [5] DEBUG NHibernate.Tuple.Entity.AbstractEntityTuplizer [(null)] - No custom accessors found for entity: Bea.Domain.Ad
+2012-12-09 14:30:23,451 [5] DEBUG NHibernate.Tuple.Entity.AbstractEntityTuplizer [(null)] - No custom accessors found for entity: Bea.Domain.Ad
+2012-12-09 14:30:23,465 [5] DEBUG NHibernate.Tuple.Entity.PocoEntityTuplizer [(null)] - Create Instantiator using optimizer for:Bea.Domain.Ad
+2012-12-09 14:30:23,488 [5] DEBUG NHibernate.Tuple.Entity.AbstractEntityTuplizer [(null)] - No custom accessors found for entity: Bea.Domain.location.City
+2012-12-09 14:30:23,490 [5] DEBUG NHibernate.Tuple.Entity.AbstractEntityTuplizer [(null)] - No custom accessors found for entity: Bea.Domain.location.City
+2012-12-09 14:30:23,491 [5] DEBUG NHibernate.Tuple.Entity.PocoEntityTuplizer [(null)] - Create Instantiator using optimizer for:Bea.Domain.location.City
+2012-12-09 14:30:23,492 [5] DEBUG NHibernate.Tuple.Entity.AbstractEntityTuplizer [(null)] - No custom accessors found for entity: Bea.Domain.location.Province
+2012-12-09 14:30:23,493 [5] DEBUG NHibernate.Tuple.Entity.AbstractEntityTuplizer [(null)] - No custom accessors found for entity: Bea.Domain.location.Province
+2012-12-09 14:30:23,493 [5] DEBUG NHibernate.Tuple.Entity.PocoEntityTuplizer [(null)] - Create Instantiator using optimizer for:Bea.Domain.location.Province
+2012-12-09 14:30:23,494 [5] DEBUG NHibernate.Tuple.Entity.AbstractEntityTuplizer [(null)] - No custom accessors found for entity: Bea.Domain.User
+2012-12-09 14:30:23,495 [5] DEBUG NHibernate.Tuple.Entity.AbstractEntityTuplizer [(null)] - No custom accessors found for entity: Bea.Domain.User
+2012-12-09 14:30:23,496 [5] DEBUG NHibernate.Tuple.Entity.PocoEntityTuplizer [(null)] - Create Instantiator using optimizer for:Bea.Domain.User
+2012-12-09 14:30:23,512 [5] DEBUG NHibernate.Persister.Collection.ICollectionPersister [(null)] - Static SQL for collection: Bea.Domain.location.City.Ads
+2012-12-09 14:30:23,514 [5] DEBUG NHibernate.Persister.Collection.ICollectionPersister [(null)] -  Row insert: UPDATE "Ad" SET City_id = ? WHERE Id = ?
+2012-12-09 14:30:23,515 [5] DEBUG NHibernate.Persister.Collection.ICollectionPersister [(null)] -  Row delete: UPDATE "Ad" SET City_id = null WHERE City_id = ? AND Id = ?
+2012-12-09 14:30:23,516 [5] DEBUG NHibernate.Persister.Collection.ICollectionPersister [(null)] -  One-shot delete: UPDATE "Ad" SET City_id = null WHERE City_id = ?
+2012-12-09 14:30:23,518 [5] DEBUG NHibernate.Persister.Collection.ICollectionPersister [(null)] - Static SQL for collection: Bea.Domain.location.Province.Cities
+2012-12-09 14:30:23,519 [5] DEBUG NHibernate.Persister.Collection.ICollectionPersister [(null)] -  Row insert: UPDATE "City" SET Province_id = ? WHERE Id = ?
+2012-12-09 14:30:23,520 [5] DEBUG NHibernate.Persister.Collection.ICollectionPersister [(null)] -  Row delete: UPDATE "City" SET Province_id = null WHERE Province_id = ? AND Id = ?
+2012-12-09 14:30:23,520 [5] DEBUG NHibernate.Persister.Collection.ICollectionPersister [(null)] -  One-shot delete: UPDATE "City" SET Province_id = null WHERE Province_id = ?
+2012-12-09 14:30:23,521 [5] DEBUG NHibernate.Persister.Collection.ICollectionPersister [(null)] - Static SQL for collection: Bea.Domain.User.Ads
+2012-12-09 14:30:23,521 [5] DEBUG NHibernate.Persister.Collection.ICollectionPersister [(null)] -  Row insert: UPDATE "Ad" SET User_id = ? WHERE Id = ?
+2012-12-09 14:30:23,522 [5] DEBUG NHibernate.Persister.Collection.ICollectionPersister [(null)] -  Row delete: UPDATE "Ad" SET User_id = null WHERE User_id = ? AND Id = ?
+2012-12-09 14:30:23,522 [5] DEBUG NHibernate.Persister.Collection.ICollectionPersister [(null)] -  One-shot delete: UPDATE "Ad" SET User_id = null WHERE User_id = ?
+2012-12-09 14:30:23,541 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] - Static SQL for entity: Bea.Domain.Ad
+2012-12-09 14:30:23,542 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Version select: SELECT Id FROM "Ad" WHERE Id = ?
+2012-12-09 14:30:23,543 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Snapshot select: SELECT ad_.Id, ad_.Title as Title0_, ad_.Body as Body0_, ad_.CreatedBy_id as CreatedBy4_0_, ad_.City_id as City5_0_ FROM "Ad" ad_ WHERE ad_.Id=?
+2012-12-09 14:30:23,544 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Insert 0: INSERT INTO "Ad" (Title, Body, CreatedBy_id, City_id, Id) VALUES (?, ?, ?, ?, ?)
+2012-12-09 14:30:23,544 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Update 0: UPDATE "Ad" SET Title = ?, Body = ?, CreatedBy_id = ?, City_id = ? WHERE Id = ?
+2012-12-09 14:30:23,545 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Delete 0: DELETE FROM "Ad" WHERE Id = ?
+2012-12-09 14:30:23,545 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Identity insert: INSERT INTO "Ad" (Title, Body, CreatedBy_id, City_id) VALUES (?, ?, ?, ?); select last_insert_rowid()
+2012-12-09 14:30:23,567 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.Ad: SELECT ad0_.Id as Id0_0_, ad0_.Title as Title0_0_, ad0_.Body as Body0_0_, ad0_.CreatedBy_id as CreatedBy4_0_0_, ad0_.City_id as City5_0_0_ FROM "Ad" ad0_ WHERE ad0_.Id=?
+2012-12-09 14:30:23,569 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.Ad: SELECT ad0_.Id as Id0_0_, ad0_.Title as Title0_0_, ad0_.Body as Body0_0_, ad0_.CreatedBy_id as CreatedBy4_0_0_, ad0_.City_id as City5_0_0_ FROM "Ad" ad0_ WHERE ad0_.Id=?
+2012-12-09 14:30:23,569 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.Ad: SELECT ad0_.Id as Id0_0_, ad0_.Title as Title0_0_, ad0_.Body as Body0_0_, ad0_.CreatedBy_id as CreatedBy4_0_0_, ad0_.City_id as City5_0_0_ FROM "Ad" ad0_ WHERE ad0_.Id=?
+2012-12-09 14:30:23,570 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.Ad: SELECT ad0_.Id as Id0_0_, ad0_.Title as Title0_0_, ad0_.Body as Body0_0_, ad0_.CreatedBy_id as CreatedBy4_0_0_, ad0_.City_id as City5_0_0_ FROM "Ad" ad0_ WHERE ad0_.Id=?
+2012-12-09 14:30:23,570 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.Ad: SELECT ad0_.Id as Id0_0_, ad0_.Title as Title0_0_, ad0_.Body as Body0_0_, ad0_.CreatedBy_id as CreatedBy4_0_0_, ad0_.City_id as City5_0_0_ FROM "Ad" ad0_ WHERE ad0_.Id=?
+2012-12-09 14:30:23,572 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Bea.Domain.Ad: SELECT ad0_.Id as Id0_0_, ad0_.Title as Title0_0_, ad0_.Body as Body0_0_, ad0_.CreatedBy_id as CreatedBy4_0_0_, ad0_.City_id as City5_0_0_ FROM "Ad" ad0_ WHERE ad0_.Id=?
+2012-12-09 14:30:23,573 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Bea.Domain.Ad: SELECT ad0_.Id as Id0_0_, ad0_.Title as Title0_0_, ad0_.Body as Body0_0_, ad0_.CreatedBy_id as CreatedBy4_0_0_, ad0_.City_id as City5_0_0_ FROM "Ad" ad0_ WHERE ad0_.Id=?
+2012-12-09 14:30:23,574 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] - Static SQL for entity: Bea.Domain.location.City
+2012-12-09 14:30:23,575 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Version select: SELECT Id FROM "City" WHERE Id = ?
+2012-12-09 14:30:23,575 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Snapshot select: SELECT city_.Id, city_.Label as Label1_ FROM "City" city_ WHERE city_.Id=?
+2012-12-09 14:30:23,576 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Insert 0: INSERT INTO "City" (Label, Id) VALUES (?, ?)
+2012-12-09 14:30:23,576 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Update 0: UPDATE "City" SET Label = ? WHERE Id = ?
+2012-12-09 14:30:23,577 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Delete 0: DELETE FROM "City" WHERE Id = ?
+2012-12-09 14:30:23,577 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Identity insert: INSERT INTO "City" (Label) VALUES (?); select last_insert_rowid()
+2012-12-09 14:30:23,577 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.location.City: SELECT city0_.Id as Id1_0_, city0_.Label as Label1_0_ FROM "City" city0_ WHERE city0_.Id=?
+2012-12-09 14:30:23,578 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.location.City: SELECT city0_.Id as Id1_0_, city0_.Label as Label1_0_ FROM "City" city0_ WHERE city0_.Id=?
+2012-12-09 14:30:23,578 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.location.City: SELECT city0_.Id as Id1_0_, city0_.Label as Label1_0_ FROM "City" city0_ WHERE city0_.Id=?
+2012-12-09 14:30:23,579 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.location.City: SELECT city0_.Id as Id1_0_, city0_.Label as Label1_0_ FROM "City" city0_ WHERE city0_.Id=?
+2012-12-09 14:30:23,579 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.location.City: SELECT city0_.Id as Id1_0_, city0_.Label as Label1_0_ FROM "City" city0_ WHERE city0_.Id=?
+2012-12-09 14:30:23,580 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Bea.Domain.location.City: SELECT city0_.Id as Id1_0_, city0_.Label as Label1_0_ FROM "City" city0_ WHERE city0_.Id=?
+2012-12-09 14:30:23,580 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Bea.Domain.location.City: SELECT city0_.Id as Id1_0_, city0_.Label as Label1_0_ FROM "City" city0_ WHERE city0_.Id=?
+2012-12-09 14:30:23,581 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] - Static SQL for entity: Bea.Domain.location.Province
+2012-12-09 14:30:23,581 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Version select: SELECT Id FROM province WHERE Id = ?
+2012-12-09 14:30:23,582 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Snapshot select: SELECT province_.Id, province_.Label as Label2_ FROM province province_ WHERE province_.Id=?
+2012-12-09 14:30:23,582 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Insert 0: INSERT INTO province (Label, Id) VALUES (?, ?)
+2012-12-09 14:30:23,583 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Update 0: UPDATE province SET Label = ? WHERE Id = ?
+2012-12-09 14:30:23,583 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Delete 0: DELETE FROM province WHERE Id = ?
+2012-12-09 14:30:23,583 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Identity insert: INSERT INTO province (Label) VALUES (?); select last_insert_rowid()
+2012-12-09 14:30:23,584 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.location.Province: SELECT province0_.Id as Id2_0_, province0_.Label as Label2_0_ FROM province province0_ WHERE province0_.Id=?
+2012-12-09 14:30:23,584 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.location.Province: SELECT province0_.Id as Id2_0_, province0_.Label as Label2_0_ FROM province province0_ WHERE province0_.Id=?
+2012-12-09 14:30:23,585 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.location.Province: SELECT province0_.Id as Id2_0_, province0_.Label as Label2_0_ FROM province province0_ WHERE province0_.Id=?
+2012-12-09 14:30:23,585 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.location.Province: SELECT province0_.Id as Id2_0_, province0_.Label as Label2_0_ FROM province province0_ WHERE province0_.Id=?
+2012-12-09 14:30:23,586 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.location.Province: SELECT province0_.Id as Id2_0_, province0_.Label as Label2_0_ FROM province province0_ WHERE province0_.Id=?
+2012-12-09 14:30:23,586 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Bea.Domain.location.Province: SELECT province0_.Id as Id2_0_, province0_.Label as Label2_0_ FROM province province0_ WHERE province0_.Id=?
+2012-12-09 14:30:23,587 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Bea.Domain.location.Province: SELECT province0_.Id as Id2_0_, province0_.Label as Label2_0_ FROM province province0_ WHERE province0_.Id=?
+2012-12-09 14:30:23,587 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] - Static SQL for entity: Bea.Domain.User
+2012-12-09 14:30:23,588 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Version select: SELECT UserId FROM user WHERE UserId = ?
+2012-12-09 14:30:23,588 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Snapshot select: SELECT user_.UserId, user_.Email as Email3_, user_.Password as Password3_, user_.CreationDate as Creation4_3_ FROM user user_ WHERE user_.UserId=?
+2012-12-09 14:30:23,589 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Insert 0: INSERT INTO user (Email, Password, CreationDate, UserId) VALUES (?, ?, ?, ?)
+2012-12-09 14:30:23,589 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Update 0: UPDATE user SET Email = ?, Password = ?, CreationDate = ? WHERE UserId = ?
+2012-12-09 14:30:23,589 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Delete 0: DELETE FROM user WHERE UserId = ?
+2012-12-09 14:30:23,590 [5] DEBUG NHibernate.Persister.Entity.AbstractEntityPersister [(null)] -  Identity insert: INSERT INTO user (Email, Password, CreationDate) VALUES (?, ?, ?); select last_insert_rowid()
+2012-12-09 14:30:23,590 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.User: SELECT user0_.UserId as UserId3_0_, user0_.Email as Email3_0_, user0_.Password as Password3_0_, user0_.CreationDate as Creation4_3_0_ FROM user user0_ WHERE user0_.UserId=?
+2012-12-09 14:30:23,591 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.User: SELECT user0_.UserId as UserId3_0_, user0_.Email as Email3_0_, user0_.Password as Password3_0_, user0_.CreationDate as Creation4_3_0_ FROM user user0_ WHERE user0_.UserId=?
+2012-12-09 14:30:23,591 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.User: SELECT user0_.UserId as UserId3_0_, user0_.Email as Email3_0_, user0_.Password as Password3_0_, user0_.CreationDate as Creation4_3_0_ FROM user user0_ WHERE user0_.UserId=?
+2012-12-09 14:30:23,592 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.User: SELECT user0_.UserId as UserId3_0_, user0_.Email as Email3_0_, user0_.Password as Password3_0_, user0_.CreationDate as Creation4_3_0_ FROM user user0_ WHERE user0_.UserId=?
+2012-12-09 14:30:23,592 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for entity Bea.Domain.User: SELECT user0_.UserId as UserId3_0_, user0_.Email as Email3_0_, user0_.Password as Password3_0_, user0_.CreationDate as Creation4_3_0_ FROM user user0_ WHERE user0_.UserId=?
+2012-12-09 14:30:23,600 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for action NHibernate.Engine.CascadingAction+MergeCascadingAction on entity Bea.Domain.User: SELECT user0_.UserId as UserId3_1_, user0_.Email as Email3_1_, user0_.Password as Password3_1_, user0_.CreationDate as Creation4_3_1_, ads1_.User_id as User6_3_, ads1_.Id as Id3_, ads1_.Id as Id0_0_, ads1_.Title as Title0_0_, ads1_.Body as Body0_0_, ads1_.CreatedBy_id as CreatedBy4_0_0_, ads1_.City_id as City5_0_0_ FROM user user0_ left outer join "Ad" ads1_ on user0_.UserId=ads1_.User_id WHERE user0_.UserId=?
+2012-12-09 14:30:23,602 [5] DEBUG NHibernate.Loader.Entity.AbstractEntityLoader [(null)] - Static select for action NHibernate.Engine.CascadingAction+RefreshCascadingAction on entity Bea.Domain.User: SELECT user0_.UserId as UserId3_1_, user0_.Email as Email3_1_, user0_.Password as Password3_1_, user0_.CreationDate as Creation4_3_1_, ads1_.User_id as User6_3_, ads1_.Id as Id3_, ads1_.Id as Id0_0_, ads1_.Title as Title0_0_, ads1_.Body as Body0_0_, ads1_.CreatedBy_id as CreatedBy4_0_0_, ads1_.City_id as City5_0_0_ FROM user user0_ left outer join "Ad" ads1_ on user0_.UserId=ads1_.User_id WHERE user0_.UserId=?
+2012-12-09 14:30:23,605 [5] DEBUG NHibernate.Loader.Collection.OneToManyLoader [(null)] - Static select for one-to-many Bea.Domain.location.City.Ads: SELECT ads0_.City_id as City5_1_, ads0_.Id as Id1_, ads0_.Id as Id0_0_, ads0_.Title as Title0_0_, ads0_.Body as Body0_0_, ads0_.CreatedBy_id as CreatedBy4_0_0_, ads0_.City_id as City5_0_0_ FROM "Ad" ads0_ WHERE ads0_.City_id=?
+2012-12-09 14:30:23,607 [5] DEBUG NHibernate.Loader.Collection.OneToManyLoader [(null)] - Static select for one-to-many Bea.Domain.location.Province.Cities: SELECT cities0_.Province_id as Province3_1_, cities0_.Id as Id1_, cities0_.Id as Id1_0_, cities0_.Label as Label1_0_ FROM "City" cities0_ WHERE cities0_.Province_id=?
+2012-12-09 14:30:23,607 [5] DEBUG NHibernate.Loader.Collection.OneToManyLoader [(null)] - Static select for one-to-many Bea.Domain.User.Ads: SELECT ads0_.User_id as User6_1_, ads0_.Id as Id1_, ads0_.Id as Id0_0_, ads0_.Title as Title0_0_, ads0_.Body as Body0_0_, ads0_.CreatedBy_id as CreatedBy4_0_0_, ads0_.City_id as City5_0_0_ FROM "Ad" ads0_ WHERE ads0_.User_id=?
+2012-12-09 14:30:23,609 [5] DEBUG NHibernate.Impl.SessionFactoryObjectFactory [(null)] - initializing class SessionFactoryObjectFactory
+2012-12-09 14:30:23,609 [5] DEBUG NHibernate.Impl.SessionFactoryObjectFactory [(null)] - registered: 09d969f6f53848fcb18f70f390669d41(unnamed)
+2012-12-09 14:30:23,610 [5] INFO  NHibernate.Impl.SessionFactoryObjectFactory [(null)] - no name configured
+2012-12-09 14:30:23,611 [5] DEBUG NHibernate.Impl.SessionFactoryImpl [(null)] - Instantiated session factory
+2012-12-09 14:30:23,613 [5] DEBUG NHibernate.Impl.SessionFactoryImpl [(null)] - Checking 0 named HQL queries
+2012-12-09 14:30:23,614 [5] DEBUG NHibernate.Impl.SessionFactoryImpl [(null)] - Checking 0 named SQL queries
+2012-12-09 14:30:23,634 [5] DEBUG NHibernate.Impl.SessionImpl [(null)] - [session-id=e0255473-3c51-4df2-bcdd-e2d2afcb349f] opened session at timestamp: 634906602236, for session factory: [/09d969f6f53848fcb18f70f390669d41]
+2012-12-09 14:30:23,661 [5] DEBUG NHibernate.Engine.Query.QueryPlanCache [(null)] - unable to locate HQL query plan in cache; generating (.Select[System.Linq.IGrouping`2[[Bea.Domain.location.City, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Bea.Domain.Ad, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]],<>f__AnonymousType0`2[[Bea.Domain.location.City, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]](.GroupBy[Bea.Domain.Ad,Bea.Domain.location.City](NHibernate.Linq.NhQueryable`1[Bea.Domain.Ad], Quote((ad, ) => (ad.City)), ), Quote((adsByCity, ) => (new <>f__AnonymousType0`2(adsByCity.Key, .Count[Bea.Domain.Ad](adsByCity, ), ))), ))
+2012-12-09 14:30:23,848 [5] DEBUG NHibernate.Hql.Ast.ANTLR.HqlSqlWalker [(null)] - select << begin [level=1, statement=select]
+2012-12-09 14:30:23,861 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.FromElement [(null)] - FromClause{level=1} :  Bea.Domain.Ad (ad) -> ad0_
+2012-12-09 14:30:23,870 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.FromReferenceNode [(null)] - Resolved :  ad -> ad0_.Id
+2012-12-09 14:30:23,875 [5] INFO  NHibernate.Hql.Ast.ANTLR.Tree.FromElement [(null)] - handling property dereference [Bea.Domain.Ad (ad) -> City (Class)]
+2012-12-09 14:30:23,878 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.DotNode [(null)] - getDataType() : City -> NHibernate.Type.ManyToOneType(Bea.Domain.location.City)
+2012-12-09 14:30:23,880 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.DotNode [(null)] - dereferenceEntityJoin() : generating join for City in Bea.Domain.Ad (_0) parent = [ {null} ]
+2012-12-09 14:30:23,883 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.FromElement [(null)] - FromClause{level=1} :  Bea.Domain.location.City (_0) -> city1_
+2012-12-09 14:30:23,885 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.FromClause [(null)] - addJoinByPathMap() : ad.City -> "City" city1_
+2012-12-09 14:30:23,886 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.FromReferenceNode [(null)] - Resolved :  ad.City -> ad0_.City_id
+2012-12-09 14:30:23,887 [5] DEBUG NHibernate.Hql.Ast.ANTLR.HqlSqlWalker [(null)] - createFromJoinElement() : "City" city1_
+2012-12-09 14:30:23,892 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.FromReferenceNode [(null)] - Resolved :  _0 -> city1_.Id
+2012-12-09 14:30:23,905 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.FromReferenceNode [(null)] - Resolved :  ad -> ad0_.Id
+2012-12-09 14:30:23,907 [5] INFO  NHibernate.Hql.Ast.ANTLR.Tree.FromElement [(null)] - handling property dereference [Bea.Domain.Ad (ad) -> City (Class)]
+2012-12-09 14:30:23,908 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.DotNode [(null)] - getDataType() : City -> NHibernate.Type.ManyToOneType(Bea.Domain.location.City)
+2012-12-09 14:30:23,908 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.DotNode [(null)] - dereferenceShortcut() : property City in Bea.Domain.Ad does not require a join.
+2012-12-09 14:30:23,909 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.DotNode [(null)] - terminal propertyPath = [City]
+2012-12-09 14:30:23,910 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Tree.FromReferenceNode [(null)] - Resolved :  ad.City -> ad0_.City_id
+2012-12-09 14:30:23,911 [5] DEBUG NHibernate.Hql.Ast.ANTLR.HqlSqlWalker [(null)] - select : finishing up [level=1, statement=select]
+2012-12-09 14:30:23,912 [5] DEBUG NHibernate.Hql.Ast.ANTLR.HqlSqlWalker [(null)] - processQuery() : ( SELECT ( {select clause} city1_.Id ( method cast ( expr_list ( count * ) integer ) ) ) ( FromClause{level=1} ( "Ad" ad0_ "City" city1_ ) ) ( group by ( ad0_.City_id ad0_.Id City ) ) )
+2012-12-09 14:30:23,924 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Util.JoinProcessor [(null)] - Using FROM fragment ["Ad" ad0_]
+2012-12-09 14:30:23,927 [5] DEBUG NHibernate.Hql.Ast.ANTLR.Util.JoinProcessor [(null)] - Using FROM fragment [left outer join "City" city1_ on ad0_.City_id=city1_.Id]
+2012-12-09 14:30:23,928 [5] DEBUG NHibernate.Hql.Ast.ANTLR.HqlSqlWalker [(null)] - select >> end [level=1, statement=select]
+2012-12-09 14:30:23,929 [5] DEBUG NHibernate.Hql.Ast.ANTLR.ErrorCounter [(null)] - throwQueryException() : no errors
+2012-12-09 14:30:23,955 [5] DEBUG NHibernate.Hql.Ast.ANTLR.HqlSqlGenerator [(null)] - SQL: select city1_.Id as col_0_0_, cast(count(*) as INT) as col_1_0_, city1_.Id as Id1_, city1_.Label as Label1_ from "Ad" ad0_ left outer join "City" city1_ on ad0_.City_id=city1_.Id group by ad0_.City_id
+2012-12-09 14:30:23,956 [5] DEBUG NHibernate.Hql.Ast.ANTLR.ErrorCounter [(null)] - throwQueryException() : no errors
+2012-12-09 14:30:23,985 [5] DEBUG NHibernate.Engine.Query.QueryPlanCache [(null)] - located HQL query plan in cache (.Select[System.Linq.IGrouping`2[[Bea.Domain.location.City, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Bea.Domain.Ad, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]],<>f__AnonymousType0`2[[Bea.Domain.location.City, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]](.GroupBy[Bea.Domain.Ad,Bea.Domain.location.City](NHibernate.Linq.NhQueryable`1[Bea.Domain.Ad], Quote((ad, ) => (ad.City)), ), Quote((adsByCity, ) => (new <>f__AnonymousType0`2(adsByCity.Key, .Count[Bea.Domain.Ad](adsByCity, ), ))), ))
+2012-12-09 14:30:23,988 [5] DEBUG NHibernate.Engine.Query.HQLQueryPlan [(null)] - find: .Select[System.Linq.IGrouping`2[[Bea.Domain.location.City, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[Bea.Domain.Ad, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]],<>f__AnonymousType0`2[[Bea.Domain.location.City, Bea.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]](.GroupBy[Bea.Domain.Ad,Bea.Domain.location.City](NHibernate.Linq.NhQueryable`1[Bea.Domain.Ad], Quote((ad, ) => (ad.City)), ), Quote((adsByCity, ) => (new <>f__AnonymousType0`2(adsByCity.Key, .Count[Bea.Domain.Ad](adsByCity, ), ))), )
+2012-12-09 14:30:23,989 [5] DEBUG NHibernate.Engine.QueryParameters [(null)] - named parameters: {}
+2012-12-09 14:30:24,007 [5] DEBUG NHibernate.AdoNet.AbstractBatcher [(null)] - Opened new IDbCommand, open IDbCommands: 1
+2012-12-09 14:30:24,007 [5] DEBUG NHibernate.AdoNet.AbstractBatcher [(null)] - Building an IDbCommand object for the SqlString: select city1_.Id as col_0_0_, cast(count(*) as INT) as col_1_0_, city1_.Id as Id1_, city1_.Label as Label1_ from "Ad" ad0_ left outer join "City" city1_ on ad0_.City_id=city1_.Id group by ad0_.City_id
+2012-12-09 14:30:24,011 [5] INFO  NHibernate.Loader.Loader [(null)] - select city1_.Id as col_0_0_, cast(count(*) as INT) as col_1_0_, city1_.Id as Id1_, city1_.Label as Label1_ from "Ad" ad0_ left outer join "City" city1_ on ad0_.City_id=city1_.Id group by ad0_.City_id
+2012-12-09 14:30:24,013 [5] DEBUG NHibernate.SQL [(null)] - select city1_.Id as col_0_0_, cast(count(*) as INT) as col_1_0_, city1_.Id as Id1_, city1_.Label as Label1_ from "Ad" ad0_ left outer join "City" city1_ on ad0_.City_id=city1_.Id group by ad0_.City_id
+2012-12-09 14:30:24,015 [5] DEBUG NHibernate.AdoNet.AbstractBatcher [(null)] - ExecuteReader took 0 ms
+2012-12-09 14:30:24,016 [5] DEBUG NHibernate.AdoNet.AbstractBatcher [(null)] - Opened IDataReader, open IDataReaders: 1
+2012-12-09 14:30:24,018 [5] DEBUG NHibernate.Loader.Loader [(null)] - processing result set
+2012-12-09 14:30:24,019 [5] DEBUG NHibernate.Loader.Loader [(null)] - done processing result set (0 rows)
+2012-12-09 14:30:24,020 [5] DEBUG NHibernate.Driver.NHybridDataReader [(null)] - running NHybridDataReader.Dispose()
+2012-12-09 14:30:24,021 [5] DEBUG NHibernate.AdoNet.AbstractBatcher [(null)] - Closed IDataReader, open IDataReaders :0
+2012-12-09 14:30:24,022 [5] DEBUG NHibernate.AdoNet.AbstractBatcher [(null)] - DataReader was closed after 6 ms
+2012-12-09 14:30:24,022 [5] DEBUG NHibernate.AdoNet.AbstractBatcher [(null)] - Closed IDbCommand, open IDbCommands: 0
+2012-12-09 14:30:24,024 [5] DEBUG NHibernate.Loader.Loader [(null)] - total objects hydrated: 0
+2012-12-09 14:30:24,024 [5] DEBUG NHibernate.Engine.StatefulPersistenceContext [(null)] - initializing non-lazy collections
+2012-12-09 14:30:24,027 [5] DEBUG NHibernate.AdoNet.ConnectionManager [(null)] - after autocommit
+2012-12-09 14:30:24,028 [5] DEBUG NHibernate.Impl.SessionImpl [(null)] - transaction completion
+2012-12-09 14:30:24,028 [5] DEBUG NHibernate.AdoNet.ConnectionManager [(null)] - transaction completed on session with on_close connection release mode; be sure to close the session to release ADO.Net resources!
+2012-12-09 14:30:24,032 [5] DEBUG NHibernate.Impl.SessionImpl [(null)] - closing session
+2012-12-09 14:30:24,032 [5] DEBUG NHibernate.AdoNet.AbstractBatcher [(null)] - running BatcherImpl.Dispose(true)
+2012-12-09 14:30:24,034 [5] DEBUG NHibernate.Impl.SessionImpl [(null)] - transaction completion
+2012-12-09 14:30:24,034 [5] DEBUG NHibernate.AdoNet.ConnectionManager [(null)] - transaction completed on session with on_close connection release mode; be sure to close the session to release ADO.Net resources!
+2012-12-09 14:30:24,036 [5] DEBUG NHibernate.Impl.SessionImpl [(null)] - [session-id=e0255473-3c51-4df2-bcdd-e2d2afcb349f] running ISession.Dispose()
+2012-12-09 14:30:24,037 [5] DEBUG NHibernate.Impl.SessionImpl [(null)] - [session-id=e0255473-3c51-4df2-bcdd-e2d2afcb349f] executing real Dispose(True)
+2012-12-09 14:35:13,152 [13] INFO  NHibernate.Cfg.Environment [(null)] - NHibernate 3.3.1.4000 (3.3.2.GA)
+2012-12-09 14:35:13,167 [13] INFO  NHibernate.Cfg.Environment [(null)] - hibernate-configuration section not found in application configuration file
+2012-12-09 14:35:13,167 [13] INFO  NHibernate.Cfg.Environment [(null)] - Bytecode provider name : lcg
+2012-12-09 14:35:13,168 [13] INFO  NHibernate.Cfg.Environment [(null)] - Using reflection optimizer
+2012-12-09 14:35:13,365 [13] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:35:13,394 [13] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapping class: Bea.Domain.Ad -> Ad
+2012-12-09 14:35:13,447 [13] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:35:13,448 [13] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapping class: Bea.Domain.location.City -> City
+2012-12-09 14:35:13,457 [13] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:35:13,457 [13] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapping class: Bea.Domain.location.Province -> province
+2012-12-09 14:35:13,458 [13] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:35:13,458 [13] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - Mapping class: Bea.Domain.User -> user
+2012-12-09 14:35:13,460 [13] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:35:13,464 [13] INFO  NHibernate.Cfg.Configuration [(null)] - checking mappings queue
+2012-12-09 14:35:13,464 [13] INFO  NHibernate.Cfg.Configuration [(null)] - processing one-to-many association mappings
+2012-12-09 14:35:13,466 [13] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - mapping collection: Bea.Domain.location.City.Ads -> Ad
+2012-12-09 14:35:13,469 [13] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - mapping collection: Bea.Domain.location.Province.Cities -> City
+2012-12-09 14:35:13,469 [13] INFO  NHibernate.Cfg.XmlHbmBinding.Binder [(null)] - mapping collection: Bea.Domain.User.Ads -> Ad
+2012-12-09 14:35:13,469 [13] INFO  NHibernate.Cfg.Configuration [(null)] - processing one-to-one association property references
+2012-12-09 14:35:13,469 [13] INFO  NHibernate.Cfg.Configuration [(null)] - processing foreign key constraints
+2012-12-09 14:35:13,471 [13] INFO  NHibernate.Cfg.Configuration [(null)] - processing filters (second pass)
+2012-12-09 14:35:13,483 [13] INFO  NHibernate.Cfg.Configuration [(null)] - checking mappings queue
+2012-12-09 14:35:13,483 [13] INFO  NHibernate.Cfg.Configuration [(null)] - processing one-to-many association mappings
+2012-12-09 14:35:13,483 [13] INFO  NHibernate.Cfg.Configuration [(null)] - processing one-to-one association property references
+2012-12-09 14:35:13,483 [13] INFO  NHibernate.Cfg.Configuration [(null)] - processing foreign key constraints
+2012-12-09 14:35:13,483 [13] INFO  NHibernate.Cfg.Configuration [(null)] - processing filters (second pass)
+2012-12-09 14:35:13,495 [13] INFO  NHibernate.Connection.ConnectionProviderFactory [(null)] - Initializing connection provider: Bea.Dal.configuration.CustomLongLastingSQLiteConnectionProvider, Bea.Dal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2012-12-09 14:35:13,495 [13] INFO  NHibernate.Connection.ConnectionProvider [(null)] - Configuring ConnectionProvider
+2012-12-09 14:35:13,535 [13] INFO  NHibernate.Cfg.Configuration [(null)] - checking mappings queue
+2012-12-09 14:35:13,535 [13] INFO  NHibernate.Cfg.Configuration [(null)] - processing one-to-many association mappings
+2012-12-09 14:35:13,535 [13] INFO  NHibernate.Cfg.Configuration [(null)] - processing one-to-one association property references
+2012-12-09 14:35:13,535 [13] INFO  NHibernate.Cfg.Configuration [(null)] - processing foreign key constraints
+2012-12-09 14:35:13,535 [13] INFO  NHibernate.Cfg.Configuration [(null)] - processing filters (second pass)
+2012-12-09 14:35:13,546 [13] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:35:13,549 [13] INFO  NHibernate.Dialect.Dialect [(null)] - Using dialect: NHibernate.Dialect.SQLiteDialect
+2012-12-09 14:35:13,569 [13] INFO  NHibernate.Exceptions.SQLExceptionConverterFactory [(null)] - Using dialect defined converter
+2012-12-09 14:35:13,569 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Generate SQL with comments: disabled
+2012-12-09 14:35:13,569 [13] INFO  NHibernate.Connection.ConnectionProviderFactory [(null)] - Initializing connection provider: Bea.Dal.configuration.CustomLongLastingSQLiteConnectionProvider, Bea.Dal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+2012-12-09 14:35:13,570 [13] INFO  NHibernate.Connection.ConnectionProvider [(null)] - Configuring ConnectionProvider
+2012-12-09 14:35:13,570 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Transaction factory: NHibernate.Transaction.AdoNetWithDistributedTransactionFactory
+2012-12-09 14:35:13,570 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Optimize cache for minimal puts: False
+2012-12-09 14:35:13,570 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Connection release mode: on_close
+2012-12-09 14:35:13,571 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Default batch fetch size: 1
+2012-12-09 14:35:13,571 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - echoing all SQL to stdout
+2012-12-09 14:35:13,571 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Statistics: disabled
+2012-12-09 14:35:13,571 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Deleted entity synthetic identifier rollback: disabled
+2012-12-09 14:35:13,571 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Query translator: NHibernate.Hql.Ast.ANTLR.ASTQueryTranslatorFactory
+2012-12-09 14:35:13,572 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Query language substitutions: {'true'='1', 'false'='0'}
+2012-12-09 14:35:13,573 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - cache provider: NHibernate.Cache.NoCacheProvider, NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4
+2012-12-09 14:35:13,573 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Order SQL inserts for batching: disabled
+2012-12-09 14:35:13,573 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Batcher factory: NHibernate.AdoNet.NonBatchingBatcherFactory, NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4
+2012-12-09 14:35:13,574 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Default entity-mode: Poco
+2012-12-09 14:35:13,574 [13] INFO  NHibernate.Cfg.SettingsFactory [(null)] - Named query checking : enabled
+2012-12-09 14:35:13,584 [13] INFO  NHibernate.Impl.SessionFactoryImpl [(null)] - building session factory
+2012-12-09 14:35:13,735 [13] INFO  NHibernate.Impl.SessionFactoryObjectFactory [(null)] - no name configured
+2012-12-09 14:35:13,955 [13] INFO  NHibernate.Hql.Ast.ANTLR.Tree.FromElement [(null)] - handling property dereference [Bea.Domain.Ad (ad) -> City (Class)]
+2012-12-09 14:35:13,969 [5] INFO  NHibernate.Hql.Ast.ANTLR.Tree.FromElement [(null)] - handling property dereference [Bea.Domain.location.Province (x) -> Label (Class)]
+2012-12-09 14:35:13,973 [13] INFO  NHibernate.Hql.Ast.ANTLR.Tree.FromElement [(null)] - handling property dereference [Bea.Domain.Ad (ad) -> City (Class)]
+2012-12-09 14:35:14,053 [13] INFO  NHibernate.Loader.Loader [(null)] - select city1_.Id as col_0_0_, cast(count(*) as INT) as col_1_0_, city1_.Id as Id1_, city1_.Label as Label1_ from "Ad" ad0_ left outer join "City" city1_ on ad0_.City_id=city1_.Id group by ad0_.City_id
+2012-12-09 14:35:14,053 [5] INFO  NHibernate.Loader.Loader [(null)] - select province0_.Id as Id2_, province0_.Label as Label2_ from province province0_ where province0_.Label=@p0
+2012-12-09 14:35:14,073 [5] INFO  NHibernate.Loader.Loader [(null)] - select province0_.Id as Id2_, province0_.Label as Label2_ from province province0_ where province0_.Label=@p0
+2012-12-09 14:35:14,075 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,075 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,079 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,080 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,080 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,080 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,080 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,081 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,081 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,081 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,081 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,081 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,081 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,082 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,082 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,082 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,082 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,082 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,082 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,082 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,082 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,082 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,082 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,082 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,083 [5] INFO  NHibernate.Hql.Ast.ANTLR.Tree.FromElement [(null)] - handling property dereference [Bea.Domain.User (x) -> Email (Class)]
+2012-12-09 14:35:14,084 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,084 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,084 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,084 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,084 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,084 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,084 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,084 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,084 [5] INFO  NHibernate.Loader.Loader [(null)] - select user0_.UserId as UserId3_, user0_.Email as Email3_, user0_.Password as Password3_, user0_.CreationDate as Creation4_3_ from user user0_ where user0_.Email=@p0
+2012-12-09 14:35:14,086 [5] INFO  NHibernate.Hql.Ast.ANTLR.Tree.FromElement [(null)] - handling property dereference [Bea.Domain.location.City (x) -> Label (Class)]
+2012-12-09 14:35:14,086 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,086 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,086 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,086 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,086 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,086 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,086 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,086 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,087 [5] INFO  NHibernate.Loader.Loader [(null)] - select city0_.Id as Id1_, city0_.Label as Label1_ from "City" city0_ where city0_.Label=@p0
+2012-12-09 14:35:14,089 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,089 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,090 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,090 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,090 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,090 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,090 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,090 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,091 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,091 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,092 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,092 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,092 [5] INFO  NHibernate.Engine.Cascade [(null)] - processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:14,092 [5] INFO  NHibernate.Engine.Cascade [(null)] - cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,092 [5] INFO  NHibernate.Engine.Cascade [(null)] - done cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for collection: Bea.Domain.User.Ads
+2012-12-09 14:35:14,092 [5] INFO  NHibernate.Engine.Cascade [(null)] - done processing cascade NHibernate.Engine.CascadingAction+SaveUpdateCascadingAction for: Bea.Domain.User
+2012-12-09 14:35:17,766 [5] INFO  NHibernate.Loader.Loader [(null)] - select city1_.Id as col_0_0_, cast(count(*) as INT) as col_1_0_, city1_.Id as Id1_, city1_.Label as Label1_ from "Ad" ad0_ left outer join "City" city1_ on ad0_.City_id=city1_.Id group by ad0_.City_id

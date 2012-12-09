@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using bea.domain;
-using bea.domain.location;
+using Bea.Domain;
+using Bea.Domain.location;
 
-namespace bea.dal
+namespace Bea.Dal
 {
     public abstract class InMemoryData : InMemoryDatabase
     {
@@ -18,18 +18,18 @@ namespace bea.dal
             
             //Create Provinces
             Province province = new Province();
-            province.label = "Province Nord";
+            province.Label = "Province Nord";
             Session.Save(province);
             Session.Flush();
 
             province = new Province();
-            province.label = "Province Sud";
+            province.Label = "Province Sud";
             Session.Save(province);
             Session.Flush();
 
             City city = new City();
             city.Label = "Noumea";
-            province = new Repository<Province>(Session).FilterBy(x => x.label.Equals("Province Sud")).First();
+            province = new Repository<Province>(Session).FilterBy(x => x.Label.Equals("Province Sud")).First();
             province.AddCity(city);
             Session.Save(city);
             Session.SaveOrUpdate(province);
@@ -37,7 +37,7 @@ namespace bea.dal
 
             city = new City();
             city.Label = "Koumac";
-            province = new Repository<Province>(Session).FilterBy(x => x.label.Equals("Province Nord")).First();
+            province = new Repository<Province>(Session).FilterBy(x => x.Label.Equals("Province Nord")).First();
             province.AddCity(city);
             Session.Save(city);
             Session.SaveOrUpdate(province);

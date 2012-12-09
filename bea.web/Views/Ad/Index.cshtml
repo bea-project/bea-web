@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Index";
+    IDictionary<Bea.Domain.location.City, int> nbAdsByCity = Model;
+}
+
+<h2>Number of ads by city</h2>
+
+    <ul>
+        @foreach (KeyValuePair<Bea.Domain.location.City, int> item in nbAdsByCity)
+        {
+            <li>@item.Key.Label (@item.Key.Province) - @item.Value</li>
+        }
+    </ul>

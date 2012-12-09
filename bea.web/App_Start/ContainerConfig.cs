@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Autofac;
+using Autofac.Integration.Mvc;
+using Bea.Core.dal;
+using Bea.Core.services;
+using Bea.Services;
+using Bea.Dal.repository;
+using NHibernate;
+using Bea.Web.NhibernateHelper;
+
+namespace Bea.Web.App_Start
+{
+    public class ContainerConfig
+    {
+        public static void RegisterContainer()
+        {
+            ContainerBuilder builder = new ContainerBuilder();
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+
+            builder.Register<ISessionFactory>(x => new SQLiteWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
+            builder.RegisterType<AdRepository>().As<IAdRepository>().SingleInstance();
+            builder.RegisterType<AdServices>().As<IAdServices>().SingleInstance();
+
+            // Register the inMemoryData singleton to inject data
+            builder.Register(x => new InMemoryDataInjector(x.Resolve<ISessionFactory>())).SingleInstance();
+
+            IContainer container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+        }
+    }
+}

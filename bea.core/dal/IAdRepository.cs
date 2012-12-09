@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using bea.domain.location;
+using Bea.Domain.location;
 
-namespace bea.core.dal
+namespace Bea.Core.dal
 {
     public interface IAdRepository
     {

@@ -3,12 +3,12 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using bea.dal;
-using bea.domain;
+using Bea.Dal;
+using Bea.Domain;
 using System.Data.SQLite;
-using bea.domain.location;
+using Bea.Domain.location;
 
-namespace bea.test
+namespace Bea.Test
 {
     [TestClass]
     public class InMemoryTest : InMemoryData

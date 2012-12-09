@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using bea.domain;
-using bea.domain.location;
+using Bea.Domain;
+using Bea.Domain.location;
 
-namespace bea.core.services
+namespace Bea.Core.services
 {
     public interface IAdServices
     {

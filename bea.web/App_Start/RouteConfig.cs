@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace bea_web
+namespace Bea.Web
 {
     public class RouteConfig
     {

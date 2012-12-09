@@ -5,7 +5,7 @@ using System.Text;
 using NHibernate;
 using System.Data;
 
-namespace bea.dal
+namespace Bea.Dal
 {
     public interface IUnitOfWork : IDisposable
     {

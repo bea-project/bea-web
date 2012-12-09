@@ -45,9 +45,9 @@
     <Compile Include="services\IAdServices.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\bea.domain\bea.domain.csproj">
+    <ProjectReference Include="..\Bea.Domain\Bea.Domain.csproj">
       <Project>{79c4229d-2a62-4fca-be59-60edbb6bf747}</Project>
-      <Name>bea.domain</Name>
+      <Name>Bea.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,20 +8,26 @@ using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 
-namespace bea.dal.configuration
+namespace Bea.Dal.configuration
 {
     public abstract class AbstractSessionFactoryFactory
     {
-        protected ISessionFactory _sessionFactory;
-        public ISessionFactory SessionFactory
-        {
-            get { return _sessionFactory ?? (_sessionFactory = CreateSessionFactory()); }
-        }
+        private ISessionFactory _sessionFactory;
+        protected Boolean _rebuildSchema;
 
-        public NHibernate.Cfg.Configuration Configuration { get; set; }
+        public ISessionFactory GetSessionFactory()
+        {
+            return _sessionFactory;
+        }
 
         protected AbstractSessionFactoryFactory()
         {
+            _sessionFactory = CreateSessionFactory();
+        }
+
+        protected AbstractSessionFactoryFactory(Boolean rebuildSchema)
+        {
+            _rebuildSchema = rebuildSchema;
             _sessionFactory = CreateSessionFactory();
         }
 
@@ -34,12 +40,10 @@ namespace bea.dal.configuration
               .BuildSessionFactory();
         }
 
-        // TODO: For some reason, this code doesn't trigger db creation... to look into...
         protected virtual void ExposeConfiguration(NHibernate.Cfg.Configuration cfg)
         {
-            Configuration = cfg;
             SchemaExport sch = new SchemaExport(cfg);
-            sch.Create(true, true);
+            sch.Create(true, _rebuildSchema);
         }
 
         protected virtual IPersistenceConfigurer SetPersistenceConfigurer()
