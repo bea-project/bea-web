@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Bea.Core.dal;
+using Bea.Core.Dal;
 using Bea.Domain;
-using Bea.Domain.location;
+using Bea.Domain.Location;
 using NHibernate;
 using NHibernate.Linq;
 
-namespace Bea.Dal.repository
+namespace Bea.Dal.Repository
 {
     public class AdRepository : IAdRepository
     {

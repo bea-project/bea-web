@@ -1,4 +1,4 @@
-﻿using Bea.Dal.configuration;
+﻿using Bea.Dal.Configuration;
 using NHibernate;
 
 namespace Bea.Test.TestHelper

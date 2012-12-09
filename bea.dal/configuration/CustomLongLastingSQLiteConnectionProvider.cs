@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using NHibernate.Connection;
 
-namespace Bea.Dal.configuration
+namespace Bea.Dal.Configuration
 {
     /// <summary>
     /// This class should only be used for testing purposes

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using Bea.Core.dal;
+using Bea.Core.Dal;
 using NHibernate;
 using NHibernate.Linq;
 using NHibernate.Criterion;
 
-namespace Bea.Dal.repository
+namespace Bea.Dal.Repository
 {
     public class Repository : IRepository
     {

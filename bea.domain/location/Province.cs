@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Bea.Domain.location
+namespace Bea.Domain.Location
 {
     public class Province
     {

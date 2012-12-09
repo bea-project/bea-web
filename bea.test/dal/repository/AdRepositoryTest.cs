@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bea.Domain;
-using Bea.Domain.location;
+using Bea.Domain.Location;
 using Bea.Test.TestHelper;
-using Bea.Dal.repository;
+using Bea.Dal.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
+using Bea.Dal.Repository;
 
 namespace Bea.Test.dal.repository
 {

@@ -5,7 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bea.Dal;
 using Bea.Domain;
-using Bea.Domain.location;
+using Bea.Domain.Location;
 
 namespace Bea.Test
 {

@@ -5,12 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
-using Bea.Core.dal;
-using Bea.Core.services;
+using Bea.Core.Dal;
+using Bea.Core.Services;
 using Bea.Services;
-using Bea.Dal.repository;
 using NHibernate;
 using Bea.Web.NhibernateHelper;
+using Bea.Dal.Repository;
 
 namespace Bea.Web.App_Start
 {

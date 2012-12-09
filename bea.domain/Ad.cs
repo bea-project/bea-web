@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Bea.Domain.location;
+using Bea.Domain.Location;
 
 namespace Bea.Domain
 {

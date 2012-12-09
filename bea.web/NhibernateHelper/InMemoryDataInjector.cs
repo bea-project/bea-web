@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Bea.Domain;
-using Bea.Domain.location;
+using Bea.Domain.Location;
 using NHibernate;
 using NHibernate.Linq;
 

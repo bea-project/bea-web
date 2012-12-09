@@ -8,7 +8,7 @@ using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 
-namespace Bea.Dal.configuration
+namespace Bea.Dal.Configuration
 {
     public abstract class AbstractSessionFactoryFactory
     {

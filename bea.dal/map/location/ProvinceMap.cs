@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Bea.Domain.location;
+using Bea.Domain.Location;
 using FluentNHibernate.Mapping;
 
-namespace Bea.Dal.map.location
+namespace Bea.Dal.map.Location
 {
     public class ProvinceMap : ClassMap<Province>
     {

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Bea.Domain;
-using Bea.Domain.location;
+using Bea.Domain.Location;
 using FluentNHibernate.Mapping;
 
-namespace Bea.Dal.map.location
+namespace Bea.Dal.map.Location
 {
     public class CityMap : ClassMap<City>
     {

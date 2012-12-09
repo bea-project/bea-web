@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bea.Domain;
-using Bea.Domain.location;
+using Bea.Domain.Location;
 
-namespace Bea.Core.services
+namespace Bea.Core.Services
 {
     public interface IAdServices
     {

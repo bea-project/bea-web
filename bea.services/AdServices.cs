@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Bea.Core.dal;
-using Bea.Core.services;
+using Bea.Core.Dal;
+using Bea.Core.Services;
 using Bea.Domain;
-using Bea.Domain.location;
+using Bea.Domain.Location;
 
 namespace Bea.Services
 {

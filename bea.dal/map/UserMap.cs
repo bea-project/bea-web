@@ -4,7 +4,7 @@ using System.Text;
 using Bea.Domain;
 using FluentNHibernate.Mapping;
 
-namespace Bea.Dal.map
+namespace Bea.Dal.Map
 {
     public class UserMap : ClassMap<User>
     {

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Bea.Core.dal;
-using Bea.Domain.location;
+using Bea.Core.Dal;
+using Bea.Domain.Location;
 using Bea.Services;
 using Bea.Test.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
