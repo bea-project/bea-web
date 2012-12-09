@@ -21,9 +21,8 @@ namespace Bea.Dal.Repository
 
         public IDictionary<City, int> CountAdsByCity()
         {
-            var query = (from ad in _sessionFactory.GetCurrentSession().Query<Ad>()
-                        group ad by ad.City into adsByCity
-                        select new { City = adsByCity.Key, Count = adsByCity.Count() });
+            var query = (from c in _sessionFactory.GetCurrentSession().Query<City>().Fetch(x => x.Province)
+                         select new { City = c, Count = c.Ads.Count });
 
             IDictionary<City, int> result = query.ToList().ToDictionary(x => x.City, x => x.Count);
 
