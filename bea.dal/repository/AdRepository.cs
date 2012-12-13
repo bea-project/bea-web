@@ -29,5 +29,20 @@ namespace Bea.Dal.Repository
             return result;
         }
 
+        public IDictionary<User, int> CountAdsByUser()
+        {
+            var query = (from u in _sessionFactory.GetCurrentSession().Query<User>()
+                         select new { User = u, Count = u.Ads.Count });
+            IDictionary<User, int> result = query.ToList().ToDictionary(x => x.User, x => x.Count);
+            return result;
+        }
+
+        public List<Ad> GetAllAds()
+        {
+            return _sessionFactory.GetCurrentSession().Query<Ad>().Fetch(x=>x.CreatedBy).Fetch(x=>x.City).ToList();
+        }
+
+
+
     }
 }

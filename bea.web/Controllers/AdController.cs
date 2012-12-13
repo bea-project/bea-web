@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Bea.Core.Services;
+using Bea.Domain;
 
 namespace Bea.Web.Controllers
 {
@@ -21,11 +22,32 @@ namespace Bea.Web.Controllers
 
         //
         // GET: /Ad/
-        public ActionResult Index()
+        public ActionResult Index_Test()
         {
             var result = _adServices.CountAdsByCities();
             return View(result);
         }
+
+        //
+        // GET: /Ad/
+        public ActionResult Index()
+        {
+            var result = _adServices.GetAllAds();
+            return View(result);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Ad ad)
+        {
+            return View(ad);
+        }
+
+
 
     }
 }

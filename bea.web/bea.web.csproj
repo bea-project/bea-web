@@ -137,6 +137,7 @@
   <ItemGroup>
     <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="Controllers\AdController.cs" />
+    <Compile Include="Controllers\AdAPIController.cs" />
     <Compile Include="Controllers\TestDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -189,7 +190,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Index.cshtml" />
+    <Content Include="Views\Ad\Index_Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bea.Core\Bea.Core.csproj">
@@ -213,6 +214,24 @@
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ad\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ad\Create.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -243,7 +262,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetDir)x86\SQLite.Interop.dll" $(TargetDir) /y /c</PostBuildEvent>
   </PropertyGroup>

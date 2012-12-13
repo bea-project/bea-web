@@ -1,13 +1,51 @@
-﻿@{
+﻿@model IEnumerable<Bea.Domain.Ad>
+
+@{
     ViewBag.Title = "Index";
-    IDictionary<Bea.Domain.Location.City, int> nbAdsByCity = Model;
 }
 
-<h2>Number of ads by city</h2>
+<h2>Ads</h2>
 
-    <ul>
-        @foreach (KeyValuePair<Bea.Domain.Location.City, int> item in nbAdsByCity)
-        {
-            <li>@item.Key.Label (@item.Key.Province.Label) - @item.Value</li>
-        }
-    </ul>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-condensed table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Body)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City.Label)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Body)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City.Label)
+        </td>
+    </tr>
+}
+
+</table>

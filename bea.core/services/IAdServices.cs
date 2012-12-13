@@ -10,5 +10,6 @@ namespace Bea.Core.Services
     public interface IAdServices
     {
         IDictionary<City, int> CountAdsByCities();
+        IList<Ad> GetAllAds();
     }
 }

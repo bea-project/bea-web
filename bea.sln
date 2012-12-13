@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Web", "Bea.Web\Bea.Web.csproj", "{5FB8F688-2104-4A45-B0C4-26A5746D6DBD}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Web", "bea.web\Bea.Web.csproj", "{5FB8F688-2104-4A45-B0C4-26A5746D6DBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Dal", "Bea.Dal\Bea.Dal.csproj", "{E758260E-04BD-49C6-974A-D3EB9322716F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Dal", "bea.dal\Bea.Dal.csproj", "{E758260E-04BD-49C6-974A-D3EB9322716F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E9B4D713-60C2-43EA-BF9D-3E7A75387A6C}"
 	ProjectSection(SolutionItems) = preProject

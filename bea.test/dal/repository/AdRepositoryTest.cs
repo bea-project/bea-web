@@ -8,7 +8,6 @@ using Bea.Test.TestHelper;
 using Bea.Dal.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
-using Bea.Dal.Repository;
 
 namespace Bea.Test.dal.repository
 {

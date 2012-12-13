@@ -22,5 +22,15 @@ namespace Bea.Services
         {
             return _adRepository.CountAdsByCity();
         }
+
+        public IDictionary<User, int> CountAdsByUsers()
+        {
+            return _adRepository.CountAdsByUser();
+        }
+
+        public IList<Ad> GetAllAds()
+        {
+            return _adRepository.GetAllAds();
+        }
     }
 }
