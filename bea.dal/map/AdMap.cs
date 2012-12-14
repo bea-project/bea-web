@@ -16,6 +16,8 @@ namespace Bea.Dal.Map
             References<City>(x => x.City).Not.Nullable();
             Map(x => x.Title).Not.Nullable();
             Map(x => x.Body).Not.Nullable();
+            Map(x => x.CreationDate).Not.Nullable();
+            Map(x => x.Price).Not.Nullable();
         }
     }
 }

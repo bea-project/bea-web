@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Web", "bea.web\Bea.Web.csproj", "{5FB8F688-2104-4A45-B0C4-26A5746D6DBD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Dal", "bea.dal\Bea.Dal.csproj", "{E758260E-04BD-49C6-974A-D3EB9322716F}"
@@ -28,6 +28,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Core", "Bea.Core\Bea.Core.csproj", "{984F2A39-D038-437A-95FC-0AAE21ADCE4B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Services", "Bea.Services\Bea.Services.csproj", "{2DA715F9-C9AD-453A-B819-08997D81125D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Models", "Bea.Models\Bea.Models.csproj", "{5207CC9F-6AC5-42BD-AE46-82940DE48F78}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -62,6 +64,10 @@ Global
 		{2DA715F9-C9AD-453A-B819-08997D81125D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DA715F9-C9AD-453A-B819-08997D81125D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DA715F9-C9AD-453A-B819-08997D81125D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5207CC9F-6AC5-42BD-AE46-82940DE48F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5207CC9F-6AC5-42BD-AE46-82940DE48F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5207CC9F-6AC5-42BD-AE46-82940DE48F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5207CC9F-6AC5-42BD-AE46-82940DE48F78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

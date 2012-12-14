@@ -205,6 +205,10 @@
       <Project>{79c4229d-2a62-4fca-be59-60edbb6bf747}</Project>
       <Name>Bea.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bea.Models\Bea.Models.csproj">
+      <Project>{5207cc9f-6ac5-42bd-ae46-82940de48f78}</Project>
+      <Name>Bea.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bea.Services\Bea.Services.csproj">
       <Project>{2da715f9-c9ad-453a-b819-08997d81125d}</Project>
       <Name>Bea.Services</Name>
@@ -265,6 +269,7 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetDir)x86\SQLite.Interop.dll" $(TargetDir) /y /c</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

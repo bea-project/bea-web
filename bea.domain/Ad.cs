@@ -15,5 +15,6 @@ namespace Bea.Domain
         public virtual string Body { get; set; }
         public virtual List<string> Pictures { get; set; }
         public virtual City City { get; set; }
+        public virtual Double Price { get; set; }
     }
 }

@@ -26,5 +26,13 @@ namespace Bea.Core.Dal
         /// </summary>
         /// <returns>A list of Ads</returns>
         List<Ad> GetAllAds();
+
+        /// <summary>
+        /// Searches through all the announces by title
+        /// using "like" %searchString%
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        IList<Ad> SearchAdsByTitle(String searchString);
     }
 }
