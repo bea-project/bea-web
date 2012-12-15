@@ -19,11 +19,10 @@ namespace Bea.Web.Controllers
 
         //
         // GET: /TestData/
-
         public ActionResult Index()
         {
             _inMemoryDataInjector.InsertInMemoryData();
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+            return RedirectToAction("Index", "Home");
         }
 
     }
