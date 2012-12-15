@@ -1,0 +1,49 @@
+﻿@model Bea.Models.AdDetailsModel
+
+@{
+    ViewBag.Title = "View1";
+}
+
+<h2>View1</h2>
+
+<fieldset>
+    <legend>AdDetailsModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AdId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AdId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Location)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Location)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreationDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreationDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Back to List", "Index", new { controller = "Home" })
+</p>

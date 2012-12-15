@@ -11,6 +11,7 @@ using Bea.Services;
 using NHibernate;
 using Bea.Web.NhibernateHelper;
 using Bea.Dal.Repository;
+using bea.core.Services;
 
 namespace Bea.Web.App_Start
 {
@@ -24,6 +25,7 @@ namespace Bea.Web.App_Start
             builder.Register<ISessionFactory>(x => new SQLiteWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
             builder.RegisterType<AdRepository>().As<IAdRepository>().SingleInstance();
             builder.RegisterType<AdServices>().As<IAdServices>().SingleInstance();
+            builder.RegisterType<SearchServices>().As<ISearchServices>().SingleInstance();
 
             // Register the inMemoryData singleton to inject data
             builder.Register(x => new InMemoryDataInjector(x.Resolve<ISessionFactory>())).SingleInstance();

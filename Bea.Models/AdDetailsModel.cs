@@ -6,7 +6,7 @@ using Bea.Domain;
 
 namespace Bea.Models
 {
-    public class AdSearchResultModel
+    public class AdDetailsModel
     {
         public long AdId { get; set; }
         public String Title { get; set; }
@@ -14,11 +14,11 @@ namespace Bea.Models
         public String Price { get; set; }
         public DateTime CreationDate { get; set; }
 
-        public AdSearchResultModel()
+        public AdDetailsModel()
         {
         }
 
-        public AdSearchResultModel(Ad ad)
+        public AdDetailsModel(Ad ad)
         {
             AdId = ad.Id;
             Title = ad.Title;

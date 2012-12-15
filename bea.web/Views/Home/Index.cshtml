@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Bea.Models.AdSearchResultModel>
+
+@{
+    ViewBag.Title = "BEA - Welcome";
+}
+
+<h2>Latest ads</h2>
+
+<table class="table table-bordered table-condensed table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        
+        <td>
+            @Html.ActionLink("Details", "Details", new { controller = "Ad", id = item.AdId })
+        </td>
+    </tr>
+}
+
+</table>

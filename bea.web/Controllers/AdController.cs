@@ -47,7 +47,12 @@ namespace Bea.Web.Controllers
             return View(ad);
         }
 
-
+        //
+        // GET: /Ad/Details/{id}
+        public ActionResult Details(long id)
+        {
+            return View();
+        }
 
     }
 }

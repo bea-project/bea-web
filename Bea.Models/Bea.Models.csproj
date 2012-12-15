@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdDetailsModel.cs" />
     <Compile Include="AdSearchResultModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

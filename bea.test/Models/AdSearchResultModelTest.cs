@@ -17,6 +17,7 @@ namespace Bea.Test.Models
             // Given
             Ad ad = new Ad()
             {
+                Id = 19,
                 Title = "the title",
                 CreationDate = new DateTime(2012, 12, 21),
                 City = new Domain.Location.City { Label = "Nouméa" },
@@ -27,6 +28,7 @@ namespace Bea.Test.Models
             AdSearchResultModel model = new AdSearchResultModel(ad);
 
             // Then
+            Assert.AreEqual(ad.Id, model.AdId);
             Assert.AreEqual(ad.Title, model.Title);
             Assert.AreEqual(ad.CreationDate, model.CreationDate);
             Assert.AreEqual(ad.City.Label, model.Location);

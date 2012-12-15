@@ -138,6 +138,7 @@
     <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="Controllers\AdController.cs" />
     <Compile Include="Controllers\AdAPIController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TestDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -236,6 +237,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Ad\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ad\Details.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
