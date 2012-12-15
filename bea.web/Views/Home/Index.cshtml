@@ -4,7 +4,19 @@
     ViewBag.Title = "BEA - Welcome";
 }
 
-<h2>Latest ads</h2>
+<div class="navbar">
+    <div class="navbar-inner">
+        <span class="brand">Title</span>
+        <ul class="nav">
+            <li>
+                <form class="navbar-form pull-left">
+                    <input type="text" class="span2" name="title">
+                    <button type="submit" class="btn btn-primary">CHERCHER</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
 
 <table class="table table-bordered table-condensed table-striped">
     <tr>
@@ -23,28 +35,29 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreationDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        
-        <td>
-            @Html.ActionLink("Details", "Details", new { controller = "Ad", id = item.AdId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "Details", new { controller = "Ad", id = item.AdId })
+            </td>
+        </tr>
+    }
 </table>
 
-<div> 
-  @Html.Partial("_TestData")
+<div>
+    @Html.Partial("_TestData")
 </div>

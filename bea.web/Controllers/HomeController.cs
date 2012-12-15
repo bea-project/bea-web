@@ -22,9 +22,9 @@ namespace Bea.Web.Controllers
 
         //
         // GET: /Home/
-        public ActionResult Index()
+        public ActionResult Index(String title)
         {
-            IList<AdSearchResultModel> result = _searchServices.SearchAdsByTitle(null);
+            IList<AdSearchResultModel> result = _searchServices.SearchAdsByTitle(title);
 
             return View(result);
         }
