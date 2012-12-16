@@ -18,7 +18,7 @@ namespace Bea.Test.dal.repository
         public void CountAdsByCity_2Citiesand3Ad_Return2elements()
         {
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
-            Repository repo = new Repository(sessionFactory.GetCurrentSession());
+            Repository repo = new Repository(sessionFactory);
             AdRepository adRepo = new AdRepository(sessionFactory);
 
             using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
@@ -88,7 +88,7 @@ namespace Bea.Test.dal.repository
         public void SearchAdsByTitle_SearchStringIsNull_ReturnEverythingOrderedByCreationDate()
         {
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
-            Repository repo = new Repository(sessionFactory.GetCurrentSession());
+            Repository repo = new Repository(sessionFactory);
             AdRepository adRepo = new AdRepository(sessionFactory);
 
             using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
@@ -147,7 +147,7 @@ namespace Bea.Test.dal.repository
         public void SearchAdsByTitle_SearchStringIsEmpty_ReturnEverythingOrderedByCreationDate()
         {
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
-            Repository repo = new Repository(sessionFactory.GetCurrentSession());
+            Repository repo = new Repository(sessionFactory);
             AdRepository adRepo = new AdRepository(sessionFactory);
 
             using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
@@ -206,7 +206,7 @@ namespace Bea.Test.dal.repository
         public void SearchAdsByTitle_SearchStringIsNotNullOrEmpty_ReturnMatchedAd()
         {
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
-            Repository repo = new Repository(sessionFactory.GetCurrentSession());
+            Repository repo = new Repository(sessionFactory);
             AdRepository adRepo = new AdRepository(sessionFactory);
 
             using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())

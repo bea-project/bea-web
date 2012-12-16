@@ -63,6 +63,7 @@
     <Compile Include="Configuration\CustomLongLastingSQLiteConnectionProvider.cs" />
     <Compile Include="InMemoryData.cs" />
     <Compile Include="InMemoryDatabase.cs" />
+    <Compile Include="Map\AdImageMap.cs" />
     <Compile Include="Map\AdMap.cs">
       <SubType>Code</SubType>
     </Compile>

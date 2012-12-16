@@ -7,8 +7,8 @@
     <ProjectGuid>{984F2A39-D038-437A-95FC-0AAE21ADCE4B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>bea.core</RootNamespace>
-    <AssemblyName>bea.core</AssemblyName>
+    <RootNamespace>Bea.Core</RootNamespace>
+    <AssemblyName>Bea.Core</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -42,6 +42,7 @@
     <Compile Include="Dal\IAdRepository.cs" />
     <Compile Include="Dal\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IAdImageServices.cs" />
     <Compile Include="Services\IAdServices.cs" />
     <Compile Include="Services\ISearchServices.cs" />
   </ItemGroup>

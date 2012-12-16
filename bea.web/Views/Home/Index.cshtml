@@ -16,6 +16,9 @@
 <table class="table table-bordered table-condensed table-striped">
     <tr>
         <th>
+             @Html.DisplayName("Image")
+        </th>
+        <th>
             @Html.DisplayName("Date")
         </th>
         <th>
@@ -33,6 +36,12 @@
     @foreach (var item in Model.SearchResult)
     {
         <tr>
+            <td>
+                @if (!String.IsNullOrEmpty(item.MainImageId))
+                {
+                    <img alt="@item.Title" src="/AdImage/@item.MainImageId" >
+                }
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreationDate)
             </td>

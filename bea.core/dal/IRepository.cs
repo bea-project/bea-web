@@ -11,6 +11,7 @@ namespace Bea.Core.Dal
         T Get<T>(object id);
         IList<T> GetAll<T>();
         void Save<T>(T obj);
+        U Save<T, U>(T obj);
         void Update<T>(T obj);
         void Delete<T>(T obj);
         void Flush();

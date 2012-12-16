@@ -14,6 +14,12 @@ namespace Bea.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "AdImage",
+                url: "AdImage/{imageId}",
+                defaults: new { controller = "AdImage", action = "Index" }
+            );
+
+            routes.MapRoute(
                 name: "DefaultWithParameter",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using bea.core.Services;
+using Bea.Core.Services;
 using Bea.Core.Dal;
 using Bea.Domain;
 using Bea.Models;

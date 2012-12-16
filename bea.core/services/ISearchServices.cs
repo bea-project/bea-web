@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Models;
 
-namespace bea.core.Services
+namespace Bea.Core.Services
 {
     public interface ISearchServices
     {

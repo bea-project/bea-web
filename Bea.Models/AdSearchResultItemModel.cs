@@ -13,6 +13,7 @@ namespace Bea.Models
         public String Location { get; set; }
         public String Price { get; set; }
         public DateTime CreationDate { get; set; }
+        public String MainImageId { get; set; }
 
         public AdSearchResultItemModel()
         {
@@ -25,6 +26,10 @@ namespace Bea.Models
             Location = ad.City.Label;
             Price = String.Format("{0} Francs", ad.Price);
             CreationDate = ad.CreationDate;
+
+            AdImage primaryImage = ad.Images.Where(i => i.IsPrimary).SingleOrDefault();
+            if (primaryImage != null)
+                MainImageId = primaryImage.Id.ToString();
         }
     }
 }
