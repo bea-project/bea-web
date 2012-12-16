@@ -42,8 +42,6 @@
   <ItemGroup>
     <Compile Include="Ad.cs" />
     <Compile Include="AdImage.cs" />
-    <Compile Include="Technical\ArrayBlob.cs" />
-    <Compile Include="Technical\Blob.cs" />
     <Compile Include="Location\City.cs" />
     <Compile Include="Location\Province.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
