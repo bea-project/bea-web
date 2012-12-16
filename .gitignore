@@ -6,3 +6,4 @@ packages/*
 .nuget/*
 */bea.log
 */bea.log*.*
+*.user
