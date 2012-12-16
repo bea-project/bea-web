@@ -30,17 +30,19 @@ namespace Bea.Test.services
             });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAdsByTitle("prout")).Returns(searchResult);
+            adRepoMock.Setup(r => r.SearchAdsByTitle("title")).Returns(searchResult);
 
             SearchServices service = new SearchServices(adRepoMock.Object);
 
             // When
-            IList<AdSearchResultModel> result = service.SearchAdsByTitle("prout");
+            AdSearchResultModel result = service.SearchAdsByTitle("title");
 
             // Then
-            Assert.AreEqual(2, result.Count);
-            Assert.AreEqual("the ad title", result[0].Title);
-            Assert.AreEqual("the ad title 2", result[1].Title);
+            Assert.AreEqual("title", result.SearchString);
+            Assert.AreEqual(2, result.SearchResult.Count);
+            Assert.AreEqual(2, result.SearchResultTotalCount);
+            Assert.AreEqual("the ad title", result.SearchResult[0].Title);
+            Assert.AreEqual("the ad title 2", result.SearchResult[1].Title);
 
             adRepoMock.VerifyAll();
         }

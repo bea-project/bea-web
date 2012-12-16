@@ -79,11 +79,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdMapTest.cs" />
-    <Compile Include="dal\repository\AdRepositoryTest.cs" />
-    <Compile Include="dal\map\UserMapTest.cs" />
+    <Compile Include="Dal\repository\AdRepositoryTest.cs" />
+    <Compile Include="Dal\map\UserMapTest.cs" />
     <Compile Include="Models\AdSearchResultModelTest.cs" />
-    <Compile Include="services\AdServicesTest.cs" />
-    <Compile Include="services\SearchServicesTest.cs" />
+    <Compile Include="Services\AdServicesTest.cs" />
+    <Compile Include="Services\SearchServicesTest.cs" />
     <Compile Include="TestHelper\DataAccessTestBase.cs" />
     <Compile Include="InMemoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Bea.Models.AdSearchResultModel>
+﻿@model Bea.Models.AdSearchResultModel
 
 @{
     ViewBag.Title = "BEA - Welcome";
@@ -10,7 +10,7 @@
         <ul class="nav">
             <li>
                 <form class="navbar-form pull-left">
-                    <input type="text" class="span2" name="title">
+                    <input type="text" class="span2" name="title" value="@Html.DisplayFor(model => model.SearchString)"/>
                     <button type="submit" class="btn btn-primary">CHERCHER</button>
                 </form>
             </li>
@@ -21,21 +21,21 @@
 <table class="table table-bordered table-condensed table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CreationDate)
+            @Html.DisplayName("CreationDate")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Location)
+            @Html.DisplayName("Location")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.DisplayName("Title")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayName("Price")
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.SearchResult)
     {
         <tr>
             <td>

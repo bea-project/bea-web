@@ -25,7 +25,7 @@ namespace Bea.Test.Models
             };
 
             // When
-            AdSearchResultModel model = new AdSearchResultModel(ad);
+            AdSearchResultItemModel model = new AdSearchResultItemModel(ad);
 
             // Then
             Assert.AreEqual(ad.Id, model.AdId);

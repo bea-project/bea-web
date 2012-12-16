@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AdDetailsModel.cs" />
     <Compile Include="AdSearchResultModel.cs" />
+    <Compile Include="AdSearchResultItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

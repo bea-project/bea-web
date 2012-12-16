@@ -8,6 +8,6 @@ namespace bea.core.Services
 {
     public interface ISearchServices
     {
-        IList<AdSearchResultModel> SearchAdsByTitle(String title);
+        AdSearchResultModel SearchAdsByTitle(String title);
     }
 }
