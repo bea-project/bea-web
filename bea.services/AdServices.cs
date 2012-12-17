@@ -33,9 +33,14 @@ namespace Bea.Services
             return _adRepository.GetAllAds();
         }
 
-        public Ad GetAdById(int adId)
+        public Ad GetAdById(long adId)
         {
             return _adRepository.GetAdById(adId);
+        }
+
+        public void DeleteAdById(long adId)
+        {
+            _adRepository.DeleteAdById(adId);
         }
     }
 }

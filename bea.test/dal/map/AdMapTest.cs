@@ -92,7 +92,7 @@ namespace Bea.Test.Dal.map
 
                 ad.AddImage(img);
                 repo.Save(ad);
-                int aId = ad.Id;
+                long aId = ad.Id;
 
                 repo.Flush();
                 repo.Clear();

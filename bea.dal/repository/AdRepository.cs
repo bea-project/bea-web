@@ -42,9 +42,11 @@ namespace Bea.Dal.Repository
             return _sessionFactory.GetCurrentSession().Query<Ad>().Fetch(x=>x.CreatedBy).Fetch(x=>x.City).ToList();
         }
 
-        public Ad GetAdById(int adId)
+        public Ad GetAdById(long adId)
         {
-            return _sessionFactory.GetCurrentSession().Query<Ad>().Fetch(x => x.CreatedBy).Fetch(x => x.City).Where(x => x.Id == adId).First();
+            
+            Ad ad = _sessionFactory.GetCurrentSession().Query<Ad>().Fetch(x => x.CreatedBy).Fetch(x => x.City).Where(x => x.Id == adId).FirstOrDefault();
+            return ad;
         }
 
         public IList<Ad> SearchAdsByTitle(string searchString)
@@ -55,6 +57,16 @@ namespace Bea.Dal.Repository
                 query = query.Where(a => a.Title.Contains(searchString));
 
             return query.OrderByDescending(a => a.CreationDate).ToList();
+        }
+
+        public void DeleteAdById(long adId)
+        {
+            Ad ad = GetAdById(adId);
+            if (ad != null)
+            {
+                _sessionFactory.GetCurrentSession().Delete(ad);
+                _sessionFactory.GetCurrentSession().Flush();
+            }
         }
     }
 }

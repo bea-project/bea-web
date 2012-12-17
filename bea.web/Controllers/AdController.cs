@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Bea.Core.Services;
 using Bea.Domain;
+using Bea.Models;
 
 namespace Bea.Web.Controllers
 {
@@ -47,17 +48,18 @@ namespace Bea.Web.Controllers
             return View(ad);
         }
 
-        public ActionResult AdDetail(int adId)
-        {
-            var result = _adServices.GetAdById(adId);
-            return View(result);
-        }
-
         //
         // GET: /Ad/Details/{id}
         public ActionResult Details(long id)
         {
-            return View();
+            var result = _adServices.GetAdById(id);
+            return View(new AdDetailsModel(result));
+        }
+
+        public ActionResult Delete(long id)
+        {
+            _adServices.DeleteAdById(id);
+            return RedirectToAction("Index","Home");
         }
     }
 }

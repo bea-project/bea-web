@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Bea.Core.Services;
 using Bea.Domain;
+using Bea.Models;
 
 namespace Bea.Web.Controllers
 {
@@ -23,18 +24,24 @@ namespace Bea.Web.Controllers
         public AdAPIController()
         { }
 
-
-        // GET api/AdAPI
-        public IEnumerable<string> Get()
+        public AdDetailsModel Get(long id)
         {
-            return new string[] { "value1", "value2" };
+            Ad ad = _adServices.GetAdById(id);
+            if (ad == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            AdDetailsModel adModel = new AdDetailsModel(ad);
+            return adModel;
         }
 
-        // GET api/AdAPI/5
-        public Ad Get(int id)
+        public IEnumerable<AdDetailsModel> Get()
         {
-            Ad ad =  _adServices.GetAdById(id);
-            return ad;
+            List<Ad> ads = _adServices.GetAllAds().ToList();
+            List<AdDetailsModel> adsModel = new List<AdDetailsModel>();
+            foreach (Ad ad in ads)
+            {
+                adsModel.Add(new AdDetailsModel(ad));
+            }
+            return adsModel;
         }
 
         // POST api/AdAPI
@@ -48,8 +55,9 @@ namespace Bea.Web.Controllers
         }
 
         // DELETE api/AdAPI/5
-        public void Delete(int id)
+        public void Delete(long id)
         {
+            _adServices.DeleteAdById(id);
         }
     }
 }

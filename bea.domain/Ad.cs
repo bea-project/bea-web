@@ -6,12 +6,10 @@ using Bea.Domain.Location;
 using Newtonsoft.Json;
 
 namespace Bea.Domain
-{
-    [Serializable]
-    
+{ 
     public class Ad
     {
-        public virtual int Id { get; set; }
+        public virtual long Id { get; set; }
         public virtual User CreatedBy { get; set; }
         public virtual DateTime CreationDate { get; set; }
         public virtual string Title { get; set; }

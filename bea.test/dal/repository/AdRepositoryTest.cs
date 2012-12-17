@@ -76,7 +76,7 @@ namespace Bea.Test.dal.repository
 
                 // When
                 IDictionary<City, int> result = adRepo.CountAdsByCity();
-                
+
                 // Then
                 Assert.AreEqual(2, result.Count);
                 Assert.AreEqual(2, result[c]);
@@ -109,23 +109,15 @@ namespace Bea.Test.dal.repository
                 };
                 Ad a = new Ad
                 {
-<<<<<<< HEAD
-                    Title = "titre",
-                    Body = "content",
-                    CreatedBy = u,
-=======
                     Title = "titre 1",
                     Body = "content",
                     CreatedBy = u,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 12)
->>>>>>> b9652d7517a014ff2a153b21e743dfb54742f3ec
                 };
                 c.AddAd(a);
                 repo.Save<City>(c);
                 repo.Save<Ad>(a);
 
-<<<<<<< HEAD
-=======
                 Ad a2 = new Ad
                 {
                     Title = "title 2",
@@ -255,24 +247,75 @@ namespace Bea.Test.dal.repository
                 repo.Save<Ad>(a2);
 
 
->>>>>>> b9652d7517a014ff2a153b21e743dfb54742f3ec
                 repo.Flush();
 
                 #endregion
 
                 // When
-
-                Ad result = adRepo.GetAdById(1);
-
-                // Then
-                Assert.AreEqual("titre", result.Title);
-                Assert.AreEqual("CherzmOi", result.City.Label);
-                Assert.AreEqual("test@test.com", result.CreatedBy.Email);
                 IList<Ad> result = adRepo.SearchAdsByTitle("tre");
 
                 // Then
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(a, result[0]);
+            }
+        }
+
+        [TestMethod]
+        public void DeleteAdFromDb()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            AdRepository adRepo = new AdRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                // Given
+                #region test data
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "CherzmOi"
+                };
+                Ad a = new Ad
+                {
+                    Title = "titre 1",
+                    Body = "content",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18)
+                };
+                c.AddAd(a);
+                repo.Save<City>(c);
+                repo.Save<Ad>(a);
+
+                Ad a2 = new Ad
+                {
+                    Title = "title 2",
+                    Body = "content",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17)
+                };
+                c.AddAd(a2);
+                repo.Save<Ad>(a2);
+
+
+                repo.Flush();
+
+                #endregion
+
+                // When
+                adRepo.DeleteAdById(1);
+                List<Ad> result= adRepo.GetAllAds();
+
+                // Then
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(a2, result[0]);
             }
         }
     }

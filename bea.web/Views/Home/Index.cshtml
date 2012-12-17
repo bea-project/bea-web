@@ -57,7 +57,9 @@
 
             <td>
                 @Html.ActionLink("Details", "Details", new { controller = "Ad", id = item.AdId })
+                @Html.ActionLink("Delete", "Delete", new { controller = "Ad", id = item.AdId })
             </td>
+
         </tr>
     }
 </table>
