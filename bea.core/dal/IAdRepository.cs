@@ -26,5 +26,11 @@ namespace Bea.Core.Dal
         /// </summary>
         /// <returns>A list of Ads</returns>
         List<Ad> GetAllAds();
+
+        /// <summary>
+        /// Get a particular Ad by Id
+        /// </summary>
+        /// <returns>An Ad</returns>
+        Ad GetAdById(int adId);
     }
 }

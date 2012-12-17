@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Bea.Core.Services;
+using Bea.Domain;
 
 namespace Bea.Web.Controllers
 {
@@ -19,31 +20,34 @@ namespace Bea.Web.Controllers
 
             _adServices = adServices;
         }
+        public AdAPIController()
+        { }
 
 
-        // GET api/default1
+        // GET api/AdAPI
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/default1/5
-        public string Get(int id)
+        // GET api/AdAPI/5
+        public Ad Get(int id)
         {
-            return "value";
+            Ad ad =  _adServices.GetAdById(id);
+            return ad;
         }
 
-        // POST api/default1
+        // POST api/AdAPI
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT api/default1/5
+        // PUT api/AdAPI/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/default1/5
+        // DELETE api/AdAPI/5
         public void Delete(int id)
         {
         }

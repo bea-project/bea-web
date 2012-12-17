@@ -5,12 +5,15 @@ using System.Web;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
 using Bea.Core.Dal;
 using Bea.Core.Services;
 using Bea.Services;
 using NHibernate;
 using Bea.Web.NhibernateHelper;
 using Bea.Dal.Repository;
+using System.Reflection;
+using System.Web.Http;
 
 namespace Bea.Web.App_Start
 {
@@ -20,6 +23,7 @@ namespace Bea.Web.App_Start
         {
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             builder.Register<ISessionFactory>(x => new SQLiteWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
             builder.RegisterType<AdRepository>().As<IAdRepository>().SingleInstance();
@@ -30,6 +34,8 @@ namespace Bea.Web.App_Start
 
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            //DependencyResolver.SetResolver(new AutofacWebApiDependencyResolver(container));
         }
     }
 }

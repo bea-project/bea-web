@@ -12,12 +12,12 @@ namespace Bea.Web
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
             ContainerConfig.RegisterContainer();
-
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            FilterConfig.RegisterWebApiGlobalFilters(System.Web.Http.GlobalConfiguration.Configuration.Filters);
+            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            
             // Enable log4net configuration
             log4net.Config.XmlConfigurator.Configure();
         }

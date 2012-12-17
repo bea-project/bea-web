@@ -11,5 +11,6 @@ namespace Bea.Core.Services
     {
         IDictionary<City, int> CountAdsByCities();
         IList<Ad> GetAllAds();
+        Ad GetAdById(int adId);
     }
 }

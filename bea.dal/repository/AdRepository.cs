@@ -42,7 +42,9 @@ namespace Bea.Dal.Repository
             return _sessionFactory.GetCurrentSession().Query<Ad>().Fetch(x=>x.CreatedBy).Fetch(x=>x.City).ToList();
         }
 
-
-
+        public Ad GetAdById(int adId)
+        {
+            return _sessionFactory.GetCurrentSession().Query<Ad>().Fetch(x => x.CreatedBy).Fetch(x => x.City).Where(x => x.Id == adId).First();
+        }
     }
 }

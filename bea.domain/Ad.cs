@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bea.Domain.Location;
+using Newtonsoft.Json;
 
 namespace Bea.Domain
 {
+    [Serializable]
+    
     public class Ad
     {
         public virtual int Id { get; set; }

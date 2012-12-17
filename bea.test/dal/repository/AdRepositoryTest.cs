@@ -83,5 +83,52 @@ namespace Bea.Test.dal.repository
                 Assert.AreEqual(1, result[c2]);
             }
         }
+
+        [TestMethod]
+        public void GetAnAdFromId()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory.GetCurrentSession());
+            AdRepository adRepo = new AdRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                // Given
+                #region test data
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "CherzmOi"
+                };
+                Ad a = new Ad
+                {
+                    Title = "titre",
+                    Body = "content",
+                    CreatedBy = u,
+                };
+                c.AddAd(a);
+                repo.Save<City>(c);
+                repo.Save<Ad>(a);
+
+                repo.Flush();
+
+                #endregion
+
+                // When
+                Ad result = adRepo.GetAdById(1);
+
+                // Then
+                Assert.AreEqual("titre", result.Title);
+                Assert.AreEqual("CherzmOi", result.City.Label);
+                Assert.AreEqual("test@test.com", result.CreatedBy.Email);
+            }
+        }
     }
 }

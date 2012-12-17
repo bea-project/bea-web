@@ -32,5 +32,10 @@ namespace Bea.Services
         {
             return _adRepository.GetAllAds();
         }
+
+        public Ad GetAdById(int adId)
+        {
+            return _adRepository.GetAdById(adId);
+        }
     }
 }

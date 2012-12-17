@@ -47,6 +47,12 @@ namespace Bea.Web.Controllers
             return View(ad);
         }
 
+        public ActionResult AdDetail(int adId)
+        {
+            var result = _adServices.GetAdById(adId);
+            return View(result);
+        }
+
 
 
     }
