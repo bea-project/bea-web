@@ -16,7 +16,20 @@ namespace Bea.Domain
         public virtual DateTime CreationDate { get; set; }
         public virtual string Title { get; set; }
         public virtual string Body { get; set; }
-        public virtual List<string> Pictures { get; set; }
         public virtual City City { get; set; }
+        public virtual Double Price { get; set; }
+
+        public virtual IList<AdImage> Images { get; set; }
+
+        public Ad()
+        {
+            Images = new List<AdImage>();
+        }
+
+        public virtual void AddImage(AdImage adImage)
+        {
+            Images.Add(adImage);
+            adImage.Ad = this;
+        }
     }
 }

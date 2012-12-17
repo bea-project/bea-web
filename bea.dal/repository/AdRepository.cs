@@ -46,5 +46,15 @@ namespace Bea.Dal.Repository
         {
             return _sessionFactory.GetCurrentSession().Query<Ad>().Fetch(x => x.CreatedBy).Fetch(x => x.City).Where(x => x.Id == adId).First();
         }
+
+        public IList<Ad> SearchAdsByTitle(string searchString)
+        {
+            IQueryable<Ad> query = _sessionFactory.GetCurrentSession().Query<Ad>();
+
+            if (!String.IsNullOrEmpty(searchString))
+                query = query.Where(a => a.Title.Contains(searchString));
+
+            return query.OrderByDescending(a => a.CreationDate).ToList();
+        }
     }
 }

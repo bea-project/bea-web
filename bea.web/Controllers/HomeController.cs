@@ -4,29 +4,29 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace bea.web.Controllers
+using Bea.Core.Services;
+using Bea.Models;
+
+namespace Bea.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+        private ISearchServices _searchServices;
 
-            return View();
+        public HomeController(ISearchServices searchServices)
+        {
+            if (searchServices == null)
+                throw new ArgumentNullException("searchServices");
+
+            _searchServices = searchServices;
         }
 
-        public ActionResult About()
+        //
+        // GET: /Home/
+        public ActionResult Index(String title)
         {
-            ViewBag.Message = "Your app description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            AdSearchResultModel result = _searchServices.SearchAdsByTitle(title);
+            return View(result);
         }
     }
 }

@@ -1,0 +1,15 @@
+﻿@model Bea.Models.AdSearchResultModel
+
+<div class="navbar">
+    <div class="navbar-inner">
+        <span class="brand">Titre</span>
+        <ul class="nav">
+            <li>
+                <form class="navbar-form pull-left">
+                    <input type="text" class="span2" name="title" value="@Html.DisplayFor(model => model.SearchString)"/>
+                    <button type="submit" class="btn btn-primary">CHERCHER</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>

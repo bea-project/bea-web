@@ -12,76 +12,81 @@ namespace Bea.Dal.Repository
 {
     public class Repository : IRepository
     {
-        protected ISession _session;
+        protected ISessionFactory _sessionFactory;
 
-        public Repository(ISession session)
+        public Repository(ISessionFactory sessionFactory)
         {
-            _session = session;
+            _sessionFactory = sessionFactory;
         }
 
         #region IRepository<T> Members
 
         public T Load<T>(object id)
         {
-            return _session.Load<T>(id);
+            return _sessionFactory.GetCurrentSession().Load<T>(id);
         }
 
         public T Get<T>(object id)
         {
-            return _session.Get<T>(id);
+            return _sessionFactory.GetCurrentSession().Get<T>(id);
         }
         public IList<T> GetAll<T>()
         {
-            return _session.CreateCriteria(typeof(T)).List<T>();
+            return _sessionFactory.GetCurrentSession().CreateCriteria(typeof(T)).List<T>();
         }
         public void Update<T>(T obj)
         {
-            _session.Update(obj);
+            _sessionFactory.GetCurrentSession().Update(obj);
         }
 
         public void Save<T>(T obj)
         {
-            _session.Save(obj);
+            Save<T, object>(obj);
+        }
+
+        public U Save<T, U>(T obj)
+        {
+            return (U) _sessionFactory.GetCurrentSession().Save(obj);
         }
 
         public void Delete<T>(T obj)
         {
-            _session.Delete(obj);
+            _sessionFactory.GetCurrentSession().Delete(obj);
         }
 
         public void Flush()
         {
-            _session.Flush();
+            _sessionFactory.GetCurrentSession().Flush();
         }
 
         public void SaveOrUpdate<T>(T obj)
         {
-            _session.SaveOrUpdate(obj);
+            _sessionFactory.GetCurrentSession().SaveOrUpdate(obj);
         }
 
         public IEnumerable<T> Find<T>(Expression<Func<T, bool>> matchingCriteria)
         {
-            return _session.Query<T>().Where(matchingCriteria);
+            return _sessionFactory.GetCurrentSession().Query<T>().Where(matchingCriteria);
         }
 
         public int CountAll<T>()
         {
-            return _session.CreateCriteria(typeof(T)).SetProjection(Projections.Count("Id")).UniqueResult<int>();
+            return _sessionFactory.GetCurrentSession().CreateCriteria(typeof(T)).SetProjection(Projections.Count("Id")).UniqueResult<int>();
         }
 
         public void Evict<T>(T obj)
         {
-            _session.Evict(obj);
+            _sessionFactory.GetCurrentSession().Evict(obj);
         }
 
         public void Refresh<T>(T obj)
         {
-            _session.Refresh(obj);
+            _sessionFactory.GetCurrentSession().Refresh(obj);
         }
 
         public void Clear()
         {
-            _session.Clear();
+            _sessionFactory.GetCurrentSession().Clear();
         }
 
         #endregion

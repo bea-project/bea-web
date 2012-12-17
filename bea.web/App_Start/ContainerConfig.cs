@@ -26,11 +26,14 @@ namespace Bea.Web.App_Start
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             builder.Register<ISessionFactory>(x => new SQLiteWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
+            builder.RegisterType<Repository>().As<IRepository>().SingleInstance();
             builder.RegisterType<AdRepository>().As<IAdRepository>().SingleInstance();
             builder.RegisterType<AdServices>().As<IAdServices>().SingleInstance();
+            builder.RegisterType<SearchServices>().As<ISearchServices>().SingleInstance();
+            builder.RegisterType<AdImageServices>().As<IAdImageServices>().SingleInstance();
 
             // Register the inMemoryData singleton to inject data
-            builder.Register(x => new InMemoryDataInjector(x.Resolve<ISessionFactory>())).SingleInstance();
+            builder.Register(x => new InMemoryDataInjector(x.Resolve<ISessionFactory>(), x.Resolve<IRepository>())).SingleInstance();
 
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));

@@ -39,8 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdImageServices.cs" />
     <Compile Include="AdServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bea.Core\Bea.Core.csproj">
@@ -50,6 +52,10 @@
     <ProjectReference Include="..\Bea.Domain\Bea.Domain.csproj">
       <Project>{79c4229d-2a62-4fca-be59-60edbb6bf747}</Project>
       <Name>Bea.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bea.Models\Bea.Models.csproj">
+      <Project>{5207cc9f-6ac5-42bd-ae46-82940de48f78}</Project>
+      <Name>Bea.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
