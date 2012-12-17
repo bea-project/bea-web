@@ -45,8 +45,9 @@ namespace Bea.Web.Controllers
         }
 
         // POST api/AdAPI
-        public void Post([FromBody]string value)
+        public void Post(AdDetailsModel adModel)
         {
+
         }
 
         // PUT api/AdAPI/5
