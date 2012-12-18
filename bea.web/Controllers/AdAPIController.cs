@@ -24,24 +24,34 @@ namespace Bea.Web.Controllers
         public AdAPIController()
         { }
 
-        public AdDetailsModel Get(long id)
+        public HttpResponseMessage Get(long id)
         {
+            HttpResponseMessage response;
             Ad ad = _adServices.GetAdById(id);
             if (ad == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
-            AdDetailsModel adModel = new AdDetailsModel(ad);
-            return adModel;
+            {
+                response = new HttpResponseMessage(HttpStatusCode.NotFound);
+            }
+            else 
+            {
+                AdDetailsModel adModel = new AdDetailsModel(ad);
+                response = Request.CreateResponse(HttpStatusCode.OK, adModel);
+            }
+
+            return response;
         }
 
-        public IEnumerable<AdDetailsModel> Get()
+        public HttpResponseMessage Get()
         {
+            HttpResponseMessage response;
             List<Ad> ads = _adServices.GetAllAds().ToList();
             List<AdDetailsModel> adsModel = new List<AdDetailsModel>();
             foreach (Ad ad in ads)
             {
                 adsModel.Add(new AdDetailsModel(ad));
             }
-            return adsModel;
+            response = Request.CreateResponse(HttpStatusCode.OK, adsModel);
+            return response;
         }
 
         // POST api/AdAPI
@@ -53,12 +63,14 @@ namespace Bea.Web.Controllers
         // PUT api/AdAPI/5
         public void Put(int id, [FromBody]string value)
         {
+
         }
 
         // DELETE api/AdAPI/5
-        public void Delete(long id)
+        public HttpResponseMessage Delete(long id)
         {
             _adServices.DeleteAdById(id);
+            return (Request.CreateResponse(HttpStatusCode.OK));
         }
     }
 }
