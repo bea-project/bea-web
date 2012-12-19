@@ -68,5 +68,25 @@ namespace Bea.Dal.Repository
                 _sessionFactory.GetCurrentSession().Flush();
             }
         }
+
+        public IList<Province> GetAllProvinces()
+        {
+            return _sessionFactory.GetCurrentSession().Query<Province>().ToList();
+        }
+
+        public User GetUserFromEmail(string email)
+        {
+            return _sessionFactory.GetCurrentSession().Query<User>().Where(x => x.Email.Equals(email)).FirstOrDefault();
+        }
+
+        public City GetCityFromLabel(string label)
+        {
+            return _sessionFactory.GetCurrentSession().Query<City>().Where(x => x.Label.Equals(label)).FirstOrDefault();
+        }
+
+        public void AddAd(Ad ad)
+        {
+            _sessionFactory.GetCurrentSession().Save(ad);
+        }
     }
 }

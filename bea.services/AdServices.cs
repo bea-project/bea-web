@@ -42,5 +42,25 @@ namespace Bea.Services
         {
             _adRepository.DeleteAdById(adId);
         }
+
+        public IList<Province> GetAllProvinces()
+        {
+            return _adRepository.GetAllProvinces();
+        }
+
+        public void AddAd(Ad ad)
+        {
+            _adRepository.AddAd(ad);
+        }
+
+        public User GetUserFromEmail(string email)
+        {
+            return _adRepository.GetUserFromEmail(email);
+        }
+
+        public City GetCityFromLabel(string label)
+        {
+            return _adRepository.GetCityFromLabel(label);
+        }
     }
 }

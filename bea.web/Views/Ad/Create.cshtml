@@ -1,43 +1,63 @@
-﻿@model Bea.Domain.Ad
-
-
+﻿@model Bea.Models.AdCreateModel
+@{
+    ViewBag.Title = "Create";
+}
+@using (Html.BeginForm("Create", "Ad", FormMethod.Post, new { @class = "well form-horizontal" }))
+{
+    @Html.ValidationSummary(true)
     
-    @using (Html.BeginForm("Create", "Ad", FormMethod.Post, new {@class="well" })) {
-        @Html.ValidationSummary(true)
-    
-        <fieldset>
-            <legend>Ad</legend>
-    
-            <div class="editor-label">
-                @Html.LabelFor(model => model.CreationDate)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.CreationDate)
-                @Html.ValidationMessageFor(model => model.CreationDate)
-            </div>
-    
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Title)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Title)
-                @Html.ValidationMessageFor(model => model.Title)
-            </div>
-    
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Body)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Body)
-                @Html.ValidationMessageFor(model => model.Body)
-            </div>
-    
-            <p>
-                <input type="submit" value="Create" />
-            </p>
-        </fieldset>
-    }
-    
-    <div>
-        @Html.ActionLink("Back to List", "Index")
+    <hr> 
+    <div class="control-group">
+        <label class="control-label" for="inputName">@Html.LabelFor(model => model.Name)</label>
+        <div class="controls">
+            @Html.TextBoxFor(model => model.Name, new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.Name,String.Empty, new { @class = "help-inline", @style = "color:red" })
+        </div>
     </div>
+    <div class="control-group">
+        <label class="control-label" for="inputEmail">@Html.LabelFor(model => model.Email)</label>
+        <div class="controls">
+            @Html.TextBoxFor(model => model.Email, new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.Email, String.Empty, new { @class = "help-inline", @style = "color:red" })
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputPhone">@Html.LabelFor(model => model.Telephone)</label>
+        <div class="controls">
+            @Html.TextBoxFor(model => model.Telephone, new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.Telephone, String.Empty, new { @class = "help-inline", @style = "color:red" })
+        </div>
+    </div>
+    <hr>   
+    <div class="control-group">
+        <label class="control-label" for="inputTitle">@Html.LabelFor(model => model.Title)</label>
+        <div class="controls">
+            @Html.TextBoxFor(x => x.Title, new { @class = "input-xxlarge" })
+            @Html.ValidationMessageFor(model => model.Title, String.Empty, new { @class = "help-inline", @style = "color:red" })
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputBody">@Html.LabelFor(model => model.Body)</label>
+        <div class="controls">
+            @Html.TextAreaFor(model => model.Body, new { @rows = 10, @class = "input-xxlarge", style = "resize: none;" })
+            @Html.ValidationMessageFor(model => model.Body, String.Empty, new { @class = "help-inline", @style = "color:red" })
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputPrice">@Html.LabelFor(model => model.Price)</label>
+        <div class="controls">
+            @Html.TextBoxFor(model => model.Price, new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.Price, String.Empty, new { @class = "help-inline", @style = "color:red" })
+        </div>
+    </div>    
+        
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-primary">
+                Valider</button>
+        </div>
+    </div>
+        
+    
+}
+
