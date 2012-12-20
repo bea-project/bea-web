@@ -13,9 +13,8 @@ namespace Bea.Core.Services
         IList<Ad> GetAllAds();
         Ad GetAdById(long adId);
         void DeleteAdById(long adId);
-        IList<Province> GetAllProvinces();
         void AddAd(Ad ad);
-        User GetUserFromEmail(string email);
-        City GetCityFromLabel(string label);
+        
+        
     }
 }

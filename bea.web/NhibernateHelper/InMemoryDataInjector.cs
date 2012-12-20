@@ -93,6 +93,7 @@ namespace Bea.Web.NhibernateHelper
                     Ad ad = new Ad();
                     Faker.Lorem.Words(3).ForEach(s => ad.Title += " "+s);
                     ad.Body = Faker.Lorem.Paragraph();
+                    ad.IsOffer = true;
                     ad.CreationDate = DateTime.Now
                         .AddDays(Faker.RandomNumber.Next(1, 7))
                         .AddHours(Faker.RandomNumber.Next(1, 23))

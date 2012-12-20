@@ -47,12 +47,7 @@ namespace Bea.Core.Dal
         /// <returns></returns>
         void DeleteAdById(long adId);
 
-        /// Get All provinces
-        /// Required to create the AdCreateModel
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        IList<Province> GetAllProvinces();
+
 
         /// Insert an Ad
         /// </summary>
@@ -60,17 +55,6 @@ namespace Bea.Core.Dal
         /// <returns></returns>
         void AddAd(Ad ad);
 
-
-        /// Get the User from the email
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>The user with the email</returns>
-        User GetUserFromEmail(string email);
-
-        /// Get the City from the label
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>The user with the email</returns>
-        City GetCityFromLabel(string label);
+       
     }
 }

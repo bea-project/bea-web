@@ -40,12 +40,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dal\IAdRepository.cs" />
+    <Compile Include="Dal\ILocationRepository.cs" />
     <Compile Include="Dal\IRepository.cs" />
+    <Compile Include="Dal\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IAdImageServices.cs" />
     <Compile Include="Services\IAdServices.cs" />
     <Compile Include="Services\ILocationServices.cs" />
     <Compile Include="Services\ISearchServices.cs" />
+    <Compile Include="Services\IUserServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bea.Domain\Bea.Domain.csproj">

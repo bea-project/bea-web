@@ -5,6 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Bea.Domain.Location;
+using System.Web.Mvc;
 
 namespace Bea.Models
 {
@@ -36,7 +37,14 @@ namespace Bea.Models
         [Required(ErrorMessage = "Veuillez inserer un numero de telephone.")]
         public String Telephone { get; set; }
 
+        
+        public IEnumerable<SelectListItem> Provinces { get; set; }
+        
         [DisplayName("Province:")]
-        public List<Province> provinces { get; set; }
+        public Province SelectedProvince { get; set; }
+
+        [DisplayName("Type d'annonce:")]
+        [Required(ErrorMessage = "Veuillez selectionner un type d'annonce.")]
+        public Boolean IsOffer { get; set; }
     }
 }

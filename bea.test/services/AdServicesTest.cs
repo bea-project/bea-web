@@ -19,6 +19,8 @@ namespace Bea.Test.services
             // Given
             IDictionary<City, int> result = new Dictionary<City, int>();
             var adRepoMock = new Moq.Mock<IAdRepository>();
+            var userRepoMock = new Moq.Mock<IUserRepository>();
+            var locationRepoMock = new Moq.Mock<ILocationRepository>();
             adRepoMock.Setup(r => r.CountAdsByCity()).Returns(result);
 
             AdServices service = new AdServices(adRepoMock.Object);

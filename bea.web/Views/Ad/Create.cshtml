@@ -6,12 +6,19 @@
 {
     @Html.ValidationSummary(true)
     
-    <hr> 
+@*    <div class="control-group">
+        <label class="control-label" for="inputName">@Html.LabelFor(model => model.SelectedProvince)</label>
+        <div class="controls">
+            @Html.DropDownListFor(model=>model.SelectedProvince, Model.Provinces,"Choisissez la province",new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.SelectedProvince, String.Empty, new { @class = "help-inline", @style = "color:red" })
+        </div>
+    </div>*@
+    
     <div class="control-group">
         <label class="control-label" for="inputName">@Html.LabelFor(model => model.Name)</label>
         <div class="controls">
             @Html.TextBoxFor(model => model.Name, new { @class = "input-large" })
-            @Html.ValidationMessageFor(model => model.Name,String.Empty, new { @class = "help-inline", @style = "color:red" })
+            @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "help-inline", @style = "color:red" })
         </div>
     </div>
     <div class="control-group">
@@ -46,11 +53,19 @@
     <div class="control-group">
         <label class="control-label" for="inputPrice">@Html.LabelFor(model => model.Price)</label>
         <div class="controls">
-            @Html.TextBoxFor(model => model.Price, new { @class = "input-large" })
+            @Html.TextBoxFor(model => model.Price, new { @class = "input-large", @Value = "" })
             @Html.ValidationMessageFor(model => model.Price, String.Empty, new { @class = "help-inline", @style = "color:red" })
         </div>
     </div>    
-        
+    
+    <div class="control-group">
+        <label class="control-label" for="inputIsOffer">@Html.LabelFor(model => model.IsOffer)</label>
+        <div class="controls">
+            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, true, new { @checked = "checked", @style = "vertical-align: top" }) Offres</label>
+            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, false, new { @style = "vertical-align: top" }) Demandes</label>
+        </div>
+    </div>    
+    
     <div class="control-group">
         <div class="controls">
             <button type="submit" class="btn btn-primary">
