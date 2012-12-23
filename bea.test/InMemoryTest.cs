@@ -5,7 +5,6 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bea.Dal;
 using Bea.Domain;
-using System.Data.SQLite;
 using Bea.Domain.Location;
 
 namespace Bea.Test

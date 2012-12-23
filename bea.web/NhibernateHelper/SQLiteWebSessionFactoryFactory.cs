@@ -1,6 +1,5 @@
 ﻿using System;
 using Bea.Dal.Configuration;
-using Bea.Web.NhibernateHelper;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Cfg;
 

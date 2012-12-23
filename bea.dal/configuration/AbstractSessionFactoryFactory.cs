@@ -33,7 +33,7 @@ namespace Bea.Dal.Configuration
 
         protected ISessionFactory CreateSessionFactory()
         {
-            return Fluently.Configure()
+            return Fluently.Configure(new NHibernate.Cfg.Configuration())
               .Database(SetPersistenceConfigurer())
               .Mappings(m => m.FluentMappings.AddFromAssemblyOf<AbstractSessionFactoryFactory>())
               .ExposeConfiguration(cfg => ExposeConfiguration(cfg))

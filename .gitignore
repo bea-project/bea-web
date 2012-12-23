@@ -3,7 +3,6 @@ packages/*
 */bin/*
 */obj/*
 *.suo
-.nuget/*
 */bea.log
 */bea.log*.*
 *.user

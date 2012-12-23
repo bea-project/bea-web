@@ -10,7 +10,6 @@ namespace Bea.Dal.Map
     {
         public UserMap()
         {
-            Table("user");
             Id(x => x.UserId).GeneratedBy.Identity();
             Map(x => x.Email).Not.Nullable();
             Map(x => x.Password).Not.Nullable();

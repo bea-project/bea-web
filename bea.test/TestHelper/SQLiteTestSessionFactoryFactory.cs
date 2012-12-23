@@ -16,7 +16,7 @@ namespace Bea.Test.TestHelper
         protected override IPersistenceConfigurer SetPersistenceConfigurer()
         {
             return SQLiteConfiguration.Standard.InMemory().ShowSql()
-                    .Provider<CustomLongLastingSQLiteConnectionProvider>();
+                .Provider<CustomLongLastingSQLiteConnectionProvider>();
         }
 
         protected override void ExposeConfiguration(Configuration cfg)
