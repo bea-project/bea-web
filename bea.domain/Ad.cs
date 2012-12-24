@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bea.Domain.Location;
-using Newtonsoft.Json;
 
 namespace Bea.Domain
 { 
