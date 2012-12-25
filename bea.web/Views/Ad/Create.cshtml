@@ -6,69 +6,78 @@
 {
     @Html.ValidationSummary(true)
     
-@*    <div class="control-group">
-        <label class="control-label" for="inputName">@Html.LabelFor(model => model.SelectedProvince)</label>
+    <div class="control-group">
+        <label class="control-label" for="inputProvince">@Html.LabelFor(model => model.SelectedProvinceId)</label>
         <div class="controls">
-            @Html.DropDownListFor(model=>model.SelectedProvince, Model.Provinces,"Choisissez la province",new { @class = "input-large" })
-            @Html.ValidationMessageFor(model => model.SelectedProvince, String.Empty, new { @class = "help-inline", @style = "color:red" })
+            @Html.DropDownListFor(model=>model.SelectedProvinceId,Model.Provinces,"Choisissez la province",new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.SelectedProvinceId, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
         </div>
-    </div>*@
-    
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputCity">@Html.LabelFor(model => model.SelectedCityId)</label>
+        <div class="controls">
+            @Html.DropDownListFor(model => model.SelectedCityId, Enumerable.Empty<SelectListItem>(), "Choisissez la ville", new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.SelectedCityId, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+        </div>
+    </div>
+    <hr>  
+    <br /> 
     <div class="control-group">
         <label class="control-label" for="inputName">@Html.LabelFor(model => model.Name)</label>
         <div class="controls">
-            @Html.TextBoxFor(model => model.Name, new { @class = "input-large" })
-            @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "help-inline", @style = "color:red" })
+            @Html.TextBoxFor(model => model.Name, new { @class = "input-large", rel="popover"})
+            @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="inputEmail">@Html.LabelFor(model => model.Email)</label>
         <div class="controls">
-            @Html.TextBoxFor(model => model.Email, new { @class = "input-large" })
-            @Html.ValidationMessageFor(model => model.Email, String.Empty, new { @class = "help-inline", @style = "color:red" })
+            @Html.TextBoxFor(model => model.Email, new { @class = "input-large", rel = "tooltip" })
+            @Html.ValidationMessageFor(model => model.Email, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="inputPhone">@Html.LabelFor(model => model.Telephone)</label>
         <div class="controls">
             @Html.TextBoxFor(model => model.Telephone, new { @class = "input-large" })
-            @Html.ValidationMessageFor(model => model.Telephone, String.Empty, new { @class = "help-inline", @style = "color:red" })
+            @Html.ValidationMessageFor(model => model.Telephone, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
         </div>
     </div>
-    <hr>   
+    <hr>  
+    <br /> 
     <div class="control-group">
         <label class="control-label" for="inputTitle">@Html.LabelFor(model => model.Title)</label>
         <div class="controls">
             @Html.TextBoxFor(x => x.Title, new { @class = "input-xxlarge" })
-            @Html.ValidationMessageFor(model => model.Title, String.Empty, new { @class = "help-inline", @style = "color:red" })
+            @Html.ValidationMessageFor(model => model.Title, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="inputBody">@Html.LabelFor(model => model.Body)</label>
         <div class="controls">
             @Html.TextAreaFor(model => model.Body, new { @rows = 10, @class = "input-xxlarge", style = "resize: none;" })
-            @Html.ValidationMessageFor(model => model.Body, String.Empty, new { @class = "help-inline", @style = "color:red" })
+            @Html.ValidationMessageFor(model => model.Body, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="inputPrice">@Html.LabelFor(model => model.Price)</label>
         <div class="controls">
             @Html.TextBoxFor(model => model.Price, new { @class = "input-large", @Value = "" })
-            @Html.ValidationMessageFor(model => model.Price, String.Empty, new { @class = "help-inline", @style = "color:red" })
+            @Html.ValidationMessageFor(model => model.Price, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
         </div>
     </div>    
     
     <div class="control-group">
         <label class="control-label" for="inputIsOffer">@Html.LabelFor(model => model.IsOffer)</label>
         <div class="controls">
-            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, true, new { @checked = "checked", @style = "vertical-align: top" }) Offres</label>
-            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, false, new { @style = "vertical-align: top" }) Demandes</label>
+            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, true, new { @checked = "checked", @style = "vertical-align: top" }) Offre</label>
+            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, false, new { @style = "vertical-align: top" }) Demande</label>
         </div>
     </div>    
     
     <div class="control-group">
         <div class="controls">
-            <button type="submit" class="btn btn-primary">
+            <button id="submitButton" type="submit" class="btn btn-primary" rel="popover">
                 Valider</button>
         </div>
     </div>
@@ -76,3 +85,43 @@
     
 }
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Refreshes the city list when user chenges province
+        $('#SelectedProvinceId').change(function () {
+            if ($(this).val()) {
+                //The user selected a province
+                var provinceId = $('#SelectedProvinceId').val();
+                var url = '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "LocationApi" })' + "/" + provinceId;
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#SelectedCityId').empty();
+                        $('#SelectedCityId').append($('<option/>', {
+                            value: null,
+                            text: "Choisissez la ville"
+                        }));
+                        $(data).each(function () {
+                            var option = $('<option />');
+                            option.attr('value', this.Value).text(this.Text);
+                            $('#SelectedCityId').append(option);
+                        });
+                    }
+                });
+            }
+            else {
+                //The user selected "Choisissez la province"
+                $('#SelectedCityId').empty();
+                $('#SelectedCityId').append($('<option/>', {
+                    value: null,
+                    text: "Choisissez la ville"
+                }));
+            }
+        });
+
+        $('#Name').popover({ 'trigger': 'focus', 'content': 'Votre nom sera affiche dans l\'annonce', 'title': 'Aide'});
+        $('#Email').tooltip({ 'trigger': 'focus', 'title': 'Votre Email ne sera pas affiche dans l\'annonce', 'placement':'right' });
+    });
+</script>

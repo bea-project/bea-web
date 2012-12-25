@@ -21,9 +21,19 @@ namespace Bea.Services
             return _locationRepository.GetCityFromLabel(label);
         }
 
-        public IList<Province> GetAllProvinces()
+        public City GetCityFromId(int cityId)
+        {
+            return _locationRepository.GetCityFromId(cityId);
+        }
+
+        public IEnumerable<Province> GetAllProvinces()
         {
             return _locationRepository.GetAllProvinces();
+        }
+
+        public IEnumerable<City> GetCitiesFromProvince(int provinceId)
+        {
+            return _locationRepository.GetCitiesFromProvince(provinceId);
         }
     }
 }

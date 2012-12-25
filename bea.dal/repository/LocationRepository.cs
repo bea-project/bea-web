@@ -24,9 +24,20 @@ namespace Bea.Dal.Repository
             return _sessionFactory.GetCurrentSession().Query<City>().Where(x => x.Label.Equals(label)).FirstOrDefault();
         }
 
-        public IList<Province> GetAllProvinces()
+        public City GetCityFromId(int cityId)
         {
-            return _sessionFactory.GetCurrentSession().Query<Province>().ToList();
+            return _sessionFactory.GetCurrentSession().Query<City>().Where(x => x.Id==cityId).FirstOrDefault();
         }
+
+        public IEnumerable<Province> GetAllProvinces()
+        {
+            return _sessionFactory.GetCurrentSession().Query<Province>();
+        }
+
+        public IEnumerable<City> GetCitiesFromProvince(int provinceId)
+        {
+            return _sessionFactory.GetCurrentSession().Query<City>().Where(x => x.Province.Id==provinceId);
+        }
+
     }
 }

@@ -145,6 +145,7 @@
     <Compile Include="Controllers\AdAPIController.cs" />
     <Compile Include="Controllers\AdImageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationApiController.cs" />
     <Compile Include="Controllers\TestDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

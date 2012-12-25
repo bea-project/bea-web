@@ -60,7 +60,7 @@ namespace Bea.Web.Controllers
         public ActionResult Create()
         {
             AdCreateModel model = new AdCreateModel();
-            model.Provinces = _locationServices.GetAllProvinces().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() });
+            model.Provinces = _locationServices.GetAllProvinces().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
             return View(model);
         }
 
@@ -80,14 +80,17 @@ namespace Bea.Web.Controllers
         {
             Ad ad = new Ad();
             User user = _userServices.GetUserFromEmail(model.Email);
-            City city = _locationServices.GetCityFromLabel("Noumea");
+            City city = _locationServices.GetCityFromId(model.SelectedCityId);
             ad.CreatedBy = user;
             ad.Body = model.Body;
             ad.City = city;
             ad.CreationDate = DateTime.Now;
-            ad.Price = model.Price;
+            ad.Price = model.Price.GetValueOrDefault();
             ad.Title = model.Title;
+            ad.IsOffer = model.IsOffer;
             return ad;
         }
+
+
     }
 }

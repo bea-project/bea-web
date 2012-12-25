@@ -52,6 +52,11 @@ namespace Bea.Web.NhibernateHelper
                 provinceNord.AddCity(city2);
                 _sessionFactory.GetCurrentSession().Save(city2);
 
+                City city3 = new City();
+                city3.Label = "Bourail";
+                provinceSud.AddCity(city3);
+                _sessionFactory.GetCurrentSession().Save(city3);
+
                 //-------------------------------------------
                 //         USER TABLE
                 //-------------------------------------------

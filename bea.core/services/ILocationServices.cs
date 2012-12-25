@@ -9,6 +9,8 @@ namespace Bea.Core.Services
     public interface ILocationServices
     {
         City GetCityFromLabel(string label);
-        IList<Province> GetAllProvinces();
+        City GetCityFromId(int cityId);
+        IEnumerable<Province> GetAllProvinces();
+        IEnumerable<City> GetCitiesFromProvince(int provinceId);
     }
 }

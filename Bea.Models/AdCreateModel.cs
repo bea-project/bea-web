@@ -20,8 +20,7 @@ namespace Bea.Models
         public String Body { get; set; }
 
         [DisplayName("Prix:")]
-        [Range(0, 999999999, ErrorMessage = "Veuillez saisir un prix correct.")]
-        public Double Price { get; set; }
+        public Double? Price { get; set; }
 
         [DisplayName("Votre nom:")]
         [Required(ErrorMessage = "Veuillez saisir un nom.")]
@@ -37,14 +36,23 @@ namespace Bea.Models
         [Required(ErrorMessage = "Veuillez inserer un numero de telephone.")]
         public String Telephone { get; set; }
 
-        
         public IEnumerable<SelectListItem> Provinces { get; set; }
         
         [DisplayName("Province:")]
-        public Province SelectedProvince { get; set; }
+        [Required(ErrorMessage = "Veuillez selectionner une province.")]
+        public int SelectedProvinceId { get; set; }
+
+        public IEnumerable<SelectListItem> Cities { get; set; }
+
+        [DisplayName("Ville:")]
+        [Required(ErrorMessage = "Veuillez selectionner une ville.")]
+        public int SelectedCityId { get; set; }
 
         [DisplayName("Type d'annonce:")]
         [Required(ErrorMessage = "Veuillez selectionner un type d'annonce.")]
         public Boolean IsOffer { get; set; }
+
+        [DisplayName("Ajouter une photo:")]
+        public Boolean PicturePath { get; set; }
     }
 }
