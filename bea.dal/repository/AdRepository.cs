@@ -69,8 +69,6 @@ namespace Bea.Dal.Repository
             }
         }
 
-        
-
         public void AddAd(Ad ad)
         {
             _sessionFactory.GetCurrentSession().Save(ad);

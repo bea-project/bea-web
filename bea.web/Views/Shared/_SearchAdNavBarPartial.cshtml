@@ -1,14 +1,61 @@
 ﻿@model Bea.Models.AdSearchResultModel
 
+<div class="navbar">
+    <div class="navbar-inner">
+        <span class="brand">Titre</span>
+        <ul class="nav">
+            <li>
+                <form class="navbar-form pull-left">
+                    <input type="text" class="span2" name="title" value="@Html.DisplayFor(model => model.SearchString)"/>
+                    @Html.DropDownListFor(
+                        x => x.ProvinceSelectedId,
+                        Enumerable.Empty<SelectListItem>(),
+                        "Toutes les provinces",
+                        new { id = "provinces" })
+                    @Html.DropDownListFor(
+                        x => x.CitySelectedId,
+                        Enumerable.Empty<SelectListItem>(),
+                        "Toutes les villes",
+                        new { id = "cities" })
+                    <button type="submit" class="btn btn-primary">CHERCHER</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
+
 <script type="text/javascript">
+    $(document).ready(function () {
+        //Refreshes the city list when user chenges province
+        $('#provinces').change(function () {
+            var ddl = $('#cities');
+            ddl.empty();
+            $(document.createElement('option'))
+                            .attr('value', "")
+                            .text("Toutes les villes")
+                            .appendTo(ddl);
+            if ($(this).val()) {
+                //The user selected a province
+                var provinceId = $('#provinces').val();
+                $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "LocationApi", action = "GetCitiesFromProvince", provinceId = "id" })'.replace("id", provinceId), function (result) {
+                    $(result).each(function () {
+                        $(document.createElement('option'))
+                            .attr('value', this.Id)
+                            .text(this.Label)
+                            .appendTo(ddl);
+                    });
+                });
+            }
+        });
+    });
 
     $(function () {
-        $.getJSON('/API/Location/GetAllProvinces', function (result) {
+        $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "LocationApi", action = "GetAllProvinces" })', function (result) {
             var ddl = $('#provinces');
             ddl.empty();
             $(document.createElement('option'))
-                    .attr('value', 0)
-                    .text("")
+                    .attr('value', "")
+                    .text("Toutes les provinces")
                     .appendTo(ddl);
             $(result).each(function () {
                 $(document.createElement('option'))
@@ -20,22 +67,3 @@
     });
 
 </script>
-
-<div class="navbar">
-    <div class="navbar-inner">
-        <span class="brand">Titre</span>
-        <ul class="nav">
-            <li>
-                <form class="navbar-form pull-left">
-                    <input type="text" class="span2" name="title" value="@Html.DisplayFor(model => model.SearchString)"/>
-                    @Html.DropDownListFor(
-                        x => x.ProvinceSelectedId,
-                        Enumerable.Empty<SelectListItem>(),
-                        "-- Loading Values --",
-                        new { id = "provinces" })
-                    <button type="submit" class="btn btn-primary">CHERCHER</button>
-                </form>
-            </li>
-        </ul>
-    </div>
-</div>

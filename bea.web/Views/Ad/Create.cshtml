@@ -92,7 +92,7 @@
             if ($(this).val()) {
                 //The user selected a province
                 var provinceId = $('#SelectedProvinceId').val();
-                var url = '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "LocationApi" })' + "/" + provinceId;
+                var url = '@Url.RouteUrl("ActionApi", new { httproute = "", controller = "LocationApi", action = "GetCitiesFromProvince", provinceId = "id" })'.replace("id", provinceId);
                 $.ajax({
                     url: url,
                     type: 'GET',
@@ -105,7 +105,7 @@
                         }));
                         $(data).each(function () {
                             var option = $('<option />');
-                            option.attr('value', this.Value).text(this.Text);
+                            option.attr('value', this.Id).text(this.Label);
                             $('#SelectedCityId').append(option);
                         });
                     }

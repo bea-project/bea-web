@@ -10,9 +10,12 @@ namespace Bea.Services
 {
     public class LocationServices : ILocationServices
     {
+        private readonly IRepository _repository;
         private readonly ILocationRepository _locationRepository;
-        public LocationServices(ILocationRepository locationRepository)
+
+        public LocationServices(IRepository repository, ILocationRepository locationRepository)
         {
+            _repository = repository;
             _locationRepository = locationRepository;
         }
         
@@ -26,14 +29,14 @@ namespace Bea.Services
             return _locationRepository.GetCityFromId(cityId);
         }
 
-        public IEnumerable<Province> GetAllProvinces()
+        public IList<Province> GetAllProvinces()
         {
-            return _locationRepository.GetAllProvinces();
+            return _repository.GetAll<Province>();
         }
 
-        public IEnumerable<City> GetCitiesFromProvince(int provinceId)
+        public IList<City> GetCitiesFromProvince(int provinceId)
         {
-            return _locationRepository.GetCitiesFromProvince(provinceId);
+            return _locationRepository.GetCitiesFromProvince(provinceId).ToList();
         }
     }
 }

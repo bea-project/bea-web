@@ -10,7 +10,7 @@ namespace Bea.Core.Services
     {
         City GetCityFromLabel(string label);
         City GetCityFromId(int cityId);
-        IEnumerable<Province> GetAllProvinces();
-        IEnumerable<City> GetCitiesFromProvince(int provinceId);
+        IList<Province> GetAllProvinces();
+        IList<City> GetCitiesFromProvince(int provinceId);
     }
 }

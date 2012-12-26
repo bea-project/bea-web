@@ -8,7 +8,8 @@ namespace Bea.Models
     public class AdSearchResultModel
     {
         public String SearchString { get; set; }
-        public int ProvinceSelectedId { get; set; }
+        public int? ProvinceSelectedId { get; set; }
+        public int? CitySelectedId { get; set; }
 
         public int SearchResultTotalCount { get; set; }
         public IList<AdSearchResultItemModel> SearchResult { get; set; }

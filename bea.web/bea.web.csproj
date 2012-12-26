@@ -142,11 +142,10 @@
   <ItemGroup>
     <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="Controllers\AdController.cs" />
-    <Compile Include="Controllers\AdAPIController.cs" />
+    <Compile Include="Controllers\API\AdAPIController.cs" />
     <Compile Include="Controllers\AdImageController.cs" />
-    <Compile Include="Controllers\API\LocationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LocationApiController.cs" />
+    <Compile Include="Controllers\API\LocationApiController.cs" />
     <Compile Include="Controllers\TestDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -253,7 +252,9 @@
   <ItemGroup>
     <Content Include="Views\Shared\_SearchAdNavBarPartial.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controllers\Reference\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Ad\Create.cshtml" />
   </ItemGroup>
