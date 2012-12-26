@@ -144,6 +144,7 @@
     <Compile Include="Controllers\AdController.cs" />
     <Compile Include="Controllers\AdAPIController.cs" />
     <Compile Include="Controllers\AdImageController.cs" />
+    <Compile Include="Controllers\API\LocationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationApiController.cs" />
     <Compile Include="Controllers\TestDataController.cs" />

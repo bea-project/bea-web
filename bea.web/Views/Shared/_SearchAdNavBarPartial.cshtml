@@ -1,5 +1,26 @@
 ﻿@model Bea.Models.AdSearchResultModel
 
+<script type="text/javascript">
+
+    $(function () {
+        $.getJSON('/API/Location/GetAllProvinces', function (result) {
+            var ddl = $('#provinces');
+            ddl.empty();
+            $(document.createElement('option'))
+                    .attr('value', 0)
+                    .text("")
+                    .appendTo(ddl);
+            $(result).each(function () {
+                $(document.createElement('option'))
+                    .attr('value', this.Id)
+                    .text(this.Label)
+                    .appendTo(ddl);
+            });
+        });
+    });
+
+</script>
+
 <div class="navbar">
     <div class="navbar-inner">
         <span class="brand">Titre</span>
@@ -7,6 +28,11 @@
             <li>
                 <form class="navbar-form pull-left">
                     <input type="text" class="span2" name="title" value="@Html.DisplayFor(model => model.SearchString)"/>
+                    @Html.DropDownListFor(
+                        x => x.ProvinceSelectedId,
+                        Enumerable.Empty<SelectListItem>(),
+                        "-- Loading Values --",
+                        new { id = "provinces" })
                     <button type="submit" class="btn btn-primary">CHERCHER</button>
                 </form>
             </li>

@@ -13,7 +13,7 @@ namespace Bea.Dal.map.Location
             Table("province");
             Id(x => x.Id).GeneratedBy.Identity();
             Map(x => x.Label).Not.Nullable();
-            HasMany<City>(x => x.Cities).AsBag().Inverse();
+            HasMany<City>(x => x.Cities).AsBag().Cascade.SaveUpdate().Inverse();
         }
     }
 }

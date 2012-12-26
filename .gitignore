@@ -4,5 +4,5 @@ packages/*
 */obj/*
 *.suo
 */bea.log
-*/bea.log*.*
+*/bea.log.*
 *.user

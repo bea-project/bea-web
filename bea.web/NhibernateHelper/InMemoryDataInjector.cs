@@ -25,6 +25,68 @@ namespace Bea.Web.NhibernateHelper
             _repository = repository;
         }
 
+        public void InsertLocations()
+        {
+            //-------------------------------------------
+            //         LOCATION REFERENCE TABLES
+            //-------------------------------------------
+
+            if (_repository.CountAll<City>() == 0)
+            {
+                //Create Provinces
+                Province provinceNord = new Province();
+                provinceNord.Label = "Province Nord";
+                provinceNord.AddCity(new City { Label = "Poya Nord" });
+                provinceNord.AddCity(new City { Label = "Pouembout" });
+                provinceNord.AddCity(new City { Label = "Koné" });
+                provinceNord.AddCity(new City { Label = "Voh" });
+                provinceNord.AddCity(new City { Label = "Kaala-Gomen" });
+                provinceNord.AddCity(new City { Label = "Koumac" });
+                provinceNord.AddCity(new City { Label = "Poum" });
+                provinceNord.AddCity(new City { Label = "Iles Belep" });
+                provinceNord.AddCity(new City { Label = "Ouégoa" });
+                provinceNord.AddCity(new City { Label = "Pouébo" });
+                provinceNord.AddCity(new City { Label = "Hienghène" });
+                provinceNord.AddCity(new City { Label = "Touho" });
+                provinceNord.AddCity(new City { Label = "Poindimié" });
+                provinceNord.AddCity(new City { Label = "Ponérihouen" });
+                provinceNord.AddCity(new City { Label = "Houaïlou" });
+                provinceNord.AddCity(new City { Label = "Kouaoua" });
+                provinceNord.AddCity(new City { Label = "Canala" });
+                _repository.Save(provinceNord);
+
+
+                Province provinceSud = new Province();
+                provinceSud.Label = "Province Sud";
+                provinceSud.AddCity(new City { Label = "Thio" });
+                provinceSud.AddCity(new City { Label = "Yaté" });
+                provinceSud.AddCity(new City { Label = "Ile des Pins" });
+                provinceSud.AddCity(new City { Label = "Mont-Dore" });
+                provinceSud.AddCity(new City { Label = "Nouméa" });
+                provinceSud.AddCity(new City { Label = "Dumbéa" });
+                provinceSud.AddCity(new City { Label = "Païta" });
+                provinceSud.AddCity(new City { Label = "Boulouparis" });
+                provinceSud.AddCity(new City { Label = "La Foa" });
+                provinceSud.AddCity(new City { Label = "Sarraméa" });
+                provinceSud.AddCity(new City { Label = "Farino" });
+                provinceSud.AddCity(new City { Label = "Moindou" });
+                provinceSud.AddCity(new City { Label = "Bourail" });
+                provinceSud.AddCity(new City { Label = "Poya Sud" });
+                _repository.Save(provinceSud);
+
+
+                Province ilesLoyaute = new Province();
+                ilesLoyaute.Label = "Iles Loyauté";
+                ilesLoyaute.AddCity(new City { Label = "Ouvéa" });
+                ilesLoyaute.AddCity(new City { Label = "Lifou" });
+                ilesLoyaute.AddCity(new City { Label = "Maré" });
+                _repository.Save(ilesLoyaute);
+
+                _repository.Flush();
+            }
+             
+        }
+
         public void InsertInMemoryData()
         {
             //-------------------------------------------
@@ -32,35 +94,12 @@ namespace Bea.Web.NhibernateHelper
             //-------------------------------------------
             using (ITransaction transaction = _sessionFactory.GetCurrentSession().BeginTransaction())
             {
-                
-                //Create Provinces
-                Province provinceNord = new Province();
-                provinceNord.Label = "Province Nord";
-                _sessionFactory.GetCurrentSession().Save(provinceNord);
 
-                Province provinceSud = new Province();
-                provinceSud.Label = "Province Sud";
-                _sessionFactory.GetCurrentSession().Save(provinceSud);
-
-                City city = new City();
-                city.Label = "Noumea";
-                provinceSud.AddCity(city);
-                _sessionFactory.GetCurrentSession().Save(city);
-
-                City city2 = new City();
-                city2.Label = "Koumac";
-                provinceNord.AddCity(city2);
-                _sessionFactory.GetCurrentSession().Save(city2);
-
-                City city3 = new City();
-                city3.Label = "Bourail";
-                provinceSud.AddCity(city3);
-                _sessionFactory.GetCurrentSession().Save(city3);
-
+                InsertLocations();
+                City c = _repository.GetAll<City>().First();
                 //-------------------------------------------
                 //         USER TABLE
                 //-------------------------------------------
-
 
                 //Create User 1
                 User user = new User();
@@ -110,7 +149,7 @@ namespace Bea.Web.NhibernateHelper
                     if (i == 2)
                         ad.AddImage(img2);
                     user.AddAd(ad);
-                    city.AddAd(ad);
+                    c.AddAd(ad);
                     _sessionFactory.GetCurrentSession().Save(ad);
                 }
 
