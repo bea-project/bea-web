@@ -29,5 +29,16 @@ namespace Bea.Services
             
             return model;
         }
+
+        public AdSearchResultModel SearchAds(AdSearchModel searchQuery)
+        {
+            IList<Ad> searchResult = _adRepository.SearchAds(searchQuery.SearchString, searchQuery.ProvinceSelectedId, searchQuery.CitySelectedId);
+
+            AdSearchResultModel model = new AdSearchResultModel(searchQuery);
+            model.SearchResultTotalCount = searchResult.Count;
+            model.SearchResult = searchResult.Select(a => new AdSearchResultItemModel(a)).ToList();
+
+            return model;
+        }
     }
 }

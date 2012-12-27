@@ -41,6 +41,13 @@ namespace Bea.Core.Dal
         /// <returns></returns>
         IList<Ad> SearchAdsByTitle(String searchString);
 
+        /// Searches through all the announces by title, body, province or city
+        /// using "like" %searchString%
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        IList<Ad> SearchAds(String searchString, int? provinceId, int? cityId);
+
         /// Deletes an Ad by Id
         /// </summary>
         /// <param name="id"></param>

@@ -28,5 +28,13 @@ namespace Bea.Web.Controllers
             AdSearchResultModel result = _searchServices.SearchAdsByTitle(title);
             return View(result);
         }
+
+        //
+        // GET: /Home/Search
+        public ActionResult Search(AdSearchModel model)
+        {
+            AdSearchResultModel result = _searchServices.SearchAds(model);
+            return View("Index", result);
+        }
     }
 }

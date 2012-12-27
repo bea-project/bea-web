@@ -59,6 +59,21 @@ namespace Bea.Dal.Repository
             return query.OrderByDescending(a => a.CreationDate).ToList();
         }
 
+        public IList<Ad> SearchAds(string searchString, int? provinceId = null, int? cityId = null)
+        {
+            IQueryable<Ad> query = _sessionFactory.GetCurrentSession().Query<Ad>();
+
+            if (!String.IsNullOrEmpty(searchString))
+                query = query.Where(a => a.Title.Contains(searchString) || a.Body.Contains(searchString));
+
+            if (cityId.HasValue)
+                query = query.Where(a => a.City.Id == cityId);
+            else if (provinceId.HasValue)
+                query = query.Where(a => a.City.Province.Id == provinceId);
+
+            return query.OrderByDescending(a => a.CreationDate).ToList();
+        }
+
         public void DeleteAdById(long adId)
         {
             Ad ad = GetAdById(adId);
