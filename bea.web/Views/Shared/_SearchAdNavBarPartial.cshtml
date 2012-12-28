@@ -2,26 +2,34 @@
 
 <div class="navbar">
     <div class="navbar-inner">
-        <span class="brand">Titre</span>
-        <ul class="nav">
-            <li>
-                @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { @class = "navbar-form pull-left" }))
-                {
-                    @Html.TextBoxFor(x => x.SearchString, new { @class = "span2" })
+        @using (Html.BeginForm("Search", "Home", FormMethod.Get, new { @class = "navbar-form" }))
+        {
+            <ul class="nav">
+                <li class="bea-nav-li">
+                    @Html.TextBoxFor(x => x.SearchString, new { @class = "input-xlarge", @size = 60 })
+                </li>
+                
+                <li class="bea-nav-li">
                     @Html.DropDownListFor(
                         x => x.ProvinceSelectedId,
                         Enumerable.Empty<SelectListItem>(),
                         "Toutes les provinces",
                         new { id = "provinces" })
+                </li>
+                
+                <li class="bea-nav-li">
                     @Html.DropDownListFor(
                         x => x.CitySelectedId,
                         Enumerable.Empty<SelectListItem>(),
                         "Toutes les villes",
                         new { id = "cities" })
-                    <button type="submit" class="btn btn-primary">CHERCHER</button>
-                }
-            </li>
-        </ul>
+                </li>
+            
+                <li>
+                    <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i>&nbsp;CHERCHER</button>
+                </li>
+            </ul>
+        }
     </div>
 </div>
 
@@ -53,7 +61,7 @@
         });
     });
 
-    $.fn.reloadCities = function() {
+    $.fn.reloadCities = function () {
         var ddl = $('#cities');
         ddl.empty();
         $(document.createElement('option'))

@@ -31,12 +31,12 @@ namespace Bea.Dal.Repository
 
         public IEnumerable<Province> GetAllProvinces()
         {
-            return _sessionFactory.GetCurrentSession().Query<Province>();
+            return _sessionFactory.GetCurrentSession().Query<Province>().OrderBy(p => p.Label);
         }
 
         public IEnumerable<City> GetCitiesFromProvince(int provinceId)
         {
-            return _sessionFactory.GetCurrentSession().Query<City>().Where(x => x.Province.Id==provinceId);
+            return _sessionFactory.GetCurrentSession().Query<City>().Where(x => x.Province.Id==provinceId).OrderBy(c => c.Label);
         }
 
     }
