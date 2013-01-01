@@ -18,18 +18,6 @@ namespace Bea.Services
             _adRepository = adRepository;
         }
 
-        public AdSearchResultModel SearchAdsByTitle(String title)
-        {
-            IList<Ad> searchResult = _adRepository.SearchAdsByTitle(title);
-
-            AdSearchResultModel model = new AdSearchResultModel();
-            model.SearchString = title;
-            model.SearchResultTotalCount = searchResult.Count;
-            model.SearchResult = searchResult.Select(a => new AdSearchResultItemModel(a)).ToList();
-            
-            return model;
-        }
-
         public AdSearchResultModel SearchAds(AdSearchModel searchQuery)
         {
             String[] andSearchString = null;

@@ -15,6 +15,8 @@ namespace Bea.Models
         public String Body { get; set; }
         public DateTime CreationDate { get; set; }
 
+        public IList<String> ImagesIds { get; set; }
+
         public String UserFirstName { get; set; }
         public String UserPhoneNumber { get; set; }
 
@@ -22,9 +24,11 @@ namespace Bea.Models
 
         public AdDetailsModel()
         {
+            ImagesIds = new List<String>();
         }
 
         public AdDetailsModel(Ad ad)
+            : this()
         {
             AdId = ad.Id;
             Title = ad.Title;
@@ -35,6 +39,8 @@ namespace Bea.Models
 
             UserFirstName = ad.CreatedBy.Firstname;
             UserPhoneNumber = ad.PhoneNumber;
+
+            ad.Images.ToList().ForEach(i => ImagesIds.Add(i.Id.ToString()));
         }
     }
 }

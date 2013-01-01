@@ -23,9 +23,9 @@ namespace Bea.Web.Controllers
 
         //
         // GET: /Home/
-        public ActionResult Index(String title)
+        public ActionResult Index()
         {
-            AdSearchResultModel result = _searchServices.SearchAdsByTitle(title);
+            AdSearchResultModel result = _searchServices.SearchAds(new AdSearchResultModel());
             return View(result);
         }
 

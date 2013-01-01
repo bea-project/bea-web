@@ -46,8 +46,12 @@ namespace Bea.Dal.Repository
 
         public Ad GetAdById(long adId)
         {
+            Ad ad = _sessionFactory.GetCurrentSession().Query<Ad>()
+                .Fetch(x => x.CreatedBy)
+                .Fetch(x => x.City)
+                .Fetch(x => x.Images)
+                .Where(x => x.Id == adId).FirstOrDefault();
             
-            Ad ad = _sessionFactory.GetCurrentSession().Query<Ad>().Fetch(x => x.CreatedBy).Fetch(x => x.City).Where(x => x.Id == adId).FirstOrDefault();
             return ad;
         }
 

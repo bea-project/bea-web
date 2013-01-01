@@ -14,40 +14,6 @@ namespace Bea.Test.services
     public class SearchServicesTest
     {
         [TestMethod]
-        public void SearchAdsByTitle_2Ads_CallAdRepoAndBuildModels()
-        {
-            // Given
-            IList<Ad> searchResult = new List<Ad>();
-            searchResult.Add(new Ad
-            {
-                Title = "the ad title",
-                City = new Domain.Location.City() { Label = "the city" }
-            });
-            searchResult.Add(new Ad
-            {
-                Title = "the ad title 2",
-                City = new Domain.Location.City() { Label = "the city" }
-            });
-
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAdsByTitle("title")).Returns(searchResult);
-
-            SearchServices service = new SearchServices(adRepoMock.Object);
-
-            // When
-            AdSearchResultModel result = service.SearchAdsByTitle("title");
-
-            // Then
-            Assert.AreEqual("title", result.SearchString);
-            Assert.AreEqual(2, result.SearchResult.Count);
-            Assert.AreEqual(2, result.SearchResultTotalCount);
-            Assert.AreEqual("the ad title", result.SearchResult[0].Title);
-            Assert.AreEqual("the ad title 2", result.SearchResult[1].Title);
-
-            adRepoMock.VerifyAll();
-        }
-
-        [TestMethod]
         public void SearchAds_2Ads_CallAdRepoAndBuildModels()
         {
             // Given

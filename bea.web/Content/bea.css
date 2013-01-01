@@ -2,3 +2,16 @@
 {
     margin-right: 12px;
 }
+
+.bea-carousel
+{
+    width: 600px;
+    
+}
+
+.bea-centered
+{
+    margin: 0 auto;
+}
+
+.carousel .item > img { display: inline-block; margin: 0 auto;}

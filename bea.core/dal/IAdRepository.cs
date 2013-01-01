@@ -28,19 +28,11 @@ namespace Bea.Core.Dal
         List<Ad> GetAllAds();
 
         /// <summary>
-
         /// Get a particular Ad by Id
         /// </summary>
         /// <returns>An Ad</returns>
         Ad GetAdById(long adId);
-
-        /// Searches through all the announces by title
-        /// using "like" %searchString%
-        /// </summary>
-        /// <param name="title"></param>
-        /// <returns></returns>
-        IList<Ad> SearchAdsByTitle(String searchString);
-
+        
         /// Searches through all the announces by title, body, province or city
         /// using "like" %searchString%
         /// </summary>
@@ -53,14 +45,10 @@ namespace Bea.Core.Dal
         /// <returns></returns>
         void DeleteAdById(long adId);
 
-
-
         /// Insert an Ad
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         void AddAd(Ad ad);
-
-       
     }
 }
