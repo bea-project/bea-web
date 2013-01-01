@@ -81,6 +81,7 @@
     <Compile Include="Dal\map\AdMapTest.cs" />
     <Compile Include="Dal\repository\AdRepositoryTest.cs" />
     <Compile Include="Dal\map\UserMapTest.cs" />
+    <Compile Include="Models\AdDetailsModelTest.cs" />
     <Compile Include="Models\AdSearchResultItemModelTest.cs" />
     <Compile Include="Models\AdSearchResultModelTest.cs" />
     <Compile Include="Services\AdImageServicesTest.cs" />

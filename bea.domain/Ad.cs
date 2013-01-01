@@ -16,6 +16,7 @@ namespace Bea.Domain
         public virtual City City { get; set; }
         public virtual Double Price { get; set; }
         public virtual Boolean IsOffer { get; set; }
+        public virtual String PhoneNumber { get; set; }
 
         public virtual IList<AdImage> Images { get; set; }
 

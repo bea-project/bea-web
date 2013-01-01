@@ -47,8 +47,12 @@ namespace Bea.Web.Controllers
         // GET: /Ad/Details/{id}
         public ActionResult Details(long id)
         {
-            var result = _adServices.GetAdById(id);
-            return View(new AdDetailsModel(result));
+            var result = _adServices.GetAdDetails(id);
+
+            if (result == null)
+                return HttpNotFound();
+
+            return View(result);
         }
 
         public ActionResult Delete(long id)

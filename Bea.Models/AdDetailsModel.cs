@@ -12,7 +12,13 @@ namespace Bea.Models
         public String Title { get; set; }
         public String Location { get; set; }
         public String Price { get; set; }
+        public String Body { get; set; }
         public DateTime CreationDate { get; set; }
+
+        public String UserFirstName { get; set; }
+        public String UserPhoneNumber { get; set; }
+
+        public Boolean IsNew { get; set; }
 
         public AdDetailsModel()
         {
@@ -23,8 +29,12 @@ namespace Bea.Models
             AdId = ad.Id;
             Title = ad.Title;
             Location = ad.City.Label;
-            Price = String.Format("{0} Francs", ad.Price);
+            Price = String.Format("{0:0,0 Francs}", ad.Price);
+            Body = ad.Body;
             CreationDate = ad.CreationDate;
+
+            UserFirstName = ad.CreatedBy.Firstname;
+            UserPhoneNumber = ad.PhoneNumber;
         }
     }
 }

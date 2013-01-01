@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AdImageServices.cs" />
     <Compile Include="AdServices.cs" />
+    <Compile Include="HelperService.cs" />
     <Compile Include="LocationServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchServices.cs" />

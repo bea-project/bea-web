@@ -6,16 +6,19 @@ using Bea.Core.Dal;
 using Bea.Core.Services;
 using Bea.Domain;
 using Bea.Domain.Location;
+using Bea.Models;
 
 namespace Bea.Services
 {
     public class AdServices : IAdServices
     {
         private readonly IAdRepository _adRepository;
-
-        public AdServices(IAdRepository adRepository)
+        private readonly IHelperService _helperService;
+        
+        public AdServices(IAdRepository adRepository, IHelperService helperService)
         {
             _adRepository = adRepository;
+            _helperService = helperService;
         }
 
         public IDictionary<City, int> CountAdsByCities()
@@ -43,15 +46,22 @@ namespace Bea.Services
             _adRepository.DeleteAdById(adId);
         }
 
-        
-
         public void AddAd(Ad ad)
         {
             _adRepository.AddAd(ad);
         }
 
-        
+        public AdDetailsModel GetAdDetails(long adId)
+        {
+            Ad ad = _adRepository.GetAdById(adId);
 
-        
+            if (ad == null)
+                return null;
+
+            AdDetailsModel model = new AdDetailsModel(ad);
+            model.IsNew = model.CreationDate > _helperService.GetCurrentDateTime().AddHours(-72);
+
+            return model;
+        }
     }
 }

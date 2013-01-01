@@ -105,12 +105,16 @@ namespace Bea.Web.NhibernateHelper
                 User user = new User();
                 user.Email = "bruno.deprez@gmail.com";
                 user.Password = "mypassword";
+                user.Firstname = "Bruno";
+                user.Lastname = "Secret";
                 _sessionFactory.GetCurrentSession().Save(user);
 
                 //Create User 2
                 User user2 = new User();
                 user2.Email = "nicolas.raynaud@gmail.com";
                 user2.Password = "mypassword";
+                user2.Firstname = "Nicolas";
+                user2.Lastname = "Secret";
                 _sessionFactory.GetCurrentSession().Save(user);
 
                 //-------------------------------------------
@@ -139,11 +143,12 @@ namespace Bea.Web.NhibernateHelper
                     ad.Body = Faker.Lorem.Paragraph();
                     ad.IsOffer = true;
                     ad.CreationDate = DateTime.Now
-                        .AddDays(Faker.RandomNumber.Next(1, 7))
+                        .AddDays(Faker.RandomNumber.Next(-7, 7))
                         .AddHours(Faker.RandomNumber.Next(1, 23))
                         .AddMinutes(Faker.RandomNumber.Next(1, 59))
                         .AddSeconds(Faker.RandomNumber.Next(1, 59));
                     ad.Price = Faker.RandomNumber.Next(1, 300000);
+                    ad.PhoneNumber = String.Format("{0}.{1}.{2}", Faker.RandomNumber.Next(20, 99), Faker.RandomNumber.Next(20, 99), Faker.RandomNumber.Next(20, 99));
                     if (i == 1)
                         ad.AddImage(img1);
                     if (i == 2)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Domain;
 using Bea.Domain.Location;
+using Bea.Models;
 
 namespace Bea.Core.Services
 {
@@ -14,7 +15,7 @@ namespace Bea.Core.Services
         Ad GetAdById(long adId);
         void DeleteAdById(long adId);
         void AddAd(Ad ad);
-        
-        
+
+        AdDetailsModel GetAdDetails(long adId);
     }
 }

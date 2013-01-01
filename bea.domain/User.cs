@@ -17,6 +17,8 @@ namespace Bea.Domain
         public virtual string Password { get; set; }
         public virtual IList<Ad> Ads { get; set; }
         public virtual DateTime CreationDate { get; set; }
+        public virtual String Firstname { get; set; }
+        public virtual String Lastname { get; set; }
 
         //Add the Ad to the user and set the Ad created by to this
         public virtual void AddAd(Ad adToBeAdded)

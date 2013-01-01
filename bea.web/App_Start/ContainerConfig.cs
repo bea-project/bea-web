@@ -35,6 +35,7 @@ namespace Bea.Web.App_Start
             builder.RegisterType<AdImageServices>().As<IAdImageServices>().SingleInstance();
             builder.RegisterType<LocationServices>().As<ILocationServices>().SingleInstance();
             builder.RegisterType<UserServices>().As<IUserServices>().SingleInstance();
+            builder.RegisterType<HelperService>().As<IHelperService>().SingleInstance();
 
             // Register the inMemoryData singleton to inject data
             builder.Register(x => new InMemoryDataInjector(x.Resolve<ISessionFactory>(), x.Resolve<IRepository>())).SingleInstance();
@@ -42,7 +43,6 @@ namespace Bea.Web.App_Start
             IContainer container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-            //DependencyResolver.SetResolver(new AutofacWebApiDependencyResolver(container));
         }
     }
 }

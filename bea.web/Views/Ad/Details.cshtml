@@ -1,49 +1,86 @@
 ﻿@model Bea.Models.AdDetailsModel
 
 @{
-    ViewBag.Title = "View1";
+    ViewBag.Title = String.Format("{0} - {1} - {2}", Model.Title, Model.Location, "BEA");
 }
 
-<h2>View1</h2>
+<div class="container-fluid">
 
-<fieldset>
-    <legend>AdDetailsModel</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.AdId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AdId)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Title)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Title)
+    <div class="row-fluid">
+        <div class="span12">
+            <ul class="breadcrumb">
+                <li><a href="#">Accueil</a> <span class="divider">/</span></li>
+                <li><a href="#">Categorie</a> <span class="divider">/</span></li>
+                <li class="active">@Model.Title</li>
+            </ul>
+        </div>
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Location)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Location)
+    <div class="row-fluid">
+        <div class="span9">
+            <div class="page-header">
+                <h4>
+                    @Html.DisplayFor(model => model.Title)
+                    @if (Model.IsNew)
+                    {
+                        <span class="label label-important">Nouveau</span>
+                    }
+                </h4>
+            </div>
+            <p class="muted"><i>Annonce mise en ligne par @Html.ActionLink(Model.UserFirstName, "#") le @Model.CreationDate.ToString("f")</i></p>
+
+            @* <div id="beaCarousel" class="carousel slide">
+                <!-- Carousel items -->
+                <div class="carousel-inner">
+                    <div class="active item">…</div>
+                    <div class="item">…</div>
+                    <div class="item">…</div>
+                </div>
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#beaCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#beaCarousel" data-slide="next">&rsaquo;</a>
+            </div>*@
+
+            <div>
+                <dl class="dl-horizontal">
+                    <dt>Prix</dt>
+                    <dd>@Html.DisplayFor(model => model.Price)</dd>
+
+                    <dt>Lieu</dt>
+                    <dd>@Html.DisplayFor(model => model.Location)</dd>
+                </dl>
+
+                <dl class="dl-horizontal">
+                    <dt>Description</dt>
+                    <dd>@Html.DisplayFor(model => model.Body)</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="span3">
+            <div class="page-header">
+                <h4>Contacter</h4>
+            </div>
+            <i class="icon-envelope"></i>&nbsp;@Html.ActionLink("Envoyer un message", "#")<br />
+            <i class="icon-comment"></i>&nbsp;@Html.ActionLink(String.Format("Appeler {0} au {1}", Model.UserFirstName, Model.UserPhoneNumber), "#")<br />
+            <i class="icon-bullhorn"></i>&nbsp;@Html.ActionLink("Partager avec un ami", "#")<br />
+            <br />
+            <div class="page-header">
+                <h4>Actions</h4>
+            </div>
+            <i class="icon-pencil"></i>&nbsp;@Html.ActionLink("Modifier", "#")<br />
+            <i class="icon-trash"></i>&nbsp;@Html.ActionLink("Supprimer", "#")<br />
+        </div>
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Price)
+    <div class="row-fluid">
+        <div class="span12">
+            <p>
+                @Html.ActionLink("Retour à la liste", "Index", new { controller = "Home" })
+            </p>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Price)
-    </div>
+</div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CreationDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CreationDate)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Back to List", "Index", new { controller = "Home" })
-</p>
+
+

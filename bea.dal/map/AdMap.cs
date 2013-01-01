@@ -17,6 +17,7 @@ namespace Bea.Dal.Map
             Map(x => x.CreationDate).Not.Nullable();
             Map(x => x.Price).Nullable();
             Map(x => x.IsOffer).Not.Nullable();
+            Map(x => x.PhoneNumber);
 
             References<User>(x => x.CreatedBy).Not.Nullable();
             References<City>(x => x.City).Not.Nullable();
