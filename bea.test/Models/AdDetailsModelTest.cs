@@ -33,7 +33,7 @@ namespace Bea.Test.Models
                 Price = 1270,
                 City = c,
                 CreatedBy = u,
-                CreationDate = new DateTime(2012, 05, 12),
+                CreationDate = new DateTime(2012, 05, 12, 17, 26, 08),
                 Body = "body",
             };
             ad.Images.Add(new AdImage() { Id = Guid.Parse("e9da8b1e-aa77-401b-84e0-a1290130b7b7") });
@@ -46,7 +46,7 @@ namespace Bea.Test.Models
             Assert.AreEqual("title", model.Title);
             Assert.AreEqual("Nouméa", model.Location);
             Assert.AreEqual("Nicolas", model.UserFirstName);
-            Assert.AreEqual(new DateTime(2012, 05, 12), model.CreationDate);
+            Assert.AreEqual("samedi 12 mai 2012 17:26", model.CreationDateString);
             Assert.AreEqual("body", model.Body);
             Assert.AreEqual("1 270 Francs", model.Price);
             Assert.AreEqual(17, model.AdId);

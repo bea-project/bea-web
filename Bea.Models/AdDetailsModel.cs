@@ -14,7 +14,7 @@ namespace Bea.Models
         public String Location { get; set; }
         public String Price { get; set; }
         public String Body { get; set; }
-        public DateTime CreationDate { get; set; }
+        public String CreationDateString { get; set; }
 
         public IList<String> ImagesIds { get; set; }
 
@@ -35,8 +35,8 @@ namespace Bea.Models
             Title = ad.Title;
             Location = ad.City.Label;
             Price = String.Format(CultureInfo.GetCultureInfo("fr-FR"), "{0:0,0 Francs}", ad.Price);
+            CreationDateString = String.Format(CultureInfo.GetCultureInfo("fr-FR"), "{0:f}", ad.CreationDate);
             Body = ad.Body;
-            CreationDate = ad.CreationDate;
 
             UserFirstName = ad.CreatedBy.Firstname;
             UserPhoneNumber = ad.PhoneNumber;

@@ -27,7 +27,7 @@
                     }
                 </h4>
             </div>
-            <p class="muted"><i>Annonce mise en ligne par @Html.ActionLink(Model.UserFirstName, "#") le @Model.CreationDate.ToString("f")</i></p>
+            <p class="muted"><i>Annonce mise en ligne par @Html.ActionLink(Model.UserFirstName, "#") le @Model.CreationDateString</i></p>
             <br />
 
             @if (Model.ImagesIds.Count > 0)

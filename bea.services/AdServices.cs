@@ -59,7 +59,7 @@ namespace Bea.Services
                 return null;
 
             AdDetailsModel model = new AdDetailsModel(ad);
-            model.IsNew = model.CreationDate > _helperService.GetCurrentDateTime().AddHours(-72);
+            model.IsNew = ad.CreationDate > _helperService.GetCurrentDateTime().AddHours(-72);
 
             return model;
         }
