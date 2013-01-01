@@ -32,8 +32,13 @@ namespace Bea.Services
 
         public AdSearchResultModel SearchAds(AdSearchModel searchQuery)
         {
-            IList<Ad> searchResult = _adRepository.SearchAds(searchQuery.SearchString, searchQuery.ProvinceSelectedId, searchQuery.CitySelectedId);
+            String[] andSearchString = null;
 
+            if (!String.IsNullOrEmpty(searchQuery.SearchString))
+                andSearchString = searchQuery.SearchString.Trim().Split(' ');
+
+            IList<Ad> searchResult = _adRepository.SearchAds(andSearchString, null, searchQuery.ProvinceSelectedId, searchQuery.CitySelectedId);
+            
             AdSearchResultModel model = new AdSearchResultModel(searchQuery);
             model.SearchResultTotalCount = searchResult.Count;
             model.SearchResult = searchResult.Select(a => new AdSearchResultItemModel(a)).ToList();

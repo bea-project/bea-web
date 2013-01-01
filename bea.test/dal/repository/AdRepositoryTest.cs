@@ -369,7 +369,7 @@ namespace Bea.Test.dal.repository
                 #endregion
 
                 // When
-                IList<Ad> result = adRepo.SearchAds("tre");
+                IList<Ad> result = adRepo.SearchAds(orSearchStrings: new String[] { "tre" });
 
                 // Then
                 Assert.AreEqual(1, result.Count);
@@ -432,7 +432,7 @@ namespace Bea.Test.dal.repository
                 #endregion
 
                 // When
-                IList<Ad> result = adRepo.SearchAds("ti", cityId: c2.Id);
+                IList<Ad> result = adRepo.SearchAds(orSearchStrings: new String[] { "ti" }, cityId: c2.Id);
 
                 // Then
                 Assert.AreEqual(1, result.Count);
@@ -507,7 +507,7 @@ namespace Bea.Test.dal.repository
                 #endregion
 
                 // When
-                IList<Ad> result = adRepo.SearchAds("ti", provinceId: c2.Province.Id);
+                IList<Ad> result = adRepo.SearchAds(orSearchStrings: new String[] { "ti" }, provinceId: c2.Province.Id);
 
                 // Then
                 Assert.AreEqual(1, result.Count);
@@ -582,7 +582,158 @@ namespace Bea.Test.dal.repository
                 #endregion
 
                 // When
-                IList<Ad> result = adRepo.SearchAds("ti", provinceId: c2.Province.Id, cityId: c.Id);
+                IList<Ad> result = adRepo.SearchAds(null, new String[]{ "ti" }, provinceId: c2.Province.Id, cityId: c.Id);
+
+                // Then
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(a, result[0]);
+            }
+        }
+
+        [TestMethod]
+        public void SearchAds_SearchByTitleAndBodyOrString_CreateWhereOrQuery()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            AdRepository adRepo = new AdRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                // Given
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "ship"
+                };
+                p1.AddCity(c);
+                Ad a = new Ad
+                {
+                    Title = "ship",
+                    Body = "content",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18)
+                };
+                c.AddAd(a);
+                repo.Save<Province>(p1);
+                repo.Save<City>(c);
+                repo.Save<Ad>(a);
+
+                Province p2 = new Province
+                {
+                    Label = "p2"
+                };
+                City c2 = new City
+                {
+                    Label = "CherzmOi2"
+                };
+                p2.AddCity(c2);
+                Ad a2 = new Ad
+                {
+                    Title = "car",
+                    Body = "content",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17)
+                };
+                c2.AddAd(a2);
+                repo.Save<Province>(p2);
+                repo.Save<City>(c2);
+                repo.Save<Ad>(a2);
+
+
+                repo.Flush();
+
+                #endregion
+
+                // When
+                IList<Ad> result = adRepo.SearchAds(null, new String[]{ "car", "ship" }, null, null);
+
+                // Then
+                Assert.AreEqual(2, result.Count);
+                Assert.AreEqual(a, result[0]);
+                Assert.AreEqual(a2, result[1]);
+            }
+        }
+
+        [TestMethod]
+        public void SearchAds_SearchByTitleAndBodyAndString_CreateWhereAndQuery()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            AdRepository adRepo = new AdRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                // Given
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city"
+                };
+                p1.AddCity(c);
+                Ad a = new Ad
+                {
+                    Title = "ship",
+                    Body = "computer",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18)
+                };
+                c.AddAd(a);
+                repo.Save<Province>(p1);
+                repo.Save<City>(c);
+                repo.Save<Ad>(a);
+
+                Province p2 = new Province
+                {
+                    Label = "p2"
+                };
+                City c2 = new City
+                {
+                    Label = "CherzmOi2"
+                };
+                p2.AddCity(c2);
+                Ad a2 = new Ad
+                {
+                    Title = "ship",
+                    Body = "content",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17)
+                };
+                c2.AddAd(a2);
+                repo.Save<Province>(p2);
+                repo.Save<City>(c2);
+                repo.Save<Ad>(a2);
+
+
+                repo.Flush();
+
+                #endregion
+
+                // When
+                IList<Ad> result = adRepo.SearchAds(new String[] { "computer", "ship" }, null, null, null);
 
                 // Then
                 Assert.AreEqual(1, result.Count);
