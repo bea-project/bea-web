@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Bea.Domain;
@@ -33,7 +34,7 @@ namespace Bea.Models
             AdId = ad.Id;
             Title = ad.Title;
             Location = ad.City.Label;
-            Price = String.Format("{0:0,0 Francs}", ad.Price);
+            Price = String.Format(CultureInfo.GetCultureInfo("fr-FR"), "{0:0,0 Francs}", ad.Price);
             Body = ad.Body;
             CreationDate = ad.CreationDate;
 
