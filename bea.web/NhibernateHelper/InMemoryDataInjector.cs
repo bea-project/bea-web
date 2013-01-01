@@ -118,6 +118,25 @@ namespace Bea.Web.NhibernateHelper
                 _sessionFactory.GetCurrentSession().Save(user);
 
                 //-------------------------------------------
+                //         CATEGORY TABLES
+                //-------------------------------------------
+
+
+                CategoryGroup vehicles = new CategoryGroup();
+                vehicles.Label = "Vehicules";
+                vehicles.AddCategory(new CategoryElement { Label = "Voitures" });
+                vehicles.AddCategory(new CategoryElement { Label = "Motos" });
+                vehicles.AddCategory(new CategoryElement { Label = "Utlitaires" });
+                _sessionFactory.GetCurrentSession().Save(vehicles);
+
+                CategoryGroup nautisme = new CategoryGroup();
+                nautisme.Label = "Nautisme";
+                nautisme.AddCategory(new CategoryElement { Label = "Bateaux à moteur" });
+                nautisme.AddCategory(new CategoryElement { Label = "Kite Surf" });
+                nautisme.AddCategory(new CategoryElement { Label = "Planches à voile" });
+                _sessionFactory.GetCurrentSession().Save(nautisme);
+
+                //-------------------------------------------
                 //         IMAGES
                 //-------------------------------------------
                 AdImage img1 = new AdImage();
@@ -155,11 +174,34 @@ namespace Bea.Web.NhibernateHelper
                         ad.AddImage(img2);
                     user.AddAd(ad);
                     c.AddAd(ad);
+                    vehicles.Categories[0].AddAd(ad);
                     _sessionFactory.GetCurrentSession().Save(ad);
                 }
 
                 _sessionFactory.GetCurrentSession().Update(img1);
                 _sessionFactory.GetCurrentSession().Update(img2);
+
+
+                //-------------------------------------------
+                //         REFERENCE TABLES
+                //-------------------------------------------
+
+                //Car Brands
+                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Renault" });
+                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Peugeot" });
+                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Citroën" });
+                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Hyundai" });
+                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Great Wall" });
+                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Mercedes" });
+                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "BMW" });
+                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Audi" });
+                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Nissan" });
+
+                _sessionFactory.GetCurrentSession().Save(new CarFuel { Label = "Essence" });
+                _sessionFactory.GetCurrentSession().Save(new CarFuel { Label = "Diesel" });
+                _sessionFactory.GetCurrentSession().Save(new CarFuel { Label = "GPL" });
+                _sessionFactory.GetCurrentSession().Save(new CarFuel { Label = "Electrique" });
+                _sessionFactory.GetCurrentSession().Save(new CarFuel { Label = "Autre" });
 
                 _sessionFactory.GetCurrentSession().Flush();
 

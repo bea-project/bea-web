@@ -25,6 +25,9 @@
             @Html.DisplayName("Ville")
         </th>
         <th>
+            @Html.DisplayName("Categorie")
+        </th>
+        <th>
             @Html.DisplayName("Titre")
         </th>
         <th>
@@ -47,6 +50,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)

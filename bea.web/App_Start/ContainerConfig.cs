@@ -30,12 +30,16 @@ namespace Bea.Web.App_Start
             builder.RegisterType<AdRepository>().As<IAdRepository>().SingleInstance();
             builder.RegisterType<UserRepository>().As<IUserRepository>().SingleInstance();
             builder.RegisterType<LocationRepository>().As<ILocationRepository>().SingleInstance();
+            builder.RegisterType<ReferenceRepository>().As<IReferenceRepository>().SingleInstance();
+            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().SingleInstance();
             builder.RegisterType<AdServices>().As<IAdServices>().SingleInstance();
             builder.RegisterType<SearchServices>().As<ISearchServices>().SingleInstance();
             builder.RegisterType<AdImageServices>().As<IAdImageServices>().SingleInstance();
             builder.RegisterType<LocationServices>().As<ILocationServices>().SingleInstance();
             builder.RegisterType<UserServices>().As<IUserServices>().SingleInstance();
             builder.RegisterType<HelperService>().As<IHelperService>().SingleInstance();
+            builder.RegisterType<ReferenceServices>().As<IReferenceServices>().SingleInstance();
+            builder.RegisterType<CategoryServices>().As<ICategoryServices>().SingleInstance();
 
             // Register the inMemoryData singleton to inject data
             builder.Register(x => new InMemoryDataInjector(x.Resolve<ISessionFactory>(), x.Resolve<IRepository>())).SingleInstance();

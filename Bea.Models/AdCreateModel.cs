@@ -15,7 +15,7 @@ namespace Bea.Models
         [DisplayName("Titre de l'annonce:")]
         public String Title { get; set; }
 
-        [Required(ErrorMessage = "Veuillez rediger un texte d'annonce.")]
+        [Required(ErrorMessage = "Veuillez rédiger un texte d'annonce.")]
         [DisplayName("Texte de l'annonce:")]
         public String Body { get; set; }
 
@@ -27,7 +27,7 @@ namespace Bea.Models
         public String Name { get; set; }
         
         [DisplayName("Email:")]
-        [Required(ErrorMessage = "Veuillez inserer une adresse email.")]
+        [Required(ErrorMessage = "Veuillez insérer une adresse email.")]
         [RegularExpression("^[a-zA-Z0-9_\\+-]+(\\.[a-zA-Z0-9_\\+-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,4})$", ErrorMessage = "Email invalide.")]
         public String Email { get; set; }
 
@@ -39,20 +39,26 @@ namespace Bea.Models
         public IEnumerable<SelectListItem> Provinces { get; set; }
         
         [DisplayName("Province:")]
-        [Required(ErrorMessage = "Veuillez selectionner une province.")]
+        [Required(ErrorMessage = "Veuillez sélectionner une province.")]
         public int SelectedProvinceId { get; set; }
 
         public IEnumerable<SelectListItem> Cities { get; set; }
 
         [DisplayName("Ville:")]
-        [Required(ErrorMessage = "Veuillez selectionner une ville.")]
+        [Required(ErrorMessage = "Veuillez sélectionner une ville.")]
         public int SelectedCityId { get; set; }
 
         [DisplayName("Type d'annonce:")]
-        [Required(ErrorMessage = "Veuillez selectionner un type d'annonce.")]
+        [Required(ErrorMessage = "Veuillez sélectionner un type d'annonce.")]
         public Boolean IsOffer { get; set; }
 
         [DisplayName("Ajouter une photo:")]
         public Boolean PicturePath { get; set; }
+
+        [DisplayName("Catégorie:")]
+        [Required(ErrorMessage = "Veuillez sélectionner une catégorie.")]
+        public int SelectedCategoryId { get; set; }
+
+        public IEnumerable<SelectListItem> Categories { get; set; }
     }
 }

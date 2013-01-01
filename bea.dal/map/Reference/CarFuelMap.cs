@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using Bea.Domain.Location;
 using FluentNHibernate.Mapping;
+using Bea.Domain.Reference;
 
-namespace Bea.Dal.map.Location
+namespace Bea.Dal.Map.Reference
 {
-    public class ProvinceMap : ClassMap<Province>
+    public class CarFuelMap : ClassMap<CarFuel>
     {
-        public ProvinceMap()
+        public CarFuelMap()
         {
             Id(x => x.Id).GeneratedBy.Identity();
             Map(x => x.Label).Not.Nullable();
-            HasMany<City>(x => x.Cities).AsBag().Cascade.SaveUpdate().Inverse();
         }
     }
 }

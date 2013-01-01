@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdCarCreateModel.cs" />
     <Compile Include="AdCreateModel.cs" />
     <Compile Include="AdDetailsModel.cs" />
     <Compile Include="AdSearchModel.cs" />

@@ -4,6 +4,7 @@ using System.Text;
 using Bea.Domain;
 using Bea.Domain.Location;
 using FluentNHibernate.Mapping;
+using Bea.Domain.Category;
 
 namespace Bea.Dal.Map
 {
@@ -21,7 +22,8 @@ namespace Bea.Dal.Map
 
             References<User>(x => x.CreatedBy).Not.Nullable();
             References<City>(x => x.City).Not.Nullable();
-            
+            References<CategoryElement>(x => x.Category).Not.Nullable();
+
             HasMany<AdImage>(x => x.Images).Inverse().LazyLoad().Cascade.Delete();
         }
     }

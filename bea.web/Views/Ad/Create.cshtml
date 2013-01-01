@@ -20,8 +20,8 @@
             @Html.ValidationMessageFor(model => model.SelectedCityId, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
         </div>
     </div>
-    <hr>  
-    <br /> 
+    <hr />  
+    <br />
     <div class="control-group">
         <label class="control-label" for="inputName">@Html.LabelFor(model => model.Name)</label>
         <div class="controls">
@@ -43,7 +43,23 @@
             @Html.ValidationMessageFor(model => model.Telephone, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
         </div>
     </div>
-    <hr>  
+    <hr />
+    <br /> 
+    <div class="control-group">
+        <label class="control-label" for="inputCategory">@Html.LabelFor(model => model.SelectedCategoryId)</label>
+        <div class="controls">
+            @Html.DropDownListFor(model => model.SelectedCategoryId, Model.Categories, "Choisissez la catégorie", new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.SelectedCategoryId, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputIsOffer">@Html.LabelFor(model => model.IsOffer)</label>
+        <div class="controls">
+            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, true, new { @checked = "checked", @style = "vertical-align: top" }) Offre</label>
+            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, false, new { @style = "vertical-align: top" }) Demande</label>
+        </div>
+    </div>   
+    <hr /> 
     <br /> 
     <div class="control-group">
         <label class="control-label" for="inputTitle">@Html.LabelFor(model => model.Title)</label>
@@ -67,13 +83,7 @@
         </div>
     </div>    
     
-    <div class="control-group">
-        <label class="control-label" for="inputIsOffer">@Html.LabelFor(model => model.IsOffer)</label>
-        <div class="controls">
-            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, true, new { @checked = "checked", @style = "vertical-align: top" }) Offre</label>
-            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, false, new { @style = "vertical-align: top" }) Demande</label>
-        </div>
-    </div>    
+     
     
     <div class="control-group">
         <div class="controls">
@@ -121,7 +131,7 @@
             }
         });
 
-        $('#Name').popover({ 'trigger': 'focus', 'content': 'Votre nom sera affiche dans l\'annonce', 'title': 'Aide'});
+        $('#Name').tooltip({ 'trigger': 'focus', 'title': 'Votre nom sera affiche dans l\'annonce', 'placement': 'right' });
         $('#Email').tooltip({ 'trigger': 'focus', 'title': 'Votre Email ne sera pas affiche dans l\'annonce', 'placement':'right' });
     });
 </script>

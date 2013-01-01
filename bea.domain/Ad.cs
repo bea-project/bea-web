@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bea.Domain.Location;
+using Bea.Domain.Category;
 
 namespace Bea.Domain
 { 
@@ -16,6 +17,7 @@ namespace Bea.Domain
         public virtual City City { get; set; }
         public virtual Double Price { get; set; }
         public virtual Boolean IsOffer { get; set; }
+        public virtual CategoryElement Category { get; set; }
         public virtual String PhoneNumber { get; set; }
 
         public virtual IList<AdImage> Images { get; set; }

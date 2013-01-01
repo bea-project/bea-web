@@ -14,6 +14,7 @@ namespace Bea.Models
         public String Price { get; set; }
         public DateTime CreationDate { get; set; }
         public String MainImageId { get; set; }
+        public String Category { get; set; }
 
         public AdSearchResultItemModel()
         {
@@ -30,6 +31,7 @@ namespace Bea.Models
             AdImage primaryImage = ad.Images.Where(i => i.IsPrimary).SingleOrDefault();
             if (primaryImage != null)
                 MainImageId = primaryImage.Id.ToString();
+            Category = ad.Category.Label;
         }
     }
 }

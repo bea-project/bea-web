@@ -16,15 +16,14 @@ namespace Bea.Web.Controllers
         private IAdServices _adServices;
         private ILocationServices _locationServices;
         private IUserServices _userServices;
+        private ICategoryServices _categoryServices;
 
-        public AdController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices)
+        public AdController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices)
         {
-            if (adServices == null)
-                throw new ArgumentNullException("adServices");
-
             _adServices = adServices;
             _locationServices = locationServices;
             _userServices = userServices;
+            _categoryServices = categoryServices;
         }
 
         //
@@ -65,6 +64,7 @@ namespace Bea.Web.Controllers
         {
             AdCreateModel model = new AdCreateModel();
             model.Provinces = _locationServices.GetAllProvinces().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+            model.Categories = _categoryServices.GetAllCategoryGroupsWithCategories().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
             return View(model);
         }
 
@@ -85,6 +85,7 @@ namespace Bea.Web.Controllers
             Ad ad = new Ad();
             User user = _userServices.GetUserFromEmail(model.Email);
             City city = _locationServices.GetCityFromId(model.SelectedCityId);
+            CategoryElement category = _categoryServices.GetCategoryById(model.SelectedCategoryId);
             ad.CreatedBy = user;
             ad.Body = model.Body;
             ad.City = city;
@@ -92,6 +93,7 @@ namespace Bea.Web.Controllers
             ad.Price = model.Price.GetValueOrDefault();
             ad.Title = model.Title;
             ad.IsOffer = model.IsOffer;
+            ad.Category = category;
             return ad;
         }
 
