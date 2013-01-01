@@ -39,24 +39,24 @@ namespace Bea.Models
         public IEnumerable<SelectListItem> Provinces { get; set; }
         
         [DisplayName("Province:")]
-        [Required(ErrorMessage = "Veuillez sélectionner une province.")]
+        [Required(ErrorMessage = "Veuillez séléctionner une province.")]
         public int SelectedProvinceId { get; set; }
 
         public IEnumerable<SelectListItem> Cities { get; set; }
 
         [DisplayName("Ville:")]
-        [Required(ErrorMessage = "Veuillez sélectionner une ville.")]
+        [Required(ErrorMessage = "Veuillez séléctionner une ville.")]
         public int SelectedCityId { get; set; }
 
         [DisplayName("Type d'annonce:")]
-        [Required(ErrorMessage = "Veuillez sélectionner un type d'annonce.")]
+        [Required(ErrorMessage = "Veuillez séléctionner un type d'annonce.")]
         public Boolean IsOffer { get; set; }
 
         [DisplayName("Ajouter une photo:")]
         public Boolean PicturePath { get; set; }
 
         [DisplayName("Catégorie:")]
-        [Required(ErrorMessage = "Veuillez sélectionner une catégorie.")]
+        [Required(ErrorMessage = "Veuillez séléctionner une catégorie.")]
         public int SelectedCategoryId { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; }

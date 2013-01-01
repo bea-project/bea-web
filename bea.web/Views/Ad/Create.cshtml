@@ -25,7 +25,7 @@
     <div class="control-group">
         <label class="control-label" for="inputName">@Html.LabelFor(model => model.Name)</label>
         <div class="controls">
-            @Html.TextBoxFor(model => model.Name, new { @class = "input-large", rel="popover"})
+            @Html.TextBoxFor(model => model.Name, new { @class = "input-large", rel = "tooltip" })
             @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
         </div>
     </div>
@@ -39,7 +39,7 @@
     <div class="control-group">
         <label class="control-label" for="inputPhone">@Html.LabelFor(model => model.Telephone)</label>
         <div class="controls">
-            @Html.TextBoxFor(model => model.Telephone, new { @class = "input-large" })
+            @Html.TextBoxFor(model => model.Telephone, new { @class = "input-large", rel = "tooltip" })
             @Html.ValidationMessageFor(model => model.Telephone, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
         </div>
     </div>
@@ -87,7 +87,7 @@
     
     <div class="control-group">
         <div class="controls">
-            <button id="submitButton" type="submit" class="btn btn-primary" rel="popover">
+            <button id="submitButton" type="submit" class="btn btn-primary">
                 Valider</button>
         </div>
     </div>
@@ -110,7 +110,7 @@
                     success: function (data) {
                         $('#SelectedCityId').empty();
                         $('#SelectedCityId').append($('<option/>', {
-                            value: null,
+                            value: "",
                             text: "Choisissez la ville"
                         }));
                         $(data).each(function () {
@@ -125,7 +125,7 @@
                 //The user selected "Choisissez la province"
                 $('#SelectedCityId').empty();
                 $('#SelectedCityId').append($('<option/>', {
-                    value: null,
+                    value: "",
                     text: "Choisissez la ville"
                 }));
             }
@@ -133,5 +133,6 @@
 
         $('#Name').tooltip({ 'trigger': 'focus', 'title': 'Votre nom sera affiche dans l\'annonce', 'placement': 'right' });
         $('#Email').tooltip({ 'trigger': 'focus', 'title': 'Votre Email ne sera pas affiche dans l\'annonce', 'placement':'right' });
+        $('#Telephone').tooltip({ 'trigger': 'focus', 'title': 'Exemple: 123456', 'placement': 'right' });
     });
 </script>
