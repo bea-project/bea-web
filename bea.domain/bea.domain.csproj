@@ -46,7 +46,6 @@
     <Compile Include="AdImage.cs" />
     <Compile Include="Ads\BaseAd.cs" />
     <Compile Include="Ads\CarAd.cs" />
-    <Compile Include="Ads\UniqueAdIdentifier.cs" />
     <Compile Include="Categories\AdCar.cs" />
     <Compile Include="Categories\AdKite.cs" />
     <Compile Include="Categories\Category.cs" />
