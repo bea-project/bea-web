@@ -47,6 +47,7 @@ namespace Bea.Services
         public void DeleteAdById(long adId)
         {
             _repository.Delete(_repository.Get<Ad>(adId));
+            _repository.Flush();
         }
 
         public void AddAd(Ad ad)
