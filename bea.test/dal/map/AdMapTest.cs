@@ -8,6 +8,7 @@ using Bea.Domain.Location;
 using Bea.Test.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
+using Bea.Domain.Category;
 
 namespace Bea.Test.Dal.map
 {
@@ -37,6 +38,11 @@ namespace Bea.Test.Dal.map
                 repo.Save(c);
                 int cId = c.Id;
 
+                CategoryElement cat = new CategoryElement
+                {
+                    Label = "Catamaran"
+                };
+                repo.Save(cat);
                 Ad ad = new Ad
                 {
                     Title = "title",
@@ -44,6 +50,7 @@ namespace Bea.Test.Dal.map
                     CreatedBy = u
                 };
                 c.AddAd(ad);
+                cat.AddAd(ad);
                 u.AddAd(ad);
 
                 repo.Save(ad);
@@ -78,6 +85,12 @@ namespace Bea.Test.Dal.map
                 repo.Save(c);
                 int cId = c.Id;
 
+                CategoryElement cat = new CategoryElement
+                {
+                    Label = "Catamaran"
+                };
+                repo.Save(cat);
+
                 Ad ad = new Ad
                 {
                     Title = "title",
@@ -85,6 +98,7 @@ namespace Bea.Test.Dal.map
                     CreatedBy = u
                 };
                 c.AddAd(ad);
+                cat.AddAd(ad);
                 u.AddAd(ad);
 
                 AdImage img = new AdImage();

@@ -8,6 +8,7 @@ using Bea.Test.TestHelper;
 using Bea.Dal.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
+using Bea.Domain.Category;
 
 namespace Bea.Test.dal.repository
 {
@@ -37,14 +38,24 @@ namespace Bea.Test.dal.repository
                 {
                     Label = "CherzmOi"
                 };
+
+                CategoryElement cat = new CategoryElement
+                {
+                    Label = "Bateau"
+                };
+
                 Ad a = new Ad
                 {
                     Title = "titre",
                     Body = "content",
                     CreatedBy = u,
+                    City = c,
+                    Category = cat
                 };
                 c.AddAd(a);
+                cat.AddAd(a);
                 repo.Save<City>(c);
+                repo.Save<CategoryElement>(cat);
                 repo.Save<Ad>(a);
 
                 Ad a2 = new Ad
@@ -52,6 +63,8 @@ namespace Bea.Test.dal.repository
                     Title = "titre",
                     Body = "content",
                     CreatedBy = u,
+                    City = c,
+                    Category = cat
                 };
                 c.AddAd(a2);
                 repo.Save<Ad>(a2);
@@ -65,6 +78,8 @@ namespace Bea.Test.dal.repository
                     Title = "titre",
                     Body = "content",
                     CreatedBy = u,
+                    City = c2,
+                    Category = cat
                 };
                 c2.AddAd(a3);
                 repo.Save<City>(c2);
@@ -107,6 +122,12 @@ namespace Bea.Test.dal.repository
                 {
                     Label = "CherzmOi"
                 };
+
+                CategoryElement cat = new CategoryElement
+                {
+                    Label = "Moto"
+                };
+
                 Ad a = new Ad
                 {
                     Title = "titre 1",
@@ -115,7 +136,9 @@ namespace Bea.Test.dal.repository
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 12)
                 };
                 c.AddAd(a);
+                cat.AddAd(a);
                 repo.Save<City>(c);
+                repo.Save<CategoryElement>(cat);
                 repo.Save<Ad>(a);
 
                 Ad a2 = new Ad
@@ -126,6 +149,7 @@ namespace Bea.Test.dal.repository
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 18)
                 };
                 c.AddAd(a2);
+                cat.AddAd(a2);
                 repo.Save<Ad>(a2);
 
 
@@ -166,15 +190,24 @@ namespace Bea.Test.dal.repository
                 {
                     Label = "CherzmOi"
                 };
+
+                CategoryElement cat = new CategoryElement 
+                {
+                    Label = "Voiture"
+                };
+
                 Ad a = new Ad
                 {
                     Title = "titre 1",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 12)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 12),
+                    Category = cat
                 };
                 c.AddAd(a);
+                cat.AddAd(a);
                 repo.Save<City>(c);
+                repo.Save<CategoryElement>(cat);
                 repo.Save<Ad>(a);
 
                 Ad a2 = new Ad
@@ -182,7 +215,8 @@ namespace Bea.Test.dal.repository
                     Title = "title 2",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
+                    Category = cat
                 };
                 c.AddAd(a2);
                 repo.Save<Ad>(a2);
@@ -225,6 +259,12 @@ namespace Bea.Test.dal.repository
                 {
                     Label = "CherzmOi"
                 };
+
+                CategoryElement cat = new CategoryElement
+                {
+                    Label = "Voiture"
+                };
+
                 Ad a = new Ad
                 {
                     Title = "titre 1",
@@ -233,7 +273,9 @@ namespace Bea.Test.dal.repository
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 18)
                 };
                 c.AddAd(a);
+                cat.AddAd(a);
                 repo.Save<City>(c);
+                repo.Save<CategoryElement>(cat);
                 repo.Save<Ad>(a);
 
                 Ad a2 = new Ad
@@ -244,6 +286,7 @@ namespace Bea.Test.dal.repository
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 17)
                 };
                 c.AddAd(a2);
+                cat.AddAd(a2);
                 repo.Save<Ad>(a2);
 
 
@@ -283,15 +326,24 @@ namespace Bea.Test.dal.repository
                 {
                     Label = "CherzmOi"
                 };
+
+                CategoryElement cat = new CategoryElement 
+                {
+                    Label = "Moto"
+                };
+
                 Ad a = new Ad
                 {
                     Title = "titre 1",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
                 };
                 c.AddAd(a);
+                cat.AddAd(a);
                 repo.Save<City>(c);
+                repo.Save<CategoryElement>(cat);
                 repo.Save<Ad>(a);
 
                 Ad a2 = new Ad
@@ -299,7 +351,8 @@ namespace Bea.Test.dal.repository
                     Title = "title 2",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
+                    Category = cat
                 };
                 c.AddAd(a2);
                 repo.Save<Ad>(a2);
@@ -342,15 +395,24 @@ namespace Bea.Test.dal.repository
                 {
                     Label = "CherzmOi"
                 };
+
+                CategoryElement cat = new CategoryElement
+                {
+                    Label = "Moto"
+                };
+
                 Ad a = new Ad
                 {
                     Title = "titre 1",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
                 };
                 c.AddAd(a);
+                cat.AddAd(a);
                 repo.Save<City>(c);
+                repo.Save<CategoryElement>(cat);
                 repo.Save<Ad>(a);
 
                 Ad a2 = new Ad
@@ -358,11 +420,12 @@ namespace Bea.Test.dal.repository
                     Title = "title 2",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
+                    Category = cat
                 };
                 c.AddAd(a2);
+                cat.AddAd(a2);
                 repo.Save<Ad>(a2);
-
 
                 repo.Flush();
 
@@ -400,30 +463,48 @@ namespace Bea.Test.dal.repository
                 {
                     Label = "CherzmOi"
                 };
+
+                CategoryElement cat = new CategoryElement
+                {
+                    Label = "Moto"
+                };
+
                 Ad a = new Ad
                 {
                     Title = "titre 1",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
                 };
                 c.AddAd(a);
+                cat.AddAd(a);
                 repo.Save<City>(c);
+                repo.Save<CategoryElement>(cat);
                 repo.Save<Ad>(a);
 
                 City c2 = new City
                 {
                     Label = "CherzmOi2"
                 };
+
+                CategoryElement cat2 = new CategoryElement
+                {
+                    Label = "Auto"
+                };
+
                 Ad a2 = new Ad
                 {
                     Title = "title 2",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
+                    Category=cat2
                 };
                 c2.AddAd(a2);
+                cat2.AddAd(a2);
                 repo.Save<City>(c2);
+                repo.Save<CategoryElement>(cat2);
                 repo.Save<Ad>(a2);
 
 
@@ -468,16 +549,25 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi"
                 };
                 p1.AddCity(c);
+                
+                CategoryElement cat = new CategoryElement
+                {
+                    Label = "Moto"
+                };
+
                 Ad a = new Ad
                 {
                     Title = "titre 1",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
                 };
                 c.AddAd(a);
+                cat.AddAd(a);
                 repo.Save<Province>(p1);
                 repo.Save<City>(c);
+                repo.Save<CategoryElement>(cat);
                 repo.Save<Ad>(a);
 
                 Province p2 = new Province
@@ -494,13 +584,13 @@ namespace Bea.Test.dal.repository
                     Title = "title 2",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
+                    Category = cat
                 };
                 c2.AddAd(a2);
                 repo.Save<Province>(p2);
                 repo.Save<City>(c2);
                 repo.Save<Ad>(a2);
-
 
                 repo.Flush();
 
@@ -543,16 +633,25 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi"
                 };
                 p1.AddCity(c);
+
+                CategoryElement cat = new CategoryElement
+                {
+                    Label = "Moto"
+                };
+
                 Ad a = new Ad
                 {
                     Title = "titre 1",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
                 };
                 c.AddAd(a);
+                cat.AddAd(a);
                 repo.Save<Province>(p1);
                 repo.Save<City>(c);
+                repo.Save<CategoryElement>(cat);
                 repo.Save<Ad>(a);
 
                 Province p2 = new Province
@@ -569,7 +668,8 @@ namespace Bea.Test.dal.repository
                     Title = "title 2",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
+                    Category = cat
                 };
                 c2.AddAd(a2);
                 repo.Save<Province>(p2);
@@ -618,16 +718,25 @@ namespace Bea.Test.dal.repository
                     Label = "ship"
                 };
                 p1.AddCity(c);
+                
+                CategoryElement cat = new CategoryElement
+                {
+                    Label = "Moto"
+                };
+
                 Ad a = new Ad
                 {
                     Title = "ship",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
                 };
                 c.AddAd(a);
+                cat.AddAd(a);
                 repo.Save<Province>(p1);
                 repo.Save<City>(c);
+                repo.Save<CategoryElement>(cat);
                 repo.Save<Ad>(a);
 
                 Province p2 = new Province
@@ -639,12 +748,14 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi2"
                 };
                 p2.AddCity(c2);
+
                 Ad a2 = new Ad
                 {
                     Title = "car",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
+                    Category = cat
                 };
                 c2.AddAd(a2);
                 repo.Save<Province>(p2);
@@ -694,16 +805,25 @@ namespace Bea.Test.dal.repository
                     Label = "city"
                 };
                 p1.AddCity(c);
+
+                CategoryElement cat = new CategoryElement
+                {
+                    Label = "Moto"
+                };
+
                 Ad a = new Ad
                 {
                     Title = "ship",
                     Body = "computer",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
                 };
                 c.AddAd(a);
+                cat.AddAd(a);
                 repo.Save<Province>(p1);
                 repo.Save<City>(c);
+                repo.Save<CategoryElement>(cat);
                 repo.Save<Ad>(a);
 
                 Province p2 = new Province
@@ -720,7 +840,8 @@ namespace Bea.Test.dal.repository
                     Title = "ship",
                     Body = "content",
                     CreatedBy = u,
-                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17)
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
+                    Category = cat
                 };
                 c2.AddAd(a2);
                 repo.Save<Province>(p2);

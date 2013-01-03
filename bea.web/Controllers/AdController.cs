@@ -8,6 +8,7 @@ using Bea.Domain;
 using Bea.Models;
 using System.Diagnostics;
 using Bea.Domain.Location;
+using Bea.Domain.Category;
 
 namespace Bea.Web.Controllers
 {

@@ -13,12 +13,14 @@ namespace Bea.Services
     public class AdServices : IAdServices
     {
         private readonly IAdRepository _adRepository;
+        private readonly IRepository _repository;
         private readonly IHelperService _helperService;
-        
-        public AdServices(IAdRepository adRepository, IHelperService helperService)
+
+        public AdServices(IAdRepository adRepository, IHelperService helperService, IRepository repository)
         {
             _adRepository = adRepository;
             _helperService = helperService;
+            _repository = repository;
         }
 
         public IDictionary<City, int> CountAdsByCities()
@@ -43,12 +45,12 @@ namespace Bea.Services
 
         public void DeleteAdById(long adId)
         {
-            _adRepository.DeleteAdById(adId);
+            _repository.Delete(_repository.Get<Ad>(adId));
         }
 
         public void AddAd(Ad ad)
         {
-            _adRepository.AddAd(ad);
+            _repository.Save(ad);
         }
 
         public AdDetailsModel GetAdDetails(long adId)

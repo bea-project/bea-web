@@ -10,6 +10,8 @@ using log4net;
 using log4net.Repository.Hierarchy;
 using NHibernate;
 using NHibernate.Linq;
+using Bea.Domain.Category;
+using Bea.Domain.Reference;
 
 namespace Bea.Web.NhibernateHelper
 {
