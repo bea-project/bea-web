@@ -5,6 +5,7 @@ using System.Text;
 using Bea.Core.Dal;
 using Bea.Core.Services;
 using Bea.Domain;
+using Bea.Domain.Ads;
 using Bea.Domain.Location;
 using Bea.Models;
 using Bea.Services;

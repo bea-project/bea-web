@@ -16,7 +16,7 @@ namespace Bea.Dal.Map
             Map(x => x.FileName);
             Map(x => x.ImageBytes).LazyLoad();
             Map(x => x.ImageThumbnailBytes).LazyLoad();
-            References(x => x.Ad).Nullable().LazyLoad();
+            References(x => x.BaseAd).Nullable().LazyLoad();
         }
     }
 }

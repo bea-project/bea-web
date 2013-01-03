@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Core.Dal;
 using Bea.Domain;
+using Bea.Domain.Ads;
 using Bea.Models;
 using Bea.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

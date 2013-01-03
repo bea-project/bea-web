@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Domain.Location;
 using Bea.Domain;
+using Bea.Domain.Ads;
 
 namespace Bea.Core.Dal
 {

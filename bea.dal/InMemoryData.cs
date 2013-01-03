@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bea.Domain;
+using Bea.Domain.Ads;
 using Bea.Domain.Location;
 
 namespace Bea.Dal
@@ -74,7 +75,7 @@ namespace Bea.Dal
             //Add User 1 as creator of Ad1, automaticall setting the created by for the Ad
             user = new Repository<User>(Session).FilterBy(x => x.Email.Equals("bruno.deprez@gmail.com")).First();
             city = new Repository<City>(Session).FilterBy(x => x.Label.Equals("Noumea")).First();
-            user.AddAd(ad);
+            ad.CreatedBy = user;
             city.AddAd(ad);
             Session.SaveOrUpdate(user);
             Session.SaveOrUpdate(city);

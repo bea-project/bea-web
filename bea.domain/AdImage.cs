@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Bea.Domain.Ads;
 
 namespace Bea.Domain
 {
@@ -13,6 +14,6 @@ namespace Bea.Domain
         public virtual String FileName { get; set; }
         public virtual byte[] ImageBytes { get; set; }
         public virtual byte[] ImageThumbnailBytes { get; set; }
-        public virtual Ad Ad { get; set; }
+        public virtual BaseAd BaseAd { get; set; }
     }
 }

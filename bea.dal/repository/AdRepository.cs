@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Core.Dal;
 using Bea.Domain;
+using Bea.Domain.Ads;
 using Bea.Domain.Location;
 using NHibernate;
 using NHibernate.Criterion;
@@ -33,8 +34,12 @@ namespace Bea.Dal.Repository
 
         public IDictionary<User, int> CountAdsByUser()
         {
-            var query = (from u in _sessionFactory.GetCurrentSession().Query<User>()
-                         select new { User = u, Count = u.Ads.Count });
+            var query = (from a in _sessionFactory.GetCurrentSession().Query<Ad>()
+                         group a by a.CreatedBy into g
+                         select new { User = g.Key, Count = g.Count() });
+
+            //var query = (from u in _sessionFactory.GetCurrentSession().Query<User>()
+            //             select new { User = u, Count = u.Ads.Count });
             IDictionary<User, int> result = query.ToList().ToDictionary(x => x.User, x => x.Count);
             return result;
         }

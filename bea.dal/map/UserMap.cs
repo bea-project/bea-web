@@ -16,7 +16,6 @@ namespace Bea.Dal.Map
             Map(x => x.CreationDate);
             Map(x => x.Firstname);
             Map(x => x.Lastname);
-            HasMany<Ad>(x => x.Ads).AsBag().Cascade.All();
         }
     }
 }

@@ -10,8 +10,9 @@ using log4net;
 using log4net.Repository.Hierarchy;
 using NHibernate;
 using NHibernate.Linq;
-using Bea.Domain.Category;
+using Bea.Domain.Categories;
 using Bea.Domain.Reference;
+using Bea.Domain.Ads;
 
 namespace Bea.Web.NhibernateHelper
 {
@@ -126,16 +127,16 @@ namespace Bea.Web.NhibernateHelper
 
                 CategoryGroup vehicles = new CategoryGroup();
                 vehicles.Label = "Vehicules";
-                vehicles.AddCategory(new CategoryElement { Label = "Voitures" });
-                vehicles.AddCategory(new CategoryElement { Label = "Motos" });
-                vehicles.AddCategory(new CategoryElement { Label = "Utlitaires" });
+                vehicles.AddCategory(new Category { Label = "Voitures" });
+                vehicles.AddCategory(new Category { Label = "Motos" });
+                vehicles.AddCategory(new Category { Label = "Utlitaires" });
                 _sessionFactory.GetCurrentSession().Save(vehicles);
 
                 CategoryGroup nautisme = new CategoryGroup();
                 nautisme.Label = "Nautisme";
-                nautisme.AddCategory(new CategoryElement { Label = "Bateaux à moteur" });
-                nautisme.AddCategory(new CategoryElement { Label = "Kite Surf" });
-                nautisme.AddCategory(new CategoryElement { Label = "Planches à voile" });
+                nautisme.AddCategory(new Category { Label = "Bateaux à moteur" });
+                nautisme.AddCategory(new Category { Label = "Kite Surf" });
+                nautisme.AddCategory(new Category { Label = "Planches à voile" });
                 _sessionFactory.GetCurrentSession().Save(nautisme);
 
                 //-------------------------------------------
@@ -174,7 +175,7 @@ namespace Bea.Web.NhibernateHelper
                         ad.AddImage(img1);
                     if (i == 2)
                         ad.AddImage(img2);
-                    user.AddAd(ad);
+                    ad.CreatedBy = user;
                     c.AddAd(ad);
                     vehicles.Categories[0].AddAd(ad);
                     _sessionFactory.GetCurrentSession().Save(ad);

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Core.Services;
 using Bea.Core.Dal;
-using Bea.Domain.Category;
+using Bea.Domain.Categories;
 
 namespace Bea.Services
 {
@@ -21,7 +21,7 @@ namespace Bea.Services
         /// Get all the Category Groups with the categories
         /// </summary>
         /// <returns>A list of Category Groups</returns>
-        public List<CategoryElement> GetAllCategoryGroupsWithCategories()
+        public List<Category> GetAllCategoryGroupsWithCategories()
         {
             return _categoryRepository.GetAllCategoryGroupsWithCategories();
         }
@@ -30,7 +30,7 @@ namespace Bea.Services
         /// Get all the Category by Id
         /// </summary>
         /// <returns>A Category</returns>
-        public CategoryElement GetCategoryById(int categoryId)
+        public Category GetCategoryById(int categoryId)
         {
             return _categoryRepository.GetCategoryById(categoryId);
         }

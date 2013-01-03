@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Bea.Core.Services;
 using Bea.Domain;
+using Bea.Domain.Ads;
 using Bea.Models;
 
 namespace Bea.Web.Controllers.API

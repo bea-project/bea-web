@@ -8,7 +8,8 @@ using Bea.Test.TestHelper;
 using Bea.Dal.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
-using Bea.Domain.Category;
+using Bea.Domain.Categories;
+using Bea.Domain.Ads;
 
 namespace Bea.Test.dal.repository
 {
@@ -39,7 +40,7 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi"
                 };
 
-                CategoryElement cat = new CategoryElement
+                Category cat = new Category
                 {
                     Label = "Bateau"
                 };
@@ -55,7 +56,7 @@ namespace Bea.Test.dal.repository
                 c.AddAd(a);
                 cat.AddAd(a);
                 repo.Save<City>(c);
-                repo.Save<CategoryElement>(cat);
+                repo.Save<Category>(cat);
                 repo.Save<Ad>(a);
 
                 Ad a2 = new Ad
@@ -123,7 +124,7 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi"
                 };
 
-                CategoryElement cat = new CategoryElement
+                Category cat = new Category
                 {
                     Label = "Moto"
                 };
@@ -138,7 +139,7 @@ namespace Bea.Test.dal.repository
                 c.AddAd(a);
                 cat.AddAd(a);
                 repo.Save<City>(c);
-                repo.Save<CategoryElement>(cat);
+                repo.Save<Category>(cat);
                 repo.Save<Ad>(a);
 
                 Ad a2 = new Ad
@@ -191,7 +192,7 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi"
                 };
 
-                CategoryElement cat = new CategoryElement 
+                Category cat = new Category 
                 {
                     Label = "Voiture"
                 };
@@ -207,7 +208,7 @@ namespace Bea.Test.dal.repository
                 c.AddAd(a);
                 cat.AddAd(a);
                 repo.Save<City>(c);
-                repo.Save<CategoryElement>(cat);
+                repo.Save<Category>(cat);
                 repo.Save<Ad>(a);
 
                 Ad a2 = new Ad
@@ -260,7 +261,7 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi"
                 };
 
-                CategoryElement cat = new CategoryElement
+                Category cat = new Category
                 {
                     Label = "Voiture"
                 };
@@ -275,7 +276,7 @@ namespace Bea.Test.dal.repository
                 c.AddAd(a);
                 cat.AddAd(a);
                 repo.Save<City>(c);
-                repo.Save<CategoryElement>(cat);
+                repo.Save<Category>(cat);
                 repo.Save<Ad>(a);
 
                 Ad a2 = new Ad
@@ -327,7 +328,7 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi"
                 };
 
-                CategoryElement cat = new CategoryElement 
+                Category cat = new Category 
                 {
                     Label = "Moto"
                 };
@@ -343,7 +344,7 @@ namespace Bea.Test.dal.repository
                 c.AddAd(a);
                 cat.AddAd(a);
                 repo.Save<City>(c);
-                repo.Save<CategoryElement>(cat);
+                repo.Save<Category>(cat);
                 repo.Save<Ad>(a);
 
                 Ad a2 = new Ad
@@ -396,7 +397,7 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi"
                 };
 
-                CategoryElement cat = new CategoryElement
+                Category cat = new Category
                 {
                     Label = "Moto"
                 };
@@ -412,7 +413,7 @@ namespace Bea.Test.dal.repository
                 c.AddAd(a);
                 cat.AddAd(a);
                 repo.Save<City>(c);
-                repo.Save<CategoryElement>(cat);
+                repo.Save<Category>(cat);
                 repo.Save<Ad>(a);
 
                 Ad a2 = new Ad
@@ -464,7 +465,7 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi"
                 };
 
-                CategoryElement cat = new CategoryElement
+                Category cat = new Category
                 {
                     Label = "Moto"
                 };
@@ -480,7 +481,7 @@ namespace Bea.Test.dal.repository
                 c.AddAd(a);
                 cat.AddAd(a);
                 repo.Save<City>(c);
-                repo.Save<CategoryElement>(cat);
+                repo.Save<Category>(cat);
                 repo.Save<Ad>(a);
 
                 City c2 = new City
@@ -488,7 +489,7 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi2"
                 };
 
-                CategoryElement cat2 = new CategoryElement
+                Category cat2 = new Category
                 {
                     Label = "Auto"
                 };
@@ -504,7 +505,7 @@ namespace Bea.Test.dal.repository
                 c2.AddAd(a2);
                 cat2.AddAd(a2);
                 repo.Save<City>(c2);
-                repo.Save<CategoryElement>(cat2);
+                repo.Save<Category>(cat2);
                 repo.Save<Ad>(a2);
 
 
@@ -550,7 +551,7 @@ namespace Bea.Test.dal.repository
                 };
                 p1.AddCity(c);
                 
-                CategoryElement cat = new CategoryElement
+                Category cat = new Category
                 {
                     Label = "Moto"
                 };
@@ -567,7 +568,7 @@ namespace Bea.Test.dal.repository
                 cat.AddAd(a);
                 repo.Save<Province>(p1);
                 repo.Save<City>(c);
-                repo.Save<CategoryElement>(cat);
+                repo.Save<Category>(cat);
                 repo.Save<Ad>(a);
 
                 Province p2 = new Province
@@ -634,7 +635,7 @@ namespace Bea.Test.dal.repository
                 };
                 p1.AddCity(c);
 
-                CategoryElement cat = new CategoryElement
+                Category cat = new Category
                 {
                     Label = "Moto"
                 };
@@ -651,7 +652,7 @@ namespace Bea.Test.dal.repository
                 cat.AddAd(a);
                 repo.Save<Province>(p1);
                 repo.Save<City>(c);
-                repo.Save<CategoryElement>(cat);
+                repo.Save<Category>(cat);
                 repo.Save<Ad>(a);
 
                 Province p2 = new Province
@@ -719,7 +720,7 @@ namespace Bea.Test.dal.repository
                 };
                 p1.AddCity(c);
                 
-                CategoryElement cat = new CategoryElement
+                Category cat = new Category
                 {
                     Label = "Moto"
                 };
@@ -736,7 +737,7 @@ namespace Bea.Test.dal.repository
                 cat.AddAd(a);
                 repo.Save<Province>(p1);
                 repo.Save<City>(c);
-                repo.Save<CategoryElement>(cat);
+                repo.Save<Category>(cat);
                 repo.Save<Ad>(a);
 
                 Province p2 = new Province
@@ -806,7 +807,7 @@ namespace Bea.Test.dal.repository
                 };
                 p1.AddCity(c);
 
-                CategoryElement cat = new CategoryElement
+                Category cat = new Category
                 {
                     Label = "Moto"
                 };
@@ -823,7 +824,7 @@ namespace Bea.Test.dal.repository
                 cat.AddAd(a);
                 repo.Save<Province>(p1);
                 repo.Save<City>(c);
-                repo.Save<CategoryElement>(cat);
+                repo.Save<Category>(cat);
                 repo.Save<Ad>(a);
 
                 Province p2 = new Province

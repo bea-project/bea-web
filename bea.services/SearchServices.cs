@@ -6,6 +6,7 @@ using Bea.Core.Services;
 using Bea.Core.Dal;
 using Bea.Domain;
 using Bea.Models;
+using Bea.Domain.Ads;
 
 namespace Bea.Services
 {

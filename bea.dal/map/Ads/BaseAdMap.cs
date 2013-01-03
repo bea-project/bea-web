@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Bea.Domain;
 using Bea.Domain.Ads;
+using Bea.Domain.Categories;
 using Bea.Domain.Location;
 using FluentNHibernate.Mapping;
 
-namespace Bea.Dal.map.Location
+namespace Bea.Dal.Map.Ads
 {
-    public class CityMap : ClassMap<City>
+    public class BaseAdMap : ClassMap<BaseAd>
     {
-        public CityMap()
+        public BaseAdMap()
         {
             Id(x => x.Id).GeneratedBy.Identity();
-            Map(x => x.Label).Not.Nullable();
-            References<Province>(x => x.Province);
-            HasMany<Ad>(x => x.Ads).AsBag();
+
+            HasMany<AdImage>(x => x.Images).Inverse().LazyLoad().Cascade.Delete();
         }
     }
 }

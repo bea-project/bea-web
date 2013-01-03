@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Core.Dal;
 using NHibernate;
-using Bea.Domain.Category;
+using Bea.Domain.Categories;
 using NHibernate.Linq;
 
 namespace Bea.Dal.Repository
@@ -18,14 +18,14 @@ namespace Bea.Dal.Repository
             _sessionFactory = sessionFactory;
         }
 
-        public List<CategoryElement> GetAllCategoryGroupsWithCategories()
+        public List<Category> GetAllCategoryGroupsWithCategories()
         {
-            return _sessionFactory.GetCurrentSession().Query<CategoryElement>().ToList();
+            return _sessionFactory.GetCurrentSession().Query<Category>().ToList();
         }
 
-        public CategoryElement GetCategoryById(int categoryId)
+        public Category GetCategoryById(int categoryId)
         {
-            return _sessionFactory.GetCurrentSession().Query<CategoryElement>().Where(x => x.Id == categoryId).FirstOrDefault();
+            return _sessionFactory.GetCurrentSession().Query<Category>().Where(x => x.Id == categoryId).FirstOrDefault();
         }
     }
 }

@@ -8,7 +8,8 @@ using Bea.Domain;
 using Bea.Models;
 using System.Diagnostics;
 using Bea.Domain.Location;
-using Bea.Domain.Category;
+using Bea.Domain.Categories;
+using Bea.Domain.Ads;
 
 namespace Bea.Web.Controllers
 {
@@ -86,7 +87,7 @@ namespace Bea.Web.Controllers
             Ad ad = new Ad();
             User user = _userServices.GetUserFromEmail(model.Email);
             City city = _locationServices.GetCityFromId(model.SelectedCityId);
-            CategoryElement category = _categoryServices.GetCategoryById(model.SelectedCategoryId);
+            Category category = _categoryServices.GetCategoryById(model.SelectedCategoryId);
             ad.CreatedBy = user;
             ad.Body = model.Body;
             ad.City = city;

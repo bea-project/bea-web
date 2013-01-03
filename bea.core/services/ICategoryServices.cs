@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Bea.Domain.Category;
+using Bea.Domain.Categories;
 
 namespace Bea.Core.Services
 {
@@ -12,12 +12,12 @@ namespace Bea.Core.Services
         /// Get all the Category Groups with the categories
         /// </summary>
         /// <returns>A list of Category Groups</returns>
-        List<CategoryElement> GetAllCategoryGroupsWithCategories();
+        List<Category> GetAllCategoryGroupsWithCategories();
 
         /// <summary>
         /// Get all the Category by Id
         /// </summary>
         /// <returns>A Category</returns>
-        CategoryElement GetCategoryById(int categoryId);
+        Category GetCategoryById(int categoryId);
     }
 }

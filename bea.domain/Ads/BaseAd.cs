@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bea.Domain.Categories;
 using Bea.Domain.Location;
-using Bea.Domain.Category;
 
-namespace Bea.Domain
-{ 
-    public class Ad
+namespace Bea.Domain.Ads
+{
+    public class BaseAd
     {
         public virtual long Id { get; set; }
         public virtual User CreatedBy { get; set; }
@@ -17,12 +17,12 @@ namespace Bea.Domain
         public virtual City City { get; set; }
         public virtual Double Price { get; set; }
         public virtual Boolean IsOffer { get; set; }
-        public virtual CategoryElement Category { get; set; }
+        public virtual Category Category { get; set; }
         public virtual String PhoneNumber { get; set; }
 
         public virtual IList<AdImage> Images { get; set; }
 
-        public Ad()
+        protected BaseAd()
         {
             Images = new List<AdImage>();
         }
@@ -30,7 +30,7 @@ namespace Bea.Domain
         public virtual void AddImage(AdImage adImage)
         {
             Images.Add(adImage);
-            adImage.Ad = this;
+            adImage.BaseAd = this;
         }
     }
 }
