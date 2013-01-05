@@ -160,7 +160,18 @@ namespace Bea.Web.NhibernateHelper
 
                 for (int i = 1; i < 31; i++)
                 {
-                    Ad ad = new Ad();
+                    BaseAd ad = null;
+
+                    if (i % 2 == 0)
+                    {
+                        ad = new CarAd();
+                        (ad as CarAd).Kilometers = Faker.RandomNumber.Next(2300, 350000);
+                        (ad as CarAd).Year = Faker.RandomNumber.Next(1990, 2013);
+                        (ad as CarAd).IsAutomatic = (i%5 == 0);
+                    }
+                    else
+                        ad = new Ad();
+
                     Faker.Lorem.Words(3).ForEach(s => ad.Title += " "+s);
                     ad.Body = Faker.Lorem.Paragraph();
                     ad.IsOffer = true;
@@ -183,6 +194,7 @@ namespace Bea.Web.NhibernateHelper
 
                 _sessionFactory.GetCurrentSession().Update(img1);
                 _sessionFactory.GetCurrentSession().Update(img2);
+
 
 
                 //-------------------------------------------

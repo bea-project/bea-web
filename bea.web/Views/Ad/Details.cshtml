@@ -47,7 +47,7 @@
                         }
 
                     </div>
-                   
+
                     @if (Model.ImagesIds.Count > 1)
                     { 
                         <!-- Carousel nav -->
@@ -57,6 +57,11 @@
                 </div>
             }
             <div>
+                @if (Model is Bea.Models.Details.CarAdDetailsModel)
+                {
+                    @Html.Partial("Shared/Details/_CarAdDetailsPartial", Model);
+                }
+
                 <dl class="dl-horizontal">
                     <dt>Prix</dt>
                     <dd>@Html.DisplayFor(model => model.Price)</dd>
@@ -70,6 +75,7 @@
                     <dd>@Html.DisplayFor(model => model.Body)</dd>
                 </dl>
             </div>
+
         </div>
 
         <div class="span3">
