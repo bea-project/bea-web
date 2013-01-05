@@ -8,6 +8,7 @@ using Bea.Domain;
 using Bea.Domain.Ads;
 using Bea.Domain.Location;
 using Bea.Models;
+using Bea.Models.Details;
 using Bea.Services;
 using Bea.Test.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -45,7 +46,8 @@ namespace Bea.Test.services
             ad.City = new City { Label = "Ville" };
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.GetAdById(17)).Returns(ad);
+            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.Ad);
+            adRepoMock.Setup(r => r.GetAdById<Ad>(17)).Returns(ad);
 
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
@@ -69,7 +71,8 @@ namespace Bea.Test.services
             ad.City = new City { Label = "Ville" };
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.GetAdById(17)).Returns(ad);
+            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.Ad);
+            adRepoMock.Setup(r => r.GetAdById<Ad>(17)).Returns(ad);
 
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
@@ -84,7 +87,7 @@ namespace Bea.Test.services
         }
 
         [TestMethod]
-        public void GetAdDetails_AdExists_GetAdFromRepoAndReturnModel()
+        public void GetAdDetails_AdExists_GetAdFromRepoAndReturnAdModel()
         {
             // Given
             Ad ad = new Ad() { Id = 17 };
@@ -92,8 +95,12 @@ namespace Bea.Test.services
             ad.CreatedBy = new User { Firstname = "Michel" };
             ad.City = new City { Label = "Ville" };
 
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(x => x.Get<BaseAd>(17)).Returns(ad as BaseAd);
+
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.GetAdById(17)).Returns(ad);
+            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.Ad);
+            adRepoMock.Setup(r => r.GetAdById<Ad>(17)).Returns(ad);
 
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
@@ -108,18 +115,44 @@ namespace Bea.Test.services
         }
 
         [TestMethod]
+        public void GetAdDetails_CarAdExists_GetAdFromRepoAndReturnCarAdModel()
+        {
+            // Given
+            CarAd ad = new CarAd() { Id = 17 };
+            ad.CreationDate = new DateTime(2012, 02, 18);
+            ad.CreatedBy = new User { Firstname = "Michel" };
+            ad.City = new City { Label = "Ville" };
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(x => x.Get<BaseAd>(17)).Returns(ad as BaseAd);
+
+            var adRepoMock = new Moq.Mock<IAdRepository>();
+            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.CarAd);
+            adRepoMock.Setup(r => r.GetAdById<CarAd>(17)).Returns(ad);
+
+            var helperMock = new Moq.Mock<IHelperService>();
+            helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
+
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null);
+
+            // When
+            AdDetailsModel actual = service.GetAdDetails(17);
+
+            // Then
+            Assert.AreEqual(17, actual.AdId);
+            Assert.IsTrue(actual is CarAdDetailsModel);
+        }
+
+        [TestMethod]
         public void GetAdDetails_AdDoesNotExist_ReturnNull()
         {
             // Given
             Ad ad = null;
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.GetAdById(17)).Returns(ad);
+            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.Undefined);
 
-            var helperMock = new Moq.Mock<IHelperService>();
-            helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
-
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null);
+            AdServices service = new AdServices(adRepoMock.Object, null, null);
 
             // When
             AdDetailsModel actual = service.GetAdDetails(17);

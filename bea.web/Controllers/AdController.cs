@@ -27,15 +27,7 @@ namespace Bea.Web.Controllers
             _userServices = userServices;
             _categoryServices = categoryServices;
         }
-
-        //
-        // GET: /Ad/
-        public ActionResult Index_Test()
-        {
-            var result = _adServices.CountAdsByCities();
-            return View(result);
-        }
-
+        
         //
         // GET: /Ad/
         public ActionResult Index()

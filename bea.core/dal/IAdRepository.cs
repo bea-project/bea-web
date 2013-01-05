@@ -29,11 +29,18 @@ namespace Bea.Core.Dal
         List<Ad> GetAllAds();
 
         /// <summary>
-        /// Get a particular Ad by Id
+        /// Get a particular Ad by Id and Type
         /// </summary>
         /// <returns>An Ad</returns>
-        Ad GetAdById(long adId);
-        
+        T GetAdById<T>(long adId) where T : BaseAd;
+
+        /// <summary>
+        /// Get the type of an Ad based on its id
+        /// </summary>
+        /// <param name="adId">The ad Id</param>
+        /// <returns>The type of the Ad</returns>
+        AdTypeEnum GetAdType(long adId);
+
         /// Searches through all the announces by title, body, province or city
         /// using "like" %searchString%
         /// </summary>

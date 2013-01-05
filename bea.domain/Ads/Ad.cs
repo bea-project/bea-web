@@ -12,6 +12,7 @@ namespace Bea.Domain.Ads
         public Ad()
             : base()
         {
+            AdType = AdTypeEnum.Ad;
         }
     }
 }

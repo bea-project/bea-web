@@ -27,7 +27,7 @@ namespace Bea.Dal.Map.Ads
 
             Map(x => x.Kilometers);
             Map(x => x.Year);
-            Map(x => x.IsAutomatic).Default("false");
+            Map(x => x.IsAutomatic);
         }
     }
 }

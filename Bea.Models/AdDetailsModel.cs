@@ -10,6 +10,8 @@ namespace Bea.Models
 {
     public class AdDetailsModel
     {
+        #region BaseAd properties
+
         public long AdId { get; set; }
         public String Title { get; set; }
         public String Location { get; set; }
@@ -24,12 +26,14 @@ namespace Bea.Models
 
         public Boolean IsNew { get; set; }
 
+        #endregion
+
         public AdDetailsModel()
         {
             ImagesIds = new List<String>();
         }
 
-        public AdDetailsModel(Ad ad)
+        public AdDetailsModel(BaseAd ad)
             : this()
         {
             AdId = ad.Id;

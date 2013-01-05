@@ -862,5 +862,191 @@ namespace Bea.Test.dal.repository
                 Assert.AreEqual(a, result[0]);
             }
         }
+
+        [TestMethod]
+        public void GetAdById_GetAd_ReturnAdObject()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            AdRepository adRepo = new AdRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Moto"
+                };
+
+                Ad a = new Ad
+                {
+                    Title = "ship",
+                    Body = "computer",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
+                };
+                c.AddAd(a);
+                cat.AddAd(a);
+                repo.Save<Province>(p1);
+                repo.Save<City>(c);
+                repo.Save<Category>(cat);
+                long id = repo.Save<Ad, long>(a);
+
+                repo.Flush();
+
+                #endregion
+
+                Assert.AreEqual(a, adRepo.GetAdById<Ad>(id));
+            }
+        }
+
+        [TestMethod]
+        public void GetAdById_GetCarAd_ReturnCarAdObject()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            AdRepository adRepo = new AdRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Moto"
+                };
+
+                CarAd a = new CarAd
+                {
+                    Title = "honda civic type R",
+                    Body = "the best!!",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    Kilometers = 25000,
+                    Year = 1998
+                };
+                c.AddAd(a);
+                cat.AddAd(a);
+                repo.Save<Province>(p1);
+                repo.Save<City>(c);
+                repo.Save<Category>(cat);
+                long id = repo.Save<CarAd, long>(a);
+
+                repo.Flush();
+
+                #endregion
+
+                Assert.IsNull(adRepo.GetAdById<Ad>(id));
+                Assert.AreEqual(a, adRepo.GetAdById<CarAd>(id));
+            }
+        }
+
+        [TestMethod]
+        public void GetAdType_AdExists_ReturnType()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            AdRepository adRepo = new AdRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Moto"
+                };
+
+                CarAd a = new CarAd
+                {
+                    Title = "honda civic type R",
+                    Body = "the best!!",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    Kilometers = 25000,
+                    Year = 1998
+                };
+                c.AddAd(a);
+                cat.AddAd(a);
+                repo.Save<Province>(p1);
+                repo.Save<City>(c);
+                repo.Save<Category>(cat);
+                long id = repo.Save<CarAd, long>(a);
+
+                repo.Flush();
+
+                #endregion
+
+                Assert.AreEqual(AdTypeEnum.CarAd, adRepo.GetAdType(id));
+            }
+        }
+
+        [TestMethod]
+        public void GetAdType_AdDoesNotExist_ReturnTypeUndefined()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            AdRepository adRepo = new AdRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                Assert.AreEqual(AdTypeEnum.Undefined, adRepo.GetAdType(18));
+            }
+        }
     }
 }
