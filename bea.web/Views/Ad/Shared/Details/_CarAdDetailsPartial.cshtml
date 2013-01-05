@@ -1,12 +1,20 @@
 ﻿@model Bea.Models.Details.CarAdDetailsModel
 
 <dl class="dl-horizontal">
+
+    <dt>Marque</dt>
+    <dd>@Html.DisplayFor(model => model.Brand)&nbsp;</dd>
+
     <dt>Année modèle</dt>
-    <dd>@Html.DisplayFor(model => model.Year)</dd>
+    <dd>@Html.DisplayFor(model => model.Year)&nbsp;</dd>
+
+    <dt>Carburant</dt>
+    <dd>@Html.DisplayFor(model => model.Fuel)&nbsp;</dd>
 
     <dt>Kilométrage</dt>
-    <dd>@Html.DisplayFor(model => model.Kilometers)</dd>
+    <dd>@Html.DisplayFor(model => model.Kilometers)&nbsp;</dd>
 
     <dt>Boîte</dt>
-    <dd>@Html.DisplayFor(model => model.GearType)</dd>
+    <dd>@Html.DisplayFor(model => model.GearType)&nbsp;</dd>
+
 </dl>

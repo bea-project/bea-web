@@ -5,7 +5,7 @@ using System.Text;
 using Bea.Domain;
 using Bea.Domain.Ads;
 using Bea.Domain.Location;
-using Bea.Models;
+using Bea.Models.Details;
 
 namespace Bea.Core.Services
 {

@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Bea.Domain;
 using Bea.Domain.Ads;
 using Bea.Domain.Categories;
 using Bea.Domain.Location;
-using Bea.Models;
+using Bea.Models.Details;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bea.Test.Models

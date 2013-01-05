@@ -147,8 +147,6 @@ namespace Bea.Test.services
         public void GetAdDetails_AdDoesNotExist_ReturnNull()
         {
             // Given
-            Ad ad = null;
-
             var adRepoMock = new Moq.Mock<IAdRepository>();
             adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.Undefined);
 

@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using Bea.Domain;
 using Bea.Domain.Ads;
 
-namespace Bea.Models
+namespace Bea.Models.Details
 {
     public class AdDetailsModel
     {

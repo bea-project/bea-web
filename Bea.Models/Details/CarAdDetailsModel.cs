@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Bea.Domain.Ads;
 
 namespace Bea.Models.Details
@@ -13,6 +10,8 @@ namespace Bea.Models.Details
         public int? Year { get; set; }
         public int? Kilometers { get; set; }
         public String GearType { get; set; }
+        public String Brand { get; set; }
+        public String Fuel { get; set; }
 
         #endregion
 
@@ -22,6 +21,8 @@ namespace Bea.Models.Details
             Year = ad.Year;
             Kilometers = ad.Kilometers;
             GearType = ad.IsAutomatic ? "Automatique" : "Manuelle";
+            Brand = ad.Brand == null ? String.Empty : ad.Brand.Label;
+            Fuel = ad.Fuel == null ? String.Empty : ad.Fuel.Label;
         }
     }
 }
