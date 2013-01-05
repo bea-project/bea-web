@@ -18,6 +18,8 @@ namespace Bea.Models
         public String Price { get; set; }
         public String Body { get; set; }
         public String CreationDateString { get; set; }
+        public String CategoryGroup { get; set; }
+        public String Category { get; set; }
 
         public IList<String> ImagesIds { get; set; }
 
@@ -42,6 +44,12 @@ namespace Bea.Models
             Price = String.Format(CultureInfo.GetCultureInfo("fr-FR"), "{0:0,0 Francs}", ad.Price);
             CreationDateString = String.Format(CultureInfo.GetCultureInfo("fr-FR"), "{0:f}", ad.CreationDate);
             Body = ad.Body;
+
+            if (ad.Category != null)
+            {
+                Category = ad.Category.Label;
+                CategoryGroup = ad.Category.CategoryGrp.Label;
+            }
 
             UserFirstName = ad.CreatedBy.Firstname;
             UserPhoneNumber = ad.PhoneNumber;
