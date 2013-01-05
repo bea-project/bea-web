@@ -129,6 +129,44 @@ namespace Bea.Test.Models.Details
         }
 
         [TestMethod]
+        public void AdDetailsModel_ctor_WithCarAd_OtherBrand()
+        {
+            // Given
+            City c = new City()
+            {
+                Label = "Nouméa"
+            };
+
+            User u = new User()
+            {
+                Firstname = "Nicolas"
+            };
+
+            CarAd ad = new CarAd()
+            {
+                Id = 17,
+                Title = "title",
+                Price = 1270,
+                City = c,
+                CreatedBy = u,
+                CreationDate = new DateTime(2012, 05, 12, 17, 26, 08),
+                Body = "body",
+                Kilometers = 2000,
+                Year = 2013,
+                IsAutomatic = true,
+                Brand = new CarBrand { Label = "Autre" },
+                OtherBrand = "Batmobile",
+                Fuel = new CarFuel { Label = "Super" }
+            };
+
+            // When
+            CarAdDetailsModel model = new CarAdDetailsModel(ad);
+
+            // Then
+            Assert.AreEqual("Batmobile", model.Brand);
+        }
+
+        [TestMethod]
         public void AdDetailsModel_ctor_WithCarAd_NoBrandNorFuel()
         {
             // Given

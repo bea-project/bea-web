@@ -10,6 +10,7 @@ namespace Bea.Domain.Ads
     {
         public virtual Boolean IsAutomatic { get; set; }
         public virtual CarBrand Brand { get; set; }
+        public virtual String OtherBrand { get; set; }
         public virtual CarFuel Fuel { get; set; }
 
         public CarAd()

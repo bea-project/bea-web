@@ -29,6 +29,7 @@ namespace Bea.Dal.Map.Ads
             Map(x => x.Kilometers);
             Map(x => x.Year);
             Map(x => x.IsAutomatic);
+            Map(x => x.OtherBrand);
             References<CarFuel>(x => x.Fuel);
             References<CarBrand>(x => x.Brand);
         }

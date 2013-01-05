@@ -21,8 +21,12 @@ namespace Bea.Models.Details
             Year = ad.Year;
             Kilometers = ad.Kilometers;
             GearType = ad.IsAutomatic ? "Automatique" : "Manuelle";
-            Brand = ad.Brand == null ? String.Empty : ad.Brand.Label;
             Fuel = ad.Fuel == null ? String.Empty : ad.Fuel.Label;
+
+            if (!String.IsNullOrEmpty(ad.OtherBrand))
+                Brand = ad.OtherBrand;
+            else
+                Brand = ad.Brand == null ? String.Empty : ad.Brand.Label;
         }
     }
 }

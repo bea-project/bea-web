@@ -211,6 +211,8 @@ namespace Bea.Web.NhibernateHelper
                 _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "BMW" });
                 _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Audi" });
                 _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Nissan" });
+                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Chevrolet" });
+                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Autre" });
 
                 _sessionFactory.GetCurrentSession().Save(new CarFuel { Label = "Essence" });
                 _sessionFactory.GetCurrentSession().Save(new CarFuel { Label = "Diesel" });
