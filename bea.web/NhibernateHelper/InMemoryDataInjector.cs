@@ -13,6 +13,7 @@ using NHibernate.Linq;
 using Bea.Domain.Categories;
 using Bea.Domain.Reference;
 using Bea.Domain.Ads;
+using Bea.Domain.Search;
 
 namespace Bea.Web.NhibernateHelper
 {
@@ -190,6 +191,9 @@ namespace Bea.Web.NhibernateHelper
                     c.AddAd(ad);
                     vehicles.Categories[0].AddAd(ad);
                     _sessionFactory.GetCurrentSession().Save(ad);
+
+                    SearchAdCache cacheAd = new SearchAdCache(ad);
+                    _sessionFactory.GetCurrentSession().Save(cacheAd);
                 }
 
                 _sessionFactory.GetCurrentSession().Update(img1);

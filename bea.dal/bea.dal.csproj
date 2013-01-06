@@ -67,6 +67,7 @@
     <Compile Include="Map\Location\ProvinceMap.cs" />
     <Compile Include="Map\Reference\CarBrandMap.cs" />
     <Compile Include="Map\Reference\CarFuelMap.cs" />
+    <Compile Include="Map\Search\SearchAdCacheMap.cs" />
     <Compile Include="Map\UserMap.cs">
       <SubType>Code</SubType>
     </Compile>

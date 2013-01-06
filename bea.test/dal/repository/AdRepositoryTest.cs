@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 using Bea.Domain.Categories;
 using Bea.Domain.Ads;
+using Bea.Domain.Search;
 
 namespace Bea.Test.dal.repository
 {
@@ -402,38 +403,36 @@ namespace Bea.Test.dal.repository
                     Label = "Moto"
                 };
 
-                Ad a = new Ad
+                SearchAdCache a = new SearchAdCache
                 {
+                    AdId = 1,
                     Title = "titre 1",
                     Body = "content",
-                    CreatedBy = u,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
-                    Category = cat
+                    Category = cat,
+                    City = c
                 };
-                c.AddAd(a);
-                cat.AddAd(a);
                 repo.Save<City>(c);
                 repo.Save<Category>(cat);
-                repo.Save<Ad>(a);
+                repo.Save(a);
 
-                Ad a2 = new Ad
+                SearchAdCache a2 = new SearchAdCache
                 {
+                    AdId = 2,
                     Title = "title 2",
                     Body = "content",
-                    CreatedBy = u,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
-                    Category = cat
+                    Category = cat,
+                    City = c
                 };
-                c.AddAd(a2);
-                cat.AddAd(a2);
-                repo.Save<Ad>(a2);
+                repo.Save(a2);
 
                 repo.Flush();
 
                 #endregion
 
                 // When
-                IList<Ad> result = adRepo.SearchAds(orSearchStrings: new String[] { "tre" });
+                IList<SearchAdCache> result = adRepo.SearchAds(orSearchStrings: new String[] { "tre" });
 
                 // Then
                 Assert.AreEqual(1, result.Count);
@@ -470,19 +469,18 @@ namespace Bea.Test.dal.repository
                     Label = "Moto"
                 };
 
-                Ad a = new Ad
+                SearchAdCache a = new SearchAdCache
                 {
+                    AdId = 1,
                     Title = "titre 1",
                     Body = "content",
-                    CreatedBy = u,
+                    City = c,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
                     Category = cat
                 };
-                c.AddAd(a);
-                cat.AddAd(a);
                 repo.Save<City>(c);
                 repo.Save<Category>(cat);
-                repo.Save<Ad>(a);
+                repo.Save(a);
 
                 City c2 = new City
                 {
@@ -494,19 +492,18 @@ namespace Bea.Test.dal.repository
                     Label = "Auto"
                 };
 
-                Ad a2 = new Ad
+                SearchAdCache a2 = new SearchAdCache
                 {
+                    AdId = 2,
                     Title = "title 2",
                     Body = "content",
-                    CreatedBy = u,
+                    City = c2,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
                     Category=cat2
                 };
-                c2.AddAd(a2);
-                cat2.AddAd(a2);
                 repo.Save<City>(c2);
                 repo.Save<Category>(cat2);
-                repo.Save<Ad>(a2);
+                repo.Save(a2);
 
 
                 repo.Flush();
@@ -514,7 +511,7 @@ namespace Bea.Test.dal.repository
                 #endregion
 
                 // When
-                IList<Ad> result = adRepo.SearchAds(orSearchStrings: new String[] { "ti" }, cityId: c2.Id);
+                IList<SearchAdCache> result = adRepo.SearchAds(orSearchStrings: new String[] { "ti" }, cityId: c2.Id);
 
                 // Then
                 Assert.AreEqual(1, result.Count);
@@ -556,20 +553,20 @@ namespace Bea.Test.dal.repository
                     Label = "Moto"
                 };
 
-                Ad a = new Ad
+                SearchAdCache a = new SearchAdCache
                 {
+                    AdId = 1,
                     Title = "titre 1",
                     Body = "content",
-                    CreatedBy = u,
+                    City = c,
+                    Province = p1,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
                     Category = cat
                 };
-                c.AddAd(a);
-                cat.AddAd(a);
                 repo.Save<Province>(p1);
                 repo.Save<City>(c);
                 repo.Save<Category>(cat);
-                repo.Save<Ad>(a);
+                repo.Save<SearchAdCache>(a);
 
                 Province p2 = new Province
                 {
@@ -580,25 +577,26 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi2"
                 };
                 p2.AddCity(c2);
-                Ad a2 = new Ad
+                SearchAdCache a2 = new SearchAdCache
                 {
+                    AdId = 2,
                     Title = "title 2",
                     Body = "content",
-                    CreatedBy = u,
+                    City = c2,
+                    Province = p2,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
                     Category = cat
                 };
-                c2.AddAd(a2);
                 repo.Save<Province>(p2);
                 repo.Save<City>(c2);
-                repo.Save<Ad>(a2);
+                repo.Save<SearchAdCache>(a2);
 
                 repo.Flush();
 
                 #endregion
 
                 // When
-                IList<Ad> result = adRepo.SearchAds(orSearchStrings: new String[] { "ti" }, provinceId: c2.Province.Id);
+                IList<SearchAdCache> result = adRepo.SearchAds(orSearchStrings: new String[] { "ti" }, provinceId: c2.Province.Id);
 
                 // Then
                 Assert.AreEqual(1, result.Count);
@@ -640,20 +638,20 @@ namespace Bea.Test.dal.repository
                     Label = "Moto"
                 };
 
-                Ad a = new Ad
+                SearchAdCache a = new SearchAdCache
                 {
+                    AdId = 1,
                     Title = "titre 1",
                     Body = "content",
-                    CreatedBy = u,
+                    City = c,
+                    Province = p1,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
                     Category = cat
                 };
-                c.AddAd(a);
-                cat.AddAd(a);
                 repo.Save<Province>(p1);
                 repo.Save<City>(c);
                 repo.Save<Category>(cat);
-                repo.Save<Ad>(a);
+                repo.Save<SearchAdCache>(a);
 
                 Province p2 = new Province
                 {
@@ -664,18 +662,19 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi2"
                 };
                 p2.AddCity(c2);
-                Ad a2 = new Ad
+                SearchAdCache a2 = new SearchAdCache
                 {
+                    AdId = 2,
                     Title = "title 2",
                     Body = "content",
-                    CreatedBy = u,
+                    City = c2,
+                    Province = p2,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
                     Category = cat
                 };
-                c2.AddAd(a2);
                 repo.Save<Province>(p2);
                 repo.Save<City>(c2);
-                repo.Save<Ad>(a2);
+                repo.Save<SearchAdCache>(a2);
 
 
                 repo.Flush();
@@ -683,7 +682,7 @@ namespace Bea.Test.dal.repository
                 #endregion
 
                 // When
-                IList<Ad> result = adRepo.SearchAds(null, new String[]{ "ti" }, provinceId: c2.Province.Id, cityId: c.Id);
+                IList<SearchAdCache> result = adRepo.SearchAds(null, new String[] { "ti" }, provinceId: c2.Province.Id, cityId: c.Id);
 
                 // Then
                 Assert.AreEqual(1, result.Count);
@@ -725,20 +724,19 @@ namespace Bea.Test.dal.repository
                     Label = "Moto"
                 };
 
-                Ad a = new Ad
+                SearchAdCache a = new SearchAdCache
                 {
+                    AdId = 1,
                     Title = "ship",
                     Body = "content",
-                    CreatedBy = u,
+                    City = c,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
                     Category = cat
                 };
-                c.AddAd(a);
-                cat.AddAd(a);
                 repo.Save<Province>(p1);
                 repo.Save<City>(c);
                 repo.Save<Category>(cat);
-                repo.Save<Ad>(a);
+                repo.Save(a);
 
                 Province p2 = new Province
                 {
@@ -750,18 +748,18 @@ namespace Bea.Test.dal.repository
                 };
                 p2.AddCity(c2);
 
-                Ad a2 = new Ad
+                SearchAdCache a2 = new SearchAdCache
                 {
+                    AdId = 2,
                     Title = "car",
                     Body = "content",
-                    CreatedBy = u,
+                    City = c,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
                     Category = cat
                 };
-                c2.AddAd(a2);
                 repo.Save<Province>(p2);
                 repo.Save<City>(c2);
-                repo.Save<Ad>(a2);
+                repo.Save<SearchAdCache>(a2);
 
 
                 repo.Flush();
@@ -769,7 +767,7 @@ namespace Bea.Test.dal.repository
                 #endregion
 
                 // When
-                IList<Ad> result = adRepo.SearchAds(null, new String[]{ "car", "ship" }, null, null);
+                IList<SearchAdCache> result = adRepo.SearchAds(null, new String[] { "car", "ship" }, null, null);
 
                 // Then
                 Assert.AreEqual(2, result.Count);
@@ -812,20 +810,19 @@ namespace Bea.Test.dal.repository
                     Label = "Moto"
                 };
 
-                Ad a = new Ad
+                SearchAdCache a = new SearchAdCache
                 {
+                    AdId = 1,
                     Title = "ship",
                     Body = "computer",
-                    CreatedBy = u,
+                    City = c,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
                     Category = cat
                 };
-                c.AddAd(a);
-                cat.AddAd(a);
                 repo.Save<Province>(p1);
                 repo.Save<City>(c);
                 repo.Save<Category>(cat);
-                repo.Save<Ad>(a);
+                repo.Save(a);
 
                 Province p2 = new Province
                 {
@@ -836,18 +833,18 @@ namespace Bea.Test.dal.repository
                     Label = "CherzmOi2"
                 };
                 p2.AddCity(c2);
-                Ad a2 = new Ad
+                SearchAdCache a2 = new SearchAdCache
                 {
+                    AdId = 2,
                     Title = "ship",
                     Body = "content",
-                    CreatedBy = u,
+                    City = c,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
                     Category = cat
                 };
-                c2.AddAd(a2);
                 repo.Save<Province>(p2);
                 repo.Save<City>(c2);
-                repo.Save<Ad>(a2);
+                repo.Save(a2);
 
 
                 repo.Flush();
@@ -855,7 +852,7 @@ namespace Bea.Test.dal.repository
                 #endregion
 
                 // When
-                IList<Ad> result = adRepo.SearchAds(new String[] { "computer", "ship" }, null, null, null);
+                IList<SearchAdCache> result = adRepo.SearchAds(new String[] { "computer", "ship" }, null, null, null);
 
                 // Then
                 Assert.AreEqual(1, result.Count);

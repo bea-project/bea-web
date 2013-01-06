@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Domain;
 using Bea.Domain.Ads;
+using Bea.Domain.Search;
 
 namespace Bea.Models
 {
@@ -13,6 +14,7 @@ namespace Bea.Models
         public String Title { get; set; }
         public String Location { get; set; }
         public String Price { get; set; }
+        public String Category { get; set; }
         public DateTime CreationDate { get; set; }
         public String MainImageId { get; set; }
 
@@ -20,17 +22,15 @@ namespace Bea.Models
         {
         }
 
-        public AdSearchResultItemModel(Ad ad)
+        public AdSearchResultItemModel(SearchAdCache ad)
         {
-            AdId = ad.Id;
+            AdId = ad.AdId;
             Title = ad.Title;
             Location = ad.City.Label;
+            Category = ad.Category.Label;
             Price = String.Format("{0} Francs", ad.Price);
             CreationDate = ad.CreationDate;
-
-            AdImage primaryImage = ad.Images.Where(i => i.IsPrimary).SingleOrDefault();
-            if (primaryImage != null)
-                MainImageId = primaryImage.Id.ToString();
+            MainImageId = ad.AdImageId;
         }
     }
 }
