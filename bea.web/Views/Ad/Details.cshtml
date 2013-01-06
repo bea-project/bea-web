@@ -1,4 +1,4 @@
-﻿@model Bea.Models.AdDetailsModel
+﻿@model Bea.Models.Details.AdDetailsModel
 
 @{
     ViewBag.Title = String.Format("{0} - {1} - {2}", Model.Title, Model.Location, "BEA");
@@ -6,18 +6,12 @@
 
 <div class="container-fluid">
 
-    <div class="row-fluid">
-        <div class="span12">
-            <ul class="breadcrumb">
-                <li><a href="#">Accueil</a> <span class="divider">/</span></li>
-                <li><a href="#">Categorie</a> <span class="divider">/</span></li>
-                <li class="active">@Model.Title</li>
-            </ul>
-        </div>
-    </div>
+    @Html.Partial("Shared/Details/_AdDetailBreadCrumbPartial", Model)
 
     <div class="row-fluid">
         <div class="span9">
+
+            @*Header display*@
             <div class="page-header">
                 <h4>
                     @Html.DisplayFor(model => model.Title)
@@ -30,6 +24,7 @@
             <p class="muted"><i>Annonce mise en ligne par @Html.ActionLink(Model.UserFirstName, "#") le @Model.CreationDateString</i></p>
             <br />
 
+            @*Images display*@
             @if (Model.ImagesIds.Count > 0)
             {
                 <div id="beaCarousel" class="carousel slide bea-carousel bea-centered well">
@@ -47,7 +42,7 @@
                         }
 
                     </div>
-                   
+
                     @if (Model.ImagesIds.Count > 1)
                     { 
                         <!-- Carousel nav -->
@@ -56,7 +51,15 @@
                     }
                 </div>
             }
+
+            @*Details display*@
             <div>
+                @*Specific details*@
+                @if (Model is Bea.Models.Details.CarAdDetailsModel)
+                {
+                    @Html.Partial("Shared/Details/_CarAdDetailsPartial", Model);
+                }
+
                 <dl class="dl-horizontal">
                     <dt>Prix</dt>
                     <dd>@Html.DisplayFor(model => model.Price)</dd>
@@ -70,8 +73,10 @@
                     <dd>@Html.DisplayFor(model => model.Body)</dd>
                 </dl>
             </div>
+
         </div>
 
+        @*Contact block*@
         <div class="span3">
             <div class="page-header">
                 <h4>Contacter</h4>

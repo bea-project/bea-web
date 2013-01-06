@@ -10,6 +10,8 @@ namespace Bea.Domain.Ads
     public class BaseAd
     {
         public virtual long Id { get; set; }
+        public virtual AdTypeEnum AdType { get; protected set; }
+
         public virtual User CreatedBy { get; set; }
         public virtual DateTime CreationDate { get; set; }
         public virtual string Title { get; set; }
@@ -19,7 +21,7 @@ namespace Bea.Domain.Ads
         public virtual Boolean IsOffer { get; set; }
         public virtual Category Category { get; set; }
         public virtual String PhoneNumber { get; set; }
-
+        
         public virtual IList<AdImage> Images { get; set; }
 
         protected BaseAd()

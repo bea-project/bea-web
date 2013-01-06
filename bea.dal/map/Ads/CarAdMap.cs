@@ -7,6 +7,7 @@ using Bea.Domain.Categories;
 using Bea.Domain.Location;
 using Bea.Domain.Ads;
 using FluentNHibernate.Mapping;
+using Bea.Domain.Reference;
 
 namespace Bea.Dal.Map.Ads
 {
@@ -27,7 +28,10 @@ namespace Bea.Dal.Map.Ads
 
             Map(x => x.Kilometers);
             Map(x => x.Year);
-            Map(x => x.IsAutomatic).Default("false");
+            Map(x => x.IsAutomatic);
+            Map(x => x.OtherBrand);
+            References<CarFuel>(x => x.Fuel);
+            References<CarBrand>(x => x.Brand);
         }
     }
 }

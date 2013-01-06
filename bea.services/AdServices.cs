@@ -9,6 +9,7 @@ using Bea.Domain.Ads;
 using Bea.Domain.Location;
 using Bea.Models;
 using Bea.Domain.Categories;
+using Bea.Models.Details;
 
 namespace Bea.Services
 {
@@ -46,7 +47,7 @@ namespace Bea.Services
 
         public Ad GetAdById(long adId)
         {
-            return _adRepository.GetAdById(adId);
+            return _adRepository.GetAdById<Ad>(adId);
         }
 
         public void DeleteAdById(long adId)
@@ -62,12 +63,39 @@ namespace Bea.Services
 
         public AdDetailsModel GetAdDetails(long adId)
         {
-            Ad ad = _adRepository.GetAdById(adId);
-
-            if (ad == null)
+            AdTypeEnum adType = _adRepository.GetAdType(adId);
+            
+            if (adType == AdTypeEnum.Undefined)
                 return null;
 
-            AdDetailsModel model = new AdDetailsModel(ad);
+            AdDetailsModel model = CreateAdDetailsModelFromAd(adType, adId);
+            
+            return model;
+        }
+
+        protected AdDetailsModel CreateAdDetailsModelFromAd(AdTypeEnum adType, long adId)
+        {
+            AdDetailsModel model = null;
+            BaseAd ad = null;
+
+            // Get the right Ad based on its type
+            switch (adType)
+            {
+                case AdTypeEnum.Ad:
+                    ad = _adRepository.GetAdById<Ad>(adId);
+                    model = new AdDetailsModel(ad);
+                    break;
+
+                case AdTypeEnum.CarAd:
+                    ad = _adRepository.GetAdById<CarAd>(adId);
+                    model = new CarAdDetailsModel(ad as CarAd);
+                    break;
+
+                default:
+                    return null;
+            }
+
+            // Compute whether or not this Ad is new (less than 3 days)
             model.IsNew = ad.CreationDate > _helperService.GetCurrentDateTime().AddHours(-72);
 
             return model;

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Bea.Domain;
 using Bea.Domain.Ads;
+using Bea.Domain.Categories;
 using Bea.Domain.Location;
-using Bea.Models;
+using Bea.Models.Details;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bea.Test.Models
@@ -27,6 +25,17 @@ namespace Bea.Test.Models
                 Firstname = "Nicolas"
             };
 
+            Category cat = new Category()
+            {
+                Label = "Auto"
+            };
+            
+            CategoryGroup catg = new CategoryGroup
+            {
+                Label = "Véhicule",
+            };
+            catg.AddCategory(cat);
+            
             Ad ad = new Ad()
             {
                 Id = 17,
@@ -37,6 +46,7 @@ namespace Bea.Test.Models
                 CreationDate = new DateTime(2012, 05, 12, 17, 26, 08),
                 Body = "body",
             };
+            cat.AddAd(ad);
             ad.Images.Add(new AdImage() { Id = Guid.Parse("e9da8b1e-aa77-401b-84e0-a1290130b7b7") });
             ad.Images.Add(new AdImage() { Id = Guid.Parse("e9da8b1e-aa77-401b-84e0-a1290130b7b9") });
 
@@ -54,6 +64,8 @@ namespace Bea.Test.Models
             Assert.AreEqual(2, model.ImagesIds.Count);
             Assert.AreEqual("e9da8b1e-aa77-401b-84e0-a1290130b7b7", model.ImagesIds[0]);
             Assert.AreEqual("e9da8b1e-aa77-401b-84e0-a1290130b7b9", model.ImagesIds[1]);
+            Assert.AreEqual("Auto", model.Category);
+            Assert.AreEqual("Véhicule", model.CategoryGroup);
         }
     }
 }

@@ -38,8 +38,6 @@ namespace Bea.Dal.Repository
                          group a by a.CreatedBy into g
                          select new { User = g.Key, Count = g.Count() });
 
-            //var query = (from u in _sessionFactory.GetCurrentSession().Query<User>()
-            //             select new { User = u, Count = u.Ads.Count });
             IDictionary<User, int> result = query.ToList().ToDictionary(x => x.User, x => x.Count);
             return result;
         }
@@ -49,9 +47,19 @@ namespace Bea.Dal.Repository
             return _sessionFactory.GetCurrentSession().Query<Ad>().Fetch(x=>x.CreatedBy).Fetch(x=>x.City).ToList();
         }
 
-        public Ad GetAdById(long adId)
+        public AdTypeEnum GetAdType(long adId)
         {
-            Ad ad = _sessionFactory.GetCurrentSession().Query<Ad>()
+            var result = _sessionFactory.GetCurrentSession().Query<BaseAd>()
+                .Where(a => a.Id == adId)
+                .Select(a => a.AdType)
+                .SingleOrDefault();
+
+            return result;
+        }
+
+        public T GetAdById<T>(long adId) where T : BaseAd
+        {
+            T ad = _sessionFactory.GetCurrentSession().Query<T>()
                 .Fetch(x => x.CreatedBy)
                 .Fetch(x => x.City)
                 .Fetch(x => x.Images)
@@ -72,7 +80,7 @@ namespace Bea.Dal.Repository
 
         public void DeleteAdById(long adId)
         {
-            Ad ad = GetAdById(adId);
+            Ad ad = GetAdById<Ad>(adId);
             if (ad != null)
             {
                 _sessionFactory.GetCurrentSession().Delete(ad);
