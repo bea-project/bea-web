@@ -8,6 +8,7 @@ using Bea.Domain;
 using Bea.Domain.Ads;
 using Bea.Domain.Location;
 using Bea.Models;
+using Bea.Domain.Categories;
 
 namespace Bea.Services
 {
@@ -16,12 +17,16 @@ namespace Bea.Services
         private readonly IAdRepository _adRepository;
         private readonly IRepository _repository;
         private readonly IHelperService _helperService;
+        private readonly IUserServices _userServices;
+        
 
-        public AdServices(IAdRepository adRepository, IHelperService helperService, IRepository repository)
+        public AdServices(IAdRepository adRepository, IHelperService helperService, IRepository repository, IUserServices userServices)
         {
             _adRepository = adRepository;
             _helperService = helperService;
             _repository = repository;
+            _userServices = userServices;
+            
         }
 
         public IDictionary<City, int> CountAdsByCities()
@@ -66,6 +71,37 @@ namespace Bea.Services
             model.IsNew = ad.CreationDate > _helperService.GetCurrentDateTime().AddHours(-72);
 
             return model;
+        }
+
+        public BaseAd GetAdFromModel(AdCreateModel model, Dictionary<string, string> form)
+        {
+            BaseAd baseAd = new Ad();
+            //Category modelCategory = _repository.Get<Category>(model.SelectedCategoryId);
+            //if (modelCategory!=null)
+            //{
+            //    switch (modelCategory.Label)
+            //    {
+            //        case "Voitures":
+            //            baseAd = new CarAd();
+
+            //            break;
+            //    }
+            //}
+            
+
+            if (model.SelectedCityId.HasValue)
+                baseAd.City = _repository.Get<City>(model.SelectedCityId.Value);
+            if (model.SelectedCategoryId.HasValue)
+                baseAd.Category = _repository.Get<Category>(model.SelectedCategoryId.Value);
+            baseAd.CreatedBy = _userServices.GetUserFromEmail("bruno.deprez@gmail.com");
+            baseAd.Body = model.Body;
+            baseAd.CreationDate = DateTime.Now;
+            baseAd.Price = model.Price.GetValueOrDefault();
+            baseAd.Title = model.Title;
+            baseAd.IsOffer = model.IsOffer;
+            baseAd.PhoneNumber = model.Telephone;
+
+            return baseAd;
         }
     }
 }

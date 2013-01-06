@@ -18,5 +18,6 @@ namespace Bea.Core.Services
         void AddAd(Ad ad);
 
         AdDetailsModel GetAdDetails(long adId);
+        BaseAd GetAdFromModel(AdCreateModel model, Dictionary<string, string> form);
     }
 }

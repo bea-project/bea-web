@@ -25,7 +25,7 @@ namespace Bea.Test.services
             var adRepoMock = new Moq.Mock<IAdRepository>();
             adRepoMock.Setup(r => r.CountAdsByCity()).Returns(result);
 
-            AdServices service = new AdServices(adRepoMock.Object, null, null);
+            AdServices service = new AdServices(adRepoMock.Object, null,null,null);
 
             // When
             IDictionary<City, int> actual = service.CountAdsByCities();
@@ -50,7 +50,7 @@ namespace Bea.Test.services
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
 
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null);
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null,null);
 
             // When
             AdDetailsModel actual = service.GetAdDetails(17);
@@ -74,7 +74,7 @@ namespace Bea.Test.services
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
 
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null);
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null,null);
 
             // When
             AdDetailsModel actual = service.GetAdDetails(17);
@@ -98,7 +98,7 @@ namespace Bea.Test.services
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
 
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null);
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null,null);
 
             // When
             AdDetailsModel actual = service.GetAdDetails(17);
@@ -119,7 +119,7 @@ namespace Bea.Test.services
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
 
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null);
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null,null);
 
             // When
             AdDetailsModel actual = service.GetAdDetails(17);
@@ -127,5 +127,20 @@ namespace Bea.Test.services
             // Then
             Assert.IsNull(actual);
         }
+
+        //[TestMethod]
+        //public void GetAdFromModel_NoCitySelected_PutNullInAdCity()
+        //{
+        //    BaseAd ad = new Ad();
+        //    City city = new City() { Id = 17 };
+        //    var repoMock = new Moq.Mock<IRepository>();
+        //    repoMock.Setup(r => r.Get<City>(17)).Returns(city);
+
+
+
+        //    AdServices service = new AdServices(null, null, repoMock.Object, null);
+
+        //}
+
     }
 }
