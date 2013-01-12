@@ -9,7 +9,9 @@ namespace Bea.Domain.Ads
     {
         Undefined = 0,
         Ad = 1,
-        CarAd = 2,
-        KiteAd = 3
+        CarAd = 10,
+        MotoAd = 11,
+        KiteAd = 20,
+        RealEstateAd = 30
     }
 }

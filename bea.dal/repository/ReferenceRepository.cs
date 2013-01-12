@@ -19,9 +19,9 @@ namespace Bea.Dal.Repository
             _sessionFactory = sessionFactory;
         }
 
-        public IList<CarBrand> GetAllCarBrands()
+        public IList<VehicleBrand> GetAllCarBrands()
         {
-            return _sessionFactory.GetCurrentSession().Query<CarBrand>().ToList();
+            return _sessionFactory.GetCurrentSession().Query<VehicleBrand>().ToList();
         }
 
         public IList<CarFuel> GetAllCarFuels()

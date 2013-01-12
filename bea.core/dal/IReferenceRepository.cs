@@ -12,7 +12,7 @@ namespace Bea.Core.Dal
         /// Get all the car brands
         /// </summary>
         /// <returns>A list of car brands</returns>
-        IList<CarBrand> GetAllCarBrands();
+        IList<VehicleBrand> GetAllCarBrands();
 
         /// <summary>
         /// Get all the car fuels

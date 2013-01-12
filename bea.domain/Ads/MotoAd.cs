@@ -6,17 +6,16 @@ using Bea.Domain.Reference;
 
 namespace Bea.Domain.Ads
 {
-    public class CarAd : VehicleAd
+    public class MotoAd : VehicleAd
     {
-        public virtual Boolean IsAutomatic { get; set; }
         public virtual VehicleBrand Brand { get; set; }
         public virtual String OtherBrand { get; set; }
-        public virtual CarFuel Fuel { get; set; }
+        public virtual int EngineSize { get; set; }
 
-        public CarAd()
+        public MotoAd()
             : base()
         {
-            AdType = AdTypeEnum.CarAd;
+            AdType = AdTypeEnum.MotoAd;
         }
     }
 }

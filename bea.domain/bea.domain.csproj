@@ -46,6 +46,8 @@
     <Compile Include="AdImage.cs" />
     <Compile Include="Ads\BaseAd.cs" />
     <Compile Include="Ads\CarAd.cs" />
+    <Compile Include="Ads\MotoAd.cs" />
+    <Compile Include="Ads\RealEstateAd.cs" />
     <Compile Include="Categories\AdCar.cs" />
     <Compile Include="Categories\AdKite.cs" />
     <Compile Include="Categories\Category.cs" />
@@ -54,7 +56,8 @@
     <Compile Include="Location\Province.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ads\AdTypeEnum.cs" />
-    <Compile Include="Reference\CarBrand.cs" />
+    <Compile Include="Reference\RealEstateType.cs" />
+    <Compile Include="Reference\VehicleBrand.cs" />
     <Compile Include="Reference\CarFuel.cs" />
     <Compile Include="Search\SearchAdCache.cs" />
     <Compile Include="User.cs" />

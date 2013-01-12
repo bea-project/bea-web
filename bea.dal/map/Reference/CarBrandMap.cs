@@ -7,7 +7,7 @@ using Bea.Domain.Reference;
 
 namespace Bea.Dal.Map.Reference
 {
-    class CarBrandMap : ClassMap<CarBrand>
+    class CarBrandMap : ClassMap<VehicleBrand>
     {
         public CarBrandMap()
         {

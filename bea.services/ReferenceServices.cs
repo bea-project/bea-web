@@ -17,7 +17,7 @@ namespace Bea.Services
             _referenceRepository = referenceRepository;
         }
         
-        public IList<CarBrand> GetAllCarBrands()
+        public IList<VehicleBrand> GetAllCarBrands()
         {
             return _referenceRepository.GetAllCarBrands();
         }
