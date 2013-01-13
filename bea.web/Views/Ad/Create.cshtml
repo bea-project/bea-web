@@ -82,8 +82,12 @@
             @Html.ValidationMessageFor(model => model.Price, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
         </div>
     </div>    
-    
-     
+    <div id="parameters">
+        @if (Model is Bea.Models.AdCarCreateModel)
+        {
+            @Html.Partial("Shared/_CarAdCreate", Model);
+        }
+    </div>
     
     <div class="control-group">
         <div class="controls">
@@ -131,8 +135,25 @@
             }
         });
 
+        $('#SelectedCategoryId').change(function () {
+            if ($(this).val()) {
+                //The user selected a province
+                var categoryId = $('#SelectedCategoryId').val();
+                
+                var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Ad", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    success: function (data) {
+                        $('#parameters').html(data);
+                        console.log(data);
+                    }
+                });
+            }
+        });
+
         $('#Name').tooltip({ 'trigger': 'focus', 'title': 'Votre nom sera affiche dans l\'annonce', 'placement': 'right' });
-        $('#Email').tooltip({ 'trigger': 'focus', 'title': 'Votre Email ne sera pas affiche dans l\'annonce', 'placement':'right' });
+        $('#Email').tooltip({ 'trigger': 'focus', 'title': 'Votre Email ne sera pas affiche dans l\'annonce', 'placement': 'right' });
         $('#Telephone').tooltip({ 'trigger': 'focus', 'title': 'Exemple: 123456', 'placement': 'right' });
     });
 </script>

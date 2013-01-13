@@ -16,7 +16,7 @@ namespace Bea.Core.Services
         IList<Ad> GetAllAds();
         Ad GetAdById(long adId);
         void DeleteAdById(long adId);
-        void AddAd(Ad ad);
+        void AddAd(BaseAd ad);
 
         AdDetailsModel GetAdDetails(long adId);
         BaseAd GetAdFromModel(AdCreateModel model, Dictionary<string, string> form);

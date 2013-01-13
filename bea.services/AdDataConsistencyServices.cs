@@ -41,7 +41,16 @@ namespace Bea.Services
                 errors.Add("SelectedCityId", "Veuillez sélectionner une ville.");
             if (ad.Category==null)
                 errors.Add("SelectedCategoryId", "Veuillez séléctionner une catégorie.");
-
+            if (ad is CarAd)
+            {
+                CarAd carAd = ad as CarAd;
+                if (carAd.Kilometers == 0)
+                    errors.Add("Km", "Veuillez séléctionner un kilométrage.");
+                if (carAd.Fuel==null)
+                    errors.Add("SelectedFuelId", "Veuillez sélectionner un type.");
+                if (carAd.Brand == null)
+                    errors.Add("SelectedBrandId", "Veuillez sélectionner une marque.");
+            }
             return errors;
         }
     }

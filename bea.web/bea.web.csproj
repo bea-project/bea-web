@@ -260,7 +260,7 @@
     <Content Include="Views\Ad\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\_AdCarCreate.cshtml" />
+    <Content Include="Views\Ad\Shared\_CarAdCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Ad\Shared\Details\_CarAdDetailsPartial.cshtml" />

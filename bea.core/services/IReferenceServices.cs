@@ -9,5 +9,6 @@ namespace Bea.Core.Services
     public interface IReferenceServices
     {
         IList<CarBrand> GetAllCarBrands();
+        IList<CarFuel> GetAllCarFuels();
     }
 }

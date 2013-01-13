@@ -20,14 +20,17 @@ namespace Bea.Web.Controllers
         private IUserServices _userServices;
         private ICategoryServices _categoryServices;
         private IAdDataConsistencyServices _adConsistencyServices;
+        private IReferenceServices _referenceServices;
 
-        public AdController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices)
+
+        public AdController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices)
         {
             _adServices = adServices;
             _locationServices = locationServices;
             _userServices = userServices;
             _categoryServices = categoryServices;
             _adConsistencyServices = adConsistencyServices;
+            _referenceServices = referenceServices;
         }
         
         //
@@ -76,33 +79,50 @@ namespace Bea.Web.Controllers
                 ModelState.AddModelError(key, errors[key]);
             if (ModelState.IsValid)
             {
-                //Ad newAd = AdCreateModelToAd(model);
-                //_adServices.AddAd(newAd);
+                _adServices.AddAd(newAd);
                 return RedirectToAction("Index", "Home");
             }
-            model.Provinces = _locationServices.GetAllProvinces().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
-            if(model.SelectedProvinceId!=null)
-                model.Cities = _locationServices.GetCitiesFromProvince(model.SelectedProvinceId.Value).Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
-            model.Categories = _categoryServices.GetAllCategoryGroupsWithCategories().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
-            return View(model);
+
+            AdCreateModel returnModel = GetModelFromBaseAd(newAd,model);
+
+
+            returnModel.Provinces = _locationServices.GetAllProvinces().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+            if (returnModel.SelectedProvinceId != null)
+                returnModel.Cities = _locationServices.GetCitiesFromProvince(model.SelectedProvinceId.Value).Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+            returnModel.Categories = _categoryServices.GetAllCategoryGroupsWithCategories().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+            return View(returnModel);
         }
 
-        //public Ad AdCreateModelToAd(AdCreateModel model)
-        //{
-        //    Ad ad = new Ad();
-        //    User user = _userServices.GetUserFromEmail(model.Email);
-        //    City city = _locationServices.GetCityFromId(model.SelectedCityId);
-        //    Category category = _categoryServices.GetCategoryById(model.SelectedCategoryId);
-        //    ad.CreatedBy = user;
-        //    ad.Body = model.Body;
-        //    ad.City = city;
-        //    ad.CreationDate = DateTime.Now;
-        //    ad.Price = model.Price.GetValueOrDefault();
-        //    ad.Title = model.Title;
-        //    ad.IsOffer = model.IsOffer;
-        //    ad.Category = category;
-        //    return ad;
-        //}
+        public PartialViewResult AddParamters(int categoryId)
+        {
+            Category selectedCategory = _categoryServices.GetCategoryById(categoryId);
+            if (selectedCategory.Label.Equals("Voitures"))
+            {
+                AdCarCreateModel adCarCreateModel = new AdCarCreateModel();
+                adCarCreateModel.FuelList = _referenceServices.GetAllCarFuels().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                adCarCreateModel.BrandsList = _referenceServices.GetAllCarBrands().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                return PartialView("Shared/_CarAdCreate",adCarCreateModel);
+            }
+            return PartialView();
+        }
+
+        private AdCreateModel GetModelFromBaseAd(BaseAd ad, AdCreateModel createModel)
+        {
+            AdCreateModel model = null;
+            switch (ad.AdType)
+            {
+                case AdTypeEnum.CarAd:
+                    AdCarCreateModel adCarCreateModel = new AdCarCreateModel(ad as CarAd, createModel);
+                    adCarCreateModel.FuelList = _referenceServices.GetAllCarFuels().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                    adCarCreateModel.BrandsList = _referenceServices.GetAllCarBrands().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                    model = adCarCreateModel;
+                    break; 
+
+                case AdTypeEnum.Ad:
+                    return createModel;
+            }
+            return model;
+        }
 
 
     }

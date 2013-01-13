@@ -10,6 +10,7 @@ using Bea.Domain.Location;
 using Bea.Models;
 using Bea.Domain.Categories;
 using Bea.Models.Details;
+using Bea.Domain.Reference;
 
 namespace Bea.Services
 {
@@ -56,9 +57,10 @@ namespace Bea.Services
             _repository.Flush();
         }
 
-        public void AddAd(Ad ad)
+        public void AddAd(BaseAd ad)
         {
-            _repository.Save(ad);
+            _repository.Save<BaseAd>(ad);
+            _repository.Flush();
         }
 
         public AdDetailsModel GetAdDetails(long adId)
@@ -103,33 +105,55 @@ namespace Bea.Services
 
         public BaseAd GetAdFromModel(AdCreateModel model, Dictionary<string, string> form)
         {
-            BaseAd baseAd = new Ad();
-            //Category modelCategory = _repository.Get<Category>(model.SelectedCategoryId);
-            //if (modelCategory!=null)
-            //{
-            //    switch (modelCategory.Label)
-            //    {
-            //        case "Voitures":
-            //            baseAd = new CarAd();
+            BaseAd ad = null;
 
-            //            break;
-            //    }
-            //}
-            
-
-            if (model.SelectedCityId.HasValue)
-                baseAd.City = _repository.Get<City>(model.SelectedCityId.Value);
             if (model.SelectedCategoryId.HasValue)
-                baseAd.Category = _repository.Get<Category>(model.SelectedCategoryId.Value);
-            baseAd.CreatedBy = _userServices.GetUserFromEmail("bruno.deprez@gmail.com");
-            baseAd.Body = model.Body;
-            baseAd.CreationDate = DateTime.Now;
-            baseAd.Price = model.Price.GetValueOrDefault();
-            baseAd.Title = model.Title;
-            baseAd.IsOffer = model.IsOffer;
-            baseAd.PhoneNumber = model.Telephone;
+            {
+                Category modelCategory = _repository.Get<Category>(model.SelectedCategoryId);
+                if (modelCategory != null)
+                {
+                    switch (modelCategory.Label)
+                    {
+                        case "Voitures":
+                            CarAd carAd = new CarAd();
+                            int kilometer;
+                            bool result = Int32.TryParse(form["Km"], out kilometer);
+                            if (result)
+                                carAd.Kilometers = kilometer;
+                            int selectedFuelId;
+                            result = Int32.TryParse(form["SelectedFuelId"], out selectedFuelId);
+                            if (result)
+                                carAd.Fuel = _repository.Get<CarFuel>(selectedFuelId);
+                            int selectedBrandId;
+                            result = Int32.TryParse(form["SelectedBrandId"], out selectedBrandId);
+                            if (result)
+                                carAd.Brand = _repository.Get<CarBrand>(selectedBrandId);
+                            ad = carAd;
+                            break;
 
-            return baseAd;
+                        default:
+                             ad = new Ad();
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                ad = new Ad();
+            }
+            if (model.SelectedCityId.HasValue)
+                ad.City = _repository.Get<City>(model.SelectedCityId.Value);
+            if (model.SelectedCategoryId.HasValue)
+                ad.Category = _repository.Get<Category>(model.SelectedCategoryId.Value);
+            ad.CreatedBy = _userServices.GetUserFromEmail("bruno.deprez@gmail.com");
+            ad.Body = model.Body;
+            ad.CreationDate = DateTime.Now;
+            ad.Price = model.Price.GetValueOrDefault();
+            ad.Title = model.Title;
+            ad.IsOffer = model.IsOffer;
+            ad.PhoneNumber = model.Telephone;
+
+            return ad;
         }
     }
 }

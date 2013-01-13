@@ -12,6 +12,7 @@ using Bea.Models.Details;
 using Bea.Services;
 using Bea.Test.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Bea.Domain.Categories;
 
 namespace Bea.Test.services
 {
@@ -159,19 +160,78 @@ namespace Bea.Test.services
             Assert.IsNull(actual);
         }
 
-        //[TestMethod]
-        //public void GetAdFromModel_NoCitySelected_PutNullInAdCity()
-        //{
-        //    BaseAd ad = new Ad();
-        //    City city = new City() { Id = 17 };
-        //    var repoMock = new Moq.Mock<IRepository>();
-        //    repoMock.Setup(r => r.Get<City>(17)).Returns(city);
+        [TestMethod]
+        public void GetAdFromModel_AdModel_ReturnsAd()
+        {
+            // Given
+            var repoMock = new Moq.Mock<IRepository>();
+            Category category = new Category() { Id = 17, Label = "Kite" };
+            repoMock.Setup(r => r.Get<Category>(17)).Returns(category);
 
+            var userServicesMock = new Moq.Mock<IUserServices>();
+            string email = "bruno.deprez@gmail.com";
+            User user = new User() { Email = email };
+            userServicesMock.Setup(r => r.GetUserFromEmail(email)).Returns(user);
 
+            AdServices service = new AdServices(null, null, repoMock.Object, userServicesMock.Object);
 
-        //    AdServices service = new AdServices(null, null, repoMock.Object, null);
+            // When
+            AdCreateModel model = new AdCreateModel() { SelectedCategoryId = 17 };
+            BaseAd ad = service.GetAdFromModel(model, null);
 
-        //}
+            // Then
+            Assert.IsTrue(ad is Ad);
+        }
+
+        [TestMethod]
+        public void GetAdFromModel_NoCategory_ReturnsAd()
+        {
+            // Given
+            var repoMock = new Moq.Mock<IRepository>();
+
+            var userServicesMock = new Moq.Mock<IUserServices>();
+            string email = "bruno.deprez@gmail.com";
+            User user = new User() { Email = email };
+            userServicesMock.Setup(r => r.GetUserFromEmail(email)).Returns(user);
+
+            AdServices service = new AdServices(null, null, repoMock.Object, userServicesMock.Object);
+
+            // When
+            AdCreateModel model = new AdCreateModel() { SelectedCategoryId = null };
+            BaseAd ad = service.GetAdFromModel(model, null);
+
+            // Then
+            Assert.IsTrue(ad is Ad);
+        }
+
+        [TestMethod]
+        public void GetAdFromModel_CarAdModel_ReturnsCarAd()
+        {
+            // Given
+            var repoMock = new Moq.Mock<IRepository>();
+            Category category = new Category() { Id = 17, Label = "Voitures" };
+            repoMock.Setup(r => r.Get<Category>(17)).Returns(category);
+
+            var userServicesMock = new Moq.Mock<IUserServices>();
+            string email = "bruno.deprez@gmail.com";
+            User user = new User(){Email=email};
+            userServicesMock.Setup(r => r.GetUserFromEmail(email)).Returns(user);
+
+            AdServices service = new AdServices(null, null, repoMock.Object, userServicesMock.Object);
+
+            // When
+            Dictionary<string, string> form = new Dictionary<string, string>();
+            form.Add("Km", "");
+            form.Add("SelectedFuelId", "");
+            form.Add("SelectedBrandId", "");
+
+            AdCreateModel model = new AdCreateModel() { SelectedCategoryId = 17 };
+            BaseAd ad = service.GetAdFromModel(model, form);
+
+            // Then
+            Assert.IsTrue(ad is CarAd);
+
+        }
 
     }
 }
