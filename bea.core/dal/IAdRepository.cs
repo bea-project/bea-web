@@ -5,6 +5,7 @@ using System.Text;
 using Bea.Domain.Location;
 using Bea.Domain;
 using Bea.Domain.Ads;
+using Bea.Domain.Search;
 
 namespace Bea.Core.Dal
 {
@@ -45,7 +46,7 @@ namespace Bea.Core.Dal
         /// using "like" %searchString%
         /// </summary>
         /// <returns></returns>
-        IList<Ad> SearchAds(String[] andSearchStrings, String[] orSearchStrings, int? provinceId, int? cityId);
+        IList<SearchAdCache> SearchAds(String[] andSearchStrings, String[] orSearchStrings, int? provinceId, int? cityId);
 
         /// Deletes an Ad by Id
         /// </summary>

@@ -6,6 +6,7 @@ using Bea.Core.Dal;
 using Bea.Domain;
 using Bea.Domain.Ads;
 using Bea.Domain.Location;
+using Bea.Domain.Search;
 using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Linq;
@@ -93,9 +94,9 @@ namespace Bea.Dal.Repository
             _sessionFactory.GetCurrentSession().Save(ad);
         }
 
-        public IList<Ad> SearchAds(string[] andSearchStrings = null, string[] orSearchStrings = null, int? provinceId = null, int? cityId = null)
+        public IList<SearchAdCache> SearchAds(string[] andSearchStrings = null, string[] orSearchStrings = null, int? provinceId = null, int? cityId = null)
         {
-            ICriteria query = _sessionFactory.GetCurrentSession().CreateCriteria<Ad>();
+            ICriteria query = _sessionFactory.GetCurrentSession().CreateCriteria<SearchAdCache>();
 
             // Add AND clause between search strings
             if (andSearchStrings != null && andSearchStrings.Length != 0)
@@ -127,14 +128,12 @@ namespace Bea.Dal.Repository
             if (cityId.HasValue)
                 query.Add(Expression.Eq("City.Id", cityId.Value));
             else if (provinceId.HasValue)
-            {
-                query.CreateCriteria("City", "c", JoinType.InnerJoin);
-                query.Add(Expression.Eq("c.Province.Id", provinceId.Value));
-            }
+                query.Add(Expression.Eq("Province.Id", provinceId.Value));
+
             // Order results by creation date descending (most recent furst)
             query.AddOrder(Order.Desc("CreationDate"));
 
-            return query.List<Ad>();
+            return query.List<SearchAdCache>();
         }
     }
 }

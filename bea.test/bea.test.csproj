@@ -80,6 +80,7 @@
     <Compile Include="Dal\map\CarAdMapTest.cs" />
     <Compile Include="Dal\repository\AdRepositoryTest.cs" />
     <Compile Include="Dal\map\UserMapTest.cs" />
+    <Compile Include="Domain\SearchAdCacheTest.cs" />
     <Compile Include="Models\AdDetailsModelTest.cs" />
     <Compile Include="Models\AdSearchResultItemModelTest.cs" />
     <Compile Include="Models\AdSearchResultModelTest.cs" />

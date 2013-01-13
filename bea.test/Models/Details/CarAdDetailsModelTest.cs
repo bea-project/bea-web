@@ -116,7 +116,7 @@ namespace Bea.Test.Models.Details
                 Kilometers = 2000,
                 Year = 2013,
                 IsAutomatic = true,
-                Brand = new CarBrand { Label = "Honda" },
+                Brand = new VehicleBrand { Label = "Honda" },
                 Fuel = new CarFuel { Label = "Super" }
             };
 
@@ -154,7 +154,7 @@ namespace Bea.Test.Models.Details
                 Kilometers = 2000,
                 Year = 2013,
                 IsAutomatic = true,
-                Brand = new CarBrand { Label = "Autre" },
+                Brand = new VehicleBrand { Label = "Autre" },
                 OtherBrand = "Batmobile",
                 Fuel = new CarFuel { Label = "Super" }
             };

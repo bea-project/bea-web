@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bea.Domain;
+using Bea.Domain.Ads;
 using Bea.Domain.Categories;
 using Bea.Domain.Location;
-using Bea.Domain.Ads;
-using FluentNHibernate.Mapping;
 using Bea.Domain.Reference;
+using FluentNHibernate.Mapping;
 
 namespace Bea.Dal.Map.Ads
 {
-    public class CarAdMap : SubclassMap<CarAd>
+    public class MotoAdMap : SubclassMap<MotoAd>
     {
-        public CarAdMap()
+        public MotoAdMap()
         {
             Map(x => x.Title).Not.Nullable();
             Map(x => x.Body).Not.Nullable();
@@ -28,10 +28,9 @@ namespace Bea.Dal.Map.Ads
 
             Map(x => x.Kilometers);
             Map(x => x.Year);
-            Map(x => x.IsAutomatic);
             Map(x => x.OtherBrand);
-            References<CarFuel>(x => x.Fuel);
             References<VehicleBrand>(x => x.Brand);
+            Map(x => x.EngineSize);
         }
     }
 }

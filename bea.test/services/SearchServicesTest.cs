@@ -5,6 +5,8 @@ using System.Text;
 using Bea.Core.Dal;
 using Bea.Domain;
 using Bea.Domain.Ads;
+using Bea.Domain.Location;
+using Bea.Domain.Search;
 using Bea.Models;
 using Bea.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,16 +20,18 @@ namespace Bea.Test.services
         public void SearchAds_2Ads_CallAdRepoAndBuildModels()
         {
             // Given
-            IList<Ad> searchResult = new List<Ad>();
-            searchResult.Add(new Ad
+            IList<SearchAdCache> searchResult = new List<SearchAdCache>();
+            searchResult.Add(new SearchAdCache
             {
                 Title = "the ad title",
-                City = new Domain.Location.City() { Label = "the city" }
+                City = new City() { Label = "the city" },
+                Category = new Bea.Domain.Categories.Category()
             });
-            searchResult.Add(new Ad
+            searchResult.Add(new SearchAdCache
             {
                 Title = "the ad title 2",
-                City = new Domain.Location.City() { Label = "the city" }
+                City = new City() { Label = "the city" },
+                Category = new Bea.Domain.Categories.Category()
             });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
@@ -61,16 +65,18 @@ namespace Bea.Test.services
         public void SearchAds_2SearchString_CallAdRepoWithSeveralWords()
         {
             // Given
-            IList<Ad> searchResult = new List<Ad>();
-            searchResult.Add(new Ad
+            IList<SearchAdCache> searchResult = new List<SearchAdCache>();
+            searchResult.Add(new SearchAdCache
             {
                 Title = "ship",
-                City = new Domain.Location.City() { Label = "the city" }
+                City = new City() { Label = "the city" },
+                Category = new Bea.Domain.Categories.Category()
             });
-            searchResult.Add(new Ad
+            searchResult.Add(new SearchAdCache
             {
                 Title = "computer",
-                City = new Domain.Location.City() { Label = "the city" }
+                City = new City() { Label = "the city" },
+                Category = new Bea.Domain.Categories.Category()
             });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();

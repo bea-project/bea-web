@@ -13,6 +13,7 @@ using NHibernate.Linq;
 using Bea.Domain.Categories;
 using Bea.Domain.Reference;
 using Bea.Domain.Ads;
+using Bea.Domain.Search;
 
 namespace Bea.Web.NhibernateHelper
 {
@@ -58,7 +59,6 @@ namespace Bea.Web.NhibernateHelper
                 provinceNord.AddCity(new City { Label = "Canala" });
                 _repository.Save(provinceNord);
 
-
                 Province provinceSud = new Province();
                 provinceSud.Label = "Province Sud";
                 provinceSud.AddCity(new City { Label = "Thio" });
@@ -77,7 +77,6 @@ namespace Bea.Web.NhibernateHelper
                 provinceSud.AddCity(new City { Label = "Poya Sud" });
                 _repository.Save(provinceSud);
 
-
                 Province ilesLoyaute = new Province();
                 ilesLoyaute.Label = "Iles Loyauté";
                 ilesLoyaute.AddCity(new City { Label = "Ouvéa" });
@@ -90,6 +89,135 @@ namespace Bea.Web.NhibernateHelper
              
         }
 
+        public void InsertVehicleReferences()
+        {
+            if (_repository.CountAll<VehicleBrand>() != 0)
+                return;
+
+            _repository.Save(new VehicleBrand { Label = "Alfa Romeo", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Alpina" });
+            _repository.Save(new VehicleBrand { Label = "Ariel" });
+            _repository.Save(new VehicleBrand { Label = "Ascari" });
+            _repository.Save(new VehicleBrand { Label = "Asia Motors" });
+            _repository.Save(new VehicleBrand { Label = "Aston Martin" });
+            _repository.Save(new VehicleBrand { Label = "Audi", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Austin" });
+            _repository.Save(new VehicleBrand { Label = "Autobianchi" });
+            _repository.Save(new VehicleBrand { Label = "Bentley" });
+            _repository.Save(new VehicleBrand { Label = "BMW", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Bristol" });
+            _repository.Save(new VehicleBrand { Label = "Brooke" });
+            _repository.Save(new VehicleBrand { Label = "Buick" });
+            _repository.Save(new VehicleBrand { Label = "Cadillac" });
+            _repository.Save(new VehicleBrand { Label = "Callaway" });
+            _repository.Save(new VehicleBrand { Label = "Campagna" });
+            _repository.Save(new VehicleBrand { Label = "Carver" });
+            _repository.Save(new VehicleBrand { Label = "Caterham" });
+            _repository.Save(new VehicleBrand { Label = "Chevrolet", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Chrysler", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Citroen", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Corvette" });
+            _repository.Save(new VehicleBrand { Label = "Dacia", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Daewoo", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Daihatsu", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Daimler" });
+            _repository.Save(new VehicleBrand { Label = "Datsun" });
+            _repository.Save(new VehicleBrand { Label = "Dodge" });
+            _repository.Save(new VehicleBrand { Label = "Donkervoort" });
+            _repository.Save(new VehicleBrand { Label = "Elfin" });
+            _repository.Save(new VehicleBrand { Label = "Ferrari" });
+            _repository.Save(new VehicleBrand { Label = "Fiat", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Ford", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "FSO" });
+            _repository.Save(new VehicleBrand { Label = "Galloper" });
+            _repository.Save(new VehicleBrand { Label = "Gumpert" });
+            _repository.Save(new VehicleBrand { Label = "Holden" });
+            _repository.Save(new VehicleBrand { Label = "Honda", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Hummer" });
+            _repository.Save(new VehicleBrand { Label = "Hyundai", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Infiniti" });
+            _repository.Save(new VehicleBrand { Label = "Innocenti" });
+            _repository.Save(new VehicleBrand { Label = "Invicta" });
+            _repository.Save(new VehicleBrand { Label = "Isuzu", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Jaguar", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Jeep", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "JMC" });
+            _repository.Save(new VehicleBrand { Label = "Josse" });
+            _repository.Save(new VehicleBrand { Label = "Kia", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Koenigsegg" });
+            _repository.Save(new VehicleBrand { Label = "Lada" });
+            _repository.Save(new VehicleBrand { Label = "Lamborghini" });
+            _repository.Save(new VehicleBrand { Label = "Lancia", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Land Rover" });
+            _repository.Save(new VehicleBrand { Label = "Lexus" });
+            _repository.Save(new VehicleBrand { Label = "Lincoln" });
+            _repository.Save(new VehicleBrand { Label = "Lobini" });
+            _repository.Save(new VehicleBrand { Label = "Lotus" });
+            _repository.Save(new VehicleBrand { Label = "Marcos" });
+            _repository.Save(new VehicleBrand { Label = "Maserati" });
+            _repository.Save(new VehicleBrand { Label = "Maybach" });
+            _repository.Save(new VehicleBrand { Label = "Mazda", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "MB Roadcars" });
+            _repository.Save(new VehicleBrand { Label = "Mega" });
+            _repository.Save(new VehicleBrand { Label = "Mercedes", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Mercury" });
+            _repository.Save(new VehicleBrand { Label = "MG" });
+            _repository.Save(new VehicleBrand { Label = "Mini" });
+            _repository.Save(new VehicleBrand { Label = "Mitsubishi", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Morgan" });
+            _repository.Save(new VehicleBrand { Label = "Morris" });
+            _repository.Save(new VehicleBrand { Label = "NICE" });
+            _repository.Save(new VehicleBrand { Label = "Nissan", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Noble" });
+            _repository.Save(new VehicleBrand { Label = "Opel", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Pagani" });
+            _repository.Save(new VehicleBrand { Label = "Perodua" });
+            _repository.Save(new VehicleBrand { Label = "Peugeot", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "PGO" });
+            _repository.Save(new VehicleBrand { Label = "Pontiac" });
+            _repository.Save(new VehicleBrand { Label = "Porsche" });
+            _repository.Save(new VehicleBrand { Label = "Princess" });
+            _repository.Save(new VehicleBrand { Label = "Proton" });
+            _repository.Save(new VehicleBrand { Label = "Radical" });
+            _repository.Save(new VehicleBrand { Label = "Renault", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Rolls-Royce" });
+            _repository.Save(new VehicleBrand { Label = "Rover" });
+            _repository.Save(new VehicleBrand { Label = "Saab", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Saturn" });
+            _repository.Save(new VehicleBrand { Label = "Seat", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Shelby" });
+            _repository.Save(new VehicleBrand { Label = "Skoda", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Smart", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Spectre" });
+            _repository.Save(new VehicleBrand { Label = "Spyker" });
+            _repository.Save(new VehicleBrand { Label = "Ssangyong", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "SSC" });
+            _repository.Save(new VehicleBrand { Label = "Subaru", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Superformance" });
+            _repository.Save(new VehicleBrand { Label = "Suzuki", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Talbot" });
+            _repository.Save(new VehicleBrand { Label = "Tata" });
+            _repository.Save(new VehicleBrand { Label = "Tesla" });
+            _repository.Save(new VehicleBrand { Label = "Toyota", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Triumph" });
+            _repository.Save(new VehicleBrand { Label = "TVR" });
+            _repository.Save(new VehicleBrand { Label = "Unique" });
+            _repository.Save(new VehicleBrand { Label = "Vauxhall" });
+            _repository.Save(new VehicleBrand { Label = "Volkswagen", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Volvo", IsMainBrand = true });
+            _repository.Save(new VehicleBrand { Label = "Westfield" });
+            _repository.Save(new VehicleBrand { Label = "Yugo" });
+            _repository.Save(new VehicleBrand { Label = "Autre" });
+
+            _repository.Save(new CarFuel { Label = "Essence" });
+            _repository.Save(new CarFuel { Label = "Diesel" });
+            _repository.Save(new CarFuel { Label = "GPL" });
+            _repository.Save(new CarFuel { Label = "Electrique" });
+            _repository.Save(new CarFuel { Label = "Autre" });
+
+            _repository.Flush();
+        }
+
         public void InsertInMemoryData()
         {
             //-------------------------------------------
@@ -99,6 +227,8 @@ namespace Bea.Web.NhibernateHelper
             {
 
                 InsertLocations();
+                InsertVehicleReferences();
+
                 City c = _repository.GetAll<City>().First();
                 //-------------------------------------------
                 //         USER TABLE
@@ -190,37 +320,19 @@ namespace Bea.Web.NhibernateHelper
                     c.AddAd(ad);
                     vehicles.Categories[0].AddAd(ad);
                     _sessionFactory.GetCurrentSession().Save(ad);
+
+                    SearchAdCache cacheAd = new SearchAdCache(ad);
+                    _sessionFactory.GetCurrentSession().Save(cacheAd);
                 }
 
                 _sessionFactory.GetCurrentSession().Update(img1);
                 _sessionFactory.GetCurrentSession().Update(img2);
 
 
-
                 //-------------------------------------------
                 //         REFERENCE TABLES
                 //-------------------------------------------
 
-                //Car Brands
-                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Renault" });
-                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Peugeot" });
-                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Citroën" });
-                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Hyundai" });
-                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Great Wall" });
-                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Mercedes" });
-                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "BMW" });
-                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Audi" });
-                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Nissan" });
-                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Chevrolet" });
-                _sessionFactory.GetCurrentSession().Save(new CarBrand { Label = "Autre" });
-
-                _sessionFactory.GetCurrentSession().Save(new CarFuel { Label = "Essence" });
-                _sessionFactory.GetCurrentSession().Save(new CarFuel { Label = "Diesel" });
-                _sessionFactory.GetCurrentSession().Save(new CarFuel { Label = "GPL" });
-                _sessionFactory.GetCurrentSession().Save(new CarFuel { Label = "Electrique" });
-                _sessionFactory.GetCurrentSession().Save(new CarFuel { Label = "Autre" });
-
-                _sessionFactory.GetCurrentSession().Flush();
 
                 transaction.Commit();
             }

@@ -7,6 +7,7 @@ using Bea.Core.Dal;
 using Bea.Domain;
 using Bea.Models;
 using Bea.Domain.Ads;
+using Bea.Domain.Search;
 
 namespace Bea.Services
 {
@@ -26,7 +27,7 @@ namespace Bea.Services
             if (!String.IsNullOrEmpty(searchQuery.SearchString))
                 andSearchString = searchQuery.SearchString.Trim().Split(' ');
 
-            IList<Ad> searchResult = _adRepository.SearchAds(andSearchString, null, searchQuery.ProvinceSelectedId, searchQuery.CitySelectedId);
+            IList<SearchAdCache> searchResult = _adRepository.SearchAds(andSearchString, null, searchQuery.ProvinceSelectedId, searchQuery.CitySelectedId);
             
             AdSearchResultModel model = new AdSearchResultModel(searchQuery);
             model.SearchResultTotalCount = searchResult.Count;
