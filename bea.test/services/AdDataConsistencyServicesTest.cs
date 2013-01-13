@@ -156,7 +156,7 @@ namespace Bea.Test.Services
                 Title = "Title Text",
                 Kilometers = 25,
                 Fuel = new CarFuel { Label = "My Fuel Label" },
-                Brand = new CarBrand { Label = "My BCar Brand"}
+                Brand = new VehicleBrand { Label = "My BCar Brand"}
             };
             int provinceId = 4;
 
@@ -179,7 +179,7 @@ namespace Bea.Test.Services
                 City = new City { Label = "My City" },
                 Title = "Title Text",
                 Fuel = new CarFuel { Label = "My Fuel Label" },
-                Brand = new CarBrand { Label = "My BCar Brand" }
+                Brand = new VehicleBrand { Label = "My BCar Brand" }
             };
             int provinceId = 4;
 
@@ -203,7 +203,7 @@ namespace Bea.Test.Services
                 City = new City { Label = "My City" },
                 Title = "Title Text",
                 
-                Brand = new CarBrand { Label = "My BCar Brand" },
+                Brand = new VehicleBrand { Label = "My BCar Brand" },
                 Kilometers = 25,
             };
             int provinceId = 4;

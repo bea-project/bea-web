@@ -127,7 +127,7 @@ namespace Bea.Services
                             int selectedBrandId;
                             result = Int32.TryParse(form["SelectedBrandId"], out selectedBrandId);
                             if (result)
-                                carAd.Brand = _repository.Get<CarBrand>(selectedBrandId);
+                                carAd.Brand = _repository.Get<VehicleBrand>(selectedBrandId);
                             ad = carAd;
                             break;
 
