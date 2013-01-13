@@ -1045,5 +1045,7 @@ namespace Bea.Test.dal.repository
                 Assert.AreEqual(AdTypeEnum.Undefined, adRepo.GetAdType(18));
             }
         }
+
+        
     }
 }

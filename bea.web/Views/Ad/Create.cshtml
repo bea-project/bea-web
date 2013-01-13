@@ -145,6 +145,7 @@
                     url: url,
                     type: 'GET',
                     success: function (data) {
+                        $('#parameters').html("");
                         $('#parameters').html(data);
                         console.log(data);
                     }

@@ -103,7 +103,7 @@ namespace Bea.Web.Controllers
                 adCarCreateModel.BrandsList = _referenceServices.GetAllCarBrands().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                 return PartialView("Shared/_CarAdCreate",adCarCreateModel);
             }
-            return PartialView();
+            return null;
         }
 
         private AdCreateModel GetModelFromBaseAd(BaseAd ad, AdCreateModel createModel)
