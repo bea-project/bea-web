@@ -10,6 +10,7 @@ using System.Diagnostics;
 using Bea.Domain.Location;
 using Bea.Domain.Categories;
 using Bea.Domain.Ads;
+using Bea.Domain.Search;
 
 namespace Bea.Web.Controllers
 {
@@ -80,6 +81,8 @@ namespace Bea.Web.Controllers
             if (ModelState.IsValid)
             {
                 _adServices.AddAd(newAd);
+                //SearchAdCache cacheAd = new SearchAdCache(newAd);
+
                 return RedirectToAction("Index", "Home");
             }
 

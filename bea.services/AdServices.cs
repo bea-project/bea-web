@@ -11,6 +11,7 @@ using Bea.Models;
 using Bea.Domain.Categories;
 using Bea.Models.Details;
 using Bea.Domain.Reference;
+using Bea.Domain.Search;
 
 namespace Bea.Services
 {
@@ -59,7 +60,10 @@ namespace Bea.Services
 
         public void AddAd(BaseAd ad)
         {
+           
+            SearchAdCache cacheAd = new SearchAdCache(ad);
             _repository.Save<BaseAd>(ad);
+            _repository.Save<SearchAdCache>(cacheAd);
             _repository.Flush();
         }
 
