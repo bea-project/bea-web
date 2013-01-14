@@ -60,9 +60,8 @@ namespace Bea.Services
 
         public void AddAd(BaseAd ad)
         {
-           
-            SearchAdCache cacheAd = new SearchAdCache(ad);
             _repository.Save<BaseAd>(ad);
+            SearchAdCache cacheAd = new SearchAdCache(ad);
             _repository.Save<SearchAdCache>(cacheAd);
             _repository.Flush();
         }
