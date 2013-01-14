@@ -11,6 +11,8 @@ using Bea.Domain.Location;
 using Bea.Domain.Categories;
 using Bea.Domain.Ads;
 using Bea.Domain.Search;
+using Bea.Models.Create;
+using Bea.Models.Create.Vehicules;
 
 namespace Bea.Web.Controllers
 {
@@ -64,8 +66,8 @@ namespace Bea.Web.Controllers
         {
             AdCreateModel model = new AdCreateModel();
             
-            model.Provinces = _locationServices.GetAllProvinces().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
-            model.Categories = _categoryServices.GetAllCategoryGroupsWithCategories().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+            //model.Provinces = _locationServices.GetAllProvinces().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+            //model.Categories = _categoryServices.GetAllCategoryGroupsWithCategories().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
             return View(model);
         }
 
@@ -81,30 +83,23 @@ namespace Bea.Web.Controllers
             if (ModelState.IsValid)
             {
                 _adServices.AddAd(newAd);
-                //SearchAdCache cacheAd = new SearchAdCache(newAd);
-
                 return RedirectToAction("Index", "Home");
             }
-
             AdCreateModel returnModel = GetModelFromBaseAd(newAd,model);
 
-
-            returnModel.Provinces = _locationServices.GetAllProvinces().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
-            if (returnModel.SelectedProvinceId != null)
-                returnModel.Cities = _locationServices.GetCitiesFromProvince(model.SelectedProvinceId.Value).Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
-            returnModel.Categories = _categoryServices.GetAllCategoryGroupsWithCategories().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
             return View(returnModel);
         }
 
         public PartialViewResult AddParamters(int categoryId)
         {
             Category selectedCategory = _categoryServices.GetCategoryById(categoryId);
-            if (selectedCategory.Label.Equals("Voitures"))
+            switch(selectedCategory.Label)
             {
+                case "Voitures":
                 AdCarCreateModel adCarCreateModel = new AdCarCreateModel();
                 adCarCreateModel.FuelList = _referenceServices.GetAllCarFuels().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                 adCarCreateModel.BrandsList = _referenceServices.GetAllCarBrands().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
-                return PartialView("Shared/_CarAdCreate",adCarCreateModel);
+                return PartialView("Shared/Create/_CarAdCreate",adCarCreateModel);
             }
             return null;
         }

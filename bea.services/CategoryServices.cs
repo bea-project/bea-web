@@ -11,20 +11,22 @@ namespace Bea.Services
     public class CategoryServices : ICategoryServices
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IRepository _repository;
 
-        public CategoryServices(ICategoryRepository categoryRepository)
+        public CategoryServices(ICategoryRepository categoryRepository, IRepository repository)
         {
             _categoryRepository = categoryRepository;
+            _repository = repository;
         }
 
         /// <summary>
         /// Get all the Category Groups with the categories
         /// </summary>
         /// <returns>A list of Category Groups</returns>
-        public List<Category> GetAllCategoryGroupsWithCategories()
-        {
-            return _categoryRepository.GetAllCategoryGroupsWithCategories();
-        }
+        //public List<Category> GetAllCategoryGroupsWithCategories()
+        //{
+        //    return _categoryRepository.GetAllCategoryGroupsWithCategories();
+        //}
 
         /// <summary>
         /// Get all the Category by Id
@@ -33,6 +35,11 @@ namespace Bea.Services
         public Category GetCategoryById(int categoryId)
         {
             return _categoryRepository.GetCategoryById(categoryId);
+        }
+
+        public List<Category> GetAllCategories()
+        {
+            return _repository.GetAll<Category>().ToList();
         }
     }
 }

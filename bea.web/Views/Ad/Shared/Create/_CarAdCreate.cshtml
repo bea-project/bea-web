@@ -1,0 +1,37 @@
+﻿@model Bea.Models.Create.Vehicules.AdCarCreateModel
+
+<div class="control-group">
+        <div class="control-group">
+            <label class="control-label" for="inputBrand">@Html.LabelFor(model => model.BrandsList)</label>
+            <div class="controls">
+            @Html.DropDownListFor(model => model.SelectedBrandId, Model.BrandsList, "Choisissez une marque", new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.SelectedBrandId, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="inputBrand">@Html.LabelFor(model => model.SelectedFuelId)</label>
+            <div class="controls">
+            @Html.DropDownListFor(model => model.SelectedFuelId, Model.FuelList, "Choisissez un type", new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.SelectedFuelId, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            </div>
+        </div>
+
+
+
+        <div class="control-group">
+            <label class="control-label" for="inputKm">@Html.LabelFor(model => model.Km)</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Km, new { @class = "input-large" })
+                @Html.ValidationMessageFor(model => model.Km, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            </div>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="inputIsOffer">@Html.LabelFor(model => model.IsAutomatic)</label>
+        <div class="controls">
+            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsAutomatic, true, new { @checked = "checked", @style = "vertical-align: top" }) Automatique</label>
+            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsAutomatic, false, new { @style = "vertical-align: top" }) Manuelle</label>
+        </div>
+    </div>   
+</div>

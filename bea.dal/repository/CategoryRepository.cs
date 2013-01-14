@@ -18,10 +18,10 @@ namespace Bea.Dal.Repository
             _sessionFactory = sessionFactory;
         }
 
-        public List<Category> GetAllCategoryGroupsWithCategories()
-        {
-            return _sessionFactory.GetCurrentSession().Query<Category>().ToList();
-        }
+        //public List<Category> GetAllCategoryGroupsWithCategories()
+        //{
+        //    return _sessionFactory.GetCurrentSession().Query<Category>().ToList();
+        //}
 
         public Category GetCategoryById(int categoryId)
         {

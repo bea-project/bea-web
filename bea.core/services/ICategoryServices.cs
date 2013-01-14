@@ -12,12 +12,14 @@ namespace Bea.Core.Services
         /// Get all the Category Groups with the categories
         /// </summary>
         /// <returns>A list of Category Groups</returns>
-        List<Category> GetAllCategoryGroupsWithCategories();
+        //List<Category> GetAllCategoryGroupsWithCategories();
 
         /// <summary>
         /// Get all the Category by Id
         /// </summary>
         /// <returns>A Category</returns>
         Category GetCategoryById(int categoryId);
+
+        List<Category> GetAllCategories();
     }
 }

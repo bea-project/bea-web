@@ -12,7 +12,7 @@ namespace Bea.Core.Dal
         /// Get all the Category Groups with the categories
         /// </summary>
         /// <returns>A list of Category Groups</returns>
-        List<Category> GetAllCategoryGroupsWithCategories();
+        //List<Category> GetAllCategoryGroupsWithCategories();
 
         /// <summary>
         /// Get all the Category by Id

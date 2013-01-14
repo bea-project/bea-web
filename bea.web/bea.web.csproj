@@ -144,6 +144,8 @@
     <Compile Include="Controllers\AdController.cs" />
     <Compile Include="Controllers\API\AdAPIController.cs" />
     <Compile Include="Controllers\AdImageController.cs" />
+    <Compile Include="Controllers\API\CategoryAPIController.cs" />
+    <Compile Include="Controllers\API\ReferenceAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\API\LocationApiController.cs" />
     <Compile Include="Controllers\TestDataController.cs" />
@@ -260,7 +262,7 @@
     <Content Include="Views\Ad\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Shared\_CarAdCreate.cshtml" />
+    <Content Include="Views\Ad\Shared\Create\_CarAdCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Ad\Shared\Details\_CarAdDetailsPartial.cshtml" />

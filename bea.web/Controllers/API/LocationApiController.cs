@@ -11,7 +11,6 @@ namespace Bea.Web.Controllers.API
 {
     public class LocationApiController : ApiController
     {
-        // GET api/locationapi
         private ILocationServices _locationServices;
 
         public LocationApiController(ILocationServices adServices)
