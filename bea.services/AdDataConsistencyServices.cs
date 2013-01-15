@@ -50,6 +50,18 @@ namespace Bea.Services
                     errors.Add("SelectedFuelId", "Veuillez sélectionner un type.");
                 if (carAd.Brand == null)
                     errors.Add("SelectedBrandId", "Veuillez sélectionner une marque.");
+                if (carAd.Year == 0)
+                    errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
+            }
+            if (ad is MotoAd)
+            {
+                MotoAd motoAd = ad as MotoAd;
+                if (motoAd.Kilometers == 0)
+                    errors.Add("Km", "Veuillez séléctionner un kilométrage.");
+                if (motoAd.Year == 0)
+                    errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
+                if (motoAd.EngineSize == 0)
+                    errors.Add("EngineSize", "Veuillez sélectionner une cylindrée.");
             }
             return errors;
         }

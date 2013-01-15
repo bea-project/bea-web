@@ -11,7 +11,9 @@ namespace Bea.Models.Create.Vehicules
     {
         [DisplayName("Kilometrage:")]
         public int? Km { get; set; }
-
+        
+        [DisplayName("Annee-Modele:")]
+        public int? SelectedYearId { get; set; }
 
        
     }

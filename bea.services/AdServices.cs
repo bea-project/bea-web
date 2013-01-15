@@ -115,28 +115,44 @@ namespace Bea.Services
                 Category modelCategory = _repository.Get<Category>(model.SelectedCategoryId);
                 if (modelCategory != null)
                 {
-                    switch (modelCategory.Label)
+                    switch (modelCategory.CategoryGrp.Label)
                     {
-                        case "Voitures":
-                            CarAd carAd = new CarAd();
+                        case "Véhicules":
+                            VehicleAd vehiculeAd = new VehicleAd();
                             int kilometer;
                             bool result = Int32.TryParse(form["Km"], out kilometer);
                             if (result)
-                                carAd.Kilometers = kilometer;
-                            int selectedFuelId;
-                            result = Int32.TryParse(form["SelectedFuelId"], out selectedFuelId);
+                                vehiculeAd.Kilometers = kilometer;
+                            int selectedYearId;
+                            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
                             if (result)
-                                carAd.Fuel = _repository.Get<CarFuel>(selectedFuelId);
-                            int selectedBrandId;
-                            result = Int32.TryParse(form["SelectedBrandId"], out selectedBrandId);
-                            if (result)
-                                carAd.Brand = _repository.Get<VehicleBrand>(selectedBrandId);
-                            
-                            ad = carAd;
+                                vehiculeAd.Year = selectedYearId;
+                            switch (modelCategory.Label)
+                            {
+                                case "Voitures":
+                                    CarAd carAd = new CarAd(vehiculeAd);
+                                    int selectedFuelId;
+                                    result = Int32.TryParse(form["SelectedFuelId"], out selectedFuelId);
+                                    if (result)
+                                        carAd.Fuel = _repository.Get<CarFuel>(selectedFuelId);
+                                    int selectedBrandId;
+                                    result = Int32.TryParse(form["SelectedBrandId"], out selectedBrandId);
+                                    if (result)
+                                        carAd.Brand = _repository.Get<VehicleBrand>(selectedBrandId);
+                                    ad = carAd;
+                                    break;
+                                case "Motos":
+                                    MotoAd motoAd = new MotoAd(vehiculeAd);
+                                    int engineSize;
+                                    result = Int32.TryParse(form["EngineSize"], out engineSize);
+                                    if (result)
+                                        motoAd.EngineSize = engineSize;
+                                    ad = motoAd;
+                                    break;
+                            }
                             break;
-
                         default:
-                             ad = new Ad();
+                            ad = new Ad();
                             break;
                     }
                 }

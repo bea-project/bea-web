@@ -26,5 +26,15 @@ namespace Bea.Services
         {
             return _referenceRepository.GetAllCarFuels();
         }
+
+        public Dictionary<int, string> GetAllYears()
+        {
+            int minYear = 1960;
+            Dictionary<int, string> years = new Dictionary<int,string>();
+            for(int year = DateTime.Now.Year;year >= minYear;year--)
+                years.Add(year,year.ToString());
+            years[minYear] = minYear + " ou avant";
+            return years;
+        }
     }
 }

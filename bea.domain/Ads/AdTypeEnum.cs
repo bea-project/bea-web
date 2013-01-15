@@ -11,6 +11,7 @@ namespace Bea.Domain.Ads
         Ad = 1,
         CarAd = 10,
         MotoAd = 11,
+        OtherVehiculeAd = 12,
         KiteAd = 20,
         RealEstateAd = 30
     }

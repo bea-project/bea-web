@@ -36,5 +36,7 @@ namespace Bea.Web.Controllers
             AdSearchResultModel result = _searchServices.SearchAds(model);
             return View("Index", result);
         }
+
+
     }
 }

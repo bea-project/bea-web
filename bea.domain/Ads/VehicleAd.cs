@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Bea.Domain.Ads
 {
-    public abstract class VehicleAd : BaseAd
+    public class VehicleAd : BaseAd
     {
         public virtual int Year { get; set; }
         public virtual int Kilometers { get; set; }
@@ -13,6 +13,7 @@ namespace Bea.Domain.Ads
         public VehicleAd()
             : base()
         {
+            AdType = AdTypeEnum.OtherVehiculeAd;
         }
     }
 }

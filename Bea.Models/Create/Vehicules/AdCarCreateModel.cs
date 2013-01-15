@@ -10,18 +10,12 @@ using Bea.Domain.Ads;
 namespace Bea.Models.Create.Vehicules
 {
     public class AdCarCreateModel : AdVehiculeCreateModel
-    {
-        //public String Brand { get; set; }
-
-        
-        public int? SelectedBrandId { get; set; }
+    {  
         [DisplayName("Marque:")]
-        public IEnumerable<SelectListItem> BrandsList { get; set; }
+        public int? SelectedBrandId { get; set; }
         
         [DisplayName("Carburant:")]
         public int? SelectedFuelId { get; set; }
-        
-        public IEnumerable<SelectListItem> FuelList { get; set; }
 
         [DisplayName("Boîte de vitesse:")]
         public bool IsAutomatic { get; set; }
@@ -44,6 +38,8 @@ namespace Bea.Models.Create.Vehicules
                 this.SelectedFuelId = ad.Fuel.Id;
             if (ad.Brand != null)
                 this.SelectedBrandId = ad.Brand.Id;
+            if (ad.Year != 0)
+                this.SelectedYearId = ad.Year;
         }
 
     }
