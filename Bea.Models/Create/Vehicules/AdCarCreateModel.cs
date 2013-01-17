@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using System.Web.Mvc;
 using Bea.Domain.Ads;
 
 namespace Bea.Models.Create.Vehicules
@@ -20,8 +19,12 @@ namespace Bea.Models.Create.Vehicules
         [DisplayName("Boîte de vitesse:")]
         public bool IsAutomatic { get; set; }
 
+        public int Type { get; set; }
+
         public AdCarCreateModel()
-        { }
+        {
+            this.Type = (int)AdTypeEnum.CarAd;
+        }
 
         public AdCarCreateModel( CarAd ad, AdCreateModel model)
         {
@@ -40,6 +43,7 @@ namespace Bea.Models.Create.Vehicules
                 this.SelectedBrandId = ad.Brand.Id;
             if (ad.Year != 0)
                 this.SelectedYearId = ad.Year;
+            //this.Type = AdTypeEnum.CarAd;
         }
 
     }

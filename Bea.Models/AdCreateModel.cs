@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Bea.Domain.Location;
-//using System.Web.Mvc;
+using Bea.Domain.Ads;
 
 namespace Bea.Models
 {
@@ -46,5 +46,12 @@ namespace Bea.Models
 
         [DisplayName("Catégorie:")]
         public int? SelectedCategoryId { get; set; }
+
+        //public AdTypeEnum Type { get; set; }
+
+        //public AdCreateModel()
+        //{
+        //    this.Type = AdTypeEnum.Ad;
+        //}
     }
 }

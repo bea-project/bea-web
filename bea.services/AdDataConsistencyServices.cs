@@ -11,6 +11,7 @@ namespace Bea.Services
     public class AdDataConsistencyServices : IAdDataConsistencyServices
     {
         private Regex _phoneRegex = new Regex(@"^[0-9]{6}$");
+        private Regex _emailRegex = new Regex(@"^[a-zA-Z0-9_\\+-]+(\\.[a-zA-Z0-9_\\+-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,4})$");
 
         public IDictionary<string, string> GetAdDataConsistencyErrors(BaseAd ad)
         {
@@ -18,6 +19,10 @@ namespace Bea.Services
             
             // Check base ad data consistency
             GetBaseAdDataConsistencyErrors(ad, errors);
+
+            // Check user data consistency
+            GetUserDataConsistencyErrors(ad, errors);
+
 
             // Check specifyc ad data consistency
             switch (ad.AdType)
@@ -90,6 +95,19 @@ namespace Bea.Services
 
             return errors;
         }
+
+        public IDictionary<string,string> GetUserDataConsistencyErrors(BaseAd ad, IDictionary<string, string> errors)
+        {
+            if (ad.CreatedBy != null && String.IsNullOrEmpty(ad.CreatedBy.Firstname))
+                    errors.Add("Name", "Veuillez saisir un nom.");
+            if (ad.CreatedBy != null && String.IsNullOrEmpty(ad.CreatedBy.Email))
+                    errors.Add("Email", "Veuillez insérer une adresse email.");
+            else
+                if (ad.CreatedBy != null && !_emailRegex.IsMatch(ad.CreatedBy.Email))
+                            errors.Add("Email", "Email invalide.");
+            return errors;
+        }
+
 
         public Dictionary<string, string> GetAdDataConsistencyErrors(BaseAd ad, int? selectedProvinceId)
         {

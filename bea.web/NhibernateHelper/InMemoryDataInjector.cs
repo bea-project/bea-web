@@ -257,9 +257,9 @@ namespace Bea.Web.NhibernateHelper
 
                 CategoryGroup vehicles = new CategoryGroup();
                 vehicles.Label = "Véhicules";
-                vehicles.AddCategory(new Category { Label = "Voitures" });
-                vehicles.AddCategory(new Category { Label = "Motos" });
-                vehicles.AddCategory(new Category { Label = "Utlitaires" });
+                vehicles.AddCategory(new Category { Label = "Voitures", Type=AdTypeEnum.CarAd });
+                vehicles.AddCategory(new Category { Label = "Motos", Type=AdTypeEnum.MotoAd });
+                vehicles.AddCategory(new Category { Label = "Utlitaires", Type=AdTypeEnum.OtherVehiculeAd });
                 _sessionFactory.GetCurrentSession().Save(vehicles);
 
                 CategoryGroup nautisme = new CategoryGroup();

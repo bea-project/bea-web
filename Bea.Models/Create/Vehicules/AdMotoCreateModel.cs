@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using System.Web.Mvc;
 using Bea.Domain.Ads;
 
 namespace Bea.Models.Create.Vehicules
@@ -17,8 +16,12 @@ namespace Bea.Models.Create.Vehicules
         [DisplayName("Cylindrée:")]
         public int EngineSize { get; set; }
 
+        public int Type { get; set; }
+
         public AdMotoCreateModel()
-        { }
+        {
+            this.Type = (int)AdTypeEnum.MotoAd;
+        }
 
         public AdMotoCreateModel(MotoAd ad, AdCreateModel model)
         {
@@ -34,6 +37,7 @@ namespace Bea.Models.Create.Vehicules
             if (ad.Brand != null)
                 this.SelectedBrandId = ad.Brand.Id;
             this.EngineSize= ad.EngineSize;
+            //this.Type = AdTypeEnum.MotoAd;
         }
 
     }

@@ -1,5 +1,7 @@
 ﻿@model Bea.Models.Create.Vehicules.AdCarCreateModel
 
+
+@Html.HiddenFor(model => model.Type)
 <div class="control-group">
         <div class="control-group">
             <label class="control-label" for="inputBrand">@Html.LabelFor(model => model.SelectedBrandId)</label>
@@ -39,5 +41,8 @@
             <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsAutomatic, true, new { @checked = "checked", @style = "vertical-align: top" }) Automatique</label>
             <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsAutomatic, false, new { @style = "vertical-align: top" }) Manuelle</label>
         </div>
+
+
+
     </div>   
 </div>

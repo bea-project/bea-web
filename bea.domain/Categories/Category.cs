@@ -17,6 +17,7 @@ namespace Bea.Domain.Categories
         public virtual String Label { get; set; }
         public virtual CategoryGroup CategoryGrp { get; set; }
         public virtual IList<BaseAd> Ads { get; set; }
+        public virtual AdTypeEnum Type { get; set; }
 
         //Add the Ad to the category and set the Ad category to this
         public virtual void AddAd(BaseAd adToBeAdded)

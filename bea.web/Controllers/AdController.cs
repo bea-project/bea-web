@@ -73,7 +73,7 @@ namespace Bea.Web.Controllers
         {
             Dictionary<string, string> form = collection.AllKeys.ToDictionary(k => k, v => collection[v]);
             BaseAd newAd = _adServices.GetAdFromModel(model,form);
-            Dictionary<string, string> errors = _adConsistencyServices.GetAdDataConsistencyErrors(newAd, model.SelectedProvinceId);
+            IDictionary<string, string> errors = _adConsistencyServices.GetAdDataConsistencyErrors(newAd);
             foreach (string key in errors.Keys)
                 ModelState.AddModelError(key, errors[key]);
             if (ModelState.IsValid)
@@ -89,17 +89,15 @@ namespace Bea.Web.Controllers
         {
             Category selectedCategory = _categoryServices.GetCategoryById(categoryId);
             FillViewLists(selectedCategory);
-            switch(selectedCategory.Label)
+            switch (selectedCategory.Type)
             {
-                case "Voitures":
-                //ViewBag.Years = _referenceServices.GetAllYears().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                //ViewBag.Brands = _referenceServices.GetAllCarBrands().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
-                //ViewBag.Fuels = _referenceServices.GetAllCarFuels().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
-                return PartialView("Shared/Create/_CarAdCreate");
+                case AdTypeEnum.CarAd:
+                    AdCarCreateModel carModel = new AdCarCreateModel();
+                    return PartialView("Shared/Create/_CarAdCreate", carModel);
 
-                case "Motos":
-                //ViewBag.Years = _referenceServices.GetAllYears().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                return PartialView("Shared/Create/_MotoAdCreate");
+                case AdTypeEnum.MotoAd:
+                    AdMotoCreateModel motoModel = new AdMotoCreateModel();
+                    return PartialView("Shared/Create/_MotoAdCreate", motoModel);
             }
             return null;
         }
@@ -112,14 +110,10 @@ namespace Bea.Web.Controllers
             {
                 case AdTypeEnum.CarAd:
                     AdCarCreateModel adCarCreateModel = new AdCarCreateModel(ad as CarAd, createModel);
-                    //ViewBag.Years = _referenceServices.GetAllYears().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    //ViewBag.Brands = _referenceServices.GetAllCarBrands().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
-                    //ViewBag.Fuels = _referenceServices.GetAllCarFuels().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     return adCarCreateModel;
 
                 case AdTypeEnum.MotoAd:
                     AdMotoCreateModel adMotoCreateModel = new AdMotoCreateModel(ad as MotoAd, createModel);
-                    //ViewBag.Years = _referenceServices.GetAllYears().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                     return adMotoCreateModel;
 
                 case AdTypeEnum.Ad:
