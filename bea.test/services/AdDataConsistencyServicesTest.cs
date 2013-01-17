@@ -26,10 +26,9 @@ namespace Bea.Test.Services
                 City = new City { Label = "My City" },
                 Title = "Title Text",
             };
-            int provinceId = 4;
 
             // When
-            Dictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad, provinceId);
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad);
 
             // Then
             Assert.IsTrue(actual.Count==0);
@@ -46,13 +45,12 @@ namespace Bea.Test.Services
                 City = new City { Label = "My City" },
                 Title = "Title Text"
             };
-            int provinceId = 4;
 
             // When
-            Dictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad, provinceId);
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad);
 
             // Then
-            Assert.IsTrue(actual.Count == 1);
+            Assert.AreEqual(1, actual.Count);
             Assert.IsTrue(actual.Keys.Contains("Body"));
         }
 
@@ -68,13 +66,12 @@ namespace Bea.Test.Services
                 City = new City { Label = "My City" },
                 
             };
-            int provinceId = 4;
 
             // When
-            Dictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad, provinceId);
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad);
 
             // Then
-            Assert.IsTrue(actual.Count == 1);
+            Assert.AreEqual(1, actual.Count);
             Assert.IsTrue(actual.Keys.Contains("Title"));
         }
 
@@ -90,13 +87,12 @@ namespace Bea.Test.Services
                 City = new City { Label = "My City" },
 
             };
-            int provinceId = 4;
 
             // When
-            Dictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad, provinceId);
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad);
 
             // Then
-            Assert.IsTrue(actual.Count == 1);
+            Assert.AreEqual(1, actual.Count);
             Assert.IsTrue(actual.Keys.Contains("SelectedCategoryId"));
         }
 
@@ -111,37 +107,16 @@ namespace Bea.Test.Services
                 Body = "Body Text",
                 Category = new Category { Label = "My Category" },
             };
-            int provinceId = 4;
 
             // When
-            Dictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad, provinceId);
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad);
 
             // Then
-            Assert.IsTrue(actual.Count == 1);
+            Assert.AreEqual(1, actual.Count);
             Assert.IsTrue(actual.Keys.Contains("SelectedCityId"));
         }
 
-        [TestMethod]
-        public void GetAdDataConsistencyErrors_Ad_NoProvince_ReturnsDictionaryWithProvinceError()
-        {
-            // Given
-            AdDataConsistencyServices service = new AdDataConsistencyServices();
-            BaseAd ad = new Ad()
-            {
-                Body = "Body Text",
-                Category = new Category { Label = "My Category" },
-                City = new City { Label = "My City" },
-                Title = "Title Text",
-            };
-            
-
-            // When
-            Dictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad, null);
-
-            // Then
-            Assert.IsTrue(actual.Count == 1);
-            Assert.IsTrue(actual.Keys.Contains("SelectedProvinceId"));
-        }
+        #region GetCarAdDataConsistencyErrors
 
         [TestMethod]
         public void GetAdDataConsistencyErrors_CarAd_NoError_ReturnsEmptyDictionary()
@@ -156,15 +131,16 @@ namespace Bea.Test.Services
                 Title = "Title Text",
                 Kilometers = 25,
                 Fuel = new CarFuel { Label = "My Fuel Label" },
-                Brand = new VehicleBrand { Label = "My BCar Brand"}
+                Brand = new VehicleBrand { Label = "My BCar Brand" },
+                Year = 2013
             };
-            int provinceId = 4;
+            IDictionary<string, string> errors = new Dictionary<string, string>();
 
             // When
-            Dictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad, provinceId);
+            IDictionary<string, string> actual = service.GetCarAdDataConsistencyErrors(ad as CarAd, errors);
 
             // Then
-            Assert.IsTrue(actual.Count == 0);
+            Assert.AreEqual(0, actual.Count);
         }
 
         [TestMethod]
@@ -179,15 +155,17 @@ namespace Bea.Test.Services
                 City = new City { Label = "My City" },
                 Title = "Title Text",
                 Fuel = new CarFuel { Label = "My Fuel Label" },
-                Brand = new VehicleBrand { Label = "My BCar Brand" }
+                Brand = new VehicleBrand { Label = "My BCar Brand" },
+                Year = 2013
             };
-            int provinceId = 4;
+
+            IDictionary<string, string> errors = new Dictionary<string, string>();
 
             // When
-            Dictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad, provinceId);
+            IDictionary<string, string> actual = service.GetCarAdDataConsistencyErrors(ad as CarAd, errors);
 
             // Then
-            Assert.IsTrue(actual.Count == 1);
+            Assert.AreEqual(1, actual.Count);
             Assert.IsTrue(actual.Keys.Contains("Km"));
         }
 
@@ -205,14 +183,16 @@ namespace Bea.Test.Services
                 
                 Brand = new VehicleBrand { Label = "My BCar Brand" },
                 Kilometers = 25,
+                Year = 2013
             };
-            int provinceId = 4;
+
+            IDictionary<string, string> errors = new Dictionary<string, string>();
 
             // When
-            Dictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad, provinceId);
+            IDictionary<string, string> actual = service.GetCarAdDataConsistencyErrors(ad as CarAd, errors);
 
             // Then
-            Assert.IsTrue(actual.Count == 1);
+            Assert.AreEqual(1, actual.Count);
             Assert.IsTrue(actual.Keys.Contains("SelectedFuelId"));
         }
 
@@ -229,15 +209,152 @@ namespace Bea.Test.Services
                 Title = "Title Text",
                 Fuel = new CarFuel { Label = "My Fuel Label" },
                 Kilometers = 25,
+                Year = 2013
             };
-            int provinceId = 4;
+
+            IDictionary<string, string> errors = new Dictionary<string, string>();
 
             // When
-            Dictionary<string, string> actual = service.GetAdDataConsistencyErrors(ad, provinceId);
+            IDictionary<string, string> actual = service.GetCarAdDataConsistencyErrors(ad as CarAd, errors);
 
             // Then
-            Assert.IsTrue(actual.Count == 1);
+            Assert.AreEqual(1, actual.Count);
             Assert.IsTrue(actual.Keys.Contains("SelectedBrandId"));
         }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_CarAd_MissingYear_ReturnsDictionaryWithBranError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            BaseAd ad = new CarAd()
+            {
+                Body = "Body Text",
+                Category = new Category { Label = "My Category" },
+                City = new City { Label = "My City" },
+                Title = "Title Text",
+                Fuel = new CarFuel { Label = "My Fuel Label" },
+                Brand = new VehicleBrand { Label = "My BCar Brand" },
+                Kilometers = 25
+            };
+
+            IDictionary<string, string> errors = new Dictionary<string, string>();
+
+            // When
+            IDictionary<string, string> actual = service.GetCarAdDataConsistencyErrors(ad as CarAd, errors);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedYearId"));
+        }
+
+        #endregion
+
+        #region GetMotoAdDataConsistencyErrors
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotoAd_NoError_ReturnsEmptyDictionary()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            BaseAd ad = new MotoAd()
+            {
+                Body = "Body Text",
+                Category = new Category { Label = "My Category" },
+                City = new City { Label = "My City" },
+                Title = "Title Text",
+                Kilometers = 25,
+                EngineSize = 600,
+                Brand = new VehicleBrand { Label = "My BCar Brand" },
+                Year = 2013
+            };
+            IDictionary<string, string> errors = new Dictionary<string, string>();
+
+            // When
+            IDictionary<string, string> actual = service.GetMotoAdDataConsistencyErrors(ad as MotoAd, errors);
+
+            // Then
+            Assert.AreEqual(0, actual.Count);
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotoAd_MissingKilometer_ReturnsDictionaryWithKilometerError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            BaseAd ad = new MotoAd()
+            {
+                Body = "Body Text",
+                Category = new Category { Label = "My Category" },
+                City = new City { Label = "My City" },
+                Title = "Title Text",
+                EngineSize = 600,
+                Brand = new VehicleBrand { Label = "My BCar Brand" },
+                Year = 2013
+            };
+
+            IDictionary<string, string> errors = new Dictionary<string, string>();
+
+            // When
+            IDictionary<string, string> actual = service.GetMotoAdDataConsistencyErrors(ad as MotoAd, errors);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Km"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotoAd_MissingEngineSize_ReturnsDictionaryWithFuelError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            BaseAd ad = new MotoAd()
+            {
+                Body = "Body Text",
+                Category = new Category { Label = "My Category" },
+                City = new City { Label = "My City" },
+                Title = "Title Text",
+
+                Brand = new VehicleBrand { Label = "My BCar Brand" },
+                Kilometers = 25,
+                Year = 2013
+            };
+
+            IDictionary<string, string> errors = new Dictionary<string, string>();
+
+            // When
+            IDictionary<string, string> actual = service.GetMotoAdDataConsistencyErrors(ad as MotoAd, errors);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("EngineSize"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotoAd_MissingYear_ReturnsDictionaryWithBranError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            BaseAd ad = new MotoAd()
+            {
+                Body = "Body Text",
+                Category = new Category { Label = "My Category" },
+                City = new City { Label = "My City" },
+                Title = "Title Text",
+                EngineSize = 600,
+                Kilometers = 25
+            };
+
+            IDictionary<string, string> errors = new Dictionary<string, string>();
+
+            // When
+            IDictionary<string, string> actual = service.GetMotoAdDataConsistencyErrors(ad as MotoAd, errors);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedYearId"));
+        }
+
+        #endregion
     }
 }
