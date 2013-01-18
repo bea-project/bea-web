@@ -17,12 +17,5 @@ namespace Bea.Domain.Ads
         {
             AdType = AdTypeEnum.MotoAd;
         }
-
-        public MotoAd(VehicleAd vehiculeAd)
-        {
-            this.AdType = AdTypeEnum.MotoAd;
-            this.Kilometers = vehiculeAd.Kilometers;
-            this.Year = vehiculeAd.Year;
-        }
     }
 }

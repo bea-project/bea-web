@@ -60,6 +60,7 @@ namespace Bea.Services
 
         public void AddAd(BaseAd ad)
         {
+            _repository.Save<User>(ad.CreatedBy);
             _repository.Save<BaseAd>(ad);
             SearchAdCache cacheAd = new SearchAdCache(ad);
             _repository.Save<SearchAdCache>(cacheAd);
@@ -119,15 +120,20 @@ namespace Bea.Services
                     case (int)AdTypeEnum.MotoAd:
                         ad = GeatMotoAdFromModel(form);
                         break;
+                    case (int)AdTypeEnum.OtherVehiculeAd:
+                        ad = GeatOtherVehicleAdFromModel(form);
+                        break;
                     default:
                         ad = new Ad();
                         break;
                 }
+
             }
             else
                 ad = new Ad();
 
             return GetCommonAdFromModel(ad, model);
+
         }
 
         private BaseAd GetCommonAdFromModel(BaseAd ad, AdCreateModel model)
@@ -147,6 +153,7 @@ namespace Bea.Services
              User createdBy = new User();
              createdBy.Firstname = model.Name;
              createdBy.Email = model.Email;
+             createdBy.Password = "Password";
 
              ad.CreatedBy = createdBy;
              return ad;
@@ -173,6 +180,24 @@ namespace Bea.Services
             if (result)
                 carAd.Brand = _repository.Get<VehicleBrand>(selectedBrandId);
             return (carAd);
+        }
+
+        private BaseAd GeatOtherVehicleAdFromModel(Dictionary<string, string> form)
+        {
+            OtherVehicleAd otherVehicleAd = new OtherVehicleAd();
+            int kilometer;
+            bool result = Int32.TryParse(form["Km"], out kilometer);
+            if (result)
+                otherVehicleAd.Kilometers = kilometer;
+            int selectedYearId;
+            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
+            if (result)
+                otherVehicleAd.Year = selectedYearId;
+            int selectedFuelId;
+            result = Int32.TryParse(form["SelectedFuelId"], out selectedFuelId);
+            if (result)
+                otherVehicleAd.Fuel = _repository.Get<CarFuel>(selectedFuelId);
+            return (otherVehicleAd);
         }
 
         private MotoAd GeatMotoAdFromModel(Dictionary<string, string> form)

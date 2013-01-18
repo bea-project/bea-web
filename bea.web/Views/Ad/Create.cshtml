@@ -91,6 +91,10 @@
         {
             @Html.Partial("Shared/Create/_MotoAdCreate", Model);
         }
+        @if (Model is Bea.Models.Create.Vehicules.AdOtherVehicleCreateModel)
+        {
+            @Html.Partial("Shared/Create/_OtherVehicleAdCreate", Model);
+        }
     </div>
     
     <div class="control-group">

@@ -259,7 +259,7 @@ namespace Bea.Web.NhibernateHelper
                 vehicles.Label = "Véhicules";
                 vehicles.AddCategory(new Category { Label = "Voitures", Type=AdTypeEnum.CarAd });
                 vehicles.AddCategory(new Category { Label = "Motos", Type=AdTypeEnum.MotoAd });
-                vehicles.AddCategory(new Category { Label = "Utlitaires", Type=AdTypeEnum.OtherVehiculeAd });
+                vehicles.AddCategory(new Category { Label = "Autres Vehicules", Type=AdTypeEnum.OtherVehiculeAd });
                 _sessionFactory.GetCurrentSession().Save(vehicles);
 
                 CategoryGroup nautisme = new CategoryGroup();
@@ -305,6 +305,7 @@ namespace Bea.Web.NhibernateHelper
                     Faker.Lorem.Words(3).ForEach(s => ad.Title += " "+s);
                     ad.Body = Faker.Lorem.Paragraph();
                     ad.IsOffer = true;
+                    ad.IsValidated = true;
                     ad.CreationDate = DateTime.Now
                         .AddDays(Faker.RandomNumber.Next(-7, 7))
                         .AddHours(Faker.RandomNumber.Next(1, 23))

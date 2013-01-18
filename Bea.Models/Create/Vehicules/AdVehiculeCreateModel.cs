@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace Bea.Models.Create.Vehicules
 {
-    public class AdVehiculeCreateModel : AdCreateModel
+    public abstract class AdVehiculeCreateModel : AdCreateModel
     {
         [DisplayName("Kilometrage:")]
         public int? Km { get; set; }

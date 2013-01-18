@@ -1,0 +1,29 @@
+﻿@model Bea.Models.Create.Vehicules.AdOtherVehicleCreateModel
+
+
+@Html.HiddenFor(model => model.Type)
+<div class="control-group">
+        <div class="control-group">
+            <label class="control-label" for="inputBrand">@Html.LabelFor(model => model.SelectedFuelId)</label>
+            <div class="controls">
+            @Html.DropDownListFor(model => model.SelectedFuelId, (IEnumerable<SelectListItem>)ViewBag.Fuels, "Choisissez un type", new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.SelectedFuelId, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="inputYear">@Html.LabelFor(model => model.SelectedYearId)</label>
+            <div class="controls">
+            @Html.DropDownListFor(model => model.SelectedYearId, (IEnumerable<SelectListItem>)ViewBag.Years, "Choisissez une année", new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.SelectedYearId, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="inputKm">@Html.LabelFor(model => model.Km)</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Km, new { @class = "input-large" })
+                @Html.ValidationMessageFor(model => model.Km, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            </div>
+        </div>
+</div>

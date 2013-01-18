@@ -18,12 +18,5 @@ namespace Bea.Domain.Ads
         {
             AdType = AdTypeEnum.CarAd;
         }
-
-        public CarAd(VehicleAd vehiculeAd)
-        {
-            this.Kilometers = vehiculeAd.Kilometers;
-            this.Year = vehiculeAd.Year;
-            this.AdType = AdTypeEnum.CarAd;
-        }
     }
 }

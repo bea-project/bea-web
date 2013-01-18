@@ -60,6 +60,7 @@
     </Compile>
     <Compile Include="Map\Ads\BaseAdMap.cs" />
     <Compile Include="Map\Ads\MotoAdMap.cs" />
+    <Compile Include="Map\Ads\OtherVehicleAdMap.cs" />
     <Compile Include="Map\Ads\RealEstateAdMap.cs" />
     <Compile Include="Map\Categories\CategoryGroupMap.cs" />
     <Compile Include="Map\Categories\CategoryMap.cs" />

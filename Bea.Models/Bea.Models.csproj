@@ -44,6 +44,7 @@
     <Compile Include="Create\Vehicules\AdCarCreateModel.cs" />
     <Compile Include="AdCreateModel.cs" />
     <Compile Include="Create\Vehicules\AdMotoCreateModel.cs" />
+    <Compile Include="Create\Vehicules\AdOtherVehicleCreateModel.cs" />
     <Compile Include="Create\Vehicules\AdVehiculeCreateModel.cs" />
     <Compile Include="Details\AdDetailsModel.cs" />
     <Compile Include="AdSearchModel.cs" />

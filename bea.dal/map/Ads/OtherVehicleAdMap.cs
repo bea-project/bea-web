@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using FluentNHibernate.Mapping;
+using Bea.Domain.Ads;
 using Bea.Domain;
 using Bea.Domain.Location;
-using FluentNHibernate.Mapping;
 using Bea.Domain.Categories;
-using Bea.Domain.Ads;
+using Bea.Domain.Reference;
 
 namespace Bea.Dal.Map.Ads
 {
-    public class AdMap : SubclassMap<Ad>
+    public class OtherVehicleAdMap : SubclassMap<OtherVehicleAd>
     {
-        public AdMap()
+        public OtherVehicleAdMap()
         {
             Map(x => x.Title).Not.Nullable();
             Map(x => x.Body).Not.Nullable();
@@ -19,11 +21,15 @@ namespace Bea.Dal.Map.Ads
             Map(x => x.Price).Nullable();
             Map(x => x.IsOffer).Not.Nullable();
             Map(x => x.PhoneNumber);
-            Map(x => x.IsValidated);
 
             References<User>(x => x.CreatedBy).Not.Nullable();
             References<City>(x => x.City).Not.Nullable();
             References<Category>(x => x.Category).Not.Nullable();
+
+            Map(x => x.Kilometers);
+            Map(x => x.Year);
+            References<CarFuel>(x => x.Fuel);
+
         }
     }
 }

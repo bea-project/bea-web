@@ -37,7 +37,7 @@ namespace Bea.Models.Create.Vehicules
             if (ad.Brand != null)
                 this.SelectedBrandId = ad.Brand.Id;
             this.EngineSize= ad.EngineSize;
-            //this.Type = AdTypeEnum.MotoAd;
+            this.Type = (int)AdTypeEnum.MotoAd;
         }
 
     }

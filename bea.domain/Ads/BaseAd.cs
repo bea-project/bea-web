@@ -21,6 +21,7 @@ namespace Bea.Domain.Ads
         public virtual Boolean IsOffer { get; set; }
         public virtual Category Category { get; set; }
         public virtual String PhoneNumber { get; set; }
+        public virtual Boolean IsValidated { get; set; }
         
         public virtual IList<AdImage> Images { get; set; }
 

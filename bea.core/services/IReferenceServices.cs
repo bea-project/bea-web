@@ -10,7 +10,7 @@ namespace Bea.Core.Services
     {
         IList<CarFuel> GetAllCarFuels();
         IList<VehicleBrand> GetAllCarBrands();
-        Dictionary<int, string> GetAllYears();
+        Dictionary<int, string> GetAllYears(int nbYears);
     }
 
 }

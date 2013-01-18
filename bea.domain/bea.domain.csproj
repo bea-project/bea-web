@@ -47,6 +47,7 @@
     <Compile Include="Ads\BaseAd.cs" />
     <Compile Include="Ads\CarAd.cs" />
     <Compile Include="Ads\MotoAd.cs" />
+    <Compile Include="Ads\OtherVehicleAd.cs" />
     <Compile Include="Ads\RealEstateAd.cs" />
     <Compile Include="Categories\Category.cs" />
     <Compile Include="Categories\CategoryGroup.cs" />

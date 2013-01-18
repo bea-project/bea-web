@@ -11,7 +11,7 @@ namespace Bea.Services
     public class AdDataConsistencyServices : IAdDataConsistencyServices
     {
         private Regex _phoneRegex = new Regex(@"^[0-9]{6}$");
-        private Regex _emailRegex = new Regex(@"^[a-zA-Z0-9_\\+-]+(\\.[a-zA-Z0-9_\\+-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,4})$");
+        private Regex _emailRegex = new Regex(@"^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$");
 
         public IDictionary<string, string> GetAdDataConsistencyErrors(BaseAd ad)
         {
@@ -33,6 +33,10 @@ namespace Bea.Services
 
                 case AdTypeEnum.MotoAd:
                     GetMotoAdDataConsistencyErrors(ad as MotoAd, errors);
+                    break;
+
+                case AdTypeEnum.OtherVehiculeAd:
+                    GetOtherVehicleAdDataConsistencyErrors(ad as OtherVehicleAd, errors);
                     break;
 
                 default:
@@ -75,6 +79,20 @@ namespace Bea.Services
 
             if (carAd.Brand == null)
                 errors.Add("SelectedBrandId", "Veuillez sélectionner une marque.");
+
+            if (carAd.Year == 0)
+                errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
+
+            return errors;
+        }
+
+        public IDictionary<string, string> GetOtherVehicleAdDataConsistencyErrors(OtherVehicleAd carAd, IDictionary<string, string> errors)
+        {
+            if (carAd.Kilometers == 0)
+                errors.Add("Km", "Veuillez séléctionner un kilométrage.");
+
+            if (carAd.Fuel == null)
+                errors.Add("SelectedFuelId", "Veuillez sélectionner un type.");
 
             if (carAd.Year == 0)
                 errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");

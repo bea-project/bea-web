@@ -13,7 +13,6 @@ namespace Bea.Domain.Ads
         public VehicleAd()
             : base()
         {
-            AdType = AdTypeEnum.OtherVehiculeAd;
         }
     }
 }
