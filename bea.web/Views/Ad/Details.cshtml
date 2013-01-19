@@ -59,6 +59,14 @@
                 {
                     @Html.Partial("Shared/Details/_CarAdDetailsPartial", Model);
                 }
+                else if (Model is Bea.Models.Details.MotoAdDetailsModel)
+                {
+                    @Html.Partial("Shared/Details/_MotoAdDetailsPartial", Model);
+                }
+                else if (Model is Bea.Models.Details.OtherVehicleAdDetailsModel)
+                {
+                    @Html.Partial("Shared/Details/_OtherVehicleAdDetailsPartial", Model);
+                }
 
                 <dl class="dl-horizontal">
                     <dt>Prix</dt>

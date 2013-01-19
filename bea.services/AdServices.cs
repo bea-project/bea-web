@@ -103,6 +103,16 @@ namespace Bea.Services
                     model = new CarAdDetailsModel(ad as CarAd);
                     break;
 
+                case AdTypeEnum.MotoAd:
+                    ad = _adRepository.GetAdById<MotoAd>(adId);
+                    model = new MotoAdDetailsModel(ad as MotoAd);
+                    break;
+
+                case AdTypeEnum.OtherVehiculeAd:
+                    ad = _adRepository.GetAdById<OtherVehicleAd>(adId);
+                    model = new OtherVehicleAdDetailsModel(ad as OtherVehicleAd);
+                    break;
+
                 default:
                     return null;
             }

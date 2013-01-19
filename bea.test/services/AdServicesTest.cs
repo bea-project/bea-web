@@ -145,6 +145,64 @@ namespace Bea.Test.services
         }
 
         [TestMethod]
+        public void GetAdDetails_MotoAdExists_GetAdFromRepoAndReturnMotoAdModel()
+        {
+            // Given
+            MotoAd ad = new MotoAd() { Id = 17 };
+            ad.CreationDate = new DateTime(2012, 02, 18);
+            ad.CreatedBy = new User { Firstname = "Michel" };
+            ad.City = new City { Label = "Ville" };
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(x => x.Get<BaseAd>(17)).Returns(ad as BaseAd);
+
+            var adRepoMock = new Moq.Mock<IAdRepository>();
+            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.MotoAd);
+            adRepoMock.Setup(r => r.GetAdById<MotoAd>(17)).Returns(ad);
+
+            var helperMock = new Moq.Mock<IHelperService>();
+            helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
+
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null);
+
+            // When
+            AdDetailsModel actual = service.GetAdDetails(17);
+
+            // Then
+            Assert.AreEqual(17, actual.AdId);
+            Assert.IsTrue(actual is MotoAdDetailsModel);
+        }
+
+        [TestMethod]
+        public void GetAdDetails_OtherVehicleAdExists_GetAdFromRepoAndReturnMotoAdModel()
+        {
+            // Given
+            OtherVehicleAd ad = new OtherVehicleAd() { Id = 17 };
+            ad.CreationDate = new DateTime(2012, 02, 18);
+            ad.CreatedBy = new User { Firstname = "Michel" };
+            ad.City = new City { Label = "Ville" };
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(x => x.Get<BaseAd>(17)).Returns(ad as BaseAd);
+
+            var adRepoMock = new Moq.Mock<IAdRepository>();
+            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.OtherVehiculeAd);
+            adRepoMock.Setup(r => r.GetAdById<OtherVehicleAd>(17)).Returns(ad);
+
+            var helperMock = new Moq.Mock<IHelperService>();
+            helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
+
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null);
+
+            // When
+            AdDetailsModel actual = service.GetAdDetails(17);
+
+            // Then
+            Assert.AreEqual(17, actual.AdId);
+            Assert.IsTrue(actual is OtherVehicleAdDetailsModel);
+        }
+
+        [TestMethod]
         public void GetAdDetails_AdDoesNotExist_ReturnNull()
         {
             // Given

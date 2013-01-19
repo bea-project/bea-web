@@ -87,6 +87,8 @@
     <Compile Include="Models\AdSearchResultItemModelTest.cs" />
     <Compile Include="Models\AdSearchResultModelTest.cs" />
     <Compile Include="Models\Details\CarAdDetailsModelTest.cs" />
+    <Compile Include="Models\Details\OtherVehicleAdDetailsModelTest.cs" />
+    <Compile Include="Models\Details\MotoAdDetailsModelTest.cs" />
     <Compile Include="Services\AdDataConsistencyServicesTest.cs" />
     <Compile Include="Services\AdImageServicesTest.cs" />
     <Compile Include="Services\AdServicesTest.cs" />

@@ -51,6 +51,8 @@
     <Compile Include="AdSearchResultModel.cs" />
     <Compile Include="AdSearchResultItemModel.cs" />
     <Compile Include="Details\CarAdDetailsModel.cs" />
+    <Compile Include="Details\MotoAdDetailsModel.cs" />
+    <Compile Include="Details\OtherVehicleAdDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
