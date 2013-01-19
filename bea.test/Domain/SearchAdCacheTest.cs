@@ -42,7 +42,7 @@ namespace Bea.Test.Domain
             Assert.AreEqual(ad.Category.CategoryGrp, actual.CategoryGroup);
             Assert.AreEqual(ad.Price, actual.Price);
             Assert.AreEqual(ad.CreationDate, actual.CreationDate);
-            Assert.AreEqual(ad.AdType, actual.AdType);
+            Assert.AreEqual(ad.Category.Type, actual.AdType);
             Assert.IsNull(actual.AdImageId);
         }
 

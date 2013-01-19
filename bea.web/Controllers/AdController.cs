@@ -111,7 +111,7 @@ namespace Bea.Web.Controllers
         {
             AdCreateModel model = null;
             FillViewLists(ad.Category);
-            switch (ad.AdType)
+            switch (ad.Category.Type)
             {
                 case AdTypeEnum.CarAd:
                     AdCarCreateModel adCarCreateModel = new AdCarCreateModel(ad as CarAd, createModel);

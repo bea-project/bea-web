@@ -218,6 +218,80 @@ namespace Bea.Web.NhibernateHelper
             _repository.Flush();
         }
 
+        public void InsertCategories()
+        {
+            if (_repository.CountAll<Category>() != 0)
+                return;
+
+            CategoryGroup vehicles = new CategoryGroup();
+            vehicles.Label = "Véhicules";
+            vehicles.AddCategory(new Category { Label = "Voitures", Type = AdTypeEnum.CarAd });
+            vehicles.AddCategory(new Category { Label = "Motos", Type = AdTypeEnum.MotoAd });
+            vehicles.AddCategory(new Category { Label = "Autres Vehicules", Type = AdTypeEnum.OtherVehiculeAd });
+            vehicles.AddCategory(new Category { Label = "Equipement auto", Type = AdTypeEnum.Ad });
+            vehicles.AddCategory(new Category { Label = "Equipement moto", Type = AdTypeEnum.Ad });
+            _sessionFactory.GetCurrentSession().Save(vehicles);
+
+            CategoryGroup nautisme = new CategoryGroup();
+            nautisme.Label = "Nautisme";
+            nautisme.AddCategory(new Category { Label = "Bateaux à moteur", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { Label = "Kite Surf", Type = AdTypeEnum.KiteAd });
+            nautisme.AddCategory(new Category { Label = "Planches à voile", Type = AdTypeEnum.Ad });
+            _sessionFactory.GetCurrentSession().Save(nautisme);
+
+            CategoryGroup realEstate = new CategoryGroup();
+            realEstate.Label = "Immobilier";
+            realEstate.AddCategory(new Category { Label = "Locations", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { Label = "Ventes immobilières", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { Label = "Colocations", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { Label = "Locations de vacances", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { Label = "Bureaux et commerces", Type = AdTypeEnum.RealEstateAd });
+            _sessionFactory.GetCurrentSession().Save(realEstate);
+
+            CategoryGroup multimedia = new CategoryGroup();
+            multimedia.Label = "Multimedia";
+            multimedia.AddCategory(new Category { Label = "Informatique", Type = AdTypeEnum.Ad });
+            multimedia.AddCategory(new Category { Label = "Consoles & Jeux vidéo", Type = AdTypeEnum.Ad });
+            multimedia.AddCategory(new Category { Label = "Image & Son", Type = AdTypeEnum.Ad });
+            multimedia.AddCategory(new Category { Label = "Téléphonie", Type = AdTypeEnum.Ad });
+            _sessionFactory.GetCurrentSession().Save(multimedia);
+
+            CategoryGroup maison = new CategoryGroup();
+            maison.Label = "Maison";
+            maison.AddCategory(new Category { Label = "Meubles", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Electroménager", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Arts de la table", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Décoration", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Linge de maison", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Bricolage", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Jardin", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Vêtements", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Chaussures", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Accessoires & Bagagerie", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Montres & Bijoux", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Equipements bébé", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Vêtements bébé", Type = AdTypeEnum.Ad });
+            _sessionFactory.GetCurrentSession().Save(maison);
+
+            CategoryGroup loisirs = new CategoryGroup();
+            loisirs.Label = "Loisirs";
+            loisirs.AddCategory(new Category { Label = "DVD & Films", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "CD & Musique", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Livres", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Animaux", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Vélos", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Sports & Hobbies", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Instruments de musique", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Collections", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Jeux & Jouets", Type = AdTypeEnum.Ad });
+            _sessionFactory.GetCurrentSession().Save(loisirs);
+
+            CategoryGroup autre = new CategoryGroup();
+            autre.Label = "Autres";
+            autre.AddCategory(new Category { Label = "Autres", Type = AdTypeEnum.Ad });
+            _sessionFactory.GetCurrentSession().Save(autre);
+        }
+
         public void InsertInMemoryData()
         {
             //-------------------------------------------
@@ -228,8 +302,8 @@ namespace Bea.Web.NhibernateHelper
 
                 InsertLocations();
                 InsertVehicleReferences();
+                InsertCategories();
 
-                City c = _repository.GetAll<City>().First();
                 //-------------------------------------------
                 //         USER TABLE
                 //-------------------------------------------
@@ -251,25 +325,6 @@ namespace Bea.Web.NhibernateHelper
                 _sessionFactory.GetCurrentSession().Save(user);
 
                 //-------------------------------------------
-                //         CATEGORY TABLES
-                //-------------------------------------------
-
-
-                CategoryGroup vehicles = new CategoryGroup();
-                vehicles.Label = "Véhicules";
-                vehicles.AddCategory(new Category { Label = "Voitures", Type=AdTypeEnum.CarAd });
-                vehicles.AddCategory(new Category { Label = "Motos", Type=AdTypeEnum.MotoAd });
-                vehicles.AddCategory(new Category { Label = "Autres Vehicules", Type=AdTypeEnum.OtherVehiculeAd });
-                _sessionFactory.GetCurrentSession().Save(vehicles);
-
-                CategoryGroup nautisme = new CategoryGroup();
-                nautisme.Label = "Nautisme";
-                nautisme.AddCategory(new Category { Label = "Bateaux à moteur" });
-                nautisme.AddCategory(new Category { Label = "Kite Surf" });
-                nautisme.AddCategory(new Category { Label = "Planches à voile" });
-                _sessionFactory.GetCurrentSession().Save(nautisme);
-
-                //-------------------------------------------
                 //         IMAGES
                 //-------------------------------------------
                 AdImage img1 = new AdImage();
@@ -288,26 +343,26 @@ namespace Bea.Web.NhibernateHelper
                 //         AD TABLE
                 //-------------------------------------------
 
+                var normalCategories = _sessionFactory.GetCurrentSession().Query<Category>()
+                    .Where(x => x.Type == AdTypeEnum.Ad)
+                    .ToList();
+
+                int nbCategories = normalCategories.Count;
+                int nbCities = _repository.CountAll<City>();
+
                 for (int i = 1; i < 31; i++)
                 {
                     BaseAd ad = null;
 
-                    if (i % 2 == 0)
-                    {
-                        ad = new CarAd();
-                        (ad as CarAd).Kilometers = Faker.RandomNumber.Next(2300, 350000);
-                        (ad as CarAd).Year = Faker.RandomNumber.Next(1990, 2013);
-                        (ad as CarAd).IsAutomatic = (i%5 == 0);
-                    }
-                    else
-                        ad = new Ad();
+                    ad = new Ad();
+                    normalCategories[Faker.RandomNumber.Next(0, nbCategories - 1)].AddAd(ad);
 
                     Faker.Lorem.Words(3).ForEach(s => ad.Title += " "+s);
                     ad.Body = Faker.Lorem.Paragraph();
                     ad.IsOffer = true;
                     ad.IsValidated = true;
                     ad.CreationDate = DateTime.Now
-                        .AddDays(Faker.RandomNumber.Next(-7, 7))
+                        .AddDays(Faker.RandomNumber.Next(-7, 0))
                         .AddHours(Faker.RandomNumber.Next(1, 23))
                         .AddMinutes(Faker.RandomNumber.Next(1, 59))
                         .AddSeconds(Faker.RandomNumber.Next(1, 59));
@@ -318,8 +373,9 @@ namespace Bea.Web.NhibernateHelper
                     if (i == 2)
                         ad.AddImage(img2);
                     ad.CreatedBy = user;
-                    c.AddAd(ad);
-                    vehicles.Categories[0].AddAd(ad);
+
+                    _repository.Get<City>(Faker.RandomNumber.Next(1, nbCities)).AddAd(ad);
+                    
                     _sessionFactory.GetCurrentSession().Save(ad);
 
                     SearchAdCache cacheAd = new SearchAdCache(ad);

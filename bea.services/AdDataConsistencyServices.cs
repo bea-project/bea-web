@@ -23,9 +23,11 @@ namespace Bea.Services
             // Check user data consistency
             GetUserDataConsistencyErrors(ad, errors);
 
+            if (ad.Category == null)
+                return errors;
 
             // Check specifyc ad data consistency
-            switch (ad.AdType)
+            switch (ad.Category.Type)
             {
                 case AdTypeEnum.CarAd:
                     GetCarAdDataConsistencyErrors(ad as CarAd, errors);

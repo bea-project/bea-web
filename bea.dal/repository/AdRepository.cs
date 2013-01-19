@@ -50,12 +50,16 @@ namespace Bea.Dal.Repository
 
         public AdTypeEnum GetAdType(long adId)
         {
-            var result = _sessionFactory.GetCurrentSession().Query<BaseAd>()
-                .Where(a => a.Id == adId)
-                .Select(a => a.AdType)
-                .SingleOrDefault();
+            IQuery q = _sessionFactory.GetCurrentSession()
+                .CreateSQLQuery("select c.Type from BaseAd ad inner join Category c on ad.Category_id = c.Id where ad.Id = :id");
+            q.SetParameter("id", adId);
+            var r = q.UniqueResult();
 
-            return result;
+            if (r == null)
+                return AdTypeEnum.Undefined;
+
+            return (AdTypeEnum) Enum.Parse(typeof(AdTypeEnum), r.ToString());
+
         }
 
         public T GetAdById<T>(long adId) where T : BaseAd

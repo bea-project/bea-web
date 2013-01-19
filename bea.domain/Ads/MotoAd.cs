@@ -15,7 +15,6 @@ namespace Bea.Domain.Ads
         public MotoAd()
             : base()
         {
-            AdType = AdTypeEnum.MotoAd;
         }
     }
 }

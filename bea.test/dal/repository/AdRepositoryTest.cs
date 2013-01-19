@@ -1005,7 +1005,8 @@ namespace Bea.Test.dal.repository
 
                 Category cat = new Category
                 {
-                    Label = "Moto"
+                    Label = "Auto",
+                    Type = AdTypeEnum.CarAd
                 };
 
                 CarAd a = new CarAd
@@ -1034,7 +1035,7 @@ namespace Bea.Test.dal.repository
         }
 
         [TestMethod]
-        public void GetAdType_AdDoesNotExist_ReturnTypeUndefined()
+        public void GetAdType_AdDoesNotExist_ReturnUndefined()
         {
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
             Repository repo = new Repository(sessionFactory);

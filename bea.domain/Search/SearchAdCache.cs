@@ -37,7 +37,7 @@ namespace Bea.Domain.Search
             Category = ad.Category;
             Price = ad.Price;
             CreationDate = ad.CreationDate;
-            AdType = ad.AdType;
+            AdType = ad.Category.Type;
             AdImageId = ad.Images.Where(x => x.IsPrimary).Select(x => x.Id.ToString()).SingleOrDefault();
         }
     }

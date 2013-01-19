@@ -142,6 +142,7 @@
   <ItemGroup>
     <Compile Include="App_Start\ContainerConfig.cs" />
     <Compile Include="Controllers\AdController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\API\AdAPIController.cs" />
     <Compile Include="Controllers\AdImageController.cs" />
     <Compile Include="Controllers\API\CategoryAPIController.cs" />
@@ -275,6 +276,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Ad\Shared\Create\_OtherVehicleAdCreate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

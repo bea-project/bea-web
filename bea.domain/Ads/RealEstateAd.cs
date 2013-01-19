@@ -15,8 +15,8 @@ namespace Bea.Domain.Ads
         public virtual RealEstateType RealEstateType { get; set; }
 
         public RealEstateAd()
+            : base()
         {
-            AdType = AdTypeEnum.RealEstateAd;
         }
     }
 }

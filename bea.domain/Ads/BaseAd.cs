@@ -10,7 +10,6 @@ namespace Bea.Domain.Ads
     public class BaseAd
     {
         public virtual long Id { get; set; }
-        public virtual AdTypeEnum AdType { get; protected set; }
 
         public virtual User CreatedBy { get; set; }
         public virtual DateTime CreationDate { get; set; }

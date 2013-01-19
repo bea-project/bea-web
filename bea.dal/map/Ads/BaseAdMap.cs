@@ -15,7 +15,6 @@ namespace Bea.Dal.Map.Ads
         public BaseAdMap()
         {
             Id(x => x.Id).GeneratedBy.Identity();
-            Map(x => x.AdType).Not.Nullable();
 
             HasMany<AdImage>(x => x.Images).Inverse().LazyLoad().Cascade.Delete();
         }
