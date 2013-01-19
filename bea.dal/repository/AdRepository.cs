@@ -45,21 +45,17 @@ namespace Bea.Dal.Repository
 
         public List<Ad> GetAllAds()
         {
-            return _sessionFactory.GetCurrentSession().Query<Ad>().Fetch(x=>x.CreatedBy).Fetch(x=>x.City).ToList();
+            return _sessionFactory.GetCurrentSession().Query<Ad>().Fetch(x => x.CreatedBy).Fetch(x => x.City).ToList();
         }
 
         public AdTypeEnum GetAdType(long adId)
         {
-            IQuery q = _sessionFactory.GetCurrentSession()
-                .CreateSQLQuery("select c.Type from BaseAd ad inner join Category c on ad.Category_id = c.Id where ad.Id = :id");
-            q.SetParameter("id", adId);
-            var r = q.UniqueResult();
+            AdTypeEnum result = _sessionFactory.GetCurrentSession().Query<BaseAd>()
+                .Where(x => x.Id == adId)
+                .Select(x => x.Category.Type)
+                .SingleOrDefault();
 
-            if (r == null)
-                return AdTypeEnum.Undefined;
-
-            return (AdTypeEnum) Enum.Parse(typeof(AdTypeEnum), r.ToString());
-
+            return result;
         }
 
         public T GetAdById<T>(long adId) where T : BaseAd
@@ -69,7 +65,7 @@ namespace Bea.Dal.Repository
                 .Fetch(x => x.City)
                 .Fetch(x => x.Images)
                 .Where(x => x.Id == adId).FirstOrDefault();
-            
+
             return ad;
         }
 

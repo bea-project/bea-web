@@ -12,6 +12,7 @@ using Bea.Domain.Categories;
 using Bea.Models.Details;
 using Bea.Domain.Reference;
 using Bea.Domain.Search;
+using System.Transactions;
 
 namespace Bea.Services
 {
@@ -60,11 +61,16 @@ namespace Bea.Services
 
         public void AddAd(BaseAd ad)
         {
-            _repository.Save<User>(ad.CreatedBy);
-            _repository.Save<BaseAd>(ad);
-            SearchAdCache cacheAd = new SearchAdCache(ad);
-            _repository.Save<SearchAdCache>(cacheAd);
-            _repository.Flush();
+            using (TransactionScope scope = new TransactionScope())
+            {
+                _repository.Save(ad.CreatedBy);
+                _repository.Save(ad);
+                SearchAdCache cacheAd = new SearchAdCache(ad);
+                _repository.Save(cacheAd);
+                _repository.Flush();
+
+                scope.Complete();
+            }
         }
 
         public AdDetailsModel GetAdDetails(long adId)

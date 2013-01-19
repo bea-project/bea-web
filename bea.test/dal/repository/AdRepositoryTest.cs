@@ -976,7 +976,7 @@ namespace Bea.Test.dal.repository
         }
 
         [TestMethod]
-        public void GetAdType_AdExists_ReturnType()
+        public void GetAdType_CarAdExists_ReturnType()
         {
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
             Repository repo = new Repository(sessionFactory);
@@ -1031,6 +1031,63 @@ namespace Bea.Test.dal.repository
                 #endregion
 
                 Assert.AreEqual(AdTypeEnum.CarAd, adRepo.GetAdType(id));
+            }
+        }
+
+        [TestMethod]
+        public void GetAdType_ClassicAdExists_ReturnType()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            AdRepository adRepo = new AdRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Informatique",
+                    Type = AdTypeEnum.Ad
+                };
+
+                Ad a = new Ad
+                {
+                    Title = "video game",
+                    Body = "the best!!",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                };
+                c.AddAd(a);
+                cat.AddAd(a);
+                repo.Save<Province>(p1);
+                repo.Save<City>(c);
+                repo.Save<Category>(cat);
+                long id = repo.Save<Ad, long>(a);
+
+                repo.Flush();
+
+                #endregion
+
+                Assert.AreEqual(AdTypeEnum.Ad, adRepo.GetAdType(id));
             }
         }
 

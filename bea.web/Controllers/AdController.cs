@@ -51,7 +51,7 @@ namespace Bea.Web.Controllers
             var result = _adServices.GetAdDetails(id);
 
             if (result == null)
-                return HttpNotFound();
+                return HttpNotFound("Cette annonce n'existe pas ou est désactivée");
 
             return View(result);
         }
