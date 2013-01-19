@@ -110,7 +110,8 @@ namespace Bea.Services
         public BaseAd GetAdFromModel(AdCreateModel model, Dictionary<string, string> form)
         {
             BaseAd ad = null;
-            if (form.ContainsKey("Type"))
+
+            if (form != null && form.ContainsKey("Type"))
             {
                 switch (Int32.Parse(form["Type"]))
                 {

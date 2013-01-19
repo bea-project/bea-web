@@ -221,6 +221,8 @@ namespace Bea.Test.services
 
             // When
             Dictionary<string, string> form = new Dictionary<string, string>();
+            form.Add("Type", "10");
+            form.Add("SelectedYearId", "");
             form.Add("Km", "");
             form.Add("SelectedFuelId", "");
             form.Add("SelectedBrandId", "");

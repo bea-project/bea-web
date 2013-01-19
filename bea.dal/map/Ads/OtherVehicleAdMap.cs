@@ -21,6 +21,7 @@ namespace Bea.Dal.Map.Ads
             Map(x => x.Price).Nullable();
             Map(x => x.IsOffer).Not.Nullable();
             Map(x => x.PhoneNumber);
+            Map(x => x.IsValidated);
 
             References<User>(x => x.CreatedBy).Not.Nullable();
             References<City>(x => x.City).Not.Nullable();
