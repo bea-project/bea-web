@@ -46,7 +46,7 @@ namespace Bea.Web.Controllers.API
         public HttpResponseMessage Get()
         {
             HttpResponseMessage response;
-            List<Ad> ads = _adServices.GetAllAds().ToList();
+            List<BaseAd> ads = _adServices.GetAllAds().ToList();
             List<AdDetailsModel> adsModel = new List<AdDetailsModel>();
             foreach (Ad ad in ads)
             {

@@ -360,7 +360,7 @@ namespace Bea.Web.NhibernateHelper
                     Faker.Lorem.Words(3).ForEach(s => ad.Title += " "+s);
                     ad.Body = Faker.Lorem.Paragraph();
                     ad.IsOffer = true;
-                    ad.IsValidated = true;
+                    
                     ad.CreationDate = DateTime.Now
                         .AddDays(Faker.RandomNumber.Next(-7, 0))
                         .AddHours(Faker.RandomNumber.Next(1, 23))
@@ -374,12 +374,13 @@ namespace Bea.Web.NhibernateHelper
                         ad.AddImage(img2);
                     ad.CreatedBy = user;
 
+                    ad.IsActivated = false;
+                    ad.ActivationToken = "activateme";
+
                     _repository.Get<City>(Faker.RandomNumber.Next(1, nbCities)).AddAd(ad);
                     
                     _sessionFactory.GetCurrentSession().Save(ad);
 
-                    SearchAdCache cacheAd = new SearchAdCache(ad);
-                    _sessionFactory.GetCurrentSession().Save(cacheAd);
                 }
 
                 _sessionFactory.GetCurrentSession().Update(img1);

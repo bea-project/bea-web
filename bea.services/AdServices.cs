@@ -13,6 +13,7 @@ using Bea.Models.Details;
 using Bea.Domain.Reference;
 using Bea.Domain.Search;
 using System.Transactions;
+using Bea.Models.Create;
 
 namespace Bea.Services
 {
@@ -22,15 +23,15 @@ namespace Bea.Services
         private readonly IRepository _repository;
         private readonly IHelperService _helperService;
         private readonly IUserServices _userServices;
+        private readonly IAdActivationServices _adActivationServices;
 
-
-        public AdServices(IAdRepository adRepository, IHelperService helperService, IRepository repository, IUserServices userServices)
+        public AdServices(IAdRepository adRepository, IHelperService helperService, IRepository repository, IUserServices userServices, IAdActivationServices adActivationServices)
         {
             _adRepository = adRepository;
             _helperService = helperService;
             _repository = repository;
             _userServices = userServices;
-
+            _adActivationServices = adActivationServices;
         }
 
         public IDictionary<City, int> CountAdsByCities()
@@ -43,7 +44,7 @@ namespace Bea.Services
             return _adRepository.CountAdsByUser();
         }
 
-        public IList<Ad> GetAllAds()
+        public IList<BaseAd> GetAllAds()
         {
             return _adRepository.GetAllAds();
         }
@@ -65,8 +66,6 @@ namespace Bea.Services
             {
                 _repository.Save(ad.CreatedBy);
                 _repository.Save(ad);
-                SearchAdCache cacheAd = new SearchAdCache(ad);
-                _repository.Save(cacheAd);
                 _repository.Flush();
 
                 scope.Complete();
@@ -155,25 +154,27 @@ namespace Bea.Services
 
         private BaseAd GetCommonAdFromModel(BaseAd ad, AdCreateModel model)
         {
-             if (model.SelectedCityId.HasValue)
-                 ad.City = _repository.Get<City>(model.SelectedCityId.Value);
-             if (model.SelectedCategoryId.HasValue)
-                 ad.Category = _repository.Get<Category>(model.SelectedCategoryId.Value);
+            if (model.SelectedCityId.HasValue)
+                ad.City = _repository.Get<City>(model.SelectedCityId.Value);
 
-             ad.Body = model.Body;
-             ad.CreationDate = DateTime.Now;
-             ad.Price = model.Price.GetValueOrDefault();
-             ad.Title = model.Title;
-             ad.IsOffer = model.IsOffer;
-             ad.PhoneNumber = model.Telephone;
+            if (model.SelectedCategoryId.HasValue)
+                ad.Category = _repository.Get<Category>(model.SelectedCategoryId.Value);
 
-             User createdBy = new User();
-             createdBy.Firstname = model.Name;
-             createdBy.Email = model.Email;
-             createdBy.Password = "Password";
+            ad.Body = model.Body;
+            ad.CreationDate = DateTime.Now;
+            ad.Price = model.Price.GetValueOrDefault();
+            ad.Title = model.Title;
+            ad.IsOffer = model.IsOffer;
+            ad.PhoneNumber = model.Telephone;
+            ad.ActivationToken = _adActivationServices.GenerateActivationToken();
 
-             ad.CreatedBy = createdBy;
-             return ad;
+            User createdBy = new User();
+            createdBy.Firstname = model.Name;
+            createdBy.Email = model.Email;
+            createdBy.Password = "Password";
+
+            ad.CreatedBy = createdBy;
+            return ad;
         }
 
 

@@ -13,6 +13,8 @@ using Bea.Services;
 using Bea.Test.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bea.Domain.Categories;
+using Bea.Models.Create;
+using Bea.Domain.Search;
 
 namespace Bea.Test.services
 {
@@ -27,7 +29,7 @@ namespace Bea.Test.services
             var adRepoMock = new Moq.Mock<IAdRepository>();
             adRepoMock.Setup(r => r.CountAdsByCity()).Returns(result);
 
-            AdServices service = new AdServices(adRepoMock.Object, null,null,null);
+            AdServices service = new AdServices(adRepoMock.Object, null, null, null, null);
 
             // When
             IDictionary<City, int> actual = service.CountAdsByCities();
@@ -53,7 +55,7 @@ namespace Bea.Test.services
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
 
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null,null);
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null, null);
 
             // When
             AdDetailsModel actual = service.GetAdDetails(17);
@@ -78,7 +80,7 @@ namespace Bea.Test.services
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
 
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null,null);
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null, null);
 
             // When
             AdDetailsModel actual = service.GetAdDetails(17);
@@ -106,7 +108,7 @@ namespace Bea.Test.services
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
 
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null,null);
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null, null);
 
             // When
             AdDetailsModel actual = service.GetAdDetails(17);
@@ -134,7 +136,7 @@ namespace Bea.Test.services
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
 
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null,null);
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null, null);
 
             // When
             AdDetailsModel actual = service.GetAdDetails(17);
@@ -163,7 +165,7 @@ namespace Bea.Test.services
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
 
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null);
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null, null);
 
             // When
             AdDetailsModel actual = service.GetAdDetails(17);
@@ -192,7 +194,7 @@ namespace Bea.Test.services
             var helperMock = new Moq.Mock<IHelperService>();
             helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
 
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null);
+            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null, null);
 
             // When
             AdDetailsModel actual = service.GetAdDetails(17);
@@ -209,7 +211,7 @@ namespace Bea.Test.services
             var adRepoMock = new Moq.Mock<IAdRepository>();
             adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.Undefined);
 
-            AdServices service = new AdServices(adRepoMock.Object, null, null,null);
+            AdServices service = new AdServices(adRepoMock.Object, null, null, null, null);
 
             // When
             AdDetailsModel actual = service.GetAdDetails(17);
@@ -231,7 +233,10 @@ namespace Bea.Test.services
             User user = new User() { Email = email };
             userServicesMock.Setup(r => r.GetUserFromEmail(email)).Returns(user);
 
-            AdServices service = new AdServices(null, null, repoMock.Object, userServicesMock.Object);
+            var activationServiceMock = new Moq.Mock<IAdActivationServices>();
+            activationServiceMock.Setup(x => x.GenerateActivationToken()).Returns("activationToken");
+
+            AdServices service = new AdServices(null, null, repoMock.Object, userServicesMock.Object, activationServiceMock.Object);
 
             // When
             AdCreateModel model = new AdCreateModel() { SelectedCategoryId = 17 };
@@ -252,7 +257,10 @@ namespace Bea.Test.services
             User user = new User() { Email = email };
             userServicesMock.Setup(r => r.GetUserFromEmail(email)).Returns(user);
 
-            AdServices service = new AdServices(null, null, repoMock.Object, userServicesMock.Object);
+            var activationServiceMock = new Moq.Mock<IAdActivationServices>();
+            activationServiceMock.Setup(x => x.GenerateActivationToken()).Returns("activationToken");
+
+            AdServices service = new AdServices(null, null, repoMock.Object, userServicesMock.Object, activationServiceMock.Object);
 
             // When
             AdCreateModel model = new AdCreateModel() { SelectedCategoryId = null };
@@ -272,10 +280,13 @@ namespace Bea.Test.services
 
             var userServicesMock = new Moq.Mock<IUserServices>();
             string email = "bruno.deprez@gmail.com";
-            User user = new User(){Email=email};
+            User user = new User() { Email = email };
             userServicesMock.Setup(r => r.GetUserFromEmail(email)).Returns(user);
 
-            AdServices service = new AdServices(null, null, repoMock.Object, userServicesMock.Object);
+            var activationServiceMock = new Moq.Mock<IAdActivationServices>();
+            activationServiceMock.Setup(x => x.GenerateActivationToken()).Returns("activationToken");
+
+            AdServices service = new AdServices(null, null, repoMock.Object, userServicesMock.Object, activationServiceMock.Object);
 
             // When
             Dictionary<string, string> form = new Dictionary<string, string>();
@@ -292,6 +303,5 @@ namespace Bea.Test.services
             Assert.IsTrue(ad is CarAd);
 
         }
-
     }
 }

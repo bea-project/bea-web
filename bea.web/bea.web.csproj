@@ -286,6 +286,15 @@
   <ItemGroup>
     <Content Include="Views\Ad\Shared\Details\_OtherVehicleAdDetailsPartial.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ad\Activate.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\SearchAdCache.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\BaseAd.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

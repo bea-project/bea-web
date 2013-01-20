@@ -41,6 +41,7 @@ namespace Bea.Web.App_Start
             builder.RegisterType<ReferenceServices>().As<IReferenceServices>().SingleInstance();
             builder.RegisterType<CategoryServices>().As<ICategoryServices>().SingleInstance();
             builder.RegisterType<AdDataConsistencyServices>().As<IAdDataConsistencyServices>().SingleInstance();
+            builder.RegisterType<AdActivationServices>().As<IAdActivationServices>().SingleInstance();
 
             // Register the inMemoryData singleton to inject data
             builder.Register(x => new InMemoryDataInjector(x.Resolve<ISessionFactory>(), x.Resolve<IRepository>())).SingleInstance();

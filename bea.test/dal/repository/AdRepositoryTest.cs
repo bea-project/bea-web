@@ -366,7 +366,7 @@ namespace Bea.Test.dal.repository
 
                 // When
                 adRepo.DeleteAdById(1);
-                List<Ad> result= adRepo.GetAllAds();
+                IList<BaseAd> result= adRepo.GetAllAds();
 
                 // Then
                 Assert.AreEqual(1, result.Count);

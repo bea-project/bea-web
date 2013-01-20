@@ -1,18 +1,15 @@
-﻿@model IEnumerable<Bea.Domain.Ads.BaseAd>
+﻿@model IEnumerable<Bea.Domain.Search.SearchAdCache>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Admin SearchAdCache List";
 }
 
-<h2>Ads</h2>
+<h2>SearchAdCache</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table table-bordered table-condensed table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CreationDate)
+            @Html.DisplayNameFor(model => model.AdId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -21,20 +18,20 @@
             @Html.DisplayNameFor(model => model.Body)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedBy.Email)
+            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.City.Label)
+            @Html.DisplayNameFor(model => model.CreationDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ActivationToken)
+            @Html.DisplayNameFor(model => model.AdImageId)
         </th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CreationDate)
+            @Html.DisplayFor(modelItem => item.AdId)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
@@ -43,13 +40,13 @@
             @Html.DisplayFor(modelItem => item.Body)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy.Email)
+            @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.City.Label)
+            @Html.DisplayFor(modelItem => item.CreationDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ActivationToken)
+            @Html.DisplayFor(modelItem => item.AdImageId)
         </td>
     </tr>
 }

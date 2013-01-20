@@ -1,0 +1,12 @@
+﻿@model Bea.Models.Create.AdActivationResultModel
+
+@{
+    ViewBag.Title = "Activation d'annonce";
+}
+
+<h3>@Model.InfoMessage</h3>
+
+@if (Model.IsActivated)
+{
+    <h4>@Html.ActionLink("Aller voir l'annonce", "Details", new { controller = "Ad", id = Model.AdId })</h4>
+}

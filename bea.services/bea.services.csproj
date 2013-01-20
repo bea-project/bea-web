@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdActivationServices.cs" />
     <Compile Include="AdDataConsistencyServices.cs" />
     <Compile Include="AdImageServices.cs" />
     <Compile Include="AdServices.cs" />

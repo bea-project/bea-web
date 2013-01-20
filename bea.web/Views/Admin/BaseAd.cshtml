@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<Bea.Domain.Ads.BaseAd>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Admin BaseAd List";
 }
 
-<h2>Ads</h2>
+<h2>BaseAd</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table table-bordered table-condensed table-striped">
     <tr>
         <th>
@@ -21,14 +18,21 @@
             @Html.DisplayNameFor(model => model.Body)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CreatedBy.Email)
+            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.City.Label)
+            @Html.DisplayNameFor(model => model.IsOffer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActivated)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ActivationToken)
         </th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -43,13 +47,22 @@
             @Html.DisplayFor(modelItem => item.Body)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy.Email)
+            @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.City.Label)
+            @Html.DisplayFor(modelItem => item.IsOffer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActivated)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ActivationToken)
+        </td>
+        <td>
+            @Html.RouteLink("Activate", "AdActivationRoute", new { id = item.Id, activationToken = item.ActivationToken })
         </td>
     </tr>
 }

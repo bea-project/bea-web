@@ -27,7 +27,7 @@ namespace Bea.Core.Dal
         /// Get all the Ads
         /// </summary>
         /// <returns>A list of Ads</returns>
-        List<Ad> GetAllAds();
+        IList<BaseAd> GetAllAds();
 
         /// <summary>
         /// Get a particular Ad by Id and Type

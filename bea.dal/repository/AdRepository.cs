@@ -43,9 +43,9 @@ namespace Bea.Dal.Repository
             return result;
         }
 
-        public List<Ad> GetAllAds()
+        public IList<BaseAd> GetAllAds()
         {
-            return _sessionFactory.GetCurrentSession().Query<Ad>().Fetch(x => x.CreatedBy).Fetch(x => x.City).ToList();
+            return _sessionFactory.GetCurrentSession().Query<BaseAd>().Fetch(x => x.CreatedBy).Fetch(x => x.City).ToList();
         }
 
         public AdTypeEnum GetAdType(long adId)

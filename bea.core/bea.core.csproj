@@ -46,6 +46,7 @@
     <Compile Include="Dal\IRepository.cs" />
     <Compile Include="Dal\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IAdActivationService.cs" />
     <Compile Include="Services\IAdDataConsistencyServices.cs" />
     <Compile Include="Services\IAdImageServices.cs" />
     <Compile Include="Services\IAdServices.cs" />

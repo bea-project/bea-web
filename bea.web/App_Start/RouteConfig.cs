@@ -20,6 +20,12 @@ namespace Bea.Web
             );
 
             routes.MapRoute(
+                name: "AdActivationRoute",
+                url: "Ad/Activate/{id}/{activationToken}",
+                defaults: new { controller = "Ad", action = "Activate" }
+            );
+
+            routes.MapRoute(
                 name: "DefaultWithParameter",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

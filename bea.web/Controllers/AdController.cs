@@ -24,9 +24,9 @@ namespace Bea.Web.Controllers
         private ICategoryServices _categoryServices;
         private IAdDataConsistencyServices _adConsistencyServices;
         private IReferenceServices _referenceServices;
+        private IAdActivationServices _adActivationServices;
 
-
-        public AdController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices)
+        public AdController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices)
         {
             _adServices = adServices;
             _locationServices = locationServices;
@@ -34,14 +34,14 @@ namespace Bea.Web.Controllers
             _categoryServices = categoryServices;
             _adConsistencyServices = adConsistencyServices;
             _referenceServices = referenceServices;
+            _adActivationServices = adActivationServices;
         }
 
         //
         // GET: /Ad/
         public ActionResult Index()
         {
-            var result = _adServices.GetAllAds();
-            return View(result);
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -49,6 +49,18 @@ namespace Bea.Web.Controllers
         public ActionResult Details(long id)
         {
             var result = _adServices.GetAdDetails(id);
+
+            if (result == null)
+                return HttpNotFound("Cette annonce n'existe pas ou est désactivée");
+
+            return View(result);
+        }
+
+        //
+        // GET: /Ad/Activate/{id}/{activationToken}
+        public ActionResult Activate(long id, string activationToken)
+        {
+            var result = _adActivationServices.ActivateAd(id, activationToken);
 
             if (result == null)
                 return HttpNotFound("Cette annonce n'existe pas ou est désactivée");
@@ -78,7 +90,7 @@ namespace Bea.Web.Controllers
                 ModelState.AddModelError(key, errors[key]);
             if (ModelState.IsValid)
             {
-                newAd.IsValidated = false;
+                newAd.IsActivated = false;
                 _adServices.AddAd(newAd);
                 return RedirectToAction("Index", "Home");
             }
