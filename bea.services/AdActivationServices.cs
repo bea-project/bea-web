@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Transactions;
 using Bea.Core.Dal;
@@ -65,10 +66,27 @@ namespace Bea.Services
             return model;
         }
 
-
         public string GenerateActivationToken()
         {
             return Guid.NewGuid().ToString();
+        }
+
+        //TODO: modify from and reply-to addresses
+        public void SendActivationEmail(BaseAd ad)
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient();
+
+            mail.From = new MailAddress("beaproject@gmail.com");
+            mail.To.Add(ad.CreatedBy.Email);
+            mail.Subject = String.Format("BEA Activez votre annonce\"{0}\"", ad.Title);
+            mail.ReplyToList.Add("no-reply@bea.nc");
+            mail.Body = String.Format("Bonjour,"
+                 + "Vous venez de créer votre annonce. Afin que celle-ci soit visible sur bea.nc, nous avons besoin de valider votre adresse email."
+                         + "Pour cela, merci de bien vouloir cliquer sur le lien ci-dessous pour confirmer votre annonce."
+                         + "http://bea.nc/Ad/Activate/{0}/{1}", ad.Id, ad.ActivationToken);
+
+            //SmtpServer.SendAsync(mail, ad.Id);
         }
     }
 }

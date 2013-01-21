@@ -67,7 +67,6 @@ namespace Bea.Services
                 _repository.Save(ad.CreatedBy);
                 _repository.Save(ad);
                 _repository.Flush();
-
                 scope.Complete();
             }
         }
@@ -232,7 +231,7 @@ namespace Bea.Services
             int selectedBrandId;
             result = Int32.TryParse(form["SelectedBrandId"], out selectedBrandId);
             if (result)
-                motoAd.Brand = _repository.Get<VehicleBrand>(selectedBrandId);
+                motoAd.Brand = _repository.Get<MotoBrand>(selectedBrandId);
             int engineSize;
             result = Int32.TryParse(form["EngineSize"], out engineSize);
             if (result)

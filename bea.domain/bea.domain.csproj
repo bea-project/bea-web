@@ -55,6 +55,7 @@
     <Compile Include="Location\Province.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ads\AdTypeEnum.cs" />
+    <Compile Include="Reference\MotoBrand.cs" />
     <Compile Include="Reference\RealEstateType.cs" />
     <Compile Include="Reference\VehicleBrand.cs" />
     <Compile Include="Reference\CarFuel.cs" />

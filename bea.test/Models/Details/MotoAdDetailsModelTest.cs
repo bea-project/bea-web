@@ -77,7 +77,7 @@ namespace Bea.Test.Models.Details
                 Body = "body",
                 Kilometers = 2000,
                 Year = 2013,
-                Brand = new VehicleBrand { Label = "Autre" },
+                Brand = new MotoBrand { Label = "Autre" },
                 OtherBrand = "Batmobile",
             };
 

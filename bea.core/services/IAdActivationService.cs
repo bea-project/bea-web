@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bea.Domain.Ads;
 using Bea.Models.Create;
 
 namespace Bea.Core.Services
@@ -21,5 +22,11 @@ namespace Bea.Core.Services
         /// </summary>
         /// <returns></returns>
         String GenerateActivationToken();
+
+        /// <summary>
+        /// Sends an email to the Ad creator with the activation link
+        /// </summary>
+        /// <param name="ad">The ad to send the activation mail to</param>
+        void SendActivationEmail(BaseAd ad);
     }
 }

@@ -209,6 +209,37 @@ namespace Bea.Web.NhibernateHelper
             _repository.Save(new VehicleBrand { Label = "Yugo" });
             _repository.Save(new VehicleBrand { Label = "Autre" });
 
+            _repository.Save(new MotoBrand { Label = "Aprilia" });
+            _repository.Save(new MotoBrand { Label = "Benelli" });
+            _repository.Save(new MotoBrand { Label = "BMW" });
+            _repository.Save(new MotoBrand { Label = "Buell" });
+            _repository.Save(new MotoBrand { Label = "Cagiva" });
+            _repository.Save(new MotoBrand { Label = "Daelim" });
+            _repository.Save(new MotoBrand { Label = "Dax" });
+            _repository.Save(new MotoBrand { Label = "Dayun" });
+            _repository.Save(new MotoBrand { Label = "Derbi" });
+            _repository.Save(new MotoBrand { Label = "Ducati" });
+            _repository.Save(new MotoBrand { Label = "Gas" });
+            _repository.Save(new MotoBrand { Label = "Gilera" });
+            _repository.Save(new MotoBrand { Label = "Harley-Davidson" });
+            _repository.Save(new MotoBrand { Label = "Honda" });
+            _repository.Save(new MotoBrand { Label = "Husqvarna" });
+            _repository.Save(new MotoBrand { Label = "Kawasaki" });
+            _repository.Save(new MotoBrand { Label = "KTM" });
+            _repository.Save(new MotoBrand { Label = "Kymco" });
+            _repository.Save(new MotoBrand { Label = "MBK" });
+            _repository.Save(new MotoBrand { Label = "MBS" });
+            _repository.Save(new MotoBrand { Label = "Moto Guzzi" });
+            _repository.Save(new MotoBrand { Label = "Peugeot" });
+            _repository.Save(new MotoBrand { Label = "Piaggio" });
+            _repository.Save(new MotoBrand { Label = "Suzuki" });
+            _repository.Save(new MotoBrand { Label = "Sym" });
+            _repository.Save(new MotoBrand { Label = "Triumph" });
+            _repository.Save(new MotoBrand { Label = "Vespa" });
+            _repository.Save(new MotoBrand { Label = "Yamaha" });
+            _repository.Save(new MotoBrand { Label = "Autre" });
+
+
             _repository.Save(new CarFuel { Label = "Essence" });
             _repository.Save(new CarFuel { Label = "Diesel" });
             _repository.Save(new CarFuel { Label = "GPL" });

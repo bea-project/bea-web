@@ -265,7 +265,7 @@ namespace Bea.Test.Services
                 Title = "Title Text",
                 Kilometers = 25,
                 EngineSize = 600,
-                Brand = new VehicleBrand { Label = "My BCar Brand" },
+                Brand = new MotoBrand { Label = "My BCar Brand" },
                 Year = 2013
             };
             IDictionary<string, string> errors = new Dictionary<string, string>();
@@ -289,7 +289,7 @@ namespace Bea.Test.Services
                 City = new City { Label = "My City" },
                 Title = "Title Text",
                 EngineSize = 600,
-                Brand = new VehicleBrand { Label = "My BCar Brand" },
+                Brand = new MotoBrand { Label = "My BCar Brand" },
                 Year = 2013
             };
 
@@ -315,7 +315,7 @@ namespace Bea.Test.Services
                 City = new City { Label = "My City" },
                 Title = "Title Text",
 
-                Brand = new VehicleBrand { Label = "My BCar Brand" },
+                Brand = new MotoBrand { Label = "My BCar Brand" },
                 Kilometers = 25,
                 Year = 2013
             };

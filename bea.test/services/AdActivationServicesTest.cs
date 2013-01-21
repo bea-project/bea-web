@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Bea.Core.Dal;
@@ -122,6 +123,27 @@ namespace Bea.Test.Services
 
             repoMock.Verify(x => x.Save(ad), Moq.Times.Once());
             repoMock.Verify(x => x.Save(Moq.It.IsAny<SearchAdCache>()), Moq.Times.Once());
+        }
+
+        //[TestMethod]
+        public void SendActivationEmail_TestEmailIsSent()
+        {
+            // Given
+            BaseAd a = new Ad()
+            {
+                Title = "The ad title",
+                CreatedBy = new Bea.Domain.User { Email = "customer@lagoon.nc" },
+                Id = 4567,
+                ActivationToken = "AZERTY"
+            };
+
+            AdActivationServices service = new AdActivationServices(null);
+
+            // When
+            service.SendActivationEmail(a);
+
+            // Assert ??
+            Assert.IsTrue(File.Exists(@"c:\temp\"));
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Bea.Domain.Ads
 {
     public class MotoAd : VehicleAd
     {
-        public virtual VehicleBrand Brand { get; set; }
+        public virtual MotoBrand Brand { get; set; }
         public virtual String OtherBrand { get; set; }
         public virtual int EngineSize { get; set; }
 
