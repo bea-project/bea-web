@@ -2,86 +2,75 @@
 @{
     ViewBag.Title = "Create";
 }
-@using (Html.BeginForm("Create", "Ad", FormMethod.Post, new { @class = "well form-horizontal" }))
-{
-   
-    
+<div class="hero-unit">
+    <h1>
+        Créez votre annonce !
+    </h1>
+    <p class="tagline">
+        C'est simple et gratuit. Remplissez le formulaire ci-dessous, cliquez sur le lien que nous vous envoyons par email et voila, votre annonce est en ligne !
+    </p>
+</div>
+
+
+
+@using (Html.BeginForm("Create", "Ad", FormMethod.Post, new { @class = "well form-horizontal " }))
+{       
+    <h4><i class="icon-globe"></i> Localisation</h4>
     <div class="control-group">
         <label class="control-label" for="inputProvince">@Html.LabelFor(model => model.SelectedProvinceId)</label>
-        <div class="controls">
+        <div class="controls controls-row">
             @Html.DropDownListFor(model => model.SelectedProvinceId, Enumerable.Empty<SelectListItem>(), "Choisissez la province", new { @class = "input-large" })
-            @Html.ValidationMessageFor(model => model.SelectedProvinceId, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            @Html.ValidationMessageFor(model => model.SelectedProvinceId, String.Empty, new { @class = "label label-important" })
         </div>
-    </div>
-    <div class="control-group">
+
         <label class="control-label" for="inputCity">@Html.LabelFor(model => model.SelectedCityId)</label>
-        <div class="controls">
+        <div class="controls controls-row">
             @Html.DropDownListFor(model => model.SelectedCityId, Enumerable.Empty<SelectListItem>(), "Choisissez la ville", new { @class = "input-large" })
-            @Html.ValidationMessageFor(model => model.SelectedCityId, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            @Html.ValidationMessageFor(model => model.SelectedCityId, String.Empty, new { @class = "label label-important" })
         </div>
     </div>
-    <hr />  
-    <br />
+    <h4><i class="icon-user"></i> Vos informations</h4>
     <div class="control-group">
         <label class="control-label" for="inputName">@Html.LabelFor(model => model.Name)</label>
-        <div class="controls">
+        <div class="controls controls-row">
             @Html.TextBoxFor(model => model.Name, new { @class = "input-large", rel = "tooltip" })
-            @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "label label-important" })
         </div>
-    </div>
-    <div class="control-group">
+
         <label class="control-label" for="inputEmail">@Html.LabelFor(model => model.Email)</label>
-        <div class="controls">
+        <div class="controls controls-row">
             @Html.TextBoxFor(model => model.Email, new { @class = "input-large", rel = "tooltip" })
-            @Html.ValidationMessageFor(model => model.Email, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            @Html.ValidationMessageFor(model => model.Email, String.Empty, new { @class = "label label-important" })
         </div>
-    </div>
-    <div class="control-group">
+
         <label class="control-label" for="inputPhone">@Html.LabelFor(model => model.Telephone)</label>
-        <div class="controls">
+        <div class="controls controls-row">
             @Html.TextBoxFor(model => model.Telephone, new { @class = "input-large", rel = "tooltip" })
-            @Html.ValidationMessageFor(model => model.Telephone, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            @Html.ValidationMessageFor(model => model.Telephone, String.Empty, new { @class = "label label-important" })
         </div>
     </div>
-    <hr />
-    <br /> 
+    <h4><i class=" icon-th-list"></i> Categorie</h4>
     <div class="control-group">
         <label class="control-label" for="inputCategory">@Html.LabelFor(model => model.SelectedCategoryId)</label>
-        <div class="controls">
+        <div class="controls controls-row">
             @Html.DropDownListFor(model => model.SelectedCategoryId, Enumerable.Empty<SelectListItem>(), "Choisissez la catégorie", new { @class = "input-large" })
-            @Html.ValidationMessageFor(model => model.SelectedCategoryId, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            @Html.ValidationMessageFor(model => model.SelectedCategoryId, String.Empty, new { @class = "label label-important" })
         </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="inputIsOffer">@Html.LabelFor(model => model.IsOffer)</label>
-        <div class="controls">
+
+        <label class="control-label " for="inputIsOffer">@Html.LabelFor(model => model.IsOffer)</label>
+        <div class="controls controls-row">
             <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, true, new { @checked = "checked", @style = "vertical-align: top" }) Offre</label>
             <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, false, new { @style = "vertical-align: top" }) Demande</label>
         </div>
-    </div>   
-    <hr /> 
-    <br /> 
+     </div>
+    <h4><i class="  icon-pencil"></i> Votre annonce</h4>
     <div class="control-group">
         <label class="control-label" for="inputTitle">@Html.LabelFor(model => model.Title)</label>
-        <div class="controls">
+        <div class="controls controls-row">
             @Html.TextBoxFor(x => x.Title, new { @class = "input-xxlarge" })
-            @Html.ValidationMessageFor(model => model.Title, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
+            @Html.ValidationMessageFor(model => model.Title, String.Empty, new { @class = "label label-important" })
         </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="inputBody">@Html.LabelFor(model => model.Body)</label>
-        <div class="controls">
-            @Html.TextAreaFor(model => model.Body, new { @rows = 10, @class = "input-xxlarge", style = "resize: none;" })
-            @Html.ValidationMessageFor(model => model.Body, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="inputPrice">@Html.LabelFor(model => model.Price)</label>
-        <div class="controls">
-            @Html.TextBoxFor(model => model.Price, new { @class = "input-large"})
-            @Html.ValidationMessageFor(model => model.Price, String.Empty, new { @class = "help-inline", @style = "color:red;font-weight: bold;" })
-        </div>
-    </div>    
+
     <div id="parameters">
         @if (Model is Bea.Models.Create.Vehicules.AdCarCreateModel)
         {
@@ -96,6 +85,22 @@
             @Html.Partial("Shared/Create/_OtherVehicleAdCreate", Model);
         }
     </div>
+
+        <label class="control-label" for="inputBody">@Html.LabelFor(model => model.Body)</label>
+        <div class="controls controls-row">
+            @Html.TextAreaFor(model => model.Body, new { @rows = 10, @class = "input-xxlarge", style = "resize: none;" })
+            @Html.ValidationMessageFor(model => model.Body, String.Empty, new { @class = "label label-important" })
+        </div>
+        <br />
+        <div class="control-group">
+        <label class="control-label" for="inputPrice">@Html.LabelFor(model => model.Price)</label>
+        <div class="controls controls-row">
+            @Html.TextBoxFor(model => model.Price, new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.Price, String.Empty, new { @class = "label label-important" })
+        </div>
+        </div>
+    </div>
+    
     
     <div class="control-group">
         <div class="controls">
@@ -106,6 +111,7 @@
         
     
 }
+
 
 <script type="text/javascript">
     var isLoad = false;
@@ -171,7 +177,7 @@
         $('#Telephone').tooltip({ 'trigger': 'focus', 'title': 'Exemple: 123456', 'placement': 'right' });
 
         //Fill the province list
-        var url = '@Url.RouteUrl("ActionApi", new { httproute = "", controller = "LocationApi", action = "GetAllProvinces"})';
+        var url = '@Url.RouteUrl("ActionApi", new { httproute = "", controller = "LocationApi", action = "GetAllProvinces" })';
         $.ajax({
             url: url,
             type: 'GET',
@@ -206,7 +212,7 @@
 
 
         //Fill the category list
-        var url = '@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategories"})';
+        var url = '@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategories" })';
         $.ajax({
             url: url,
             type: 'GET',
@@ -229,7 +235,5 @@
                 }
             }
         });
-
-
     });
 </script>
