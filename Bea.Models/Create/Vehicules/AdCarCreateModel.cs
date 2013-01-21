@@ -26,14 +26,18 @@ namespace Bea.Models.Create.Vehicules
             this.Type = (int)AdTypeEnum.CarAd;
         }
 
-        public AdCarCreateModel( CarAd ad, AdCreateModel model)
+        public AdCarCreateModel( CarAd ad)
         {
             this.Body = ad.Body;
             this.IsOffer = ad.IsOffer;
             this.Price = ad.Price;
-            this.SelectedCategoryId = model.SelectedCategoryId;
-            this.SelectedCityId = model.SelectedCityId;
-            this.SelectedProvinceId = model.SelectedProvinceId;
+            if (ad.Category != null)
+                this.SelectedCategoryId = ad.Category.Id;
+            if (ad.City != null)
+            {
+                this.SelectedCityId = ad.City.Id;
+                this.SelectedProvinceId = ad.City.Province.Id;
+            }
             this.Telephone = ad.PhoneNumber;
             this.Title = ad.Title;
             this.Km = ad.Kilometers;

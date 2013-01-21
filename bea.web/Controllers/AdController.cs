@@ -121,28 +121,28 @@ namespace Bea.Web.Controllers
 
         private AdCreateModel GetModelFromBaseAd(BaseAd ad, AdCreateModel createModel)
         {
-            AdCreateModel model = null;
-            FillViewLists(ad.Category);
+            
             if (ad.Category == null)
                 return createModel;
+            FillViewLists(ad.Category);
             switch (ad.Category.Type)
             {
                 case AdTypeEnum.CarAd:
-                    AdCarCreateModel adCarCreateModel = new AdCarCreateModel(ad as CarAd, createModel);
+                    AdCarCreateModel adCarCreateModel = new AdCarCreateModel(ad as CarAd);
                     return adCarCreateModel;
 
                 case AdTypeEnum.MotoAd:
-                    AdMotoCreateModel adMotoCreateModel = new AdMotoCreateModel(ad as MotoAd, createModel);
+                    AdMotoCreateModel adMotoCreateModel = new AdMotoCreateModel(ad as MotoAd);
                     return adMotoCreateModel;
 
                 case AdTypeEnum.OtherVehiculeAd:
-                    AdOtherVehicleCreateModel adOtherVehicleCreateModel = new AdOtherVehicleCreateModel(ad as OtherVehicleAd, createModel);
+                    AdOtherVehicleCreateModel adOtherVehicleCreateModel = new AdOtherVehicleCreateModel(ad as OtherVehicleAd);
                     return adOtherVehicleCreateModel;
 
                 case AdTypeEnum.Ad:
                     return createModel;
             }
-            return model;
+            return null;
         }
 
 
