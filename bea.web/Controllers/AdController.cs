@@ -116,6 +116,7 @@ namespace Bea.Web.Controllers
                     AdOtherVehicleCreateModel otherVehicleModel = new AdOtherVehicleCreateModel();
                     return PartialView("Shared/Create/_OtherVehicleAdCreate", otherVehicleModel);
             }
+            //return PartialView("Shared/Create/_temp");
             return null;
         }
 
@@ -158,6 +159,7 @@ namespace Bea.Web.Controllers
                     ViewBag.Fuels = _referenceServices.GetAllCarFuels().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;
                 case AdTypeEnum.MotoAd:
+                    ViewBag.Brands = _referenceServices.GetAllMotoBrands().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                     break;
                 case AdTypeEnum.OtherVehiculeAd:

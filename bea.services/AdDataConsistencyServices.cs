@@ -113,6 +113,9 @@ namespace Bea.Services
             if (motoAd.EngineSize == 0)
                 errors.Add("EngineSize", "Veuillez sélectionner une cylindrée.");
 
+            if (motoAd.Brand == null)
+                errors.Add("SelectedBrandId", "Veuillez sélectionner une marque.");
+
             return errors;
         }
 

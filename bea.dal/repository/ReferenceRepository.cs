@@ -19,14 +19,14 @@ namespace Bea.Dal.Repository
             _sessionFactory = sessionFactory;
         }
 
-        public IList<VehicleBrand> GetAllCarBrands()
-        {
-            return _sessionFactory.GetCurrentSession().Query<VehicleBrand>().ToList();
-        }
+        //public IList<VehicleBrand> GetAllCarBrands()
+        //{
+        //    return _sessionFactory.GetCurrentSession().Query<VehicleBrand>().ToList();
+        //}
 
-        public IList<CarFuel> GetAllCarFuels()
-        {
-            return _sessionFactory.GetCurrentSession().Query<CarFuel>().ToList();
-        }
+        //public IList<CarFuel> GetAllCarFuels()
+        //{
+        //    return _sessionFactory.GetCurrentSession().Query<CarFuel>().ToList();
+        //}
     }
 }

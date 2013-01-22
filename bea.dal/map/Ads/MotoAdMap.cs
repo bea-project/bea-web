@@ -29,7 +29,7 @@ namespace Bea.Dal.Map.Ads
             Map(x => x.Kilometers);
             Map(x => x.Year);
             Map(x => x.OtherBrand);
-            References<VehicleBrand>(x => x.Brand);
+            References<MotoBrand>(x => x.Brand);
             Map(x => x.EngineSize);
         }
     }
