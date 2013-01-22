@@ -2,28 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Web.Mvc;
 using Bea.Domain.Ads;
 
 namespace Bea.Models.Create.Vehicules
 {
-    public class AdMotoCreateModel : AdVehicleCreateModel
+    public class AdVehicleCreateModel : AdCreateModel
     {
-        [DisplayName("Marque:")]
-        public int? SelectedBrandId { get; set; }
+        [DisplayName("Kilometrage:")]
+        public int? Km { get; set; }
+        
+        [DisplayName("Annee-Modele:")]
+        public int? SelectedYearId { get; set; }
 
-        [DisplayName("Cylindrée:")]
-        public int EngineSize { get; set; }
+        public int Type { get; set; }
 
-        //public int Type { get; set; }
-
-        public AdMotoCreateModel()
+        public AdVehicleCreateModel()
         {
-            this.Type = (int)AdTypeEnum.MotoAd;
+            this.Type = (int)AdTypeEnum.VehiculeAd;
         }
 
-        public AdMotoCreateModel(MotoAd ad)
+        public AdVehicleCreateModel(VehicleAd ad)
         {
             this.Body = ad.Body;
             this.IsOffer = ad.IsOffer;
@@ -38,11 +38,9 @@ namespace Bea.Models.Create.Vehicules
             this.Telephone = ad.PhoneNumber;
             this.Title = ad.Title;
             this.Km = ad.Kilometers;
-            if (ad.Brand != null)
-                this.SelectedBrandId = ad.Brand.Id;
-            this.EngineSize= ad.EngineSize;
-            this.Type = (int)AdTypeEnum.MotoAd;
+            if (ad.Year != 0)
+                this.SelectedYearId = ad.Year;
+            this.Type = (int)AdTypeEnum.VehiculeAd;
         }
-
     }
 }

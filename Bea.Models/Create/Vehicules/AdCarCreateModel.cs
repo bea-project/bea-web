@@ -8,7 +8,7 @@ using Bea.Domain.Ads;
 
 namespace Bea.Models.Create.Vehicules
 {
-    public class AdCarCreateModel : AdVehiculeCreateModel
+    public class AdCarCreateModel : AdVehicleCreateModel
     {  
         [DisplayName("Marque:")]
         public int? SelectedBrandId { get; set; }
@@ -19,7 +19,7 @@ namespace Bea.Models.Create.Vehicules
         [DisplayName("Boîte de vitesse:")]
         public bool IsAutomatic { get; set; }
 
-        public int Type { get; set; }
+        //public int Type { get; set; }
 
         public AdCarCreateModel()
         {

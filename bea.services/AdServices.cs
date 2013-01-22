@@ -138,6 +138,9 @@ namespace Bea.Services
                     case (int)AdTypeEnum.OtherVehiculeAd:
                         ad = GeatOtherVehicleAdFromModel(form);
                         break;
+                    case (int)AdTypeEnum.VehiculeAd:
+                        ad = GeatVehicleAdFromModel(form);
+                        break;
                     default:
                         ad = new Ad();
                         break;
@@ -197,6 +200,20 @@ namespace Bea.Services
             if (result)
                 carAd.Brand = _repository.Get<VehicleBrand>(selectedBrandId);
             return (carAd);
+        }
+
+        private BaseAd GeatVehicleAdFromModel(Dictionary<string, string> form)
+        {
+            VehicleAd vehicleAd = new VehicleAd();
+            int kilometer;
+            bool result = Int32.TryParse(form["Km"], out kilometer);
+            if (result)
+                vehicleAd.Kilometers = kilometer;
+            int selectedYearId;
+            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
+            if (result)
+                vehicleAd.Year = selectedYearId;
+            return (vehicleAd);
         }
 
         private BaseAd GeatOtherVehicleAdFromModel(Dictionary<string, string> form)

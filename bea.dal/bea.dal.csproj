@@ -59,6 +59,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Map\Ads\BaseAdMap.cs" />
+    <Compile Include="Map\Ads\LightCarAdMap.cs" />
     <Compile Include="Map\Ads\MotoAdMap.cs" />
     <Compile Include="Map\Ads\OtherVehicleAdMap.cs" />
     <Compile Include="Map\Ads\RealEstateAdMap.cs" />

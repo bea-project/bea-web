@@ -148,7 +148,7 @@ namespace Bea.Web.NhibernateHelper
             _repository.Save(new VehicleBrand { Label = "Lada" });
             _repository.Save(new VehicleBrand { Label = "Lamborghini" });
             _repository.Save(new VehicleBrand { Label = "Lancia", IsMainBrand = true });
-            _repository.Save(new VehicleBrand { Label = "Land Rover" });
+            _repository.Save(new VehicleBrand { Label = "Land Rover", IsMainBrand = true });
             _repository.Save(new VehicleBrand { Label = "Lexus" });
             _repository.Save(new VehicleBrand { Label = "Lincoln" });
             _repository.Save(new VehicleBrand { Label = "Lobini" });
@@ -175,7 +175,7 @@ namespace Bea.Web.NhibernateHelper
             _repository.Save(new VehicleBrand { Label = "Peugeot", IsMainBrand = true });
             _repository.Save(new VehicleBrand { Label = "PGO" });
             _repository.Save(new VehicleBrand { Label = "Pontiac" });
-            _repository.Save(new VehicleBrand { Label = "Porsche" });
+            _repository.Save(new VehicleBrand { Label = "Porsche", IsMainBrand = true });
             _repository.Save(new VehicleBrand { Label = "Princess" });
             _repository.Save(new VehicleBrand { Label = "Proton" });
             _repository.Save(new VehicleBrand { Label = "Radical" });
@@ -242,8 +242,8 @@ namespace Bea.Web.NhibernateHelper
 
             _repository.Save(new CarFuel { Label = "Essence" });
             _repository.Save(new CarFuel { Label = "Diesel" });
-            _repository.Save(new CarFuel { Label = "GPL" });
-            _repository.Save(new CarFuel { Label = "Electrique" });
+            //_repository.Save(new CarFuel { Label = "GPL" });
+            //_repository.Save(new CarFuel { Label = "Electrique" });
             _repository.Save(new CarFuel { Label = "Autre" });
 
             _repository.Flush();
@@ -258,6 +258,8 @@ namespace Bea.Web.NhibernateHelper
             vehicles.Label = "Véhicules";
             vehicles.AddCategory(new Category { Label = "Voitures", Type = AdTypeEnum.CarAd });
             vehicles.AddCategory(new Category { Label = "Motos", Type = AdTypeEnum.MotoAd });
+            vehicles.AddCategory(new Category { Label = "Voiturettes", Type = AdTypeEnum.VehiculeAd });
+            vehicles.AddCategory(new Category { Label = "4 x 4", Type = AdTypeEnum.CarAd });
             vehicles.AddCategory(new Category { Label = "Autres Vehicules", Type = AdTypeEnum.OtherVehiculeAd });
             vehicles.AddCategory(new Category { Label = "Equipement auto", Type = AdTypeEnum.Ad });
             vehicles.AddCategory(new Category { Label = "Equipement moto", Type = AdTypeEnum.Ad });

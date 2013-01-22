@@ -84,6 +84,10 @@
         {
             @Html.Partial("Shared/Create/_OtherVehicleAdCreate", Model);
         }
+        @if (Model is Bea.Models.Create.Vehicules.AdVehicleCreateModel)
+        {
+            @Html.Partial("Shared/Create/_VehicleAdCreate", Model);
+        }
     </div>
 
         <label class="control-label" for="inputBody">@Html.LabelFor(model => model.Body)</label>

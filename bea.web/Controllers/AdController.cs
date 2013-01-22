@@ -111,7 +111,11 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.MotoAd:
                     AdMotoCreateModel motoModel = new AdMotoCreateModel();
                     return PartialView("Shared/Create/_MotoAdCreate", motoModel);
-                
+
+                case AdTypeEnum.VehiculeAd:
+                    AdVehicleCreateModel vehicleModel = new AdVehicleCreateModel();
+                    return PartialView("Shared/Create/_VehicleAdCreate", vehicleModel);
+
                 case AdTypeEnum.OtherVehiculeAd:
                     AdOtherVehicleCreateModel otherVehicleModel = new AdOtherVehicleCreateModel();
                     return PartialView("Shared/Create/_OtherVehicleAdCreate", otherVehicleModel);
@@ -140,6 +144,10 @@ namespace Bea.Web.Controllers
                     AdOtherVehicleCreateModel adOtherVehicleCreateModel = new AdOtherVehicleCreateModel(ad as OtherVehicleAd);
                     return adOtherVehicleCreateModel;
 
+                case AdTypeEnum.VehiculeAd:
+                    AdVehicleCreateModel adVehicleCreateModel = new AdVehicleCreateModel(ad as VehicleAd);
+                    return adVehicleCreateModel;
+
                 case AdTypeEnum.Ad:
                     return createModel;
             }
@@ -165,6 +173,9 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.OtherVehiculeAd:
                     ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                     ViewBag.Fuels = _referenceServices.GetAllCarFuels().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                    break;
+                case AdTypeEnum.VehiculeAd:
+                    ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                     break;
             }
         }

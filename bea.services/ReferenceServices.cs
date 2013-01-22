@@ -10,12 +10,11 @@ namespace Bea.Services
 {
     public class ReferenceServices : IReferenceServices
     {
-        private readonly IReferenceRepository _referenceRepository;
+       
         private readonly IRepository _repository;
 
-        public ReferenceServices(IReferenceRepository referenceRepository, IRepository repository)
+        public ReferenceServices(IRepository repository)
         {
-            _referenceRepository = referenceRepository;
             _repository = repository;
         }
         
@@ -26,13 +25,11 @@ namespace Bea.Services
 
         public IList<VehicleBrand> GetAllCarBrands()
         {
-            //return _referenceRepository.GetAllCarBrands();
-            return _repository.GetAll<VehicleBrand>().ToList();
+            return _repository.GetAll<VehicleBrand>().Where(x => x.IsMainBrand).ToList();
         }
 
         public IList<CarFuel> GetAllCarFuels()
         {
-            //return _referenceRepository.GetAllCarFuels();
             return _repository.GetAll<CarFuel>().ToList();
         }
 

@@ -46,6 +46,7 @@
     <Compile Include="AdImage.cs" />
     <Compile Include="Ads\BaseAd.cs" />
     <Compile Include="Ads\CarAd.cs" />
+    <Compile Include="Ads\LightCarAd.cs" />
     <Compile Include="Ads\MotoAd.cs" />
     <Compile Include="Ads\OtherVehicleAd.cs" />
     <Compile Include="Ads\RealEstateAd.cs" />

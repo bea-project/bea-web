@@ -6,7 +6,7 @@ using Bea.Domain.Reference;
 
 namespace Bea.Domain.Ads
 {
-    public class CarAd : VehicleAd
+    public class AllWheelDriveCar : VehicleAd
     {
         public virtual Boolean IsAutomatic { get; set; }
         public virtual VehicleBrand Brand { get; set; }

@@ -7,12 +7,12 @@ using Bea.Domain.Ads;
 
 namespace Bea.Models.Create.Vehicules
 {
-    public class AdOtherVehicleCreateModel : AdVehiculeCreateModel
+    public class AdOtherVehicleCreateModel : AdVehicleCreateModel
     {
         [DisplayName("Carburant:")]
         public int? SelectedFuelId { get; set; }
 
-        public int Type { get; set; }
+        //public int Type { get; set; }
 
         public AdOtherVehicleCreateModel()
         {

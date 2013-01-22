@@ -41,6 +41,10 @@ namespace Bea.Services
                     GetOtherVehicleAdDataConsistencyErrors(ad as OtherVehicleAd, errors);
                     break;
 
+                case AdTypeEnum.VehiculeAd:
+                    GetVehicleAdDataConsistencyErrors(ad as VehicleAd, errors);
+                    break;
+
                 default:
                     break;
             }
@@ -83,6 +87,16 @@ namespace Bea.Services
                 errors.Add("SelectedBrandId", "Veuillez sélectionner une marque.");
 
             if (carAd.Year == 0)
+                errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
+
+            return errors;
+        }
+
+        public IDictionary<string, string> GetVehicleAdDataConsistencyErrors(VehicleAd vehicleAd, IDictionary<string, string> errors)
+        {
+            if (vehicleAd.Kilometers == 0)
+                errors.Add("Km", "Veuillez séléctionner un kilométrage.");
+            if (vehicleAd.Year == 0)
                 errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
 
             return errors;
