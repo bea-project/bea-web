@@ -340,6 +340,7 @@ namespace Bea.Test.Services
                 Body = "Body Text",
                 Category = new Category { Label = "My Category" },
                 City = new City { Label = "My City" },
+                Brand = new MotoBrand { Label = "brand" },
                 Title = "Title Text",
                 EngineSize = 600,
                 Kilometers = 25
@@ -353,6 +354,32 @@ namespace Bea.Test.Services
             // Then
             Assert.AreEqual(1, actual.Count);
             Assert.IsTrue(actual.Keys.Contains("SelectedYearId"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotoAd_MissingBrand_ReturnsDictionaryWithBranError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            BaseAd ad = new MotoAd()
+            {
+                Body = "Body Text",
+                Category = new Category { Label = "My Category" },
+                City = new City { Label = "My City" },
+                Year = 2007,
+                Title = "Title Text",
+                EngineSize = 600,
+                Kilometers = 25
+            };
+
+            IDictionary<string, string> errors = new Dictionary<string, string>();
+
+            // When
+            IDictionary<string, string> actual = service.GetMotoAdDataConsistencyErrors(ad as MotoAd, errors);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedBrandId"));
         }
 
         #endregion
