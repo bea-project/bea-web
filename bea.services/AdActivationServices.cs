@@ -75,9 +75,7 @@ namespace Bea.Services
         public void SendActivationEmail(BaseAd ad)
         {
             MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient();
-
-            mail.From = new MailAddress("beaproject@gmail.com");
+            mail.From = new MailAddress("beaprojectnc@gmail.com");
             mail.To.Add(ad.CreatedBy.Email);
             mail.Subject = String.Format("BEA Activez votre annonce\"{0}\"", ad.Title);
             mail.ReplyToList.Add("no-reply@bea.nc");
@@ -86,7 +84,13 @@ namespace Bea.Services
                          + "Pour cela, merci de bien vouloir cliquer sur le lien ci-dessous pour confirmer votre annonce."
                          + "http://bea.nc/Ad/Activate/{0}/{1}", ad.Id, ad.ActivationToken);
 
-            //SmtpServer.SendAsync(mail, ad.Id);
+            SendEmailAsync(mail, ad);
+        }
+
+        public void SendEmailAsync(MailMessage message, BaseAd ad)
+        {
+            SmtpClient SmtpServer = new SmtpClient();
+            SmtpServer.SendAsync(message, ad.Id);
         }
     }
 }

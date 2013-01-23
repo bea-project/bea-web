@@ -6,3 +6,4 @@ packages/*
 */bea.log
 */bea.log.*
 *.user
+*.dmgl
