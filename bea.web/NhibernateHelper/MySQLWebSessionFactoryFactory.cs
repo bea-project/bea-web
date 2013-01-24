@@ -19,7 +19,7 @@ namespace Bea.Web.NhibernateHelper
         protected override IPersistenceConfigurer SetPersistenceConfigurer()
         {
             return MySQLConfiguration.Standard
-                .ConnectionString("Server=127.0.0.1;Port=3306;Database=bea;Uid=bea;Pwd=bea;").ShowSql();
+                .ConnectionString(c => c.FromConnectionStringWithKey("mySqlServerConnectionString")).ShowSql();
         }
 
         protected override void ExposeConfiguration(Configuration cfg)
