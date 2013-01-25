@@ -246,6 +246,15 @@ namespace Bea.Web.NhibernateHelper
             //_repository.Save(new CarFuel { Label = "Electrique" });
             _repository.Save(new CarFuel { Label = "Autre" });
 
+            _repository.Save(new MotorBoatType { Label = "Aluminium" });
+            _repository.Save(new MotorBoatType { Label = "Fibre" });
+            _repository.Save(new MotorBoatType { Label = "Semi-Rigide" });
+            _repository.Save(new MotorBoatType { Label = "Bois" });
+            _repository.Save(new MotorBoatType { Label = "Autre" });
+
+            _repository.Save(new MotorBoatEngineType { Label = "2-Temps" });
+            _repository.Save(new MotorBoatEngineType { Label = "4-Temps" });
+
             _repository.Flush();
         }
 
@@ -263,11 +272,12 @@ namespace Bea.Web.NhibernateHelper
             vehicles.AddCategory(new Category { Label = "Autres Vehicules", Type = AdTypeEnum.OtherVehiculeAd });
             vehicles.AddCategory(new Category { Label = "Equipement auto", Type = AdTypeEnum.Ad });
             vehicles.AddCategory(new Category { Label = "Equipement moto", Type = AdTypeEnum.Ad });
+            vehicles.AddCategory(new Category { Label = "Tuning", Type = AdTypeEnum.Ad });
             _sessionFactory.GetCurrentSession().Save(vehicles);
 
             CategoryGroup nautisme = new CategoryGroup();
             nautisme.Label = "Nautisme";
-            nautisme.AddCategory(new Category { Label = "Bateaux à moteur", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { Label = "Bateaux à moteur", Type = AdTypeEnum.MotorBoatAd });
             nautisme.AddCategory(new Category { Label = "Kite Surf", Type = AdTypeEnum.KiteAd });
             nautisme.AddCategory(new Category { Label = "Planches à voile", Type = AdTypeEnum.Ad });
             _sessionFactory.GetCurrentSession().Save(nautisme);

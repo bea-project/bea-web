@@ -13,6 +13,7 @@ using Bea.Domain.Ads;
 using Bea.Domain.Search;
 using Bea.Models.Create;
 using Bea.Models.Create.Vehicules;
+using Bea.Models.Create.WaterSport;
 
 namespace Bea.Web.Controllers
 {
@@ -119,8 +120,11 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.OtherVehiculeAd:
                     AdOtherVehicleCreateModel otherVehicleModel = new AdOtherVehicleCreateModel();
                     return PartialView("Shared/Create/_OtherVehicleAdCreate", otherVehicleModel);
+
+                case AdTypeEnum.MotorBoatAd:
+                    AdMotorBoatCreateModel motorBoatModel = new AdMotorBoatCreateModel();
+                    return PartialView("Shared/Create/_MotorBoatAdCreate", motorBoatModel);
             }
-            //return PartialView("Shared/Create/_temp");
             return null;
         }
 
@@ -147,6 +151,10 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.VehiculeAd:
                     AdVehicleCreateModel adVehicleCreateModel = new AdVehicleCreateModel(ad as VehicleAd);
                     return adVehicleCreateModel;
+
+                case AdTypeEnum.MotorBoatAd:
+                    AdMotorBoatCreateModel adMotorBoatCreateModel = new AdMotorBoatCreateModel(ad as MotorBoatAd);
+                    return adMotorBoatCreateModel;
 
                 case AdTypeEnum.Ad:
                     return createModel;
@@ -176,6 +184,11 @@ namespace Bea.Web.Controllers
                     break;
                 case AdTypeEnum.VehiculeAd:
                     ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
+                    break;
+                case AdTypeEnum.MotorBoatAd:
+                    ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
+                    ViewBag.Types = _referenceServices.GetAllMotorBoatTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                    ViewBag.MotorTypes = _referenceServices.GetAllMotorBoatEngineTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;
             }
         }

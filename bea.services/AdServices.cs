@@ -130,16 +130,19 @@ namespace Bea.Services
                 switch (Int32.Parse(form["Type"]))
                 {
                     case (int)AdTypeEnum.CarAd:
-                        ad = GeatCarAdFromModel(form);
+                        ad = GetCarAdFromModel(form);
                         break;
                     case (int)AdTypeEnum.MotoAd:
-                        ad = GeatMotoAdFromModel(form);
+                        ad = GetMotoAdFromModel(form);
                         break;
                     case (int)AdTypeEnum.OtherVehiculeAd:
-                        ad = GeatOtherVehicleAdFromModel(form);
+                        ad = GetOtherVehicleAdFromModel(form);
                         break;
                     case (int)AdTypeEnum.VehiculeAd:
-                        ad = GeatVehicleAdFromModel(form);
+                        ad = GetVehicleAdFromModel(form);
+                        break;
+                    case (int)AdTypeEnum.MotorBoatAd:
+                        ad = GetMotorBoatAdFromModel(form);
                         break;
                     default:
                         ad = new Ad();
@@ -180,7 +183,7 @@ namespace Bea.Services
         }
 
 
-        private BaseAd GeatCarAdFromModel(Dictionary<string, string> form)
+        private BaseAd GetCarAdFromModel(Dictionary<string, string> form)
         {
             CarAd carAd = new CarAd();
             int kilometer;
@@ -202,7 +205,44 @@ namespace Bea.Services
             return (carAd);
         }
 
-        private BaseAd GeatVehicleAdFromModel(Dictionary<string, string> form)
+        private BaseAd GetMotorBoatAdFromModel(Dictionary<string, string> form)
+        {
+            MotorBoatAd motorBoatAd = new MotorBoatAd();
+            
+            int selectedTypeId;
+            bool result = Int32.TryParse(form["SelectedTypeId"], out selectedTypeId);
+            if (result)
+                motorBoatAd.Type = _repository.Get<MotorBoatType>(selectedTypeId);
+
+            int selectedMotorTypeId;
+            result = Int32.TryParse(form["SelectedMotorTypeId"], out selectedMotorTypeId);
+            if (result)
+                motorBoatAd.MotorType = _repository.Get<MotorBoatEngineType>(selectedMotorTypeId);
+
+            int selectedYearId;
+            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
+            if (result)
+                motorBoatAd.Year = selectedYearId;
+
+            int hP;
+            result = Int32.TryParse(form["Hp"], out hP);
+            if (result)
+                motorBoatAd.Hp = hP;
+
+            Decimal length;
+            result = Decimal.TryParse(form["Length"], out length);
+            if (result)
+                motorBoatAd.Length = length;
+
+            int nbHours;
+            result = Int32.TryParse(form["NbHours"], out nbHours);
+            if (result)
+                motorBoatAd.NbHours = nbHours;
+
+            return (motorBoatAd);
+        }
+
+        private BaseAd GetVehicleAdFromModel(Dictionary<string, string> form)
         {
             VehicleAd vehicleAd = new VehicleAd();
             int kilometer;
@@ -216,7 +256,7 @@ namespace Bea.Services
             return (vehicleAd);
         }
 
-        private BaseAd GeatOtherVehicleAdFromModel(Dictionary<string, string> form)
+        private BaseAd GetOtherVehicleAdFromModel(Dictionary<string, string> form)
         {
             OtherVehicleAd otherVehicleAd = new OtherVehicleAd();
             int kilometer;
@@ -234,7 +274,7 @@ namespace Bea.Services
             return (otherVehicleAd);
         }
 
-        private MotoAd GeatMotoAdFromModel(Dictionary<string, string> form)
+        private MotoAd GetMotoAdFromModel(Dictionary<string, string> form)
         {
             MotoAd motoAd = new MotoAd();
             int kilometer;

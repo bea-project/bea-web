@@ -33,6 +33,16 @@ namespace Bea.Services
             return _repository.GetAll<CarFuel>().ToList();
         }
 
+        public IList<MotorBoatType> GetAllMotorBoatTypes()
+        {
+            return _repository.GetAll<MotorBoatType>().ToList();
+        }
+
+        public IList<MotorBoatEngineType> GetAllMotorBoatEngineTypes()
+        {
+            return _repository.GetAll<MotorBoatEngineType>().ToList();
+        }
+
         public Dictionary<int, string> GetAllYears(int nbYears)
         {
             

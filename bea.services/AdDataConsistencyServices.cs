@@ -45,6 +45,10 @@ namespace Bea.Services
                     GetVehicleAdDataConsistencyErrors(ad as VehicleAd, errors);
                     break;
 
+                case AdTypeEnum.MotorBoatAd:
+                    GetMotorBoatAdDataConsistencyErrors(ad as MotorBoatAd, errors);
+                    break;
+
                 default:
                     break;
             }
@@ -71,6 +75,29 @@ namespace Bea.Services
 
             if (ad.Category == null)
                 errors.Add("SelectedCategoryId", "Veuillez séléctionner une catégorie.");
+
+            return errors;
+        }
+
+        public IDictionary<string, string> GetMotorBoatAdDataConsistencyErrors(MotorBoatAd motorBoatAd, IDictionary<string, string> errors)
+        {
+            if (motorBoatAd.NbHours == 0)
+                errors.Add("NbHours", "Veuillez saisir un nombre d'heure moteur.");
+
+            if (motorBoatAd.MotorType == null)
+                errors.Add("SelectedMotorTypeId", "Veuillez sélectionner un type de moteur.");
+
+            if (motorBoatAd.Type == null)
+                errors.Add("SelectedTypeId", "Veuillez sélectionner un type.");
+
+            if (motorBoatAd.Year == 0)
+                errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
+
+            if (motorBoatAd.Hp == 0)
+                errors.Add("Hp", "Veuillez saisir une puissance.");
+
+            if (motorBoatAd.Length == 0)
+                errors.Add("Length", "Veuillez saisir une longueur.");
 
             return errors;
         }

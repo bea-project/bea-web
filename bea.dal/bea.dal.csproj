@@ -61,6 +61,7 @@
     <Compile Include="Map\Ads\BaseAdMap.cs" />
     <Compile Include="Map\Ads\LightCarAdMap.cs" />
     <Compile Include="Map\Ads\MotoAdMap.cs" />
+    <Compile Include="Map\Ads\MotorBoatMap.cs" />
     <Compile Include="Map\Ads\OtherVehicleAdMap.cs" />
     <Compile Include="Map\Ads\RealEstateAdMap.cs" />
     <Compile Include="Map\Categories\CategoryGroupMap.cs" />
@@ -72,6 +73,8 @@
     <Compile Include="Map\Reference\CarBrandMap.cs" />
     <Compile Include="Map\Reference\CarFuelMap.cs" />
     <Compile Include="Map\Reference\MotoBrandMap.cs" />
+    <Compile Include="Map\Reference\MotorBoatMotorTypeMap.cs" />
+    <Compile Include="Map\Reference\MotorBoatTypeMap.cs" />
     <Compile Include="Map\Reference\RealEstateTypeMap.cs" />
     <Compile Include="Map\Search\SearchAdCacheMap.cs" />
     <Compile Include="Map\UserMap.cs">
