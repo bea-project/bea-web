@@ -48,15 +48,14 @@ namespace Bea.Web.Controllers
                 if (hpf.ContentLength == 0)
                     continue;
 
-                string savedFileName = Path.Combine(
-                   Server.MapPath("~/App_Data/Images"),
-                   Path.GetFileName(hpf.FileName));
+                byte[] fileData = null;
+                using (var binaryReader = new BinaryReader(hpf.InputStream))
+                {
+                    fileData = binaryReader.ReadBytes(hpf.ContentLength);
+                }
 
-                hpf.SaveAs(savedFileName);
-                
-                Guid result = _adImageServices.StoreImage(hpf.FileName, System.IO.File.ReadAllBytes(savedFileName));
+                Guid result = _adImageServices.StoreImage(hpf.FileName, fileData);
                 imagesGuid.Add(result.ToString());
-                System.IO.File.Delete(savedFileName);
             }
 
             return Json(imagesGuid);
