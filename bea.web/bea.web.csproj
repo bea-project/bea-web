@@ -149,7 +149,6 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\API\AdAPIController.cs" />
     <Compile Include="Controllers\AdImageController.cs" />
-    <Compile Include="Controllers\API\AdImageApiController.cs" />
     <Compile Include="Controllers\API\CategoryAPIController.cs" />
     <Compile Include="Controllers\API\ReferenceAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
