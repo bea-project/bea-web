@@ -22,17 +22,44 @@ namespace Bea.Web.Controllers
         }
 
         //
-        // GET: /AdImage/
+        // GET: /AdImage/Get/{id}
         [AcceptVerbs(HttpVerbs.Get)]
         //[OutputCache(CacheProfile = "AdImages")]
-        public ActionResult Index(String imageId)
+        public ActionResult Get(String id)
         {
-            byte[] imageBytes = _adImageServices.GetAdImage(imageId, false);
+            byte[] imageBytes = _adImageServices.GetAdImage(id, false);
 
             if (imageBytes == null)
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
             return new FileContentResult(imageBytes, "image/jpg");
+        }
+
+        //
+        // POST: /AdImage/UploadImage
+        [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UploadImage()
+        {
+            IList<String> imagesGuid = new List<string>();
+            foreach (string file in Request.Files)
+            {
+                var hpf = Request.Files[file];
+                if (hpf.ContentLength == 0)
+                    continue;
+
+                string savedFileName = Path.Combine(
+                   Server.MapPath("~/App_Data/Images"),
+                   Path.GetFileName(hpf.FileName));
+
+                hpf.SaveAs(savedFileName);
+                
+                Guid result = _adImageServices.StoreImage(hpf.FileName, System.IO.File.ReadAllBytes(savedFileName));
+                imagesGuid.Add(result.ToString());
+                System.IO.File.Delete(savedFileName);
+            }
+
+            return Json(imagesGuid);
         }
 
     }

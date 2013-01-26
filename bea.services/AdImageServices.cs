@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Transactions;
 using Bea.Core.Dal;
 using Bea.Core.Services;
 using Bea.Domain;
@@ -17,14 +18,23 @@ namespace Bea.Services
             _repository = repository;
         }
 
-        public int StoreImage(String fileName, Byte[] imageBytes)
+        public Guid StoreImage(String fileName, Byte[] imageBytes)
         {
-            AdImage image = new AdImage();
-            image.FileName = fileName;
-            image.ImageBytes = imageBytes;
-            //TODO: create a thumbnail
+            Guid resultId;
 
-            return _repository.Save<AdImage, int>(image);
+            using (TransactionScope scope = new TransactionScope())
+            {
+                AdImage image = new AdImage();
+                image.FileName = fileName;
+                image.ImageBytes = imageBytes;
+                //TODO: create a thumbnail
+
+                resultId = _repository.Save<AdImage, Guid>(image);
+
+                scope.Complete();
+            }
+
+            return resultId;
         }
 
         public byte[] GetAdImage(string id, bool isThumbnail)

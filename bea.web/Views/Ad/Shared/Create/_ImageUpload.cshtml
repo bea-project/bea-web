@@ -1,0 +1,58 @@
+﻿<script src="@Url.Content("~/Scripts/jquery.filedrop.js")" type="text/javascript"></script>
+<style type="text/css">
+    #dropZone
+    {
+        background: gray;
+        border: black dashed 2px;
+        width: 200px;
+        padding: 50px;
+        text-align: center;
+        color: white;
+        vertical-align: middle;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $('#dropZone').filedrop({
+            url: '@Url.Action("UploadImage", "AdImage")',
+            paramname: 'files',
+            maxFiles: 5,
+            dragOver: function () {
+                $('#dropZone').css('background', 'blue');
+                $('#dropZone').html('Déposez les ici !');
+            },
+            dragLeave: function () {
+                $('#dropZone').css('background', 'gray');
+                $('#dropZone').html('Glissez vos images ici...');
+            },
+            drop: function () {
+                $('#dropZone').css('background', 'green');
+            },
+            afterAll: function () {
+                $('#dropZone').html('Les images ont été ajoutées avec succès !');
+                $('#dropZone').css('background', 'gray');
+            },
+            progressUpdated: function (index, file, currentProgress) {
+                $('#dropZone').html('Upload en cours...<br/>' + file.name + ' ' + currentProgress + '%');
+            },
+            uploadFinished: function (i, file, response, time) {
+                $('#uploadResult').append('<li>' + file.name + ' ' + response + '</li>');
+                $('#images').val($('#images').val() + response + ';');
+            }
+        });
+    });
+</script>
+
+<h4><i class="icon-camera"></i>&nbsp;Vos photos</h4>
+<div class="control-group">
+    <label class="control-label">Une annonce avec une photo est beaucoup plus consultée, pensez-y !</label>
+    <div class="controls controls-row">
+        <div id="dropZone">Glissez vos images <br />dans ce cadre...</div>
+        <br />
+        Images:
+    <ul id="uploadResult">
+        
+    </ul>
+        <input type="hidden" id="images"/>
+    </div>
+</div>

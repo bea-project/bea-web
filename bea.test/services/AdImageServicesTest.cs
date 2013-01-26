@@ -16,13 +16,14 @@ namespace Bea.Test.Services
         public void StoreImage_SavesImageInDbAndReturnCreatedIdentifier()
         {
             // Given
+            Guid guidId = new Guid("14a5e994-fd5d-4a32-859d-a152013ad860");
             var repoMock = new Moq.Mock<IRepository>();
-            repoMock.Setup(x => x.Save<AdImage, int>(Moq.It.IsAny<AdImage>())).Returns(9);
+            repoMock.Setup(x => x.Save<AdImage, Guid>(Moq.It.IsAny<AdImage>())).Returns(guidId);
 
             AdImageServices service = new AdImageServices(repoMock.Object);
 
             // Then
-            Assert.AreEqual(9, service.StoreImage("coucou", new byte[10]));
+            Assert.AreEqual(guidId, service.StoreImage("coucou", new byte[10]));
         }
 
         [TestMethod]
