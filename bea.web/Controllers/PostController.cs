@@ -17,7 +17,7 @@ using Bea.Models.Create.WaterSport;
 
 namespace Bea.Web.Controllers
 {
-    public class AdController : Controller
+    public class PostController : Controller
     {
         private IAdServices _adServices;
         private ILocationServices _locationServices;
@@ -27,7 +27,7 @@ namespace Bea.Web.Controllers
         private IReferenceServices _referenceServices;
         private IAdActivationServices _adActivationServices;
 
-        public AdController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices)
+        public PostController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices)
         {
             _adServices = adServices;
             _locationServices = locationServices;
@@ -39,14 +39,14 @@ namespace Bea.Web.Controllers
         }
 
         //
-        // GET: /Ad/
+        // GET: /Post/
         public ActionResult Index()
         {
             return RedirectToAction("Index", "Home");
         }
 
         //
-        // GET: /Ad/Details/{id}
+        // GET: /Post/Details/{id}
         public ActionResult Details(long id)
         {
             var result = _adServices.GetAdDetails(id);
@@ -58,7 +58,7 @@ namespace Bea.Web.Controllers
         }
 
         //
-        // GET: /Ad/Activate/{id}/{activationToken}
+        // GET: /Post/Activate/{id}/{activationToken}
         public ActionResult Activate(long id, string activationToken)
         {
             var result = _adActivationServices.ActivateAd(id, activationToken);

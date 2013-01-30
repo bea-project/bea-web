@@ -82,7 +82,7 @@ namespace Bea.Services
             mail.Body = String.Format("Bonjour,"
                  + "Vous venez de créer votre annonce. Afin que celle-ci soit visible sur bea.nc, nous avons besoin de valider votre adresse email."
                          + "Pour cela, merci de bien vouloir cliquer sur le lien ci-dessous pour confirmer votre annonce."
-                         + "http://bea.nc/Ad/Activate/{0}/{1}", ad.Id, ad.ActivationToken);
+                         + "http://bea.nc/Post/Activate/{0}/{1}", ad.Id, ad.ActivationToken);
 
             SendEmailAsync(mail, ad);
         }

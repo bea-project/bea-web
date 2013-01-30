@@ -145,10 +145,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ContainerConfig.cs" />
-    <Compile Include="Controllers\AdController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\API\AdAPIController.cs" />
-    <Compile Include="Controllers\AdImageController.cs" />
+    <Compile Include="Controllers\PostImageController.cs" />
     <Compile Include="Controllers\API\CategoryAPIController.cs" />
     <Compile Include="Controllers\API\ReferenceAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -239,7 +239,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Index.cshtml" />
+    <Content Include="Views\Post\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -257,7 +257,7 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Details.cshtml" />
+    <Content Include="Views\Post\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_TestData.cshtml" />
@@ -270,34 +270,34 @@
     <Folder Include="Controllers\Reference\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Create.cshtml" />
+    <Content Include="Views\Post\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Shared\Create\_CarAdCreate.cshtml" />
+    <Content Include="Views\Post\Shared\Create\_CarAdCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Shared\Details\_CarAdDetailsPartial.cshtml" />
+    <Content Include="Views\Post\Shared\Details\_CarAdDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Shared\Details\_AdDetailBreadCrumbPartial.cshtml" />
+    <Content Include="Views\Post\Shared\Details\_AdDetailBreadCrumbPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Shared\Create\_MotoAdCreate.cshtml" />
+    <Content Include="Views\Post\Shared\Create\_MotoAdCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Shared\Create\_OtherVehicleAdCreate.cshtml" />
+    <Content Include="Views\Post\Shared\Create\_OtherVehicleAdCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Shared\Details\_MotoAdDetailsPartial.cshtml" />
+    <Content Include="Views\Post\Shared\Details\_MotoAdDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Shared\Details\_OtherVehicleAdDetailsPartial.cshtml" />
+    <Content Include="Views\Post\Shared\Details\_OtherVehicleAdDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Activate.cshtml" />
+    <Content Include="Views\Post\Activate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\SearchAdCache.cshtml" />
@@ -306,16 +306,16 @@
     <Content Include="Views\Admin\BaseAd.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Shared\Create\_temp.cshtml" />
+    <Content Include="Views\Post\Shared\Create\_temp.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Shared\Create\_VehicleAdCreate.cshtml" />
+    <Content Include="Views\Post\Shared\Create\_VehicleAdCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Shared\Create\_MotorBoatAdCreate.cshtml" />
+    <Content Include="Views\Post\Shared\Create\_MotorBoatAdCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ad\Shared\Create\_ImageUpload.cshtml" />
+    <Content Include="Views\Post\Shared\Create\_ImageUpload.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

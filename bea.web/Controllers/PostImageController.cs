@@ -9,11 +9,11 @@ using Bea.Core.Services;
 
 namespace Bea.Web.Controllers
 {
-    public class AdImageController : Controller
+    public class PostImageController : Controller
     {
         private readonly IAdImageServices _adImageServices;
 
-        public AdImageController(IAdImageServices adImageServices)
+        public PostImageController(IAdImageServices adImageServices)
         {
             if (adImageServices == null)
                 throw new ArgumentNullException("adImageServices");
@@ -22,7 +22,7 @@ namespace Bea.Web.Controllers
         }
 
         //
-        // GET: /AdImage/Get/{id}
+        // GET: /PostImage/Get/{id}
         [AcceptVerbs(HttpVerbs.Get)]
         //[OutputCache(CacheProfile = "AdImages")]
         public ActionResult Get(String id)
@@ -36,7 +36,7 @@ namespace Bea.Web.Controllers
         }
 
         //
-        // POST: /AdImage/UploadImage
+        // POST: /PostImage/UploadImage
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UploadImage()

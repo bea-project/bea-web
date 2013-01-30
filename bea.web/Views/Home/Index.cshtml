@@ -42,7 +42,7 @@
             <td>
                 @if (!String.IsNullOrEmpty(item.MainImageId))
                 {
-                    <img alt="@item.Title" src="/AdImage/Get/@item.MainImageId" class="img-polaroid">
+                    <img alt="@item.Title" src="/PostImage/Get/@item.MainImageId" class="img-polaroid">
                 }
             </td>
             <td>
@@ -62,8 +62,8 @@
             </td>
 
             <td>
-                @Html.ActionLink("Details", "Details", new { controller = "Ad", id = item.AdId })
-                @Html.ActionLink("Delete", "Delete", new { controller = "Ad", id = item.AdId })
+                @Html.ActionLink("Details", "Details", new { controller = "Post", id = item.AdId })
+                @Html.ActionLink("Delete", "Delete", new { controller = "Post", id = item.AdId })
             </td>
 
         </tr>

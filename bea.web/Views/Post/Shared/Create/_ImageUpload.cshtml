@@ -18,7 +18,7 @@
 
     $(function () {
         $('#dropZone').filedrop({
-            url: '@Url.Action("UploadImage", "AdImage")',
+            url: '@Url.Action("UploadImage", "PostImage")',
             paramname: 'files',
             maxFiles: 5,
             dragOver: function () {
@@ -59,7 +59,7 @@
             },
             uploadFinished: function (i, file, response, time) {
                 $('#ImageIds').val($('#ImageIds').val() + response + ';');
-                $('#imageThumbnails').append('<div id="' + response + '" class="thumbnail span3"><img src="/AdImage/Get/' + response + '" width="100"><button class="btn btn-link" type="button" onclick="deleteImage(\'' + response + '\');"><i class="icon-black icon-remove"></i>Effacer</button></div>');
+                $('#imageThumbnails').append('<div id="' + response + '" class="thumbnail span3"><img src="/PostImage/Get/' + response + '" width="100"><button class="btn btn-link" type="button" onclick="deleteImage(\'' + response + '\');"><i class="icon-black icon-remove"></i>Effacer</button></div>');
             }
         });
     });
@@ -95,7 +95,7 @@
                 foreach (String imageId in Model.ImageIds.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                 <div id="@imageId" class="thumbnail span3">
-                    <img src="/AdImage/Get/@imageId" width="100">
+                    <img src="/PostImage/Get/@imageId" width="100">
                     <button class="btn btn-link" type="button" onclick="deleteImage('@imageId');">
                         <i class="icon-black icon-remove"></i>Effacer
                     </button>
