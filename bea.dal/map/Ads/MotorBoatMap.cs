@@ -8,6 +8,7 @@ using Bea.Domain;
 using Bea.Domain.Location;
 using Bea.Domain.Categories;
 using Bea.Domain.Reference;
+using Bea.Domain.Ads.WaterSport;
 
 namespace Bea.Dal.Map.Ads
 {

@@ -14,6 +14,7 @@ using Bea.Domain.Search;
 using Bea.Models.Create;
 using Bea.Models.Create.Vehicules;
 using Bea.Models.Create.WaterSport;
+using Bea.Domain.Ads.WaterSport;
 
 namespace Bea.Web.Controllers
 {
@@ -124,6 +125,10 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.MotorBoatAd:
                     AdMotorBoatCreateModel motorBoatModel = new AdMotorBoatCreateModel();
                     return PartialView("Shared/Create/_MotorBoatAdCreate", motorBoatModel);
+
+                case AdTypeEnum.SailingBoatAd:
+                    AdSailingBoatCreateModel sailingBoatModel = new AdSailingBoatCreateModel();
+                    return PartialView("Shared/Create/_SailingBoatAdCreate", sailingBoatModel);
             }
             return null;
         }
@@ -155,6 +160,10 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.MotorBoatAd:
                     AdMotorBoatCreateModel adMotorBoatCreateModel = new AdMotorBoatCreateModel(ad as MotorBoatAd);
                     return adMotorBoatCreateModel;
+
+                case AdTypeEnum.SailingBoatAd:
+                    AdSailingBoatCreateModel adSailingBoatCreateModel = new AdSailingBoatCreateModel(ad as SailingBoatAd);
+                    return adSailingBoatCreateModel;
 
                 case AdTypeEnum.Ad:
                     return createModel;
@@ -189,6 +198,11 @@ namespace Bea.Web.Controllers
                     ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                     ViewBag.Types = _referenceServices.GetAllMotorBoatTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     ViewBag.MotorTypes = _referenceServices.GetAllMotorBoatEngineTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                    break;
+                case AdTypeEnum.SailingBoatAd:
+                    ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
+                    ViewBag.Types = _referenceServices.GetAllSailingBoatTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                    ViewBag.HullTypes = _referenceServices.GetAllSailingBoatHullTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;
             }
         }

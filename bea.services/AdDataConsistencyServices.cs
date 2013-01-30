@@ -5,6 +5,7 @@ using System.Text;
 using Bea.Core.Services;
 using Bea.Domain.Ads;
 using System.Text.RegularExpressions;
+using Bea.Domain.Ads.WaterSport;
 
 namespace Bea.Services
 {
@@ -49,6 +50,10 @@ namespace Bea.Services
                     GetMotorBoatAdDataConsistencyErrors(ad as MotorBoatAd, errors);
                     break;
 
+                case AdTypeEnum.SailingBoatAd:
+                    GetSailingBoatAdDataConsistencyErrors(ad as SailingBoatAd, errors);
+                    break;
+
                 default:
                     break;
             }
@@ -75,6 +80,23 @@ namespace Bea.Services
 
             if (ad.Category == null)
                 errors.Add("SelectedCategoryId", "Veuillez séléctionner une catégorie.");
+
+            return errors;
+        }
+
+        public IDictionary<string, string> GetSailingBoatAdDataConsistencyErrors(SailingBoatAd sailingBoatAd, IDictionary<string, string> errors)
+        {
+            if (sailingBoatAd.HullType == null)
+                errors.Add("SelectedHullTypeId", "Veuillez sélectionner une coque.");
+
+            if (sailingBoatAd.Type == null)
+                errors.Add("SelectedTypeId", "Veuillez sélectionner un matériaux.");
+
+            if (sailingBoatAd.Year == 0)
+                errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
+
+            if (sailingBoatAd.Length == 0)
+                errors.Add("Length", "Veuillez saisir une longueur.");
 
             return errors;
         }

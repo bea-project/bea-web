@@ -43,6 +43,16 @@ namespace Bea.Services
             return _repository.GetAll<MotorBoatEngineType>().ToList();
         }
 
+        public IList<SailingBoatHullType> GetAllSailingBoatHullTypes()
+        {
+            return _repository.GetAll<SailingBoatHullType>().ToList();
+        }
+
+        public IList<SailingBoatType> GetAllSailingBoatTypes()
+        {
+            return _repository.GetAll<SailingBoatType>().ToList();
+        }
+
         public Dictionary<int, string> GetAllYears(int nbYears)
         {
             

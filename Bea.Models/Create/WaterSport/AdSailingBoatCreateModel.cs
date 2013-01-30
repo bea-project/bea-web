@@ -1,41 +1,35 @@
-﻿using System;
+﻿using Bea.Domain.Ads;
+using Bea.Domain.Ads.WaterSport;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.ComponentModel;
-using Bea.Domain.Ads;
-using Bea.Domain.Ads.WaterSport;
 
 namespace Bea.Models.Create.WaterSport
 {
-    public class AdMotorBoatCreateModel : AdCreateModel
+    public class AdSailingBoatCreateModel : AdCreateModel
     {
-        [DisplayName("Type:")]
-        public int? SelectedTypeId { get; set; }
-
+        [DisplayName("Coque:")]
+        public int? SelectedHullTypeId { get; set; }
+        
         [DisplayName("Longueur:")]
         public Decimal? Length { get; set; }
-
-        [DisplayName("Moteur:")]
-        public int? SelectedMotorTypeId { get; set; }
 
         [DisplayName("Annee-Modele:")]
         public int? SelectedYearId { get; set; }
 
-        [DisplayName("Heures Moteur:")]
-        public int? NbHours { get; set; }
+        [DisplayName("Matériaux:")]
+        public int? SelectedTypeId { get; set; }
 
-        [DisplayName("Puissance Moteur:")]
-        public int? Hp { get; set; }
-        
         public int Type { get; set; }
 
-        public AdMotorBoatCreateModel()
+        public AdSailingBoatCreateModel()
         {
-            this.Type = this.Type = (int)AdTypeEnum.MotorBoatAd;
+            this.Type = this.Type = (int)AdTypeEnum.SailingBoatAd;
         }
 
-        public AdMotorBoatCreateModel(MotorBoatAd ad)
+        public AdSailingBoatCreateModel(SailingBoatAd ad)
         {
             this.Body = ad.Body;
             this.IsOffer = ad.IsOffer;
@@ -50,18 +44,17 @@ namespace Bea.Models.Create.WaterSport
             this.Telephone = ad.PhoneNumber;
             this.Title = ad.Title;
 
-            this.Hp = ad.Hp;
             this.Length = ad.Length;
-            this.NbHours = ad.NbHours;
 
+            if (ad.HullType != null)
+                this.SelectedHullTypeId = ad.HullType.Id;
             if (ad.Type != null)
                 this.SelectedTypeId = ad.Type.Id;
-            if (ad.MotorType != null)
-                this.SelectedMotorTypeId = ad.MotorType.Id;
 
             if (ad.Year != 0)
                 this.SelectedYearId = ad.Year;
-            this.Type = (int)AdTypeEnum.MotorBoatAd;
+            this.Type = (int)AdTypeEnum.SailingBoatAd;
         }
+
     }
 }
