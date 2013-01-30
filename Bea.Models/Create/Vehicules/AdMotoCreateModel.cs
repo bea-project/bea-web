@@ -16,31 +16,18 @@ namespace Bea.Models.Create.Vehicules
         [DisplayName("Cylindrée:")]
         public int EngineSize { get; set; }
 
-        //public int Type { get; set; }
-
         public AdMotoCreateModel()
+            : base()
         {
             this.Type = (int)AdTypeEnum.MotoAd;
         }
 
         public AdMotoCreateModel(MotoAd ad)
+            : base(ad)
         {
-            this.Body = ad.Body;
-            this.IsOffer = ad.IsOffer;
-            this.Price = ad.Price;
-            if (ad.Category != null)
-                this.SelectedCategoryId = ad.Category.Id;
-            if (ad.City != null)
-            {
-                this.SelectedCityId = ad.City.Id;
-                this.SelectedProvinceId = ad.City.Province.Id;
-            }
-            this.Telephone = ad.PhoneNumber;
-            this.Title = ad.Title;
-            this.Km = ad.Kilometers;
             if (ad.Brand != null)
                 this.SelectedBrandId = ad.Brand.Id;
-            this.EngineSize= ad.EngineSize;
+            this.EngineSize = ad.EngineSize;
             this.Type = (int)AdTypeEnum.MotoAd;
         }
 

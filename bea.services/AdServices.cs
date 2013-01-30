@@ -71,6 +71,8 @@ namespace Bea.Services
             }
         }
 
+        #region consultation
+
         public AdDetailsModel GetAdDetails(long adId)
         {
             AdTypeEnum adType = _adRepository.GetAdType(adId);
@@ -120,6 +122,10 @@ namespace Bea.Services
 
             return model;
         }
+
+        #endregion
+
+        #region creation
 
         public BaseAd GetAdFromModel(AdCreateModel model, Dictionary<string, string> form)
         {
@@ -318,5 +324,7 @@ namespace Bea.Services
                 motoAd.EngineSize = engineSize;
             return (motoAd);
         }
+
+        #endregion
     }
 }

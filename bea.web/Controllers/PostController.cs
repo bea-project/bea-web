@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Bea.Core.Services;
-using Bea.Domain;
-using Bea.Models;
-using System.Diagnostics;
-using Bea.Domain.Location;
 using Bea.Domain.Categories;
 using Bea.Domain.Ads;
-using Bea.Domain.Search;
 using Bea.Models.Create;
 using Bea.Models.Create.Vehicules;
 using Bea.Models.Create.WaterSport;
@@ -99,6 +92,8 @@ namespace Bea.Web.Controllers
             return View(returnModel);
         }
 
+        //
+        // GET: /Post/AddParamters/{id}
         public PartialViewResult AddParamters(int categoryId)
         {
             Category selectedCategory = _categoryServices.GetCategoryById(categoryId);
@@ -129,11 +124,12 @@ namespace Bea.Web.Controllers
         }
 
         private AdCreateModel GetModelFromBaseAd(BaseAd ad, AdCreateModel createModel)
-        {
-            
+        {   
             if (ad.Category == null)
                 return createModel;
+         
             FillViewLists(ad.Category);
+            
             switch (ad.Category.Type)
             {
                 case AdTypeEnum.CarAd:
@@ -161,7 +157,6 @@ namespace Bea.Web.Controllers
             }
             return null;
         }
-
 
         private void FillViewLists(Category category)
         {

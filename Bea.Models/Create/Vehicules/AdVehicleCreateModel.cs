@@ -19,27 +19,19 @@ namespace Bea.Models.Create.Vehicules
         public int Type { get; set; }
 
         public AdVehicleCreateModel()
+            : base()
         {
             this.Type = (int)AdTypeEnum.VehiculeAd;
         }
 
         public AdVehicleCreateModel(VehicleAd ad)
+            : base(ad)
         {
-            this.Body = ad.Body;
-            this.IsOffer = ad.IsOffer;
-            this.Price = ad.Price;
-            if (ad.Category != null)
-                this.SelectedCategoryId = ad.Category.Id;
-            if (ad.City != null)
-            {
-                this.SelectedCityId = ad.City.Id;
-                this.SelectedProvinceId = ad.City.Province.Id;
-            }
-            this.Telephone = ad.PhoneNumber;
-            this.Title = ad.Title;
-            this.Km = ad.Kilometers;
+           this.Km = ad.Kilometers;
+
             if (ad.Year != 0)
                 this.SelectedYearId = ad.Year;
+
             this.Type = (int)AdTypeEnum.VehiculeAd;
         }
     }
