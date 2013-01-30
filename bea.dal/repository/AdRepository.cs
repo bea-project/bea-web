@@ -63,7 +63,6 @@ namespace Bea.Dal.Repository
             T ad = _sessionFactory.GetCurrentSession().Query<T>()
                 .Fetch(x => x.CreatedBy)
                 .Fetch(x => x.City)
-                .Fetch(x => x.Images)
                 .Where(x => x.Id == adId).FirstOrDefault();
 
             return ad;

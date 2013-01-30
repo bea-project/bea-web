@@ -303,5 +303,53 @@ namespace Bea.Test.services
             Assert.IsTrue(ad is CarAd);
 
         }
+
+        [TestMethod]
+        public void GetAdPicturesFromModel_NoPictures_ReturnAdWithoutPictures()
+        {
+            // Given
+            BaseAd ad = new Ad();
+            String images = null;
+
+            AdServices service = new AdServices(null, null, null, null, null);
+
+            // When
+            
+            BaseAd result = service.GetAdPicturesFromModel(ad, images);
+
+            // Then
+            Assert.AreEqual(ad, result);
+            Assert.AreEqual(0, ad.Images.Count);
+        }
+
+        [TestMethod]
+        public void GetAdPicturesFromModel_2Pictures_FetchThemFromRepoAndSetFirstAsMainImage()
+        {
+            // Given
+            BaseAd ad = new Ad();
+            String images = "b9da8b1e-aa77-401b-84e0-a1290130b7b7;b9da8b1e-aa77-401b-84e0-a1290130b999;";
+
+            AdImage img1 = new AdImage() { Id = Guid.Parse("b9da8b1e-aa77-401b-84e0-a1290130b7b7") };
+            AdImage img2 = new AdImage() { Id = Guid.Parse("b9da8b1e-aa77-401b-84e0-a1290130b999") };
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(x => x.Get<AdImage>(Guid.Parse("b9da8b1e-aa77-401b-84e0-a1290130b7b7"))).Returns(img1);
+            repoMock.Setup(x => x.Get<AdImage>(Guid.Parse("b9da8b1e-aa77-401b-84e0-a1290130b999"))).Returns(img2);
+
+            AdServices service = new AdServices(null, null, repoMock.Object, null, null);
+
+            // When
+            BaseAd result = service.GetAdPicturesFromModel(ad, images);
+
+            // Then
+            Assert.AreEqual(ad, result);
+            Assert.AreEqual(2, ad.Images.Count);
+            Assert.AreEqual("b9da8b1e-aa77-401b-84e0-a1290130b7b7", ad.Images[0].Id.ToString());
+            Assert.AreEqual(ad, ad.Images[0].BaseAd);
+            Assert.IsTrue(ad.Images[0].IsPrimary);
+            Assert.AreEqual("b9da8b1e-aa77-401b-84e0-a1290130b999", ad.Images[1].Id.ToString());
+            Assert.AreEqual(ad, ad.Images[1].BaseAd);
+            Assert.IsFalse(ad.Images[1].IsPrimary);
+        }
     }
 }

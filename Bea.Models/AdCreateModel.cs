@@ -47,11 +47,11 @@ namespace Bea.Models
         [DisplayName("Catégorie:")]
         public int? SelectedCategoryId { get; set; }
 
-        //public AdTypeEnum Type { get; set; }
+        public String ImageIds { get; set; }
 
-        //public AdCreateModel()
-        //{
-        //    this.Type = AdTypeEnum.Ad;
-        //}
+        public AdCreateModel()
+        {
+            this.IsOffer = true;
+        }
     }
 }

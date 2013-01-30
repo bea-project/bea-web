@@ -1,58 +1,109 @@
-﻿<script src="@Url.Content("~/Scripts/jquery.filedrop.js")" type="text/javascript"></script>
+﻿@model Bea.Models.AdCreateModel
+
+<script src="@Url.Content("~/Scripts/jquery.filedrop.js")" type="text/javascript"></script>
+
 <style type="text/css">
     #dropZone
     {
         background: gray;
-        border: black dashed 2px;
-        width: 200px;
-        padding: 50px;
+        height: 50px;
+        padding: 10px;
         text-align: center;
         color: white;
         vertical-align: middle;
     }
 </style>
+
 <script type="text/javascript">
+
     $(function () {
         $('#dropZone').filedrop({
             url: '@Url.Action("UploadImage", "AdImage")',
             paramname: 'files',
             maxFiles: 5,
             dragOver: function () {
-                $('#dropZone').css('background', 'blue');
-                $('#dropZone').html('Déposez les ici !');
+                if (nbPhotos < nbMaxPhotos) {
+                    $('#dropZone').css('background', '#d9edf7');
+                    $('#dropZone').css('color', '#3a87ad');
+                    $('#dropZone').css('border-color', '#bce8f1');
+                    $('#dropZone').html('Déposez les ici !<br />...');
+                }
             },
             dragLeave: function () {
-                $('#dropZone').css('background', 'gray');
-                $('#dropZone').html('Glissez vos images ici...');
+                if (nbPhotos < nbMaxPhotos) {
+                    $('#dropZone').css('background', 'gray');
+                    $('#dropZone').css('color', 'white');
+                    $('#dropZone').css('border-color', 'lightgray');
+                    $('#dropZone').html('Glissez vos images ici<br />...');
+                }
             },
             drop: function () {
-                $('#dropZone').css('background', 'green');
+
             },
             afterAll: function () {
-                $('#dropZone').html('Les images ont été ajoutées avec succès !');
-                $('#dropZone').css('background', 'gray');
+                if (nbPhotos == nbMaxPhotos) {
+                    $('#dropZone').css('background', 'gray');
+                    $('#dropZone').css('color', 'white');
+                    $('#dropZone').css('border-color', 'lightgray');
+                    $('#dropZone').html('Vous avez atteind le nombre maximum d\'images !');
+                }
+                else {
+                    $('#dropZone').css('background', '#dff0d8');
+                    $('#dropZone').css('color', '#468847');
+                    $('#dropZone').css('border-color', '#d6e9c6');
+                    $('#dropZone').html('Les images ont été ajoutées avec succès !');
+                }
             },
             progressUpdated: function (index, file, currentProgress) {
                 $('#dropZone').html('Upload en cours...<br/>' + file.name + ' ' + currentProgress + '%');
             },
             uploadFinished: function (i, file, response, time) {
-                $('#uploadResult').append('<li>' + file.name + ' ' + response + '</li>');
-                $('#images').val($('#images').val() + response + ';');
+                $('#ImageIds').val($('#ImageIds').val() + response + ';');
+                $('#imageThumbnails').append('<div id="' + response + '" class="thumbnail span3"><img src="/AdImage/Get/' + response + '" width="100"><button class="btn btn-link" type="button" onclick="deleteImage(\'' + response + '\');"><i class="icon-black icon-remove"></i>Effacer</button></div>');
             }
         });
     });
+
+    function deleteImage(imageId) {
+        $('#' + imageId).remove();
+        $('#ImageIds').val($('#ImageIds').val().replace(imageId + ';', ''));
+        nbPhotos--;
+        $('#dropZone').html('Glissez vos images ici<br />...');
+        $('#dropZone').css('background', 'gray');
+        $('#dropZone').css('color', 'white');
+        $('#dropZone').css('border-color', 'lightgray');
+    };
+
 </script>
 
 <h4><i class="icon-camera"></i>&nbsp;Vos photos</h4>
 <div class="control-group">
     <label class="control-label">Une annonce avec une photo est beaucoup plus consultée, pensez-y !</label>
     <div class="controls controls-row">
-        <div id="dropZone">Glissez vos images <br />dans ce cadre...</div>
-        <br />
-        Images:
-    <ul id="uploadResult">
-        
-    </ul>
-        <input type="hidden" id="images"/>
+        <div id="dropZone" class="thumbnail">
+            Glissez vos images ici<br />
+            ...
+        </div>
     </div>
 </div>
+
+<div class="row-fluid">
+    <div id="imageThumbnails" class="span12">
+        @{
+            if (Model.ImageIds != null)
+            {
+                foreach (String imageId in Model.ImageIds.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                <div id="@imageId" class="thumbnail span3">
+                    <img src="/AdImage/Get/@imageId" width="100">
+                    <button class="btn btn-link" type="button" onclick="deleteImage('@imageId');">
+                        <i class="icon-black icon-remove"></i>Effacer
+                    </button>
+                </div>
+                }
+            }
+        }
+    </div>
+</div>
+@Html.HiddenFor(x => x.ImageIds)
+

@@ -177,11 +177,34 @@ namespace Bea.Services
             createdBy.Firstname = model.Name;
             createdBy.Email = model.Email;
             createdBy.Password = "Password";
-
             ad.CreatedBy = createdBy;
+
+            GetAdPicturesFromModel(ad, model.ImageIds);
+
             return ad;
         }
 
+        public BaseAd GetAdPicturesFromModel(BaseAd ad, String imageIds)
+        {
+            if (String.IsNullOrEmpty(imageIds))
+                return ad;
+
+            bool first = true;
+
+            foreach (String imageId in imageIds.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                AdImage image = _repository.Get<AdImage>(Guid.Parse(imageId));
+                if (first)
+                {
+                    image.IsPrimary = true;
+                    first = false;
+                }
+
+                ad.AddImage(image);
+            }
+
+            return ad;
+        }
 
         private BaseAd GetCarAdFromModel(Dictionary<string, string> form)
         {
