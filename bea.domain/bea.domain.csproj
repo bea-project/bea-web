@@ -48,6 +48,7 @@
     <Compile Include="Ads\CarAd.cs" />
     <Compile Include="Ads\LightCarAd.cs" />
     <Compile Include="Ads\MotoAd.cs" />
+    <Compile Include="Ads\WaterSport\Engine.cs" />
     <Compile Include="Ads\WaterSport\MotorBoatAd.cs" />
     <Compile Include="Ads\OtherVehicleAd.cs" />
     <Compile Include="Ads\RealEstateAd.cs" />

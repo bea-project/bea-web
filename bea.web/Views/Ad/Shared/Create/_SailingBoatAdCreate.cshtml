@@ -14,7 +14,7 @@
         <div class="span3">
             <label class="control-label" for="inputMotorType">@Html.LabelFor(model => model.SelectedHullTypeId)</label>
             <div class="controls">
-                @Html.DropDownListFor(model => model.SelectedHullTypeId, (IEnumerable<SelectListItem>)ViewBag.HullTypes, "Choisissez un moteur", new { @class = "input-large" })
+                @Html.DropDownListFor(model => model.SelectedHullTypeId, (IEnumerable<SelectListItem>)ViewBag.HullTypes, "Choisissez une coque", new { @class = "input-large" })
                 @Html.ValidationMessageFor(model => model.SelectedHullTypeId, String.Empty, new { @class = "label label-important" })
             </div>
         </div>
