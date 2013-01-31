@@ -148,11 +148,13 @@ namespace Bea.Services
                     case (int)AdTypeEnum.SailingBoatAd:
                         ad = GetSailingBoatAdFromModel(form);
                         break;
+                    case (int)AdTypeEnum.MotorBoatEngineAd:
+                        ad = MotorBoatEngineAdFromModel(form);
+                        break;
                     default:
                         ad = new Ad();
                         break;
                 }
-
             }
             else
                 ad = new Ad();
@@ -184,6 +186,38 @@ namespace Bea.Services
 
             ad.CreatedBy = createdBy;
             return ad;
+        }
+
+        private BaseAd MotorBoatEngineAdFromModel(Dictionary<string, string> form)
+        {
+            MotorBoatEngineAd motorBoatEngineAd = new MotorBoatEngineAd();
+
+            int selectedTypeId;
+            bool result = Int32.TryParse(form["SelectedTypeId"], out selectedTypeId);
+            if (result)
+                motorBoatEngineAd.Type = _repository.Get<MotorBoatEngineType>(selectedTypeId);
+
+            int selectedYearId;
+            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
+            if (result)
+                motorBoatEngineAd.Year = selectedYearId;
+
+            int hP;
+            result = Int32.TryParse(form["Hp"], out hP);
+            if (result)
+                motorBoatEngineAd.Hp = hP;
+
+            int nbCylinders;
+            result = Int32.TryParse(form["NbCylinders"], out nbCylinders);
+            if (result)
+                motorBoatEngineAd.NbCylinder = nbCylinders;
+
+            int nbHours;
+            result = Int32.TryParse(form["NbHours"], out nbHours);
+            if (result)
+                motorBoatEngineAd.NbHours = nbHours;
+
+            return (motorBoatEngineAd);
         }
 
 

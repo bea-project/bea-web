@@ -289,6 +289,7 @@ namespace Bea.Web.NhibernateHelper
             CategoryGroup nautisme = new CategoryGroup();
             nautisme.Label = "Nautisme";
             nautisme.AddCategory(new Category { Label = "Bateaux à moteur", Type = AdTypeEnum.MotorBoatAd });
+            nautisme.AddCategory(new Category { Label = "Propulseurs", Type = AdTypeEnum.MotorBoatEngineAd });
             nautisme.AddCategory(new Category { Label = "Voiliers", Type = AdTypeEnum.SailingBoatAd });
             nautisme.AddCategory(new Category { Label = "Kite Surf", Type = AdTypeEnum.KiteAd });
             nautisme.AddCategory(new Category { Label = "Planches à voile", Type = AdTypeEnum.Ad });
