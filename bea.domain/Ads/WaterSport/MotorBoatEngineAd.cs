@@ -12,6 +12,6 @@ namespace Bea.Domain.Ads.WaterSport
         public virtual int Hp { get; set; }
         public virtual int Year { get; set; }
         public virtual int NbCylinder { get; set; }
-        public virtual int NbHours { get; set; }
+        
     }
 }

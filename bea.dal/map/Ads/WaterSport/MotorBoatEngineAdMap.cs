@@ -30,7 +30,7 @@ namespace Bea.Dal.Map.Ads.WaterSport
             Map(x => x.Year);
             Map(x => x.NbCylinder);
             Map(x => x.Hp);
-            Map(x => x.NbHours);
+            
 
             References<MotorBoatEngineType>(x => x.Type);
         }

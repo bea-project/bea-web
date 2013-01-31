@@ -14,7 +14,6 @@ using Bea.Domain.Reference;
 using Bea.Domain.Search;
 using System.Transactions;
 using Bea.Models.Create;
-using Bea.Domain.Ads.WaterSport;
 
 namespace Bea.Services
 {
@@ -151,16 +150,11 @@ namespace Bea.Services
                     case (int)AdTypeEnum.MotorBoatAd:
                         ad = GetMotorBoatAdFromModel(form);
                         break;
-                    case (int)AdTypeEnum.SailingBoatAd:
-                        ad = GetSailingBoatAdFromModel(form);
-                        break;
-                    case (int)AdTypeEnum.MotorBoatEngineAd:
-                        ad = MotorBoatEngineAdFromModel(form);
-                        break;
                     default:
                         ad = new Ad();
                         break;
                 }
+
             }
             else
                 ad = new Ad();
@@ -196,35 +190,6 @@ namespace Bea.Services
             return ad;
         }
 
-        private BaseAd MotorBoatEngineAdFromModel(Dictionary<string, string> form)
-        {
-            MotorBoatEngineAd motorBoatEngineAd = new MotorBoatEngineAd();
-
-            int selectedTypeId;
-            bool result = Int32.TryParse(form["SelectedTypeId"], out selectedTypeId);
-            if (result)
-                motorBoatEngineAd.Type = _repository.Get<MotorBoatEngineType>(selectedTypeId);
-
-            int selectedYearId;
-            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
-            if (result)
-                motorBoatEngineAd.Year = selectedYearId;
-
-            int hP;
-            result = Int32.TryParse(form["Hp"], out hP);
-            if (result)
-                motorBoatEngineAd.Hp = hP;
-
-            int nbCylinders;
-            result = Int32.TryParse(form["NbCylinders"], out nbCylinders);
-            if (result)
-                motorBoatEngineAd.NbCylinder = nbCylinders;
-
-            
-
-            return (motorBoatEngineAd);
-        }
-        
         public BaseAd GetAdPicturesFromModel(BaseAd ad, String imageIds)
         {
             if (String.IsNullOrEmpty(imageIds))
@@ -247,9 +212,6 @@ namespace Bea.Services
             return ad;
         }
 
-
-
-
         private BaseAd GetCarAdFromModel(Dictionary<string, string> form)
         {
             CarAd carAd = new CarAd();
@@ -270,33 +232,6 @@ namespace Bea.Services
             if (result)
                 carAd.Brand = _repository.Get<VehicleBrand>(selectedBrandId);
             return (carAd);
-        }
-        
-        private BaseAd GetSailingBoatAdFromModel(Dictionary<string, string> form)
-        {
-            SailingBoatAd sailingBoatAd = new SailingBoatAd();
-
-            int selectedTypeId;
-            bool result = Int32.TryParse(form["SelectedTypeId"], out selectedTypeId);
-            if (result)
-                sailingBoatAd.Type = _repository.Get<SailingBoatType>(selectedTypeId);
-
-            int selectedHullTypeId;
-            result = Int32.TryParse(form["SelectedHullTypeId"], out selectedHullTypeId);
-            if (result)
-                sailingBoatAd.HullType = _repository.Get<SailingBoatHullType>(selectedHullTypeId);
-
-            int selectedYearId;
-            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
-            if (result)
-                sailingBoatAd.Year = selectedYearId;
-
-            Decimal length;
-            result = Decimal.TryParse(form["Length"], out length);
-            if (result)
-                sailingBoatAd.Length = length;
-
-            return (sailingBoatAd);
         }
 
         private BaseAd GetMotorBoatAdFromModel(Dictionary<string, string> form)

@@ -13,16 +13,10 @@ namespace Bea.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //routes.MapRoute(
-            //    name: "AdImage",
-            //    url: "AdImage/Get/{imageId}",
-            //    defaults: new { controller = "AdImage", action = "Index" }
-            //);
-
             routes.MapRoute(
-                name: "AdActivationRoute",
-                url: "Ad/Activate/{id}/{activationToken}",
-                defaults: new { controller = "Ad", action = "Activate" }
+                name: "PostActivationRoute",
+                url: "Post/Activate/{id}/{activationToken}",
+                defaults: new { controller = "Post", action = "Activate" }
             );
 
             routes.MapRoute(

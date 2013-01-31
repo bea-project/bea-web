@@ -20,7 +20,7 @@ namespace Bea.Dal.Map.Ads
             Map(x => x.ActivationToken);
 
             References<Category>(x => x.Category);
-            HasMany<AdImage>(x => x.Images).Inverse().LazyLoad().Cascade.Delete();
+            HasMany<AdImage>(x => x.Images).Inverse().LazyLoad().Cascade.AllDeleteOrphan();
         }
     }
 }

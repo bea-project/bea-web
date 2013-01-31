@@ -31,25 +31,14 @@ namespace Bea.Models.Create.WaterSport
         public int Type { get; set; }
 
         public AdMotorBoatCreateModel()
+            : base()
         {
             this.Type = this.Type = (int)AdTypeEnum.MotorBoatAd;
         }
 
         public AdMotorBoatCreateModel(MotorBoatAd ad)
+            : base(ad)
         {
-            this.Body = ad.Body;
-            this.IsOffer = ad.IsOffer;
-            this.Price = ad.Price;
-            if (ad.Category != null)
-                this.SelectedCategoryId = ad.Category.Id;
-            if (ad.City != null)
-            {
-                this.SelectedCityId = ad.City.Id;
-                this.SelectedProvinceId = ad.City.Province.Id;
-            }
-            this.Telephone = ad.PhoneNumber;
-            this.Title = ad.Title;
-
             this.Hp = ad.Hp;
             this.Length = ad.Length;
             this.NbHours = ad.NbHours;

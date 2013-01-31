@@ -62,7 +62,7 @@
             @Html.DisplayFor(modelItem => item.ActivationToken)
         </td>
         <td>
-            @Html.RouteLink("Activate", "AdActivationRoute", new { id = item.Id, activationToken = item.ActivationToken })
+            @Html.RouteLink("Activate", "PostActivationRoute", new { id = item.Id, activationToken = item.ActivationToken })
         </td>
     </tr>
 }

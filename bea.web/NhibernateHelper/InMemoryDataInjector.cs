@@ -265,6 +265,7 @@ namespace Bea.Web.NhibernateHelper
 
             _repository.Save(new MotorBoatEngineType { Label = "2-Temps" });
             _repository.Save(new MotorBoatEngineType { Label = "4-Temps" });
+            _repository.Save(new MotorBoatEngineType { Label = "Turbine" });
 
             _repository.Flush();
         }

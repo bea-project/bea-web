@@ -196,6 +196,7 @@ namespace Bea.Services
             return ad;
         }
 
+<<<<<<< HEAD
         private BaseAd MotorBoatEngineAdFromModel(Dictionary<string, string> form)
         {
             MotorBoatEngineAd motorBoatEngineAd = new MotorBoatEngineAd();
@@ -220,11 +221,15 @@ namespace Bea.Services
             if (result)
                 motorBoatEngineAd.NbCylinder = nbCylinders;
 
-            
+            int nbHours;
+            result = Int32.TryParse(form["NbHours"], out nbHours);
+            if (result)
+                motorBoatEngineAd.NbHours = nbHours;
 
             return (motorBoatEngineAd);
         }
-        
+
+=======
         public BaseAd GetAdPicturesFromModel(BaseAd ad, String imageIds)
         {
             if (String.IsNullOrEmpty(imageIds))
@@ -246,9 +251,7 @@ namespace Bea.Services
 
             return ad;
         }
-
-
-
+>>>>>>> 2f15550545fba679e7e21dca8a57e5f6f0609d3a
 
         private BaseAd GetCarAdFromModel(Dictionary<string, string> form)
         {

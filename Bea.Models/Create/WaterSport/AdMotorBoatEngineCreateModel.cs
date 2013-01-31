@@ -48,7 +48,7 @@ namespace Bea.Models.Create.WaterSport
             this.Title = ad.Title;
 
             this.Hp = ad.Hp;
-            this.NbHours = ad.NbHours;
+            
             this.NbCylinders= ad.NbCylinder;
 
             if (ad.Type != null)

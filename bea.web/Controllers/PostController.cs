@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Bea.Core.Services;
-using Bea.Domain;
-using Bea.Models;
-using System.Diagnostics;
-using Bea.Domain.Location;
 using Bea.Domain.Categories;
 using Bea.Domain.Ads;
-using Bea.Domain.Search;
 using Bea.Models.Create;
 using Bea.Models.Create.Vehicules;
 using Bea.Models.Create.WaterSport;
@@ -18,7 +11,7 @@ using Bea.Domain.Ads.WaterSport;
 
 namespace Bea.Web.Controllers
 {
-    public class AdController : Controller
+    public class PostController : Controller
     {
         private IAdServices _adServices;
         private ILocationServices _locationServices;
@@ -28,7 +21,7 @@ namespace Bea.Web.Controllers
         private IReferenceServices _referenceServices;
         private IAdActivationServices _adActivationServices;
 
-        public AdController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices)
+        public PostController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices)
         {
             _adServices = adServices;
             _locationServices = locationServices;
@@ -40,14 +33,14 @@ namespace Bea.Web.Controllers
         }
 
         //
-        // GET: /Ad/
+        // GET: /Post/
         public ActionResult Index()
         {
             return RedirectToAction("Index", "Home");
         }
 
         //
-        // GET: /Ad/Details/{id}
+        // GET: /Post/Details/{id}
         public ActionResult Details(long id)
         {
             var result = _adServices.GetAdDetails(id);
@@ -59,7 +52,7 @@ namespace Bea.Web.Controllers
         }
 
         //
-        // GET: /Ad/Activate/{id}/{activationToken}
+        // GET: /Post/Activate/{id}/{activationToken}
         public ActionResult Activate(long id, string activationToken)
         {
             var result = _adActivationServices.ActivateAd(id, activationToken);
@@ -100,6 +93,8 @@ namespace Bea.Web.Controllers
             return View(returnModel);
         }
 
+        //
+        // GET: /Post/AddParamters/{id}
         public PartialViewResult AddParamters(int categoryId)
         {
             Category selectedCategory = _categoryServices.GetCategoryById(categoryId);
@@ -129,16 +124,21 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.SailingBoatAd:
                     AdSailingBoatCreateModel sailingBoatModel = new AdSailingBoatCreateModel();
                     return PartialView("Shared/Create/_SailingBoatAdCreate", sailingBoatModel);
+
+                case AdTypeEnum.MotorBoatEngineAd:
+                    AdMotorBoatEngineCreateModel motorBoatEngineModel = new AdMotorBoatEngineCreateModel();
+                    return PartialView("Shared/Create/_MotorBoatEngineAdCreate", motorBoatEngineModel);
             }
             return null;
         }
 
         private AdCreateModel GetModelFromBaseAd(BaseAd ad, AdCreateModel createModel)
-        {
-            
+        {   
             if (ad.Category == null)
                 return createModel;
+         
             FillViewLists(ad.Category);
+            
             switch (ad.Category.Type)
             {
                 case AdTypeEnum.CarAd:
@@ -165,12 +165,15 @@ namespace Bea.Web.Controllers
                     AdSailingBoatCreateModel adSailingBoatCreateModel = new AdSailingBoatCreateModel(ad as SailingBoatAd);
                     return adSailingBoatCreateModel;
 
+                case AdTypeEnum.MotorBoatEngineAd:
+                    AdMotorBoatEngineCreateModel adMotorBoatEngineCreateModel = new AdMotorBoatEngineCreateModel(ad as MotorBoatEngineAd);
+                    return adMotorBoatEngineCreateModel;
+
                 case AdTypeEnum.Ad:
                     return createModel;
             }
             return null;
         }
-
 
         private void FillViewLists(Category category)
         {
@@ -203,6 +206,10 @@ namespace Bea.Web.Controllers
                     ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                     ViewBag.Types = _referenceServices.GetAllSailingBoatTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     ViewBag.HullTypes = _referenceServices.GetAllSailingBoatHullTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                    break;
+                case AdTypeEnum.MotorBoatEngineAd:
+                    ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
+                    ViewBag.Types = _referenceServices.GetAllMotorBoatEngineTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;
             }
         }

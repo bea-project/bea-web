@@ -1,4 +1,4 @@
-﻿@model Bea.Models.AdCreateModel
+﻿@model Bea.Models.Create.AdCreateModel
 @{
     ViewBag.Title = "Create";
 }
@@ -12,7 +12,7 @@
 
 
 
-@using (Html.BeginForm("Create", "Ad", FormMethod.Post, new { @class = "well form-horizontal" }))
+@using (Html.BeginForm("Create", "Post", FormMethod.Post, new { @class = "well form-horizontal" }))
 {       
     <div class="row">
 
@@ -71,7 +71,7 @@
         </div>
 
         <div class="span5">
-            @Html.Partial("Shared/Create/_ImageUpload")
+            @Html.Partial("Shared/Create/_ImageUpload", Model)
         </div>
 
     </div>
@@ -182,7 +182,7 @@
                 //The user selected a province
                 var categoryId = $('#SelectedCategoryId').val();
 
-                var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Ad", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
+                var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Post", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
                 $.ajax({
                     url: url,
                     type: 'GET',
