@@ -11,11 +11,9 @@ namespace Bea.Dal.Map
     {
         public AdImageMap()
         {
-            Id(x => x.Id).GeneratedBy.GuidComb();
+            Id(x => x.Id).GeneratedBy.Assigned();
             Map(x => x.IsPrimary).Not.Nullable().Default("false");
-            Map(x => x.FileName);
-            Map(x => x.ImageBytes).LazyLoad();
-            Map(x => x.ImageThumbnailBytes).LazyLoad();
+            Map(x => x.UploadedDate);
             References(x => x.BaseAd).Nullable().LazyLoad();
         }
     }

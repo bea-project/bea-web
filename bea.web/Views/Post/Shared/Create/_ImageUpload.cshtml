@@ -59,7 +59,7 @@
             },
             uploadFinished: function (i, file, response, time) {
                 $('#ImageIds').val($('#ImageIds').val() + response + ';');
-                $('#imageThumbnails').append('<div id="' + response + '" class="thumbnail span3"><img src="/PostImage/Get/' + response + '" width="100"><button class="btn btn-link" type="button" onclick="deleteImage(\'' + response + '\');"><i class="icon-black icon-remove"></i>Effacer</button></div>');
+                $('#imageThumbnails').append('<div id="' + response + '" class="thumbnail span3"><img src="/Content/PostImages/' + response + '.jpg" width="100"><button class="btn btn-link" type="button" onclick="deleteImage(\'' + response + '\');"><i class="icon-black icon-remove"></i>Effacer</button></div>');
             }
         });
     });
@@ -95,7 +95,7 @@
                 foreach (String imageId in Model.ImageIds.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                 <div id="@imageId" class="thumbnail span3">
-                    <img src="/PostImage/Get/@imageId" width="100">
+                    <img src="@Url.Content(String.Format("~/Content/PostImages/{0}.jpg", imageId))" width="100">
                     <button class="btn btn-link" type="button" onclick="deleteImage('@imageId');">
                         <i class="icon-black icon-remove"></i>Effacer
                     </button>

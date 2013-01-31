@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bea.Core.Dal;
+using Bea.Core.Services;
 using Bea.Domain;
 using Bea.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,68 +17,23 @@ namespace Bea.Test.Services
         public void StoreImage_SavesImageInDbAndReturnCreatedIdentifier()
         {
             // Given
+            DateTime d = new DateTime(2012, 01, 17);
+
             Guid guidId = new Guid("14a5e994-fd5d-4a32-859d-a152013ad860");
             var repoMock = new Moq.Mock<IRepository>();
-            repoMock.Setup(x => x.Save<AdImage, Guid>(Moq.It.IsAny<AdImage>())).Returns(guidId);
+            repoMock.Setup(x => x.Save<AdImage>(Moq.It.IsAny<AdImage>()));
 
-            AdImageServices service = new AdImageServices(repoMock.Object);
+            var helperMock = new Moq.Mock<IHelperService>();
+            helperMock.Setup(x => x.GetCurrentDateTime()).Returns(d);
 
-            // Then
-            Assert.AreEqual(guidId, service.StoreImage("coucou", new byte[10]));
-        }
-
-        [TestMethod]
-        public void GetAdImage_GetLargeImage_ReturnLargeImage()
-        {
-            // Given
-            String guidString = "e9da8b1e-aa77-401b-84e0-a1290130b7b7";
-            Guid g = Guid.Parse(guidString);
-
-            AdImage img = new AdImage();
-            img.ImageBytes = new byte[10];
-
-            var repoMock = new Moq.Mock<IRepository>();
-            repoMock.Setup(x => x.Get<AdImage>(g)).Returns(img);
-
-            AdImageServices service = new AdImageServices(repoMock.Object);
+            AdImageServices service = new AdImageServices(repoMock.Object, helperMock.Object);
 
             // Then
-            Assert.AreEqual(img.ImageBytes, service.GetAdImage(guidString, false));
-        }
+            AdImage actual = service.StoreImage(guidId, true);
 
-        [TestMethod]
-        public void GetAdImage_GetThumbnailImage_ReturnThumbnailImage()
-        {
-            // Given
-            String guidString = "e9da8b1e-aa77-401b-84e0-a1290130b7b7";
-            Guid g = Guid.Parse(guidString);
-
-            AdImage img = new AdImage();
-            img.ImageThumbnailBytes = new byte[10];
-
-            var repoMock = new Moq.Mock<IRepository>();
-            repoMock.Setup(x => x.Get<AdImage>(g)).Returns(img);
-
-            AdImageServices service = new AdImageServices(repoMock.Object);
-
-            // Then
-            Assert.AreEqual(img.ImageThumbnailBytes, service.GetAdImage(guidString, true));
-        }
-
-        [TestMethod]
-        public void GetAdImage_NoImage_ReturnNull()
-        {
-            // Given
-            String guidString = "e9da8b1e-aa77-401b-84e0-a1290130b7b7";
-            Guid g = Guid.Parse(guidString);
-
-            var repoMock = new Moq.Mock<IRepository>();
-            repoMock.Setup(x => x.Get<AdImage>(g)).Returns((AdImage)null);
-
-            AdImageServices service = new AdImageServices(repoMock.Object);
-
-            // Then
-            Assert.IsNull(service.GetAdImage(guidString, true));
+            Assert.AreEqual(guidId, actual.Id);
+            Assert.IsTrue(actual.IsPrimary);
+            Assert.AreEqual(d, actual.UploadedDate);
         }
     }
 }

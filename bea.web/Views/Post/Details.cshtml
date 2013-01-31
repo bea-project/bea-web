@@ -31,13 +31,13 @@
                     <!-- Carousel items -->
                     <div class="carousel-inner">
                         <div class="active item">
-                            <img src="/PostImage/Get/@Model.ImagesIds[0]">
+                            <img src="@Url.Content(String.Format("~/Content/PostImages/{0}.jpg", Model.ImagesIds[0]))">
                         </div>
 
                         @foreach (String imageId in Model.ImagesIds.Skip(1))
                         {
                             <div class="item">
-                                <img src="/PostImage/Get/@imageId">
+                                <img src="@Url.Content(String.Format("~/Content/PostImages/{0}.jpg", imageId))">
                             </div>
                         }
 

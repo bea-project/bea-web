@@ -12,42 +12,44 @@ namespace Bea.Services
     public class AdImageServices : IAdImageServices
     {
         private readonly IRepository _repository;
+        private readonly IHelperService _helper;
 
-        public AdImageServices(IRepository repository)
+        public AdImageServices(IRepository repository, IHelperService helper)
         {
             _repository = repository;
+            _helper = helper;
         }
 
-        public Guid StoreImage(String fileName, Byte[] imageBytes)
+        public AdImage StoreImage(Guid id, Boolean isPrimary)
         {
-            Guid resultId;
+            AdImage image = null;
 
             using (TransactionScope scope = new TransactionScope())
             {
-                AdImage image = new AdImage();
-                image.FileName = fileName;
-                image.ImageBytes = imageBytes;
-                //TODO: create a thumbnail
-
-                resultId = _repository.Save<AdImage, Guid>(image);
+                image = new AdImage();
+                image.Id = id;
+                image.IsPrimary = isPrimary;
+                image.UploadedDate = _helper.GetCurrentDateTime();
+                
+                _repository.Save<AdImage>(image);
 
                 scope.Complete();
             }
 
-            return resultId;
+            return image;
         }
 
-        public byte[] GetAdImage(string id, bool isThumbnail)
-        {
-            AdImage img = _repository.Get<AdImage>(Guid.Parse(id));
+        //public byte[] GetAdImage(string id, bool isThumbnail)
+        //{
+        //    AdImage img = _repository.Get<AdImage>(Guid.Parse(id));
 
-            if (img == null)
-                return null;
+        //    if (img == null)
+        //        return null;
 
-            if (isThumbnail)
-                return img.ImageThumbnailBytes;
-            else
-                return img.ImageBytes;
-        }
+        //    if (isThumbnail)
+        //        return img.ImageThumbnailBytes;
+        //    else
+        //        return img.ImageBytes;
+        //}
     }
 }
