@@ -126,9 +126,6 @@ namespace Bea.Services
 
         public IDictionary<string, string> GetMotorBoatAdDataConsistencyErrors(MotorBoatAd motorBoatAd, IDictionary<string, string> errors)
         {
-            if (motorBoatAd.NbHours == 0)
-                errors.Add("NbHours", "Veuillez saisir un nombre d'heure moteur.");
-
             if (motorBoatAd.MotorType == null)
                 errors.Add("SelectedMotorTypeId", "Veuillez sélectionner un type de moteur.");
 

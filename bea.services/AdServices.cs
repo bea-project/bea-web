@@ -214,14 +214,7 @@ namespace Bea.Services
             result = Int32.TryParse(form["Hp"], out hP);
             if (result)
                 motorBoatEngineAd.Hp = hP;
-
-            int nbCylinders;
-            result = Int32.TryParse(form["NbCylinders"], out nbCylinders);
-            if (result)
-                motorBoatEngineAd.NbCylinder = nbCylinders;
-
             
-
             return (motorBoatEngineAd);
         }
         
@@ -327,11 +320,6 @@ namespace Bea.Services
             result = Decimal.TryParse(form["Length"], out length);
             if (result)
                 motorBoatAd.Length = length;
-
-            int nbHours;
-            result = Int32.TryParse(form["NbHours"], out nbHours);
-            if (result)
-                motorBoatAd.NbHours = nbHours;
 
             return (motorBoatAd);
         }

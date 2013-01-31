@@ -28,7 +28,6 @@ namespace Bea.Dal.Map.Ads.WaterSport
 
 
             Map(x => x.Year);
-            Map(x => x.NbCylinder);
             Map(x => x.Hp);
             
 

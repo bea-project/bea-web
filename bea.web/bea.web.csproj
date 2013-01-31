@@ -320,6 +320,9 @@
   <ItemGroup>
     <Content Include="Views\Post\Shared\Create\_SailingBoatAdCreate.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\Shared\Create\_MotorBoatEngineAdCreate.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

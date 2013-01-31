@@ -16,14 +16,8 @@ namespace Bea.Models.Create.WaterSport
         [DisplayName("Annee-Modele:")]
         public int? SelectedYearId { get; set; }
 
-        [DisplayName("Heures Moteur:")]
-        public int? NbHours { get; set; }
-
         [DisplayName("Puissance Moteur:")]
         public int? Hp { get; set; }
-
-        [DisplayName("Cylindres:")]
-        public int? NbCylinders { get; set; }
 
         public int Type { get; set; }
 
@@ -49,8 +43,6 @@ namespace Bea.Models.Create.WaterSport
 
             this.Hp = ad.Hp;
             
-            this.NbCylinders= ad.NbCylinder;
-
             if (ad.Type != null)
                 this.SelectedTypeId = ad.Type.Id;
 

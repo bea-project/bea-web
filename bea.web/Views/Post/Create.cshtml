@@ -10,8 +10,6 @@
     </p>
 </div>
 
-
-
 @using (Html.BeginForm("Create", "Post", FormMethod.Post, new { @class = "well form-horizontal" }))
 {       
     <div class="row">
@@ -69,7 +67,6 @@
                 </div>
             </div>
         </div>
-
         <div class="span5">
             @Html.Partial("Shared/Create/_ImageUpload", Model)
         </div>
@@ -108,6 +105,10 @@
             @if (Model is Bea.Models.Create.WaterSport.AdSailingBoatCreateModel)
             {
                 @Html.Partial("Shared/Create/_SailingBoatAdCreate", Model);
+            }
+             @if (Model is Bea.Models.Create.WaterSport.AdMotorBoatEngineCreateModel)
+            {
+                @Html.Partial("Shared/Create/_MotorBoatEngineAdCreate", Model);
             }
         </div>
 

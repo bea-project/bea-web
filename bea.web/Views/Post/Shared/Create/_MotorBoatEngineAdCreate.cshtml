@@ -1,4 +1,4 @@
-﻿@model Bea.Models.Create.WaterSport.AdMotorBoatCreateModel
+﻿@model Bea.Models.Create.WaterSport.AdMotorBoatEngineCreateModel
 
 @Html.HiddenFor(model => model.Type)
 
@@ -12,33 +12,13 @@
         </div>
         <div class="span1"></div>
         <div class="span3">
-            <label class="control-label" for="inputMotorType">@Html.LabelFor(model => model.SelectedMotorTypeId)</label>
-            <div class="controls">
-                @Html.DropDownListFor(model => model.SelectedMotorTypeId, (IEnumerable<SelectListItem>)ViewBag.MotorTypes, "Choisissez un moteur", new { @class = "input-large" })
-                @Html.ValidationMessageFor(model => model.SelectedMotorTypeId, String.Empty, new { @class = "label label-important" })
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="span3">
                 <label class="control-label" for="inputYear">@Html.LabelFor(model => model.SelectedYearId)</label>
                 <div class="controls">
                 @Html.DropDownListFor(model => model.SelectedYearId, (IEnumerable<SelectListItem>)ViewBag.Years, "Choisissez une année", new { @class = "input-large" })
                 @Html.ValidationMessageFor(model => model.SelectedYearId, String.Empty, new { @class = "label label-important" })
                 </div>
         </div>
-        <div class="span1"></div>
-        <div class="span3">
-                <label class="control-label" for="inputLength">@Html.LabelFor(model => model.Length)</label>
-                <div class="controls">
-                    <div class="input-prepend">
-                        @Html.TextBoxFor(model => model.Length, new { @class = "input-medium" })
-                        <span class="add-on">Mtr</span>
-                    </div>
-                    @Html.ValidationMessageFor(model => model.Length, String.Empty, new { @class = "label label-important" })
-                </div>
-        </div>
-     </div>
+    </div>
      <div class="row">
         <div class="span3">
                 <label class="control-label" for="inputHp">@Html.LabelFor(model => model.Hp)</label>

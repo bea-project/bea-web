@@ -27,7 +27,6 @@ namespace Bea.Dal.Map.Ads.WaterSport
             References<City>(x => x.City).Not.Nullable();
             References<Category>(x => x.Category).Not.Nullable();
 
-            Map(x => x.NbHours);
             Map(x => x.Length);
             Map(x => x.Year);
             Map(x=>x.Hp);

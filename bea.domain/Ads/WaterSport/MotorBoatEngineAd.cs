@@ -11,7 +11,6 @@ namespace Bea.Domain.Ads.WaterSport
         public virtual MotorBoatEngineType Type { get; set; }
         public virtual int Hp { get; set; }
         public virtual int Year { get; set; }
-        public virtual int NbCylinder { get; set; }
         
     }
 }

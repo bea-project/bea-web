@@ -41,7 +41,6 @@ namespace Bea.Models.Create.WaterSport
         {
             this.Hp = ad.Hp;
             this.Length = ad.Length;
-            this.NbHours = ad.NbHours;
 
             if (ad.Type != null)
                 this.SelectedTypeId = ad.Type.Id;
