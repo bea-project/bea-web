@@ -64,5 +64,10 @@ namespace Bea.Services
             years[minYear] = minYear + " ou avant";
             return years;
         }
+
+        public IList<WaterSportType> GetAllWaterSportTypes()
+        {
+            return _repository.GetAll<WaterSportType>().ToList();
+        }
     }
 }

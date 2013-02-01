@@ -1,0 +1,12 @@
+﻿@model Bea.Models.Create.WaterSport.AdWaterSportCreateModel
+
+@Html.HiddenFor(model => model.Type)
+<div class="row">
+        <div class="span3">
+            <label class="control-label" for="inputType">@Html.LabelFor(model => model.SelectedTypeId)</label>
+            <div class="controls">
+                @Html.DropDownListFor(model => model.SelectedTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Choisissez une catégorie", new { @class = "input-large" })
+                @Html.ValidationMessageFor(model => model.SelectedTypeId, String.Empty, new { @class = "label label-important" })
+            </div>
+        </div>
+    </div>

@@ -106,9 +106,13 @@
             {
                 @Html.Partial("Shared/Create/_SailingBoatAdCreate", Model);
             }
-             @if (Model is Bea.Models.Create.WaterSport.AdMotorBoatEngineCreateModel)
+            @if (Model is Bea.Models.Create.WaterSport.AdMotorBoatEngineCreateModel)
             {
                 @Html.Partial("Shared/Create/_MotorBoatEngineAdCreate", Model);
+            }
+            @if (Model is Bea.Models.Create.WaterSport.AdWaterSportCreateModel)
+            {
+                @Html.Partial("Shared/Create/_WaterSportAdCreate", Model);
             }
         </div>
 

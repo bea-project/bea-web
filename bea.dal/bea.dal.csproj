@@ -66,6 +66,7 @@
     <Compile Include="Map\Ads\OtherVehicleAdMap.cs" />
     <Compile Include="Map\Ads\RealEstateAdMap.cs" />
     <Compile Include="Map\Ads\WaterSport\SailingBoatAdMap.cs" />
+    <Compile Include="Map\Ads\WaterSport\WaterSportAdMap.cs" />
     <Compile Include="Map\Categories\CategoryGroupMap.cs" />
     <Compile Include="Map\Categories\CategoryMap.cs" />
     <Compile Include="Map\Location\CityMap.cs">
@@ -80,6 +81,7 @@
     <Compile Include="Map\Reference\RealEstateTypeMap.cs" />
     <Compile Include="Map\Reference\SailingBoatHullTypeMap.cs" />
     <Compile Include="Map\Reference\SailingBoatTypeMap.cs" />
+    <Compile Include="Map\Reference\WaterSportTypeMap.cs" />
     <Compile Include="Map\Search\SearchAdCacheMap.cs" />
     <Compile Include="Map\UserMap.cs">
       <SubType>Code</SubType>

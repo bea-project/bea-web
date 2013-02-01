@@ -15,6 +15,7 @@ namespace Bea.Core.Services
         IList<MotorBoatEngineType> GetAllMotorBoatEngineTypes();
         IList<SailingBoatHullType> GetAllSailingBoatHullTypes();
         IList<SailingBoatType> GetAllSailingBoatTypes();
+        IList<WaterSportType> GetAllWaterSportTypes();
         Dictionary<int, string> GetAllYears(int nbYears);
     }
 

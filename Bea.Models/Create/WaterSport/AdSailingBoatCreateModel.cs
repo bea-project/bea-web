@@ -30,20 +30,8 @@ namespace Bea.Models.Create.WaterSport
         }
 
         public AdSailingBoatCreateModel(SailingBoatAd ad)
+            : base(ad)
         {
-            this.Body = ad.Body;
-            this.IsOffer = ad.IsOffer;
-            this.Price = ad.Price;
-            if (ad.Category != null)
-                this.SelectedCategoryId = ad.Category.Id;
-            if (ad.City != null)
-            {
-                this.SelectedCityId = ad.City.Id;
-                this.SelectedProvinceId = ad.City.Province.Id;
-            }
-            this.Telephone = ad.PhoneNumber;
-            this.Title = ad.Title;
-
             this.Length = ad.Length;
 
             if (ad.HullType != null)

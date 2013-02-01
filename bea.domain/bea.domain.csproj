@@ -53,6 +53,7 @@
     <Compile Include="Ads\OtherVehicleAd.cs" />
     <Compile Include="Ads\RealEstateAd.cs" />
     <Compile Include="Ads\WaterSport\SailingBoatAd.cs" />
+    <Compile Include="Ads\WaterSport\WaterSportAd.cs" />
     <Compile Include="Categories\Category.cs" />
     <Compile Include="Categories\CategoryGroup.cs" />
     <Compile Include="Location\City.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Reference\SailingBoatType.cs" />
     <Compile Include="Reference\VehicleBrand.cs" />
     <Compile Include="Reference\CarFuel.cs" />
+    <Compile Include="Reference\WaterSportType.cs" />
     <Compile Include="Search\SearchAdCache.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Ads\VehicleAd.cs" />

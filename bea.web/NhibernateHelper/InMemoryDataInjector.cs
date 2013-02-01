@@ -267,6 +267,14 @@ namespace Bea.Web.NhibernateHelper
             _repository.Save(new MotorBoatEngineType { Label = "4-Temps" });
             _repository.Save(new MotorBoatEngineType { Label = "Turbine" });
 
+            _repository.Save(new WaterSportType { Label = "Kite-Surf" });
+            _repository.Save(new WaterSportType { Label = "Surf" });
+            _repository.Save(new WaterSportType { Label = "Wake" });
+            _repository.Save(new WaterSportType { Label = "Plongee" });
+            _repository.Save(new WaterSportType { Label = "Chasse sous-marine" });
+            _repository.Save(new WaterSportType { Label = "Planche a voile" });
+            _repository.Save(new WaterSportType { Label = "Autre" });
+
             _repository.Flush();
         }
 
@@ -292,7 +300,7 @@ namespace Bea.Web.NhibernateHelper
             nautisme.AddCategory(new Category { Label = "Bateaux à moteur", Type = AdTypeEnum.MotorBoatAd });
             nautisme.AddCategory(new Category { Label = "Propulseurs", Type = AdTypeEnum.MotorBoatEngineAd });
             nautisme.AddCategory(new Category { Label = "Voiliers", Type = AdTypeEnum.SailingBoatAd });
-            nautisme.AddCategory(new Category { Label = "Kite Surf", Type = AdTypeEnum.KiteAd });
+            nautisme.AddCategory(new Category { Label = "Sports / Loisirs", Type = AdTypeEnum.WaterSportAd });
             nautisme.AddCategory(new Category { Label = "Matériel de pêche", Type = AdTypeEnum.Ad });
             nautisme.AddCategory(new Category { Label = "Planches à voile", Type = AdTypeEnum.Ad });
             _sessionFactory.GetCurrentSession().Save(nautisme);

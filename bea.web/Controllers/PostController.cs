@@ -128,6 +128,10 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.MotorBoatEngineAd:
                     AdMotorBoatEngineCreateModel motorBoatEngineModel = new AdMotorBoatEngineCreateModel();
                     return PartialView("Shared/Create/_MotorBoatEngineAdCreate", motorBoatEngineModel);
+
+                case AdTypeEnum.WaterSportAd:
+                    AdWaterSportCreateModel waterSportModel = new AdWaterSportCreateModel();
+                    return PartialView("Shared/Create/_WaterSportAdCreate", waterSportModel);
             }
             return null;
         }
@@ -168,6 +172,10 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.MotorBoatEngineAd:
                     AdMotorBoatEngineCreateModel adMotorBoatEngineCreateModel = new AdMotorBoatEngineCreateModel(ad as MotorBoatEngineAd);
                     return adMotorBoatEngineCreateModel;
+
+                case AdTypeEnum.WaterSportAd:
+                    AdWaterSportCreateModel adWaterSportCreateModel = new AdWaterSportCreateModel(ad as WaterSportAd);
+                    return adWaterSportCreateModel;
 
                 case AdTypeEnum.Ad:
                     return createModel;
@@ -210,6 +218,9 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.MotorBoatEngineAd:
                     ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                     ViewBag.Types = _referenceServices.GetAllMotorBoatEngineTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                    break;
+                case AdTypeEnum.WaterSportAd:
+                    ViewBag.Types = _referenceServices.GetAllWaterSportTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;
             }
         }

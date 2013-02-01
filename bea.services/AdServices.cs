@@ -157,6 +157,9 @@ namespace Bea.Services
                     case (int)AdTypeEnum.MotorBoatEngineAd:
                         ad = MotorBoatEngineAdFromModel(form);
                         break;
+                    case (int)AdTypeEnum.WaterSportAd:
+                        ad = WaterSportAdFromModel(form);
+                        break;
                     default:
                         ad = new Ad();
                         break;
@@ -194,6 +197,17 @@ namespace Bea.Services
             GetAdPicturesFromModel(ad, model.ImageIds);
 
             return ad;
+        }
+
+        private BaseAd WaterSportAdFromModel(Dictionary<string, string> form)
+        {
+            WaterSportAd waterSportsAd = new WaterSportAd();
+
+            int selectedTypeId;
+            bool result = Int32.TryParse(form["SelectedTypeId"], out selectedTypeId);
+            if (result)
+                waterSportsAd.Type = _repository.Get<WaterSportType>(selectedTypeId);
+            return (waterSportsAd);
         }
 
         private BaseAd MotorBoatEngineAdFromModel(Dictionary<string, string> form)

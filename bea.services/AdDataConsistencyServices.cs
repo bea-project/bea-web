@@ -58,6 +58,10 @@ namespace Bea.Services
                     GetMotorBoatEngineAdDataConsistencyErrors(ad as MotorBoatEngineAd, errors);
                     break;
 
+                case AdTypeEnum.WaterSportAd:
+                    GetWaterSportAdDataConsistencyErrors(ad as WaterSportAd, errors);
+                    break;
+
                 default:
                     break;
             }
@@ -84,6 +88,14 @@ namespace Bea.Services
 
             if (ad.Category == null)
                 errors.Add("SelectedCategoryId", "Veuillez séléctionner une catégorie.");
+
+            return errors;
+        }
+
+        public IDictionary<string, string> GetWaterSportAdDataConsistencyErrors(WaterSportAd waterSportAd, IDictionary<string, string> errors)
+        {
+            if (waterSportAd.Type == null)
+                errors.Add("SelectedTypeId", "Veuillez sélectionner une discipline.");
 
             return errors;
         }
