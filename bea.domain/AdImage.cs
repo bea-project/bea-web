@@ -11,9 +11,7 @@ namespace Bea.Domain
     {
         public virtual Guid Id { get; set; }
         public virtual bool IsPrimary { get; set; }
-        public virtual String FileName { get; set; }
-        public virtual byte[] ImageBytes { get; set; }
-        public virtual byte[] ImageThumbnailBytes { get; set; }
+        public virtual DateTime UploadedDate { get; set; }
         public virtual BaseAd BaseAd { get; set; }
     }
 }

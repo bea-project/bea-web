@@ -4,8 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using Bea.Core.Services;
+using ImageResizer.Configuration;
 
 namespace Bea.Web.Controllers
 {
@@ -13,26 +15,16 @@ namespace Bea.Web.Controllers
     {
         private readonly IAdImageServices _adImageServices;
 
+        private readonly String _postImagesFilePath;
+        private readonly String _postImageExtension = ".jpg";
+
         public PostImageController(IAdImageServices adImageServices)
         {
             if (adImageServices == null)
                 throw new ArgumentNullException("adImageServices");
 
             _adImageServices = adImageServices;
-        }
-
-        //
-        // GET: /PostImage/Get/{id}
-        [AcceptVerbs(HttpVerbs.Get)]
-        //[OutputCache(CacheProfile = "AdImages")]
-        public ActionResult Get(String id)
-        {
-            byte[] imageBytes = _adImageServices.GetAdImage(id, false);
-
-            if (imageBytes == null)
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-
-            return new FileContentResult(imageBytes, "image/jpg");
+            _postImagesFilePath = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "Content", "PostImages");
         }
 
         //
@@ -42,20 +34,29 @@ namespace Bea.Web.Controllers
         public ActionResult UploadImage()
         {
             IList<String> imagesGuid = new List<string>();
+            
             foreach (string file in Request.Files)
             {
                 var hpf = Request.Files[file];
-                if (hpf.ContentLength == 0)
+
+                // If file is empty or more than 1MB, skip it
+                if (hpf.ContentLength == 0 || hpf.ContentLength > 1048576)
                     continue;
 
-                byte[] fileData = null;
-                using (var binaryReader = new BinaryReader(hpf.InputStream))
-                {
-                    fileData = binaryReader.ReadBytes(hpf.ContentLength);
-                }
+                // Create an image ID
+                Guid id = Guid.NewGuid();
 
-                Guid result = _adImageServices.StoreImage(hpf.FileName, fileData);
-                imagesGuid.Add(result.ToString());
+                // Compute the path to store it
+                string savedFileName = Path.Combine(
+                    _postImagesFilePath, 
+                    String.Format("{0}{1}", id.ToString(), _postImageExtension));
+
+                // Save the file to this path
+                hpf.SaveAs(savedFileName);
+
+                _adImageServices.StoreImage(id, false);
+
+                imagesGuid.Add(id.ToString());
             }
 
             return Json(imagesGuid);

@@ -386,15 +386,15 @@ namespace Bea.Web.NhibernateHelper
                 //         IMAGES
                 //-------------------------------------------
                 AdImage img1 = new AdImage();
+                img1.Id = Guid.Parse("acd04523-f2fc-47b5-a7af-50b33c49694f");
                 img1.IsPrimary = true;
-                img1.FileName = "toto.jpg";
-                img1.ImageBytes = File.ReadAllBytes(HttpContext.Current.Server.MapPath("~/App_Data/bateau-aluminium-04.jpg"));
+                img1.UploadedDate = new DateTime();
                 log.Info(_sessionFactory.GetCurrentSession().Save(img1));
 
                 AdImage img2 = new AdImage();
+                img2.Id = Guid.Parse("262dcc07-8c90-4af8-b99c-12e48afac89f");
                 img2.IsPrimary = true;
-                img2.FileName = "toto.jpg";
-                img2.ImageBytes = File.ReadAllBytes(HttpContext.Current.Server.MapPath("~/App_Data/suzuki-gsxr.jpg"));
+                img2.UploadedDate = new DateTime();
                 log.Info(_sessionFactory.GetCurrentSession().Save(img2));
 
                 //-------------------------------------------

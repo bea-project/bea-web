@@ -8,7 +8,7 @@ namespace Bea.Core.Services
 {
     public interface IAdImageServices
     {
-        Guid StoreImage(String fileName, Byte[] imageBytes);
-        byte[] GetAdImage(String id, bool isThumbnail);
+        AdImage StoreImage(Guid id, Boolean isPrimary);
+        //byte[] GetAdImage(String id, bool isThumbnail);
     }
 }
