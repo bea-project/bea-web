@@ -7,3 +7,4 @@ packages/*
 */bea.log.*
 *.user
 *.dmgl
+**/Content/PostImages/*.jpg
