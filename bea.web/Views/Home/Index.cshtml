@@ -42,7 +42,7 @@
             <td>
                 @if (!String.IsNullOrEmpty(item.MainImageId))
                 {
-                    <img alt="@item.Title" src="@Url.Content(String.Format("~/Content/PostImages/{0}.jpg", item.MainImageId))" class="img-polaroid">
+                    <img alt="@item.Title" src="@Url.Content(String.Format("~/Content/PostImages/{0}.small.jpg", item.MainImageId))" class="img-polaroid">
                 }
             </td>
             <td>
