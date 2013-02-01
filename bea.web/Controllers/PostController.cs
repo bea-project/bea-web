@@ -8,6 +8,7 @@ using Bea.Models.Create;
 using Bea.Models.Create.Vehicules;
 using Bea.Models.Create.WaterSport;
 using Bea.Domain.Ads.WaterSport;
+using Bea.Models.Create.RealEstate;
 
 namespace Bea.Web.Controllers
 {
@@ -132,6 +133,10 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.WaterSportAd:
                     AdWaterSportCreateModel waterSportModel = new AdWaterSportCreateModel();
                     return PartialView("Shared/Create/_WaterSportAdCreate", waterSportModel);
+
+                case AdTypeEnum.RealEstateAd:
+                    AdRealEstateCreateModel realEstateModel = new AdRealEstateCreateModel();
+                    return PartialView("Shared/Create/_realEstateAdCreate", realEstateModel);
             }
             return null;
         }
@@ -176,6 +181,10 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.WaterSportAd:
                     AdWaterSportCreateModel adWaterSportCreateModel = new AdWaterSportCreateModel(ad as WaterSportAd);
                     return adWaterSportCreateModel;
+
+                case AdTypeEnum.RealEstateAd:
+                    AdRealEstateCreateModel adRealEstateCreateModel = new AdRealEstateCreateModel(ad as RealEstateAd);
+                    return adRealEstateCreateModel;
 
                 case AdTypeEnum.Ad:
                     return createModel;
@@ -222,6 +231,11 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.WaterSportAd:
                     ViewBag.Types = _referenceServices.GetAllWaterSportTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;
+                case AdTypeEnum.RealEstateAd:
+                    ViewBag.Types = _referenceServices.GetAllRealEstateTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                    ViewBag.Districts = _locationServices.GetAllDistricts().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                    break;
+
             }
         }
     }

@@ -72,6 +72,7 @@
     <Compile Include="Map\Location\CityMap.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Map\Location\DistrictMap.cs" />
     <Compile Include="Map\Location\ProvinceMap.cs" />
     <Compile Include="Map\Reference\CarBrandMap.cs" />
     <Compile Include="Map\Reference\CarFuelMap.cs" />

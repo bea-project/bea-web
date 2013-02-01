@@ -69,5 +69,10 @@ namespace Bea.Services
         {
             return _repository.GetAll<WaterSportType>().ToList();
         }
+
+        public IList<RealEstateType> GetAllRealEstateTypes()
+        {
+            return _repository.GetAll<RealEstateType>().ToList();
+        }
     }
 }

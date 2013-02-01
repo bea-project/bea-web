@@ -28,9 +28,8 @@ namespace Bea.Dal.Map.Ads
 
             Map(x => x.RoomsNumber);
             Map(x => x.SurfaceArea);
-            Map(x => x.FloorNumber);
             Map(x => x.IsFurnished).Default("0");
-            References<RealEstateType>(x => x.RealEstateType);
+            References<RealEstateType>(x => x.Type);
         }
     }
 }

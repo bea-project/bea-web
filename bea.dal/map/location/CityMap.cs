@@ -16,6 +16,7 @@ namespace Bea.Dal.map.Location
             Map(x => x.Label).Not.Nullable();
             References<Province>(x => x.Province);
             HasMany<BaseAd>(x => x.Ads).AsBag();
+            HasMany<District>(x => x.Districts).AsBag().Cascade.SaveUpdate().Inverse();
         }
     }
 }

@@ -160,6 +160,9 @@ namespace Bea.Services
                     case (int)AdTypeEnum.WaterSportAd:
                         ad = WaterSportAdFromModel(form);
                         break;
+                    case (int)AdTypeEnum.RealEstateAd:
+                        ad = RealEstateAdFromModel(form);
+                        break;
                     default:
                         ad = new Ad();
                         break;
@@ -208,6 +211,38 @@ namespace Bea.Services
             if (result)
                 waterSportsAd.Type = _repository.Get<WaterSportType>(selectedTypeId);
             return (waterSportsAd);
+        }
+
+        private BaseAd RealEstateAdFromModel(Dictionary<string, string> form)
+        {
+            RealEstateAd realEstateAd = new RealEstateAd();
+
+            int selectedTypeId;
+            bool result = Int32.TryParse(form["SelectedTypeId"], out selectedTypeId);
+            if (result)
+                realEstateAd.Type = _repository.Get<RealEstateType>(selectedTypeId);
+
+            int selectedDistrictId;
+            result = Int32.TryParse(form["SelectedDistrictId"], out selectedDistrictId);
+            if (result)
+                realEstateAd.District = _repository.Get<District>(selectedDistrictId);
+
+            int surface;
+            result = Int32.TryParse(form["SurfaceArea"], out surface);
+            if (result)
+                realEstateAd.SurfaceArea = surface;
+
+            int roomNb;
+            result = Int32.TryParse(form["RoomNb"], out roomNb);
+            if (result)
+                realEstateAd.RoomsNumber = roomNb;
+
+            Boolean isFurnished;
+            result = Boolean.TryParse(form["IsFurnished"], out isFurnished);
+            if (result)
+                realEstateAd.IsFurnished = isFurnished;
+
+            return (realEstateAd);
         }
 
         private BaseAd MotorBoatEngineAdFromModel(Dictionary<string, string> form)

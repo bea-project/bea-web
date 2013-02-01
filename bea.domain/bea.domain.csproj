@@ -57,6 +57,7 @@
     <Compile Include="Categories\Category.cs" />
     <Compile Include="Categories\CategoryGroup.cs" />
     <Compile Include="Location\City.cs" />
+    <Compile Include="Location\District.cs" />
     <Compile Include="Location\Province.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ads\AdTypeEnum.cs" />

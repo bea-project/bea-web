@@ -61,12 +61,91 @@ namespace Bea.Web.NhibernateHelper
 
                 Province provinceSud = new Province();
                 provinceSud.Label = "Province Sud";
+
+                City noumea = new City();
+                noumea.Label = "Nouméa";
+
+                noumea.AddDistrict(new District { Label = "Centre-Ville"});
+                noumea.AddDistrict(new District { Label = "Nouville" });
+                noumea.AddDistrict(new District { Label = "Quartier Latin" });
+                noumea.AddDistrict(new District { Label = "Vallée du Génie" });
+                noumea.AddDistrict(new District { Label = "Artillerie" });
+                noumea.AddDistrict(new District { Label = "Orphelinat" });
+                noumea.AddDistrict(new District { Label = "Baie des Citrons" });
+                noumea.AddDistrict(new District { Label = "Anse Vata" });
+                noumea.AddDistrict(new District { Label = "Val Plaisance" });
+                noumea.AddDistrict(new District { Label = "N'Géa" });
+                noumea.AddDistrict(new District { Label = "Receiving" });
+                noumea.AddDistrict(new District { Label = "Motor Pool" });
+                noumea.AddDistrict(new District { Label = "Trianon" });
+                noumea.AddDistrict(new District { Label = "Riviere-Salée" });
+                noumea.AddDistrict(new District { Label = "Ducos" });
+                noumea.AddDistrict(new District { Label = "Magenta" });
+                noumea.AddDistrict(new District { Label = "Haut-Magenta" });
+                noumea.AddDistrict(new District { Label = "Aérodrome" });
+                noumea.AddDistrict(new District { Label = "PK4" });
+                noumea.AddDistrict(new District { Label = "PK6" });
+                noumea.AddDistrict(new District { Label = "PK7" });
+                noumea.AddDistrict(new District { Label = "Tina" });
+                noumea.AddDistrict(new District { Label = "Normandie" });
+                noumea.AddDistrict(new District { Label = "Vallée des Colons" });
+                noumea.AddDistrict(new District { Label = "Faubourg Blanchot" });
+                noumea.AddDistrict(new District { Label = "Montravel" });
+                noumea.AddDistrict(new District { Label = "Montagne Coupée" });
+                noumea.AddDistrict(new District { Label = "Vallée du Tir" });
+                noumea.AddDistrict(new District { Label = "Doniambo" });
+                noumea.AddDistrict(new District { Label = "Ouémo" });
+                noumea.AddDistrict(new District { Label = "Portes de Fer" });
+                provinceSud.AddCity(noumea);
+                _repository.Save(noumea);
+
+                City dumbea = new City();
+                dumbea.Label = "Dumbéa";
+                dumbea.AddDistrict(new District { Label = "Auteuil" });
+                dumbea.AddDistrict(new District { Label = "Centre" });
+                dumbea.AddDistrict(new District { Label = "Dumbéa sur Mer" });
+                dumbea.AddDistrict(new District { Label = "Koghi" });
+                dumbea.AddDistrict(new District { Label = "Koutio" });
+                dumbea.AddDistrict(new District { Label = "Nakutakoin" });
+                dumbea.AddDistrict(new District { Label = "Plaine de Koé" });
+                dumbea.AddDistrict(new District { Label = "Pointe à la Dorade" });
+                dumbea.AddDistrict(new District { Label = "ZAC Panda" });
+                provinceSud.AddCity(dumbea);
+                _repository.Save(dumbea);
+
+                City montDor = new City();
+                montDor.Label = "Mont-Dore";
+                montDor.AddDistrict(new District { Label = "Boulari" });
+                montDor.AddDistrict(new District { Label = "La Conception" });
+                montDor.AddDistrict(new District { Label = "La Coulée" });
+                montDor.AddDistrict(new District { Label = "Mont-Dore Sud" });
+                montDor.AddDistrict(new District { Label = "Plum" });
+                montDor.AddDistrict(new District { Label = "Pont des Francais" });
+                montDor.AddDistrict(new District { Label = "Robinson" });
+                montDor.AddDistrict(new District { Label = "Saint-Louis" });
+                montDor.AddDistrict(new District { Label = "Saint-Michel" });
+                montDor.AddDistrict(new District { Label = "Vallon-Dore" });
+                montDor.AddDistrict(new District { Label = "Yahoué" });
+                provinceSud.AddCity(montDor);
+                _repository.Save(montDor);
+
+                City paita = new City();
+                paita.Label = "Païta";
+                paita.AddDistrict(new District { Label = "Val Boisé" });
+                paita.AddDistrict(new District { Label = "Tontouta" });
+                paita.AddDistrict(new District { Label = "Tamoa" });
+                paita.AddDistrict(new District { Label = "Savannah" });
+                paita.AddDistrict(new District { Label = "Centre" });
+                paita.AddDistrict(new District { Label = "Naia" });
+                paita.AddDistrict(new District { Label = "Mont Mou" });
+                paita.AddDistrict(new District { Label = "Beauvallon" });
+
+                provinceSud.AddCity(paita);
+                _repository.Save(paita);
+
                 provinceSud.AddCity(new City { Label = "Thio" });
                 provinceSud.AddCity(new City { Label = "Yaté" });
                 provinceSud.AddCity(new City { Label = "Ile des Pins" });
-                provinceSud.AddCity(new City { Label = "Mont-Dore" });
-                provinceSud.AddCity(new City { Label = "Nouméa" });
-                provinceSud.AddCity(new City { Label = "Dumbéa" });
                 provinceSud.AddCity(new City { Label = "Païta" });
                 provinceSud.AddCity(new City { Label = "Boulouparis" });
                 provinceSud.AddCity(new City { Label = "La Foa" });
@@ -270,10 +349,17 @@ namespace Bea.Web.NhibernateHelper
             _repository.Save(new WaterSportType { Label = "Kite-Surf" });
             _repository.Save(new WaterSportType { Label = "Surf" });
             _repository.Save(new WaterSportType { Label = "Wake" });
-            _repository.Save(new WaterSportType { Label = "Plongee" });
+            _repository.Save(new WaterSportType { Label = "Plongée" });
             _repository.Save(new WaterSportType { Label = "Chasse sous-marine" });
             _repository.Save(new WaterSportType { Label = "Planche a voile" });
             _repository.Save(new WaterSportType { Label = "Autre" });
+
+            _repository.Save(new RealEstateType { Label = "Maison" });
+            _repository.Save(new RealEstateType { Label = "Appartement" });
+            _repository.Save(new RealEstateType { Label = "Terrain" });
+            _repository.Save(new RealEstateType { Label = "Local Commercial" });
+            _repository.Save(new RealEstateType { Label = "Dock" });
+
 
             _repository.Flush();
         }
@@ -300,9 +386,14 @@ namespace Bea.Web.NhibernateHelper
             nautisme.AddCategory(new Category { Label = "Bateaux à moteur", Type = AdTypeEnum.MotorBoatAd });
             nautisme.AddCategory(new Category { Label = "Propulseurs", Type = AdTypeEnum.MotorBoatEngineAd });
             nautisme.AddCategory(new Category { Label = "Voiliers", Type = AdTypeEnum.SailingBoatAd });
+            nautisme.AddCategory(new Category { Label = "Accastillage / Sécurité", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { Label = "Remorques", Type = AdTypeEnum.Ad });
             nautisme.AddCategory(new Category { Label = "Sports / Loisirs", Type = AdTypeEnum.WaterSportAd });
             nautisme.AddCategory(new Category { Label = "Matériel de pêche", Type = AdTypeEnum.Ad });
-            nautisme.AddCategory(new Category { Label = "Planches à voile", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { Label = "Moto Marines", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { Label = "Equipement / Electronique", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { Label = "Divers", Type = AdTypeEnum.Ad });
+
             _sessionFactory.GetCurrentSession().Save(nautisme);
 
             CategoryGroup realEstate = new CategoryGroup();
@@ -311,7 +402,7 @@ namespace Bea.Web.NhibernateHelper
             realEstate.AddCategory(new Category { Label = "Ventes immobilières", Type = AdTypeEnum.RealEstateAd });
             realEstate.AddCategory(new Category { Label = "Colocations", Type = AdTypeEnum.RealEstateAd });
             realEstate.AddCategory(new Category { Label = "Locations de vacances", Type = AdTypeEnum.RealEstateAd });
-            realEstate.AddCategory(new Category { Label = "Bureaux et commerces", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { Label = "Gardiennage", Type = AdTypeEnum.RealEstateAd });
             _sessionFactory.GetCurrentSession().Save(realEstate);
 
             CategoryGroup multimedia = new CategoryGroup();

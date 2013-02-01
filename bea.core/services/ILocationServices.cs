@@ -12,5 +12,6 @@ namespace Bea.Core.Services
         City GetCityFromId(int cityId);
         IList<Province> GetAllProvinces();
         IList<City> GetCitiesFromProvince(int provinceId);
+        IList<District> GetAllDistricts();
     }
 }

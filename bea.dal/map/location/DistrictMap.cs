@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 using FluentNHibernate.Mapping;
-using bea.dal.entites.location;
+using Bea.Domain.Location;
 
-namespace bea.dal.map.location
+
+namespace Bea.Dal.map.Location
 {
     public class DistrictMap : ClassMap<District>
     {
         public DistrictMap()
         {
-            Table("district");
-            Id(x => x.districtId).GeneratedBy.Identity();
-            Map(x => x.label).Not.Nullable();
+            Id(x => x.Id).GeneratedBy.Identity();
+            Map(x => x.Label).Not.Nullable();
+            References<City>(x => x.City);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Bea.Core.Services
         IList<SailingBoatHullType> GetAllSailingBoatHullTypes();
         IList<SailingBoatType> GetAllSailingBoatTypes();
         IList<WaterSportType> GetAllWaterSportTypes();
+        IList<RealEstateType> GetAllRealEstateTypes();
         Dictionary<int, string> GetAllYears(int nbYears);
     }
 

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Create\AdActivationResultModel.cs" />
+    <Compile Include="Create\RealEstate\AdRealEstateCreateModel.cs" />
     <Compile Include="Create\Vehicules\AdCarCreateModel.cs" />
     <Compile Include="Create\AdCreateModel.cs" />
     <Compile Include="Create\Vehicules\AdMotoCreateModel.cs" />

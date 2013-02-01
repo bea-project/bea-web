@@ -62,6 +62,9 @@ namespace Bea.Services
                     GetWaterSportAdDataConsistencyErrors(ad as WaterSportAd, errors);
                     break;
 
+                case AdTypeEnum.RealEstateAd:
+                    GetRealEstateAdDataConsistencyErrors(ad as RealEstateAd, errors);
+                    break;
                 default:
                     break;
             }
@@ -102,19 +105,31 @@ namespace Bea.Services
 
         public IDictionary<string, string> GetMotorBoatEngineAdDataConsistencyErrors(MotorBoatEngineAd motorBoatEngineAd, IDictionary<string, string> errors)
         {
-            
-
             if (motorBoatEngineAd.Type == null)
-                errors.Add("SelectedMotorTypeId", "Veuillez sélectionner un type de moteur.");
-
-            if (motorBoatEngineAd.Type == null)
-                errors.Add("SelectedTypeId", "Veuillez sélectionner un type.");
+                errors.Add("SelectedTypeId", "Veuillez sélectionner un type de moteur.");
 
             if (motorBoatEngineAd.Year == 0)
                 errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
 
             if (motorBoatEngineAd.Hp == 0)
                 errors.Add("Hp", "Veuillez saisir une puissance.");
+
+            return errors;
+        }
+
+        public IDictionary<string, string> GetRealEstateAdDataConsistencyErrors(RealEstateAd realEstateAd, IDictionary<string, string> errors)
+        {
+            if (realEstateAd.Type == null)
+                errors.Add("SelectedTypeId", "Veuillez sélectionner un type de bien.");
+
+            if (realEstateAd.RoomsNumber == 0)
+                errors.Add("RoomNb", "Veuillez sélectionner un nombre de pieces.");
+
+            if (realEstateAd.SurfaceArea == 0)
+                errors.Add("SurfaceArea", "Veuillez saisir une superficie.");
+
+            if (realEstateAd.IsFurnished == null)
+                errors.Add("IsFurnished", "Veuillez selectionner une option.");
 
             return errors;
         }

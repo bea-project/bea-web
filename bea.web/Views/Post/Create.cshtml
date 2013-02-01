@@ -114,6 +114,10 @@
             {
                 @Html.Partial("Shared/Create/_WaterSportAdCreate", Model);
             }
+            @if (Model is Bea.Models.Create.RealEstate.AdRealEstateCreateModel)
+            {
+                @Html.Partial("Shared/Create/_RealEstateAdCreate", Model);
+            }
         </div>
 
         <label class="control-label" for="inputBody">@Html.LabelFor(model => model.Body)</label>

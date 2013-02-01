@@ -1,0 +1,51 @@
+﻿@model Bea.Models.Create.RealEstate.AdRealEstateCreateModel
+
+@Html.HiddenFor(model => model.Type)
+
+<div class="row">
+        <div class="span3">
+            <label class="control-label" for="inputBrand">@Html.LabelFor(model => model.SelectedTypeId)</label>
+            <div class="controls">
+                @Html.DropDownListFor(model => model.SelectedTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Choisissez un type", new { @class = "input-large" })
+                @Html.ValidationMessageFor(model => model.SelectedTypeId, String.Empty, new { @class = "label label-important" })
+            </div>
+        </div>
+        <div class="span1"></div>
+        <div class="span3">
+            <label class="control-label" for="inputFuel">@Html.LabelFor(model => model.SelectedDistrictId)</label>
+            <div class="controls">
+                @Html.DropDownListFor(model => model.SelectedDistrictId, (IEnumerable<SelectListItem>)ViewBag.Districts, "Choisissez un quartier", new { @class = "input-large" })
+                @Html.ValidationMessageFor(model => model.SelectedDistrictId, String.Empty, new { @class = "label label-important" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span3">
+            <label class="control-label" for="inputKm">@Html.LabelFor(model => model.SurfaceArea)</label>
+            <div class="controls">
+                <div class="input-prepend">
+                    @Html.TextBoxFor(model => model.SurfaceArea, new { @class = "input- input-medium" })
+                    <span class="add-on">m²</span>
+                </div>
+                @Html.ValidationMessageFor(model => model.SurfaceArea, String.Empty, new { @class = "label label-important" })
+            </div>
+        </div>
+        <div class="span1"></div>
+        <div class="span3">
+                <label class="control-label" for="inputKm">@Html.LabelFor(model => model.RoomNb)</label>
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.RoomNb, new { @class = "input-large" })
+                    @Html.ValidationMessageFor(model => model.RoomNb, String.Empty, new { @class = "label label-important" })
+                </div>
+        </div>
+     </div>
+
+
+        <label class="control-label" for="inputIsOffer">@Html.LabelFor(model => model.IsFurnished)</label>
+        <div class="controls controls-row">
+            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsFurnished, true, new { @checked = "checked", @style = "vertical-align: top" }) Meublé</label>
+            <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsFurnished, false, new { @style = "vertical-align: top" }) Non Meublé</label>
+
+        </div>
+
+
