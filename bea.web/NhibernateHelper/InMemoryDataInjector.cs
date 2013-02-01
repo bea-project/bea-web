@@ -146,7 +146,6 @@ namespace Bea.Web.NhibernateHelper
                 provinceSud.AddCity(new City { Label = "Thio" });
                 provinceSud.AddCity(new City { Label = "Yaté" });
                 provinceSud.AddCity(new City { Label = "Ile des Pins" });
-                provinceSud.AddCity(new City { Label = "Païta" });
                 provinceSud.AddCity(new City { Label = "Boulouparis" });
                 provinceSud.AddCity(new City { Label = "La Foa" });
                 provinceSud.AddCity(new City { Label = "Sarraméa" });
