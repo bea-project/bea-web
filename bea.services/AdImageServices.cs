@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Transactions;
 using Bea.Core.Dal;
 using Bea.Core.Services;
@@ -13,6 +14,9 @@ namespace Bea.Services
     {
         private readonly IRepository _repository;
         private readonly IHelperService _helper;
+        private readonly Regex _fileExtensionMatcher = new Regex(@"\.jpe{0,1}g|\.png", RegexOptions.IgnoreCase);
+        private readonly Regex _contentTypeExtensionMatcher = new Regex(@"image/jpe{0,1}g|image/png", RegexOptions.IgnoreCase);
+        private readonly int _maxImageSizeInBytes = 1048576;
 
         public AdImageServices(IRepository repository, IHelperService helper)
         {
@@ -39,17 +43,11 @@ namespace Bea.Services
             return image;
         }
 
-        //public byte[] GetAdImage(string id, bool isThumbnail)
-        //{
-        //    AdImage img = _repository.Get<AdImage>(Guid.Parse(id));
-
-        //    if (img == null)
-        //        return null;
-
-        //    if (isThumbnail)
-        //        return img.ImageThumbnailBytes;
-        //    else
-        //        return img.ImageBytes;
-        //}
+        public Boolean ValidateImageForUpload(String contentType, int imageLength)
+        {
+            return _contentTypeExtensionMatcher.IsMatch(contentType) 
+                && imageLength > 0 
+                && imageLength <= _maxImageSizeInBytes;
+        }
     }
 }

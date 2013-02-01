@@ -9,6 +9,6 @@ namespace Bea.Core.Services
     public interface IAdImageServices
     {
         AdImage StoreImage(Guid id, Boolean isPrimary);
-        //byte[] GetAdImage(String id, bool isThumbnail);
+        Boolean ValidateImageForUpload(String contentType, int imageLength);
     }
 }

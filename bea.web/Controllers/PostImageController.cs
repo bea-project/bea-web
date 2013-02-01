@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
 using Bea.Core.Services;
+using ImageResizer;
 using ImageResizer.Configuration;
 
 namespace Bea.Web.Controllers
@@ -17,6 +18,9 @@ namespace Bea.Web.Controllers
 
         private readonly String _postImagesFilePath;
         private readonly String _postImageExtension = ".jpg";
+        private readonly String _thumbnailExt = ".small";
+        private readonly ResizeSettings _postImageResizeSettings;
+        private readonly ResizeSettings _postImageThumbnailResizeSettings;
 
         public PostImageController(IAdImageServices adImageServices)
         {
@@ -25,6 +29,19 @@ namespace Bea.Web.Controllers
 
             _adImageServices = adImageServices;
             _postImagesFilePath = Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "Content", "PostImages");
+
+            // Set the default resizing settings once and for all
+            _postImageResizeSettings = new ResizeSettings();
+            _postImageResizeSettings.MaxWidth = 600;
+            _postImageResizeSettings.MaxHeight = 400;
+            _postImageResizeSettings.Format = "jpg";
+            _postImageResizeSettings.Mode = FitMode.Max;
+
+            _postImageThumbnailResizeSettings = new ResizeSettings();
+            _postImageThumbnailResizeSettings.MaxWidth = 120;
+            _postImageThumbnailResizeSettings.Height = 70;
+            _postImageThumbnailResizeSettings.Format = "jpg";
+            _postImageThumbnailResizeSettings.Mode = FitMode.Max;
         }
 
         //
@@ -39,8 +56,8 @@ namespace Bea.Web.Controllers
             {
                 var hpf = Request.Files[file];
 
-                // If file is empty or more than 1MB, skip it
-                if (hpf.ContentLength == 0 || hpf.ContentLength > 1048576)
+                // Check whether we can upload the file (content type and size check)
+                if (!_adImageServices.ValidateImageForUpload(hpf.ContentType, hpf.ContentLength))
                     continue;
 
                 // Create an image ID
@@ -49,18 +66,25 @@ namespace Bea.Web.Controllers
                 // Compute the path to store it
                 string savedFileName = Path.Combine(
                     _postImagesFilePath, 
-                    String.Format("{0}{1}", id.ToString(), _postImageExtension));
+                    String.Format("{0}", id.ToString()));
 
-                // Save the file to this path
-                hpf.SaveAs(savedFileName);
+                string targetFileName = String.Format("{0}{1}", savedFileName, _postImageExtension);
+                string targetThumbnailFileName = String.Format("{0}{1}{2}", savedFileName, _thumbnailExt, _postImageExtension);
 
+                // Resize to JPG for the main image
+                ImageResizer.ImageBuilder.Current.Build(hpf.InputStream, targetFileName, _postImageResizeSettings);
+                
+                // Resize to smal JPG for the thumbnail version
+                ImageResizer.ImageBuilder.Current.Build(targetFileName, targetThumbnailFileName, _postImageThumbnailResizeSettings);
+
+                // Store the image
                 _adImageServices.StoreImage(id, false);
 
+                // Ad this image id to the result stream
                 imagesGuid.Add(id.ToString());
             }
 
             return Json(imagesGuid);
         }
-
     }
 }

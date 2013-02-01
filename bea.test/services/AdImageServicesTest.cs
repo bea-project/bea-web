@@ -35,5 +35,89 @@ namespace Bea.Test.Services
             Assert.IsTrue(actual.IsPrimary);
             Assert.AreEqual(d, actual.UploadedDate);
         }
+
+        [TestMethod]
+        public void ValidateImageForUpload_ImageIsContentTypeImageJpg_AndSize1_ReturnTrue()
+        {
+            // Given
+            String contentType = "image/jpg";
+
+            AdImageServices service = new AdImageServices(null, null);
+
+            // Then
+            Assert.IsTrue(service.ValidateImageForUpload(contentType, 1));
+        }
+
+        [TestMethod]
+        public void ValidateImageForUpload_ImageIsContentTypeImageJpeg_AndSize1_ReturnTrue()
+        {
+            // Given
+            String contentType = "image/jpeg";
+
+            AdImageServices service = new AdImageServices(null, null);
+
+            // Then
+            Assert.IsTrue(service.ValidateImageForUpload(contentType, 1));
+        }
+
+        [TestMethod]
+        public void ValidateImageForUpload_ImageIsContentTypeImagePng_AndSize1_ReturnTrue()
+        {
+            // Given
+            String contentType = "image/png";
+
+            AdImageServices service = new AdImageServices(null, null);
+
+            // Then
+            Assert.IsTrue(service.ValidateImageForUpload(contentType, 1));
+        }
+
+        [TestMethod]
+        public void ValidateImageForUpload_ImageIsContentTypeNot_AndSize1_ReturnFalse()
+        {
+            // Given
+            String contentType = "appliction/json";
+
+            AdImageServices service = new AdImageServices(null, null);
+
+            // Then
+            Assert.IsFalse(service.ValidateImageForUpload(contentType, 1));
+        }
+
+        [TestMethod]
+        public void ValidateImageForUpload_ImageIsContentTypeImagePng_AndSizeEmpty_ReturnFalse()
+        {
+            // Given
+            String contentType = "image/png";
+
+            AdImageServices service = new AdImageServices(null, null);
+
+            // Then
+            Assert.IsFalse(service.ValidateImageForUpload(contentType, 0));
+        }
+
+        [TestMethod]
+        public void ValidateImageForUpload_ImageIsContentTypeImagePng_AndSizeTooBig_ReturnFalse()
+        {
+            // Given
+            String contentType = "image/png";
+
+            AdImageServices service = new AdImageServices(null, null);
+
+            // Then
+            Assert.IsFalse(service.ValidateImageForUpload(contentType, 1048577));
+        }
+
+        [TestMethod]
+        public void ValidateImageForUpload_ImageIsContentTypeImagePng_AndSizeAtLimit_ReturnTrue()
+        {
+            // Given
+            String contentType = "image/png";
+
+            AdImageServices service = new AdImageServices(null, null);
+
+            // Then
+            Assert.IsTrue(service.ValidateImageForUpload(contentType, 1048576));
+        }
     }
 }
