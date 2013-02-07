@@ -35,7 +35,7 @@ namespace Bea.Test.services
             });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(new string[] { "title" }, null, null, 98)).Returns(searchResult);
+            adRepoMock.Setup(r => r.SearchAds(new string[] { "title" }, null, null, 98, null)).Returns(searchResult);
 
             AdSearchModel model = new AdSearchModel()
             {
@@ -80,7 +80,7 @@ namespace Bea.Test.services
             });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship", "computer" }, null, null, 98)).Returns(searchResult);
+            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship", "computer" }, null, null, 98, null)).Returns(searchResult);
 
             AdSearchModel model = new AdSearchModel()
             {

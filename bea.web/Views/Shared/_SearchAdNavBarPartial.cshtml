@@ -11,6 +11,14 @@
                 
                 <li class="bea-nav-li">
                     @Html.DropDownListFor(
+                        x => x.CategorySelectedId,
+                        Enumerable.Empty<SelectListItem>(),
+                        "Toutes les catégories",
+                        new { id = "categories" })
+                </li>
+
+                <li class="bea-nav-li">
+                    @Html.DropDownListFor(
                         x => x.ProvinceSelectedId,
                         Enumerable.Empty<SelectListItem>(),
                         "Toutes les provinces",
@@ -38,6 +46,25 @@
         //Refreshes the city list when user changes province
         $('#provinces').change(function () {
             $(this).reloadCities();
+        });
+    });
+
+    $(function () {
+        $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategories" })', function (result) {
+            var ddl = $('#categories');
+            ddl.empty();
+            $(document.createElement('option'))
+                    .attr('value', "")
+                    .text("Toutes les catégories")
+                    .appendTo(ddl);
+            $(result).each(function () {
+                var selected = (this.Id == "@Model.CategorySelectedId");
+                $(document.createElement('option'))
+                    .attr('value', this.Id)
+                    .attr('selected', selected)
+                    .text(this.Label)
+                    .appendTo(ddl);
+            });
         });
     });
 

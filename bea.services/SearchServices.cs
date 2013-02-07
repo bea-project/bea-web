@@ -22,12 +22,12 @@ namespace Bea.Services
 
         public AdSearchResultModel SearchAds(AdSearchModel searchQuery)
         {
-            String[] andSearchString = null;
+            String[] andSearchStrings = null;
 
             if (!String.IsNullOrEmpty(searchQuery.SearchString))
-                andSearchString = searchQuery.SearchString.Trim().Split(' ');
+                andSearchStrings = searchQuery.SearchString.Trim().Split(' ');
 
-            IList<SearchAdCache> searchResult = _adRepository.SearchAds(andSearchString, null, searchQuery.ProvinceSelectedId, searchQuery.CitySelectedId);
+            IList<SearchAdCache> searchResult = _adRepository.SearchAds(andSearchStrings, null, searchQuery.ProvinceSelectedId, searchQuery.CitySelectedId, searchQuery.CategorySelectedId);
             
             AdSearchResultModel model = new AdSearchResultModel(searchQuery);
             model.SearchResultTotalCount = searchResult.Count;

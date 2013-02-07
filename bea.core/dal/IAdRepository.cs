@@ -42,11 +42,12 @@ namespace Bea.Core.Dal
         /// <returns>The type of the Ad</returns>
         AdTypeEnum GetAdType(long adId);
 
-        /// Searches through all the announces by title, body, province or city
+        /// <summary>
+        /// Searches through all the announces by title, body, province or city and category
         /// using "like" %searchString%
         /// </summary>
         /// <returns></returns>
-        IList<SearchAdCache> SearchAds(String[] andSearchStrings, String[] orSearchStrings, int? provinceId, int? cityId);
+        IList<SearchAdCache> SearchAds(String[] andSearchStrings, String[] orSearchStrings, int? provinceId, int? cityId, int? categoryId);
 
         /// Deletes an Ad by Id
         /// </summary>

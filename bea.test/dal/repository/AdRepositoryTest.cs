@@ -520,6 +520,85 @@ namespace Bea.Test.dal.repository
         }
 
         [TestMethod]
+        public void SearchAds_SearchByTitleAndCategory()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            AdRepository adRepo = new AdRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                // Given
+                #region test data
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "CherzmOi"
+                };
+
+                Category cat = new Category
+                {
+                    Label = "Moto"
+                };
+
+                SearchAdCache a = new SearchAdCache
+                {
+                    AdId = 1,
+                    Title = "titre 1",
+                    Body = "content",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
+                };
+                repo.Save<City>(c);
+                repo.Save<Category>(cat);
+                repo.Save(a);
+
+                City c2 = new City
+                {
+                    Label = "CherzmOi2"
+                };
+
+                Category cat2 = new Category
+                {
+                    Label = "Auto"
+                };
+
+                SearchAdCache a2 = new SearchAdCache
+                {
+                    AdId = 2,
+                    Title = "title 2",
+                    Body = "content",
+                    City = c2,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 17),
+                    Category = cat2
+                };
+                repo.Save<City>(c2);
+                repo.Save<Category>(cat2);
+                repo.Save(a2);
+
+
+                repo.Flush();
+
+                #endregion
+
+                // When
+                IList<SearchAdCache> result = adRepo.SearchAds(orSearchStrings: new String[] { "ti" }, categoryId: cat.Id);
+
+                // Then
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(a, result[0]);
+            }
+        }
+
+        [TestMethod]
         public void SearchAds_SearchByTitleAndBodyAndProvince()
         {
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;

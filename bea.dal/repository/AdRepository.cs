@@ -93,7 +93,7 @@ namespace Bea.Dal.Repository
             _sessionFactory.GetCurrentSession().Save(ad);
         }
 
-        public IList<SearchAdCache> SearchAds(string[] andSearchStrings = null, string[] orSearchStrings = null, int? provinceId = null, int? cityId = null)
+        public IList<SearchAdCache> SearchAds(string[] andSearchStrings = null, string[] orSearchStrings = null, int? provinceId = null, int? cityId = null, int? categoryId = null)
         {
             ICriteria query = _sessionFactory.GetCurrentSession().CreateCriteria<SearchAdCache>();
 
@@ -129,7 +129,11 @@ namespace Bea.Dal.Repository
             else if (provinceId.HasValue)
                 query.Add(Expression.Eq("Province.Id", provinceId.Value));
 
-            // Order results by creation date descending (most recent furst)
+            // Add AND clause to the category
+            if (categoryId.HasValue)
+                query.Add(Expression.Eq("Category.Id", categoryId.Value));
+
+            // Order results by creation date descending (most recent first)
             query.AddOrder(Order.Desc("CreationDate"));
 
             return query.List<SearchAdCache>();
