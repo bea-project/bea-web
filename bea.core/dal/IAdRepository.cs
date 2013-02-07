@@ -47,7 +47,7 @@ namespace Bea.Core.Dal
         /// using "like" %searchString%
         /// </summary>
         /// <returns></returns>
-        IList<SearchAdCache> SearchAds(String[] andSearchStrings, String[] orSearchStrings, int? provinceId, int? cityId, int? categoryId);
+        IList<SearchAdCache> SearchAds(String[] andSearchStrings, String[] orSearchStrings, int? provinceId, int? cityId, int[] categoryIds);
 
         /// Deletes an Ad by Id
         /// </summary>

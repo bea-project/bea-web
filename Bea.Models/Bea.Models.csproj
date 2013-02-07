@@ -60,6 +60,7 @@
     <Compile Include="Details\MotoAdDetailsModel.cs" />
     <Compile Include="Details\OtherVehicleAdDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="References\CategoryItemModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bea.Domain\Bea.Domain.csproj">

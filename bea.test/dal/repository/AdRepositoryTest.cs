@@ -520,7 +520,7 @@ namespace Bea.Test.dal.repository
         }
 
         [TestMethod]
-        public void SearchAds_SearchByTitleAndCategory()
+        public void SearchAds_SearchByTitleAndCategories()
         {
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
             Repository repo = new Repository(sessionFactory);
@@ -590,11 +590,12 @@ namespace Bea.Test.dal.repository
                 #endregion
 
                 // When
-                IList<SearchAdCache> result = adRepo.SearchAds(orSearchStrings: new String[] { "ti" }, categoryId: cat.Id);
+                IList<SearchAdCache> result = adRepo.SearchAds(orSearchStrings: new String[] { "ti" }, categoryIds: new int[] { cat.Id, cat2.Id });
 
                 // Then
-                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(2, result.Count);
                 Assert.AreEqual(a, result[0]);
+                Assert.AreEqual(a2, result[1]);
             }
         }
 

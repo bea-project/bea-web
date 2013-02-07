@@ -93,20 +93,20 @@ namespace Bea.Dal.Repository
             _sessionFactory.GetCurrentSession().Save(ad);
         }
 
-        public IList<SearchAdCache> SearchAds(string[] andSearchStrings = null, string[] orSearchStrings = null, int? provinceId = null, int? cityId = null, int? categoryId = null)
+        public IList<SearchAdCache> SearchAds(string[] andSearchStrings = null, string[] orSearchStrings = null, int? provinceId = null, int? cityId = null, int[] categoryIds = null)
         {
             ICriteria query = _sessionFactory.GetCurrentSession().CreateCriteria<SearchAdCache>();
 
             // Add AND clause between search strings
             if (andSearchStrings != null && andSearchStrings.Length != 0)
             {
-                Conjunction andQuery = Expression.Conjunction();
+                Conjunction andQuery = Restrictions.Conjunction();
 
                 foreach (String andString in andSearchStrings)
                 {
-                    Disjunction subAndQuery = Expression.Disjunction();
-                    subAndQuery.Add(Expression.Like("Title", andString, MatchMode.Anywhere));
-                    subAndQuery.Add(Expression.Like("Body", andString, MatchMode.Anywhere));
+                    Disjunction subAndQuery = Restrictions.Disjunction();
+                    subAndQuery.Add(Restrictions.Like("Title", andString, MatchMode.Anywhere));
+                    subAndQuery.Add(Restrictions.Like("Body", andString, MatchMode.Anywhere));
                     andQuery.Add(subAndQuery);
                 }
 
@@ -116,22 +116,22 @@ namespace Bea.Dal.Repository
             // Add OR clause between search strings
             if (orSearchStrings != null && orSearchStrings.Length != 0)
             {
-                Disjunction orQuery = Expression.Disjunction();
-                orSearchStrings.ForEach(s => orQuery.Add(Expression.Like("Title", s, MatchMode.Anywhere)));
-                orSearchStrings.ForEach(s => orQuery.Add(Expression.Like("Body", s, MatchMode.Anywhere)));
+                Disjunction orQuery = Restrictions.Disjunction();
+                orSearchStrings.ForEach(s => orQuery.Add(Restrictions.Like("Title", s, MatchMode.Anywhere)));
+                orSearchStrings.ForEach(s => orQuery.Add(Restrictions.Like("Body", s, MatchMode.Anywhere)));
 
                 query.Add(orQuery);
             }
 
             // Add AND clause to the location (either city or province)
             if (cityId.HasValue)
-                query.Add(Expression.Eq("City.Id", cityId.Value));
+                query.Add(Restrictions.Eq("City.Id", cityId.Value));
             else if (provinceId.HasValue)
-                query.Add(Expression.Eq("Province.Id", provinceId.Value));
+                query.Add(Restrictions.Eq("Province.Id", provinceId.Value));
 
             // Add AND clause to the category
-            if (categoryId.HasValue)
-                query.Add(Expression.Eq("Category.Id", categoryId.Value));
+            if (categoryIds != null && categoryIds.Length > 0)
+                query.Add(Restrictions.In("Category.Id", categoryIds));
 
             // Order results by creation date descending (most recent first)
             query.AddOrder(Order.Desc("CreationDate"));

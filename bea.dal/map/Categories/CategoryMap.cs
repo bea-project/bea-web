@@ -16,8 +16,8 @@ namespace Bea.Dal.Map.Categories
             Id(x => x.Id).GeneratedBy.Identity();
             Map(x => x.Label).Not.Nullable();
             Map(x => x.Type).Not.Nullable();
-            References<CategoryGroup>(x => x.CategoryGrp);
-            HasMany<BaseAd>(x => x.Ads).AsBag();
+            References(x => x.CategoryGroup);
+            HasMany(x => x.Ads).AsBag();
         }
     }
 }

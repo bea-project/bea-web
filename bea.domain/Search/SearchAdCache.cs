@@ -33,7 +33,7 @@ namespace Bea.Domain.Search
             Body = ad.Body;
             Province = ad.City.Province;
             City = ad.City;
-            CategoryGroup = ad.Category.CategoryGrp;
+            CategoryGroup = ad.Category.CategoryGroup;
             Category = ad.Category;
             Price = ad.Price;
             CreationDate = ad.CreationDate;

@@ -15,7 +15,7 @@ namespace Bea.Domain.Categories
         
         public virtual int Id { get; set; }
         public virtual String Label { get; set; }
-        public virtual CategoryGroup CategoryGrp { get; set; }
+        public virtual CategoryGroup CategoryGroup { get; set; }
         public virtual IList<BaseAd> Ads { get; set; }
         public virtual AdTypeEnum Type { get; set; }
 

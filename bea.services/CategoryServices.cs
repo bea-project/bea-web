@@ -5,11 +5,14 @@ using System.Text;
 using Bea.Core.Services;
 using Bea.Core.Dal;
 using Bea.Domain.Categories;
+using Bea.Models.References;
 
 namespace Bea.Services
 {
     public class CategoryServices : ICategoryServices
     {
+        public static readonly int ID_MULTIPLIER = 1000000;
+
         private readonly ICategoryRepository _categoryRepository;
         private readonly IRepository _repository;
 
@@ -20,15 +23,6 @@ namespace Bea.Services
         }
 
         /// <summary>
-        /// Get all the Category Groups with the categories
-        /// </summary>
-        /// <returns>A list of Category Groups</returns>
-        //public List<Category> GetAllCategoryGroupsWithCategories()
-        //{
-        //    return _categoryRepository.GetAllCategoryGroupsWithCategories();
-        //}
-
-        /// <summary>
         /// Get all the Category by Id
         /// </summary>
         /// <returns>A Category</returns>
@@ -37,9 +31,28 @@ namespace Bea.Services
             return _categoryRepository.GetCategoryById(categoryId);
         }
 
-        public List<Category> GetAllCategories()
+        public IList<Category> GetAllCategories()
         {
-            return _repository.GetAll<Category>().ToList();
+            return _repository.GetAll<Category>();
+        }
+
+        public IList<CategoryItemModel> GetAllCategoriesAndGroups()
+        {
+            IList<CategoryItemModel> result = new List<CategoryItemModel>();
+
+            foreach (CategoryGroup group in _repository.GetAll<CategoryGroup>())
+            {
+                result.Add(new CategoryItemModel
+                    {
+                        Id = ID_MULTIPLIER + group.Id,
+                        Label = group.Label.ToUpper(),
+                        IsGroup = true
+                    });
+
+                group.Categories.ToList().ForEach(x => result.Add(new CategoryItemModel { Id = x.Id, Label = x.Label, IsGroup = false }));
+            }
+
+            return result;
         }
     }
 }

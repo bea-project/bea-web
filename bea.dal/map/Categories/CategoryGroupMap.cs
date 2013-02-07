@@ -13,7 +13,7 @@ namespace Bea.Dal.Map.Categories
         {
             Id(x => x.Id).GeneratedBy.Identity();
             Map(x => x.Label).Not.Nullable();
-            HasMany<Category>(x => x.Categories).AsBag().Inverse().Cascade.SaveUpdate();
+            HasMany(x => x.Categories).Cascade.SaveUpdate();
         }
     }
 }

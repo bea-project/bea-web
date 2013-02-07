@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bea.Domain.Categories;
+using Bea.Models.References;
 
 namespace Bea.Core.Services
 {
@@ -20,6 +21,16 @@ namespace Bea.Core.Services
         /// <returns>A Category</returns>
         Category GetCategoryById(int categoryId);
 
-        List<Category> GetAllCategories();
+        /// <summary>
+        /// Returns all categories
+        /// </summary>
+        /// <returns></returns>
+        IList<Category> GetAllCategories();
+
+        /// <summary>
+        /// Lists all the categories adding groups as non selectable
+        /// </summary>
+        /// <returns>The list of categories with groups</returns>
+        IList<CategoryItemModel> GetAllCategoriesAndGroups();
     }
 }

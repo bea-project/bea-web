@@ -6,7 +6,7 @@
         {
             <ul class="nav">
                 <li class="bea-nav-li">
-                    @Html.TextBoxFor(x => x.SearchString, new { @class = "input-xlarge", @size = 60 })
+                    @Html.TextBoxFor(x => x.SearchString, new { @class = "input-xlarge", @size = 60, @placeholder = "Vous recherchez..." })
                 </li>
                 
                 <li class="bea-nav-li">
@@ -50,7 +50,7 @@
     });
 
     $(function () {
-        $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategories" })', function (result) {
+        $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategoriesAndGroups" })', function (result) {
             var ddl = $('#categories');
             ddl.empty();
             $(document.createElement('option'))
@@ -62,6 +62,7 @@
                 $(document.createElement('option'))
                     .attr('value', this.Id)
                     .attr('selected', selected)
+                    .attr('style', this.IsGroup ? 'color: #006DCC;' : '')
                     .text(this.Label)
                     .appendTo(ddl);
             });

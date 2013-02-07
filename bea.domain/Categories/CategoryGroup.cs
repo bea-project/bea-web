@@ -19,7 +19,7 @@ namespace Bea.Domain.Categories
         public virtual void AddCategory(Category category)
         {
             this.Categories.Add(category);
-            category.CategoryGrp = this;
+            category.CategoryGroup = this;
         }
     }
 }

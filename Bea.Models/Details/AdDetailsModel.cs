@@ -46,7 +46,7 @@ namespace Bea.Models.Details
             if (ad.Category != null)
             {
                 Category = ad.Category.Label;
-                CategoryGroup = ad.Category.CategoryGrp.Label;
+                CategoryGroup = ad.Category.CategoryGroup.Label;
             }
 
             UserFirstName = ad.CreatedBy.Firstname;
