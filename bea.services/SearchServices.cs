@@ -9,6 +9,7 @@ using Bea.Models;
 using Bea.Domain.Ads;
 using Bea.Domain.Search;
 using Bea.Domain.Categories;
+using Bea.Models.Search;
 
 namespace Bea.Services
 {
@@ -31,6 +32,10 @@ namespace Bea.Services
                 andSearchStrings = searchQuery.SearchString.Trim().Split(' ');
 
             int[] categories = GetCategoryIdsFromQuery(searchQuery);
+
+            
+            Dictionary<String, String> searchParams = new Dictionary<String, String>();
+
 
             IList<SearchAdCache> searchResult = _adRepository.SearchAds(andSearchStrings, null, searchQuery.ProvinceSelectedId, searchQuery.CitySelectedId, categories);
             

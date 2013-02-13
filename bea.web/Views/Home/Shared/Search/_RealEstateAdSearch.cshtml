@@ -1,0 +1,8 @@
+﻿@model Bea.Models.Search.RealEstate.AdRealEstateSearchModel
+<h6><i class="  icon-pencil"></i>&nbsp; Filtrer les annonces (optionnel)</h6>
+<div class="controls controls-row">
+        @Html.DropDownListFor(Model => Model.MinRoomNbSelectedId, (IEnumerable<SelectListItem>)ViewBag.Rooms, "Min Pieces", new { @class = "input-medium" })
+        @Html.DropDownListFor(Model => Model.MaxRoomNbSelectedId, (IEnumerable<SelectListItem>)ViewBag.Rooms, "Max Pieces", new { @class = "input-medium" })
+        @Html.DropDownListFor(Model => Model.SelectedDistrictId, (IEnumerable<SelectListItem>)ViewBag.Districts, "Quartier", new { @class = "input-medium" })
+        @Html.DropDownListFor(Model => Model.SelectedTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Type", new { @class = "input-medium" })
+</div>

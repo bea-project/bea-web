@@ -18,6 +18,12 @@ namespace Bea.Core.Services
         IList<WaterSportType> GetAllWaterSportTypes();
         IList<RealEstateType> GetAllRealEstateTypes();
         Dictionary<int, string> GetAllYears(int nbYears);
+        Dictionary<int, string> GetAllKms();
+        Dictionary<int, string> GetAllEngineSizes();
+        Dictionary<int, string> GetAllHps();
+        Dictionary<int, string> GetAllMotorBoatLength();
+        Dictionary<int, string> GetAllSailingBoatLength();
+        Dictionary<int, string> GetAllRealEstateNbRoom();
     }
 
 }

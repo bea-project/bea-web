@@ -65,6 +65,95 @@ namespace Bea.Services
             return years;
         }
 
+        public Dictionary<int, string> GetAllKms()
+        {
+            Dictionary<int, string> kms = new Dictionary<int, string>();
+            kms.Add(0, "0");
+            kms.Add(10000, "10000");
+            kms.Add(20000, "20000");
+            kms.Add(30000, "30000");
+            kms.Add(40000, "40000");
+            kms.Add(50000, "50000");
+            kms.Add(60000, "10000");
+            kms.Add(70000, "10000");
+            kms.Add(80000, "10000");
+            kms.Add(90000, "10000");
+            kms.Add(100000, "100000");
+            kms.Add(125000, "125000");
+            kms.Add(150000, "150000");
+            kms.Add(175000, "175000");
+            kms.Add(200000, "200000");
+            kms.Add(225000, "225000");
+            kms.Add(250000, "250000");
+            return kms;
+        }
+
+        public Dictionary<int, string> GetAllEngineSizes()
+        {
+            Dictionary<int, string> engineSizes = new Dictionary<int, string>();
+            engineSizes.Add(0, "0");
+            engineSizes.Add(50, "50");
+            engineSizes.Add(80, "80");
+            engineSizes.Add(125, "125");
+            engineSizes.Add(250, "250");
+            engineSizes.Add(500, "500");
+            engineSizes.Add(600, "600");
+            engineSizes.Add(750, "750");
+            engineSizes.Add(1000, "1000");
+            return engineSizes;
+        }
+
+        public Dictionary<int, string> GetAllHps()
+        {
+            Dictionary<int, string> hps = new Dictionary<int, string>();
+            hps.Add(0, "0");
+            hps.Add(50, "50");
+            hps.Add(100, "100");
+            hps.Add(150, "150");
+            hps.Add(200, "200");
+            hps.Add(250, "250");
+            hps.Add(300, "300");
+            return hps;
+        }
+
+        public Dictionary<int, string> GetAllMotorBoatLength()
+        {
+            Dictionary<int, string> motorBoatLength = new Dictionary<int, string>();
+            motorBoatLength.Add(0, "0");
+            motorBoatLength.Add(5, "5");
+            motorBoatLength.Add(8, "8");
+            motorBoatLength.Add(10, "10");
+            motorBoatLength.Add(15, "15");
+            return motorBoatLength;
+        }
+
+        public Dictionary<int, string> GetAllSailingBoatLength()
+        {
+            Dictionary<int, string> motorBoatLength = new Dictionary<int, string>();
+            motorBoatLength.Add(0, "0");
+            motorBoatLength.Add(5, "5");
+            motorBoatLength.Add(10, "10");
+            motorBoatLength.Add(15, "15");
+            motorBoatLength.Add(20, "20");
+            motorBoatLength.Add(25, "25");
+            return motorBoatLength;
+        }
+
+        public Dictionary<int, string> GetAllRealEstateNbRoom()
+        {
+            Dictionary<int, string> realEstateNbRooms = new Dictionary<int, string>();
+            realEstateNbRooms.Add(0, "0");
+            realEstateNbRooms.Add(1, "1");
+            realEstateNbRooms.Add(2, "2");
+            realEstateNbRooms.Add(3, "3");
+            realEstateNbRooms.Add(4, "4");
+            realEstateNbRooms.Add(5, "5");
+            realEstateNbRooms.Add(6, "6");
+            realEstateNbRooms.Add(7, "7");
+            realEstateNbRooms.Add(8, "8");
+            return realEstateNbRooms;
+        }
+
         public IList<WaterSportType> GetAllWaterSportTypes()
         {
             return _repository.GetAll<WaterSportType>().ToList();

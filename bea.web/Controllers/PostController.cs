@@ -192,7 +192,7 @@ namespace Bea.Web.Controllers
             return null;
         }
 
-        private void FillViewLists(Category category)
+        public void FillViewLists(Category category)
         {
             if (category == null)
                 return;
@@ -235,7 +235,6 @@ namespace Bea.Web.Controllers
                     ViewBag.Types = _referenceServices.GetAllRealEstateTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     ViewBag.Districts = _locationServices.GetAllDistricts().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;
-
             }
         }
     }

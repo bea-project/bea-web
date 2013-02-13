@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Bea.Models.Search;
 
 namespace Bea.Test.Models
 {

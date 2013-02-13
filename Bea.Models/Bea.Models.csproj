@@ -53,14 +53,23 @@
     <Compile Include="Create\WaterSport\AdSailingBoatCreateModel.cs" />
     <Compile Include="Create\WaterSport\AdWaterSportCreateModel.cs" />
     <Compile Include="Details\AdDetailsModel.cs" />
-    <Compile Include="AdSearchModel.cs" />
-    <Compile Include="AdSearchResultModel.cs" />
-    <Compile Include="AdSearchResultItemModel.cs" />
+    <Compile Include="Search\AdSearchModel.cs" />
+    <Compile Include="Search\AdSearchResultModel.cs" />
+    <Compile Include="Search\AdSearchResultItemModel.cs" />
     <Compile Include="Details\CarAdDetailsModel.cs" />
     <Compile Include="Details\MotoAdDetailsModel.cs" />
     <Compile Include="Details\OtherVehicleAdDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="References\CategoryItemModel.cs" />
+    <Compile Include="Search\RealEstate\AdRealEstateSearchModel.cs" />
+    <Compile Include="Search\Vehicles\AdCarSearchModel.cs" />
+    <Compile Include="Search\Vehicles\AdMotoSearchModel.cs" />
+    <Compile Include="Search\Vehicles\AdOtherVehicleSearchModel.cs" />
+    <Compile Include="Search\Vehicles\AdVehicleSearchModel.cs" />
+    <Compile Include="Search\WaterSport\AdMotorBoatEngineSearchModel.cs" />
+    <Compile Include="Search\WaterSport\AdMotorBoatSearchModel.cs" />
+    <Compile Include="Search\WaterSport\AdSailingBoatSearchModel.cs" />
+    <Compile Include="Search\WaterSport\AdWaterSportSearchModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bea.Domain\Bea.Domain.csproj">
@@ -68,6 +77,7 @@
       <Name>Bea.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

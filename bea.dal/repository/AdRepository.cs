@@ -109,7 +109,6 @@ namespace Bea.Dal.Repository
                     subAndQuery.Add(Restrictions.Like("Body", andString, MatchMode.Anywhere));
                     andQuery.Add(subAndQuery);
                 }
-
                 query.Add(andQuery);
             }
 

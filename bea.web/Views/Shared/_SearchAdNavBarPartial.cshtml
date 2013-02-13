@@ -1,9 +1,10 @@
-﻿@model Bea.Models.AdSearchResultModel
+﻿@model Bea.Models.Search.AdSearchResultModel
 
 <div class="navbar">
     <div class="navbar-inner">
         @using (Html.BeginForm("Search", "Home", FormMethod.Get, new { @class = "navbar-form" }))
         {
+            <div class="controls controls-row">
             <ul class="nav">
                 <li class="bea-nav-li">
                     @Html.TextBoxFor(x => x.SearchString, new { @class = "input-xlarge", @size = 60, @placeholder = "Vous recherchez..." })
@@ -32,11 +33,13 @@
                         "Toutes les villes",
                         new { id = "cities" })
                 </li>
-            
+                
                 <li>
                     <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i>&nbsp;CHERCHER</button>
                 </li>
             </ul>
+            </div>
+            <div id="parameters"></div>
         }
     </div>
 </div>
@@ -48,6 +51,22 @@
             $(this).reloadCities();
         });
     });
+
+    $('#categories').change(function () {
+        if ($(this).val()) {
+            var categoryId = $('#categories').val();
+            var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Home", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    $('#parameters').html("");
+                    $('#parameters').html(data);
+                }
+            });
+        }
+    });
+
 
     $(function () {
         $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategoriesAndGroups" })', function (result) {

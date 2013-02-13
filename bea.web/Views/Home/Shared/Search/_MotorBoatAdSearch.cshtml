@@ -1,0 +1,13 @@
+﻿@model Bea.Models.Search.WaterSport.AdMotorBoatSearchModel
+
+<h6><i class="  icon-pencil"></i>&nbsp; Filtrer les annonces</h6>
+<div class="controls controls-row">
+        @Html.DropDownListFor(Model => Model.SelectedTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Coque", new { @class = "input-medium" })
+        @Html.DropDownListFor(Model => Model.MinHpSelectedId, (IEnumerable<SelectListItem>)ViewBag.Hps, "Min CV", new { @class = "input-medium" })
+        @Html.DropDownListFor(Model => Model.MaxHpSelectedId, (IEnumerable<SelectListItem>)ViewBag.Hps, "Max CV", new { @class = "input-medium" })
+        @Html.DropDownListFor(Model => Model.MinLengthSelectedId, (IEnumerable<SelectListItem>)ViewBag.Lengths, "Min Longueur", new { @class = "input-medium" })
+        @Html.DropDownListFor(Model => Model.MaxLengthSelectedId, (IEnumerable<SelectListItem>)ViewBag.Lengths, "Max Longueur", new { @class = "input-medium" })
+        @Html.DropDownListFor(Model => Model.MinYearSelectedId, (IEnumerable<SelectListItem>)ViewBag.Years, "Min Annee", new { @class = "input-medium" })
+        @Html.DropDownListFor(Model => Model.MaxYearSelectedId, (IEnumerable<SelectListItem>)ViewBag.Years, "Max Annee", new { @class = "input-medium" })
+        @Html.DropDownListFor(Model => Model.SelectedMotorTypeId, (IEnumerable<SelectListItem>)ViewBag.MotorTypes, "Moteur", new { @class = "input-medium" })
+</div>
