@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Transactions;
 using Bea.Core.Dal;
 using Bea.Core.Services;
+using Bea.Core.Services.Ads;
 using Bea.Domain;
 using Bea.Domain.Ads;
-using Bea.Domain.Location;
-using Bea.Models;
-using Bea.Domain.Categories;
-using Bea.Models.Details;
-using Bea.Domain.Reference;
-using Bea.Domain.Search;
-using System.Transactions;
-using Bea.Models.Create;
 using Bea.Domain.Ads.WaterSport;
+using Bea.Domain.Categories;
+using Bea.Domain.Location;
+using Bea.Domain.Reference;
+using Bea.Models.Create;
+using Bea.Models.Details;
 
-namespace Bea.Services
+namespace Bea.Services.Ads
 {
     public class AdServices : IAdServices
     {
@@ -53,12 +50,6 @@ namespace Bea.Services
         public Ad GetAdById(long adId)
         {
             return _adRepository.GetAdById<Ad>(adId);
-        }
-
-        public void DeleteAdById(long adId)
-        {
-            _repository.Delete(_repository.Get<Ad>(adId));
-            _repository.Flush();
         }
 
         public void AddAd(BaseAd ad)
@@ -263,10 +254,10 @@ namespace Bea.Services
             result = Int32.TryParse(form["Hp"], out hP);
             if (result)
                 motorBoatEngineAd.Hp = hP;
-            
+
             return (motorBoatEngineAd);
         }
-        
+
         public BaseAd GetAdPicturesFromModel(BaseAd ad, String imageIds)
         {
             if (String.IsNullOrEmpty(imageIds))
@@ -313,7 +304,7 @@ namespace Bea.Services
                 carAd.Brand = _repository.Get<VehicleBrand>(selectedBrandId);
             return (carAd);
         }
-        
+
         private BaseAd GetSailingBoatAdFromModel(Dictionary<string, string> form)
         {
             SailingBoatAd sailingBoatAd = new SailingBoatAd();
@@ -344,7 +335,7 @@ namespace Bea.Services
         private BaseAd GetMotorBoatAdFromModel(Dictionary<string, string> form)
         {
             MotorBoatAd motorBoatAd = new MotorBoatAd();
-            
+
             int selectedTypeId;
             bool result = Int32.TryParse(form["SelectedTypeId"], out selectedTypeId);
             if (result)

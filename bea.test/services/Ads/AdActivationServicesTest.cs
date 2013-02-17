@@ -10,6 +10,7 @@ using Bea.Domain.Location;
 using Bea.Domain.Search;
 using Bea.Models.Create;
 using Bea.Services;
+using Bea.Services.Ads;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bea.Test.Services

@@ -5,12 +5,12 @@ using System.Net.Mail;
 using System.Text;
 using System.Transactions;
 using Bea.Core.Dal;
-using Bea.Core.Services;
+using Bea.Core.Services.Ads;
 using Bea.Domain.Ads;
 using Bea.Domain.Search;
 using Bea.Models.Create;
 
-namespace Bea.Services
+namespace Bea.Services.Ads
 {
     public class AdActivationServices : IAdActivationServices
     {

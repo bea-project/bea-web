@@ -40,10 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdActivationServices.cs" />
-    <Compile Include="AdDataConsistencyServices.cs" />
-    <Compile Include="AdImageServices.cs" />
-    <Compile Include="AdServices.cs" />
+    <Compile Include="Ads\AdActivationServices.cs" />
+    <Compile Include="Ads\AdDataConsistencyServices.cs" />
+    <Compile Include="Ads\AdDeletionServices.cs" />
+    <Compile Include="Ads\AdImageServices.cs" />
+    <Compile Include="Ads\AdServices.cs" />
     <Compile Include="CategoryServices.cs" />
     <Compile Include="HelperService.cs" />
     <Compile Include="LocationServices.cs" />

@@ -90,10 +90,11 @@
     <Compile Include="Models\Details\CarAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\OtherVehicleAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\MotoAdDetailsModelTest.cs" />
-    <Compile Include="Services\AdActivationServicesTest.cs" />
-    <Compile Include="Services\AdDataConsistencyServicesTest.cs" />
-    <Compile Include="Services\AdImageServicesTest.cs" />
-    <Compile Include="Services\AdServicesTest.cs" />
+    <Compile Include="Services\Ads\AdActivationServicesTest.cs" />
+    <Compile Include="Services\Ads\AdDataConsistencyServicesTest.cs" />
+    <Compile Include="Services\Ads\AdDeletionServicesTest.cs" />
+    <Compile Include="Services\Ads\AdImageServicesTest.cs" />
+    <Compile Include="Services\Ads\AdServicesTest.cs" />
     <Compile Include="Services\CategoryServicesTest.cs" />
     <Compile Include="Services\SearchServicesTest.cs" />
     <Compile Include="TestHelper\DataAccessTestBase.cs" />

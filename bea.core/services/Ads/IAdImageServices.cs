@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Domain;
 
-namespace Bea.Core.Services
+namespace Bea.Core.Services.Ads
 {
     public interface IAdImageServices
     {

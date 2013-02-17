@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Domain.Categories;
 using Bea.Domain.Location;
+using Bea.Domain.Reference;
 
 namespace Bea.Domain.Ads
 {
@@ -13,8 +14,8 @@ namespace Bea.Domain.Ads
 
         public virtual User CreatedBy { get; set; }
         public virtual DateTime CreationDate { get; set; }
-        public virtual string Title { get; set; }
-        public virtual string Body { get; set; }
+        public virtual String Title { get; set; }
+        public virtual String Body { get; set; }
         public virtual City City { get; set; }
         public virtual Double Price { get; set; }
         public virtual Boolean IsOffer { get; set; }
@@ -25,6 +26,10 @@ namespace Bea.Domain.Ads
 
         public virtual Boolean IsActivated { get; set; }
         public virtual String ActivationToken { get; set; }
+
+        public virtual Boolean IsDeleted { get; set; }
+        public virtual DateTime DeletionDate { get; set; }
+        public virtual DeletionReason DeletedReason { get; set; }
 
         protected BaseAd()
         {

@@ -1,0 +1,63 @@
+﻿@model Bea.Models.Delete.DeleteAdModel
+
+@{
+    ViewBag.Title = "Supprimer mon annonce";
+}
+
+<h2>Delete</h2>
+
+@using (Html.BeginForm()) {
+    
+    <fieldset>
+        <legend>DeleteAdModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AdId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AdId)
+            @Html.ValidationMessageFor(model => model.AdId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SelectedDeletionReasonId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SelectedDeletionReasonId)
+            @Html.ValidationMessageFor(model => model.SelectedDeletionReasonId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NbTry)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NbTry)
+            @Html.ValidationMessageFor(model => model.NbTry)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.InfoMessage)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.InfoMessage)
+            @Html.ValidationMessageFor(model => model.InfoMessage)
+        </div>
+
+        <p>
+            <input type="submit" value="Supprimer" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+

@@ -15,6 +15,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bea.Domain.Categories;
 using Bea.Models.Create;
 using Bea.Domain.Search;
+using Bea.Core.Services.Ads;
+using Bea.Services.Ads;
 
 namespace Bea.Test.services
 {

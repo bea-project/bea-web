@@ -28,7 +28,7 @@ namespace Bea.Test.dal.map
             {
                 sessionFactory.GetCurrentSession().Save(userToBeAdded);
 
-                sessionFactory.GetCurrentSession().Get<User>(userToBeAdded.UserId);
+                sessionFactory.GetCurrentSession().Get<User>(userToBeAdded.Id);
                 IQueryable<User> userToBeAddedFromDb = repo.FilterBy(x => x.Email.Equals("userToBeAdded@bea.com"));
                 Assert.IsTrue(userToBeAddedFromDb.Count() == 1);
             }
@@ -50,7 +50,7 @@ namespace Bea.Test.dal.map
             {
                 sessionFactory.GetCurrentSession().Save(userToBeAdded);
 
-                sessionFactory.GetCurrentSession().Get<User>(userToBeAdded.UserId);
+                sessionFactory.GetCurrentSession().Get<User>(userToBeAdded.Id);
                 IQueryable<User> userToBeAddedFromDb = repo.FilterBy(x => x.Email.Equals("userToBeAdded@bea.com"));
                 Assert.IsTrue(userToBeAddedFromDb.Count() == 1);
             }

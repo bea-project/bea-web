@@ -14,6 +14,8 @@ using Bea.Web.NhibernateHelper;
 using Bea.Dal.Repository;
 using System.Reflection;
 using System.Web.Http;
+using Bea.Services.Ads;
+using Bea.Core.Services.Ads;
 
 namespace Bea.Web.App_Start
 {
@@ -25,8 +27,8 @@ namespace Bea.Web.App_Start
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            builder.Register<ISessionFactory>(x => new SQLiteWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
-            //builder.Register<ISessionFactory>(x => new MySQLWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
+            //builder.Register<ISessionFactory>(x => new SQLiteWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
+            builder.Register<ISessionFactory>(x => new MySQLWebSessionFactoryFactory(false).GetSessionFactory()).SingleInstance();
             builder.RegisterType<Repository>().As<IRepository>().SingleInstance();
             builder.RegisterType<AdRepository>().As<IAdRepository>().SingleInstance();
             builder.RegisterType<UserRepository>().As<IUserRepository>().SingleInstance();
@@ -43,6 +45,7 @@ namespace Bea.Web.App_Start
             builder.RegisterType<CategoryServices>().As<ICategoryServices>().SingleInstance();
             builder.RegisterType<AdDataConsistencyServices>().As<IAdDataConsistencyServices>().SingleInstance();
             builder.RegisterType<AdActivationServices>().As<IAdActivationServices>().SingleInstance();
+            builder.RegisterType<AdDeletionServices>().As<IAdDeletionServices>().SingleInstance();
 
             // Register the inMemoryData singleton to inject data
             builder.Register(x => new InMemoryDataInjector(x.Resolve<ISessionFactory>(), x.Resolve<IRepository>())).SingleInstance();

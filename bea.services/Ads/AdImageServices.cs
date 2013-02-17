@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Transactions;
 using Bea.Core.Dal;
 using Bea.Core.Services;
+using Bea.Core.Services.Ads;
 using Bea.Domain;
 
-namespace Bea.Services
+namespace Bea.Services.Ads
 {
     public class AdImageServices : IAdImageServices
     {

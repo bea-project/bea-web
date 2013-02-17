@@ -15,10 +15,15 @@ namespace Bea.Dal.Map.Ads
         public BaseAdMap()
         {
             Id(x => x.Id).GeneratedBy.Identity();
-            
-            Map(x => x.IsActivated);
+
+            Map(x => x.IsActivated).Default("0");
             Map(x => x.ActivationToken);
 
+            Map(x => x.IsDeleted).Default("0");
+            Map(x => x.DeletionDate);
+            References(x => x.DeletedReason);
+
+            References<User>(x => x.CreatedBy).Not.Nullable();
             References<Category>(x => x.Category);
             HasMany<AdImage>(x => x.Images).Inverse().LazyLoad().Cascade.AllDeleteOrphan();
         }

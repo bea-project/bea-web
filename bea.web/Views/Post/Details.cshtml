@@ -97,7 +97,7 @@
                 <h4>Actions</h4>
             </div>
             <i class="icon-pencil"></i>&nbsp;@Html.ActionLink("Modifier", "#")<br />
-            <i class="icon-trash"></i>&nbsp;@Html.ActionLink("Supprimer", "#")<br />
+            <i class="icon-trash"></i>&nbsp;@Html.ActionLink("Supprimer", "Delete", new { Id = @Model.AdId })<br />
         </div>
     </div>
 

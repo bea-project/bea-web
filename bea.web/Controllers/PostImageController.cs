@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
 using Bea.Core.Services;
+using Bea.Core.Services.Ads;
 using ImageResizer;
 using ImageResizer.Configuration;
 

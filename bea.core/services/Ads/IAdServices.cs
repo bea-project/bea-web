@@ -9,14 +9,13 @@ using Bea.Models.Details;
 using Bea.Models;
 using Bea.Models.Create;
 
-namespace Bea.Core.Services
+namespace Bea.Core.Services.Ads
 {
     public interface IAdServices
     {
         IDictionary<City, int> CountAdsByCities();
         IList<BaseAd> GetAllAds();
         Ad GetAdById(long adId);
-        void DeleteAdById(long adId);
         void AddAd(BaseAd ad);
 
         AdDetailsModel GetAdDetails(long adId);

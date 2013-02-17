@@ -22,10 +22,8 @@ namespace Bea.Dal.Map.Ads.WaterSport
             Map(x => x.IsOffer).Not.Nullable();
             Map(x => x.PhoneNumber);
 
-            References<User>(x => x.CreatedBy).Not.Nullable();
             References<City>(x => x.City).Not.Nullable();
             References<Category>(x => x.Category).Not.Nullable();
-
 
             Map(x => x.Length);
             Map(x => x.Year);

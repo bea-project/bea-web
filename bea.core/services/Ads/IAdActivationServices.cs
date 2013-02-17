@@ -5,7 +5,7 @@ using System.Text;
 using Bea.Domain.Ads;
 using Bea.Models.Create;
 
-namespace Bea.Core.Services
+namespace Bea.Core.Services.Ads
 {
     public interface IAdActivationServices
     {

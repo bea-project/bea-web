@@ -8,6 +8,7 @@ using Bea.Domain.Ads;
 using Bea.Domain.Categories;
 using Bea.Domain.Location;
 using Bea.Domain.Reference;
+using Bea.Services.Ads;
 
 namespace Bea.Test.Services
 {
