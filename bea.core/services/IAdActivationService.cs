@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Domain.Ads;
 using Bea.Models.Create;
+using Bea.Models;
 
 namespace Bea.Core.Services
 {
@@ -28,5 +29,7 @@ namespace Bea.Core.Services
         /// </summary>
         /// <param name="ad">The ad to send the activation mail to</param>
         void SendActivationEmail(BaseAd ad);
+
+        void SendEmailToUser(ContactUserFormModel model);
     }
 }

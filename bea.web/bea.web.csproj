@@ -359,6 +359,12 @@
   <ItemGroup>
     <Content Include="Views\Home\Shared\Search\_RealEstateAdSearch.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\Contact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\MessageSent.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

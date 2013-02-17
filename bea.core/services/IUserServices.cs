@@ -9,5 +9,6 @@ namespace Bea.Core.Services
     public interface IUserServices
     {
         User GetUserFromEmail(string email);
+        User GetUserFromId(int userId);
     }
 }

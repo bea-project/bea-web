@@ -9,6 +9,7 @@ using Bea.Core.Services;
 using Bea.Domain.Ads;
 using Bea.Domain.Search;
 using Bea.Models.Create;
+using Bea.Models;
 
 namespace Bea.Services
 {
@@ -76,9 +77,9 @@ namespace Bea.Services
         {
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("beaprojectnc@gmail.com");
-            mail.To.Add(ad.CreatedBy.Email);
-            mail.Subject = String.Format("BEA Activez votre annonce\"{0}\"", ad.Title);
             mail.ReplyToList.Add("no-reply@bea.nc");
+            mail.To.Add(ad.CreatedBy.Email);
+            mail.Subject = String.Format("BEA Activez votre annonce \"{0}\"", ad.Title);
             mail.Body = String.Format("Bonjour,"
                  + "Vous venez de créer votre annonce. Afin que celle-ci soit visible sur bea.nc, nous avons besoin de valider votre adresse email."
                          + "Pour cela, merci de bien vouloir cliquer sur le lien ci-dessous pour confirmer votre annonce."
@@ -91,6 +92,22 @@ namespace Bea.Services
         {
             SmtpClient SmtpServer = new SmtpClient();
             SmtpServer.SendAsync(message, ad.Id);
+        }
+
+        public void SendEmailToUser(ContactUserFormModel model)
+        {
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(model.Email);
+            mail.To.Add(model.EmailTo);
+            mail.Subject = String.Format("Bea.nc - Notification : \"{0}\"", model.AdTitle);
+            mail.Body = String.Format("Bonjour,"
+                 + "un utilisateur du site bea.nc, {0}, vous envoie le message suivant. Vous pouvez lui repondre directement à partir de cet email ou par telephone: {1}.\n\n"
+                 + "---------------------------------------------------------------\n\n"
+                 + model.EmailBody + "\n\n"
+                 + "---------------------------------------------------------------\n\n"
+                 + "http://bea.nc/Post/Details/{2}", model.Name, (String.IsNullOrEmpty(model.Telephone)) ? "non communiqué" : model.Telephone, model.AdId);
+            SmtpClient SmtpServer = new SmtpClient();
+            SmtpServer.SendAsync(mail, null);
         }
     }
 }

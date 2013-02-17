@@ -1,0 +1,59 @@
+﻿@model Bea.Models.ContactUserFormModel
+@{
+    ViewBag.Title = "ContactUserFormModel";
+}
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span9">
+
+            @*Header display*@
+            <div class="page-header">
+                <h4>
+                    @Html.DisplayFor(model => model.AdTitle)
+                </h4>
+            </div>
+        </div>
+            </div>
+</div>
+        @using (Html.BeginForm("Contact", "Post", FormMethod.Post, new { @class = "well form-horizontal" }))
+        {
+            <h4><i class="icon-envelope"></i>&nbsp;Envoyer un message à @Model.FirstName</h4>
+            @Html.HiddenFor(model => model.UserId)
+            @Html.HiddenFor(model => model.AdId)
+             @Html.HiddenFor(model => model.AdTitle)
+            <div class="control-group">
+                <label class="control-label" for="inputName">@Html.LabelFor(model => model.Name)</label>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "input-large" })
+                    @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "label label-important" })
+                </div>
+
+                <label class="control-label" for="inputEmail">@Html.LabelFor(model => model.Email)</label>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "input-large" })
+                    @Html.ValidationMessageFor(model => model.Email, String.Empty, new { @class = "label label-important" })
+                </div>
+
+                <label class="control-label" for="inputPhone">@Html.LabelFor(model => model.Telephone)</label>
+                <div class="controls controls-row">
+                    @Html.TextBoxFor(model => model.Telephone, new { @class = "input-large" })
+                    @Html.ValidationMessageFor(model => model.Telephone, String.Empty, new { @class = "label label-important" })
+                </div>
+                <label class="control-label" for="inputBody">@Html.LabelFor(model => model.EmailBody)</label>
+                <div class="controls controls-row">
+                    @Html.TextAreaFor(model => model.EmailBody, new { @rows = 10, @class = "input-xxlarge", style = "resize: none;" })
+                    @Html.ValidationMessageFor(model => model.EmailBody, String.Empty, new { @class = "label label-important" })
+                </div>
+                <label class="control-label" for="inputCopy">@Html.LabelFor(model => model.CopySender)</label>
+                <div class="controls controls-row">
+                    @Html.CheckBoxFor(model => model.CopySender)
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button id="submitButton" type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+            </div>
+        }
+

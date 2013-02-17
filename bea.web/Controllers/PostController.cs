@@ -9,6 +9,7 @@ using Bea.Models.Create.Vehicules;
 using Bea.Models.Create.WaterSport;
 using Bea.Domain.Ads.WaterSport;
 using Bea.Models.Create.RealEstate;
+using Bea.Models;
 
 namespace Bea.Web.Controllers
 {
@@ -88,6 +89,7 @@ namespace Bea.Web.Controllers
             {
                 newAd.IsActivated = false;
                 _adServices.AddAd(newAd);
+                _adActivationServices.SendActivationEmail(newAd);
                 return RedirectToAction("Index", "Home");
             }
             AdCreateModel returnModel = GetModelFromBaseAd(newAd, model);
@@ -236,6 +238,41 @@ namespace Bea.Web.Controllers
                     ViewBag.Districts = _locationServices.GetAllDistricts().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;
             }
+        }
+
+        public ActionResult Contact(long id)
+        {
+            var result = _adServices.GetAdById(id);
+
+            if (result == null)
+                return HttpNotFound("Cette annonce n'existe pas ou est désactivée");
+
+            ContactUserFormModel contactUserFormModel = new ContactUserFormModel(result.Title, result.CreatedBy.Firstname, result.CreatedBy.UserId, result.Id);
+            return View(contactUserFormModel);
+        }
+
+        [HttpPost]
+        public ActionResult Contact(ContactUserFormModel model)
+        {
+            IDictionary<string, string> errors = _adConsistencyServices.GetDataConsistencyErrors(model);
+            foreach (string key in errors.Keys)
+                ModelState.AddModelError(key, errors[key]);
+            if (ModelState.IsValid)
+            {
+                var user = _userServices.GetUserFromId(model.UserId);
+                model.EmailTo = user.Email;
+                _adActivationServices.SendEmailToUser(model);
+                if (model.CopySender)
+                {
+                    model.EmailTo = model.Email;
+                    _adActivationServices.SendEmailToUser(model);
+                }
+                AdMessageModel messageModel = new AdMessageModel();
+                messageModel.AdId = model.AdId;
+                messageModel.InfoMessage = "Votre email a été envoyé !";
+                return View("MessageSent", messageModel);
+            }
+            return View(model);
         }
     }
 }

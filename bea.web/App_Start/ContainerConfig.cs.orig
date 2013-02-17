@@ -30,8 +30,8 @@ namespace Bea.Web.App_Start
             //builder.Register<ISessionFactory>(x => new MySQLWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
 =======
             //builder.Register<ISessionFactory>(x => new SQLiteWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
-            builder.Register<ISessionFactory>(x => new MySQLWebSessionFactoryFactory(false).GetSessionFactory()).SingleInstance();
->>>>>>> 2f15550545fba679e7e21dca8a57e5f6f0609d3a
+            builder.Register<ISessionFactory>(x => new MySQLWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
+>>>>>>> d79f22e68bce1206b83c470b25f26395e7cac165
             builder.RegisterType<Repository>().As<IRepository>().SingleInstance();
             builder.RegisterType<AdRepository>().As<IAdRepository>().SingleInstance();
             builder.RegisterType<UserRepository>().As<IUserRepository>().SingleInstance();

@@ -89,7 +89,7 @@
             <div class="page-header">
                 <h4>Contacter</h4>
             </div>
-            <i class="icon-envelope"></i>&nbsp;@Html.ActionLink("Envoyer un message", "#")<br />
+            <i class="icon-envelope"></i>&nbsp;@Html.ActionLink("Envoyer un message", "Contact", new { Id = Model.AdId})<br />
             <i class="icon-comment"></i>&nbsp;@Html.ActionLink(String.Format("Appeler {0} au {1}", Model.UserFirstName, Model.UserPhoneNumber), "#")<br />
             <i class="icon-bullhorn"></i>&nbsp;@Html.ActionLink("Partager avec un ami", "#")<br />
             <br />

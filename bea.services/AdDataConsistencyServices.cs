@@ -6,6 +6,7 @@ using Bea.Core.Services;
 using Bea.Domain.Ads;
 using System.Text.RegularExpressions;
 using Bea.Domain.Ads.WaterSport;
+using Bea.Models;
 
 namespace Bea.Services
 {
@@ -295,6 +296,21 @@ namespace Bea.Services
                 if (motoAd.EngineSize == 0)
                     errors.Add("EngineSize", "Veuillez sélectionner une cylindrée.");
             }
+            return errors;
+        }
+
+        public Dictionary<string, string> GetDataConsistencyErrors(ContactUserFormModel model)
+        {
+            Dictionary<string, string> errors = new Dictionary<string, string>();
+            if (String.IsNullOrEmpty(model.Name))
+                errors.Add("Name", "Veuillez saisir votre nom.");
+            if (String.IsNullOrEmpty(model.Email))
+                errors.Add("Email", "Veuillez saisir votre adresse email.");
+            else
+                if (!String.IsNullOrEmpty(model.Email) && !_emailRegex.IsMatch(model.Email))
+                    errors.Add("Email", "Email invalide.");
+            if (String.IsNullOrEmpty(model.EmailBody))
+                errors.Add("EmailBody", "Veuillez saisir un texte.");
             return errors;
         }
     }

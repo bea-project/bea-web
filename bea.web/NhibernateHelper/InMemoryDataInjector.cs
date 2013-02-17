@@ -478,7 +478,7 @@ namespace Bea.Web.NhibernateHelper
                 user2.Password = "mypassword";
                 user2.Firstname = "Nicolas";
                 user2.Lastname = "Secret";
-                _sessionFactory.GetCurrentSession().Save(user);
+                _sessionFactory.GetCurrentSession().Save(user2);
 
                 //-------------------------------------------
                 //         IMAGES
