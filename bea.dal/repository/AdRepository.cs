@@ -58,6 +58,14 @@ namespace Bea.Dal.Repository
             return result;
         }
 
+        public Boolean CanDeleteAd(long adId)
+        {
+            return _sessionFactory.GetCurrentSession().Query<BaseAd>()
+                .Where(x => x.Id == adId)
+                .Select(x => !x.IsDeleted)
+                .SingleOrDefault();
+        }
+
         public T GetAdById<T>(long adId) where T : BaseAd
         {
             T ad = _sessionFactory.GetCurrentSession().Query<T>()
@@ -76,16 +84,6 @@ namespace Bea.Dal.Repository
                 query = query.Where(a => a.Title.Contains(searchString));
 
             return query.OrderByDescending(a => a.CreationDate).ToList();
-        }
-
-        public void DeleteAdById(long adId)
-        {
-            Ad ad = GetAdById<Ad>(adId);
-            if (ad != null)
-            {
-                _sessionFactory.GetCurrentSession().Delete(ad);
-                _sessionFactory.GetCurrentSession().Flush();
-            }
         }
 
         public void AddAd(Ad ad)

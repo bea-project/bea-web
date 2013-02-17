@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="AdMessageModel.cs" />
     <Compile Include="ContactUserFormModel.cs" />
+    <Compile Include="Admin\AccountModel.cs" />
     <Compile Include="Create\AdActivationResultModel.cs" />
     <Compile Include="Create\RealEstate\AdRealEstateCreateModel.cs" />
     <Compile Include="Create\Vehicules\AdCarCreateModel.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Create\WaterSport\AdMotorBoatEngineCreateModel.cs" />
     <Compile Include="Create\WaterSport\AdSailingBoatCreateModel.cs" />
     <Compile Include="Create\WaterSport\AdWaterSportCreateModel.cs" />
+    <Compile Include="Delete\DeleteAdModel.cs" />
     <Compile Include="Details\AdDetailsModel.cs" />
     <Compile Include="Search\AdSearchModel.cs" />
     <Compile Include="Search\AdSearchResultModel.cs" />

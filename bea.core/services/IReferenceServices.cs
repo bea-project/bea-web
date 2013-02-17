@@ -24,6 +24,7 @@ namespace Bea.Core.Services
         Dictionary<int, string> GetAllMotorBoatLength();
         Dictionary<int, string> GetAllSailingBoatLength();
         Dictionary<int, string> GetAllRealEstateNbRoom();
+        IList<DeletionReason> GetAllDeletionReasons();
     }
 
 }

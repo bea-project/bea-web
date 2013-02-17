@@ -12,7 +12,7 @@
         <div class="span9">
 
             @*Header display*@
-            <div class="page-header">
+            <div class="legend-like">
                 <h4>
                     @Html.DisplayFor(model => model.Title)
                     @if (Model.IsNew)
@@ -86,18 +86,18 @@
 
         @*Contact block*@
         <div class="span3">
-            <div class="page-header">
+            <div class="legend-like">
                 <h4>Contacter</h4>
             </div>
             <i class="icon-envelope"></i>&nbsp;@Html.ActionLink("Envoyer un message", "Contact", new { Id = Model.AdId})<br />
             <i class="icon-comment"></i>&nbsp;@Html.ActionLink(String.Format("Appeler {0} au {1}", Model.UserFirstName, Model.UserPhoneNumber), "#")<br />
             <i class="icon-bullhorn"></i>&nbsp;@Html.ActionLink("Partager avec un ami", "#")<br />
             <br />
-            <div class="page-header">
+            <div class="legend-like">
                 <h4>Actions</h4>
             </div>
             <i class="icon-pencil"></i>&nbsp;@Html.ActionLink("Modifier", "#")<br />
-            <i class="icon-trash"></i>&nbsp;@Html.ActionLink("Supprimer", "#")<br />
+            <i class="icon-trash"></i>&nbsp;@Html.ActionLink("Supprimer", "Delete", new { Id = @Model.AdId })<br />
         </div>
     </div>
 

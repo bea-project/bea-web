@@ -7,12 +7,13 @@ namespace Bea.Domain
 {
     public class User
     {
-        public virtual int UserId { get; set; }
+        public virtual int Id { get; set; }
         public virtual string Email { get; set; }
         public virtual string Password { get; set; }
         public virtual DateTime CreationDate { get; set; }
         public virtual String Firstname { get; set; }
         public virtual String Lastname { get; set; }
+        public virtual Boolean IsAccount { get; set; }
 
         public User()
         {

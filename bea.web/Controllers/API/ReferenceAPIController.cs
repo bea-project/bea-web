@@ -20,6 +20,15 @@ namespace Bea.Web.Controllers.API
             _referenceServices = referenceServices;
         }
 
+        public HttpResponseMessage GetAllDeletionReasons() 
+        {
+            HttpResponseMessage response;
 
+            var list = _referenceServices.GetAllDeletionReasons().Select(x => new { Id = x.Id, Label = x.Label });
+
+            response = Request.CreateResponse(HttpStatusCode.OK, list);
+
+            return response;
+        }
     }
 }

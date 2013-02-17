@@ -1,4 +1,4 @@
-﻿@model bea.web.Models.LoginModel
+﻿@model Bea.Models.Admin.LoginModel
 
 @{
     ViewBag.Title = "Log in";
@@ -40,11 +40,6 @@
 }
 </section>
 
-<section class="social" id="socialLoginForm">
-    <h2>Use another service to log in.</h2>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
-
-@section Scripts {
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@

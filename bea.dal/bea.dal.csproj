@@ -76,6 +76,7 @@
     <Compile Include="Map\Location\ProvinceMap.cs" />
     <Compile Include="Map\Reference\CarBrandMap.cs" />
     <Compile Include="Map\Reference\CarFuelMap.cs" />
+    <Compile Include="Map\Reference\DeletionReasonMap.cs" />
     <Compile Include="Map\Reference\MotoBrandMap.cs" />
     <Compile Include="Map\Reference\MotorBoatMotorTypeMap.cs" />
     <Compile Include="Map\Reference\MotorBoatTypeMap.cs" />

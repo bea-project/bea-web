@@ -2,14 +2,16 @@
 using System.Linq;
 using System.Web.Mvc;
 using Bea.Core.Services;
-using Bea.Domain.Categories;
+using Bea.Core.Services.Ads;
 using Bea.Domain.Ads;
+using Bea.Domain.Ads.WaterSport;
+using Bea.Domain.Categories;
 using Bea.Models.Create;
+using Bea.Models.Create.RealEstate;
 using Bea.Models.Create.Vehicules;
 using Bea.Models.Create.WaterSport;
-using Bea.Domain.Ads.WaterSport;
-using Bea.Models.Create.RealEstate;
 using Bea.Models;
+using Bea.Models.Delete;
 
 namespace Bea.Web.Controllers
 {
@@ -22,8 +24,9 @@ namespace Bea.Web.Controllers
         private IAdDataConsistencyServices _adConsistencyServices;
         private IReferenceServices _referenceServices;
         private IAdActivationServices _adActivationServices;
+        private IAdDeletionServices _adDeletionServices;
 
-        public PostController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices)
+        public PostController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices, IAdDeletionServices adDeletionServices)
         {
             _adServices = adServices;
             _locationServices = locationServices;
@@ -32,6 +35,7 @@ namespace Bea.Web.Controllers
             _adConsistencyServices = adConsistencyServices;
             _referenceServices = referenceServices;
             _adActivationServices = adActivationServices;
+            _adDeletionServices = adDeletionServices;
         }
 
         //
@@ -40,6 +44,8 @@ namespace Bea.Web.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+
+        #region Consult
 
         //
         // GET: /Post/Details/{id}
@@ -65,11 +71,33 @@ namespace Bea.Web.Controllers
             return View(result);
         }
 
+        #endregion
+
+        #region Delete
+
+        //
+        // GET: /Post/Delete/{id}
         public ActionResult Delete(long id)
         {
-            _adServices.DeleteAdById(id);
-            return RedirectToAction("Index", "Home");
+            var result = _adDeletionServices.DeleteAd(id);
+            return View(result);
         }
+
+        //
+        // POST: /Post/Delete/{DeleteAdModel}
+        [HttpPost]
+        public ActionResult Delete(DeleteAdModel model)
+        {
+            var result = _adDeletionServices.DeleteAd(model);
+            if (result.NbTry > 0)
+                ModelState.AddModelError("Password", "Mot de passe incorrect");
+            
+            return View(result);
+        }
+
+        #endregion
+
+        #region Create
 
         public ActionResult Create()
         {
@@ -239,7 +267,7 @@ namespace Bea.Web.Controllers
                     break;
             }
         }
-
+        #endregion
         public ActionResult Contact(long id)
         {
             var result = _adServices.GetAdById(id);
@@ -247,7 +275,7 @@ namespace Bea.Web.Controllers
             if (result == null)
                 return HttpNotFound("Cette annonce n'existe pas ou est désactivée");
 
-            ContactUserFormModel contactUserFormModel = new ContactUserFormModel(result.Title, result.CreatedBy.Firstname, result.CreatedBy.UserId, result.Id);
+            ContactUserFormModel contactUserFormModel = new ContactUserFormModel(result.Title, result.CreatedBy.Firstname, result.CreatedBy.Id, result.Id);
             return View(contactUserFormModel);
         }
 

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Bea.Core.Services;
+using Bea.Core.Services.Ads;
 using Bea.Domain;
 using Bea.Domain.Ads;
 using Bea.Models.Details;
@@ -71,8 +72,7 @@ namespace Bea.Web.Controllers.API
         // DELETE api/AdAPI/5
         public HttpResponseMessage Delete(long id)
         {
-            _adServices.DeleteAdById(id);
-            return (Request.CreateResponse(HttpStatusCode.OK));
+            return (Request.CreateResponse(HttpStatusCode.NotImplemented));
         }
     }
 }
