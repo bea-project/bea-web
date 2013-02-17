@@ -4,60 +4,43 @@
     ViewBag.Title = "Supprimer mon annonce";
 }
 
-<h2>Delete</h2>
+<div class="legend-like">Supprimer mon annonce</div>
 
-@using (Html.BeginForm()) {
+@if (Model.CanDeleteAd && !Model.IsDeleted)
+{
+    using (Html.BeginForm())
+    {
     
-    <fieldset>
-        <legend>DeleteAdModel</legend>
+    <p>Pour supprimer votre annonce, entrez le mot de passe indiqué lors de la mise en ligne de l'annonce.</p>
+        
+    <dl class="dl-horizontal">
+        
+        <dd>&nbsp;</dd>
+        
+        <dt>Mot de passe</dt>
+        <dd>@Html.PasswordFor(model => model.Password)</dd>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AdId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AdId)
-            @Html.ValidationMessageFor(model => model.AdId)
-        </div>
+        <dt>Raison</dt>
+        <dd>@Html.EditorFor(model => model.SelectedDeletionReasonId)</dd>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Password)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
+        <dd>&nbsp;
+            @Html.HiddenFor(x => x.AdId)
+            @Html.HiddenFor(x => x.NbTry)
+        </dd>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SelectedDeletionReasonId)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SelectedDeletionReasonId)
-            @Html.ValidationMessageFor(model => model.SelectedDeletionReasonId)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.NbTry)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.NbTry)
-            @Html.ValidationMessageFor(model => model.NbTry)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.InfoMessage)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.InfoMessage)
-            @Html.ValidationMessageFor(model => model.InfoMessage)
-        </div>
-
-        <p>
-            <input type="submit" value="Supprimer" />
-        </p>
-    </fieldset>
+        <dd>
+            @Html.ActionLink("Annuler", "Index", new { controller = "Home" }, new { @class = "btn" })
+            <input type="submit" value="Supprimer" class="btn btn-primary" />
+        </dd>
+    </dl>
+    }
+}
+else
+{
+    <h3>@Model.InfoMessage</h3>
+    <div>
+        @Html.ActionLink("Retour aux annonces", "Index", new { controller = "Home" })
+    </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
