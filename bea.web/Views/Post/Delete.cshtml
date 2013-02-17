@@ -14,14 +14,17 @@
     <p>Pour supprimer votre annonce, entrez le mot de passe indiqué lors de la mise en ligne de l'annonce.</p>
         
     <dl class="dl-horizontal">
-        
+
         <dd>&nbsp;</dd>
-        
+
         <dt>Mot de passe</dt>
-        <dd>@Html.PasswordFor(model => model.Password)</dd>
+        <dd>
+            @Html.PasswordFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password, String.Empty, new { @class = "label label-important" })
+        </dd>
 
         <dt>Raison</dt>
-        <dd>@Html.EditorFor(model => model.SelectedDeletionReasonId)</dd>
+        <dd>@Html.DropDownListFor(model => model.SelectedDeletionReasonId, Enumerable.Empty<SelectListItem>(), "Choisissez la raison", new { @class = "input-large span6" })</dd>
 
         <dd>&nbsp;
             @Html.HiddenFor(x => x.AdId)
@@ -37,10 +40,42 @@
 }
 else
 {
-    <h3>@Model.InfoMessage</h3>
+    <p>@Model.InfoMessage</p>
     <div>
         @Html.ActionLink("Retour aux annonces", "Index", new { controller = "Home" })
     </div>
 }
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var url = '@Url.RouteUrl("ActionApi", new { httproute = "", controller = "ReferenceApi", action = "GetAllDeletionReasons" })';
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                $('#SelectedDeletionReasonId').empty();
+                $('#SelectedDeletionReasonId').append($('<option/>', {
+                    value: "",
+                    text: "Choisissez la raison"
+                }));
+                $(data).each(function () {
+                    var option = $('<option />');
+                    option.attr('value', this.Id).text(this.Label);
+                    $('#SelectedDeletionReasonId').append(option);
+                });
+
+                var selectedProvinceId = '@Model.SelectedDeletionReasonId';
+                if (selectedProvinceId != null) {
+                    $('#SelectedDeletionReasonId').val(selectedProvinceId);
+                    $('#SelectedDeletionReasonId').trigger('change');
+                }
+            }
+        });
+    });
+
+
+</script>
 
 

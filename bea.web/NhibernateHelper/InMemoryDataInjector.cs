@@ -167,7 +167,7 @@ namespace Bea.Web.NhibernateHelper
              
         }
 
-        public void InsertVehicleReferences()
+        public void InsertReferences()
         {
             if (_repository.CountAll<VehicleBrand>() != 0)
                 return;
@@ -359,7 +359,11 @@ namespace Bea.Web.NhibernateHelper
             _repository.Save(new RealEstateType { Label = "Local Commercial" });
             _repository.Save(new RealEstateType { Label = "Dock" });
 
-
+            _repository.Save(new DeletionReason { Label = "J'ai vendu / loué mon bien sur bea.nc" });
+            _repository.Save(new DeletionReason { Label = "J'ai vendu / loué mon bien sur un autre site" });
+            _repository.Save(new DeletionReason { Label = "J'ai vendu / loué mon bien par un autre moyen" });
+            _repository.Save(new DeletionReason { Label = "Je souhaite renouveler mon annonce pour la faire apparaitre en tête de liste" });
+            
             _repository.Flush();
         }
 
@@ -457,7 +461,7 @@ namespace Bea.Web.NhibernateHelper
             {
 
                 InsertLocations();
-                InsertVehicleReferences();
+                InsertReferences();
                 InsertCategories();
 
                 //-------------------------------------------

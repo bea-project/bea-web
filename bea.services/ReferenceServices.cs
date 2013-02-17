@@ -163,5 +163,10 @@ namespace Bea.Services
         {
             return _repository.GetAll<RealEstateType>().ToList();
         }
+
+        public IList<DeletionReason> GetAllDeletionReasons()
+        {
+            return _repository.GetAll<DeletionReason>();
+        }
     }
 }

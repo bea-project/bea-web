@@ -11,6 +11,7 @@ using Bea.Domain.Search;
 using Bea.Models.Delete;
 using Bea.Services.Ads;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Bea.Test.Services.Ads
 {
@@ -201,6 +202,7 @@ namespace Bea.Test.Services.Ads
             };
             BaseAd ad = new Ad()
             {
+                Id = 56,
                 CreatedBy = creator
             };
 
@@ -226,13 +228,70 @@ namespace Bea.Test.Services.Ads
             Assert.IsNull(result.Password);
             Assert.IsNull(result.SelectedDeletionReasonId);
             Assert.AreEqual(0, result.NbTry);
-            Assert.IsNull(result.InfoMessage);
+            Assert.AreEqual("Votre annonce a correctement été supprimée. Elle n'est plus disponible à la recherche.", result.InfoMessage);
             Assert.IsFalse(result.CanDeleteAd);
             Assert.IsTrue(result.IsDeleted);
 
             Assert.AreEqual(new DateTime(2013, 01, 26), ad.DeletionDate);
             Assert.IsTrue(ad.IsDeleted);
             Assert.AreEqual(dr, ad.DeletedReason);
+
+            repoMock.Verify(x => x.Save<BaseAd>(ad), Times.Once());
+            repoMock.Verify(x => x.Delete<SearchAdCache>(adc), Times.Once());
+        }
+
+        [TestMethod]
+        public void PerformDeleteAd_AdExists_PasswordMatchesNoReasonAndNoSearchAdCache_MarkAdAsDeleted()
+        {
+            // Given
+            DeleteAdModel model = new DeleteAdModel
+            {
+                AdId = 56,
+                Password = "p^louf",
+                NbTry = 1,
+                SelectedDeletionReasonId = null
+            };
+            SearchAdCache adc = new SearchAdCache() { AdId = 56 };
+            User creator = new User()
+            {
+                Password = "p^louf"
+            };
+            BaseAd ad = new Ad()
+            {
+                CreatedBy = creator
+            };
+
+            var adRepoMock = new Moq.Mock<IAdRepository>();
+            adRepoMock.Setup(r => r.GetAdById<BaseAd>(model.AdId)).Returns(ad);
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(x => x.Get<SearchAdCache>(model.AdId)).Returns(adc);
+            repoMock.Setup(x => x.Save<BaseAd>(ad));
+            repoMock.Setup(x => x.Delete<SearchAdCache>(adc));
+
+            var helperMock = new Moq.Mock<IHelperService>();
+            helperMock.Setup(x => x.GetCurrentDateTime()).Returns(new DateTime(2013, 01, 26));
+
+            AdDeletionServices service = new AdDeletionServices(adRepoMock.Object, repoMock.Object, helperMock.Object);
+
+            // When
+            DeleteAdModel result = service.DeleteAd(model);
+
+            // Then
+            Assert.AreEqual(model.AdId, result.AdId);
+            Assert.IsNull(result.Password);
+            Assert.IsNull(result.SelectedDeletionReasonId);
+            Assert.AreEqual(0, result.NbTry);
+            Assert.AreEqual("Votre annonce a correctement été supprimée. Elle n'est plus disponible à la recherche.", result.InfoMessage);
+            Assert.IsFalse(result.CanDeleteAd);
+            Assert.IsTrue(result.IsDeleted);
+
+            Assert.AreEqual(new DateTime(2013, 01, 26), ad.DeletionDate);
+            Assert.IsTrue(ad.IsDeleted);
+            Assert.IsNull(ad.DeletedReason);
+
+            repoMock.Verify(x => x.Save<BaseAd>(ad), Times.Once());
+            repoMock.Verify(x => x.Delete<SearchAdCache>(adc), Times.Never());
         }
 
     }

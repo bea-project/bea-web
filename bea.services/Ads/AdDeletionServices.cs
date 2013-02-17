@@ -65,7 +65,8 @@ namespace Bea.Services.Ads
             {
                 ad.IsDeleted = true;
                 ad.DeletionDate = _helper.GetCurrentDateTime();
-                ad.DeletedReason = _repository.Get<DeletionReason>(model.SelectedDeletionReasonId);
+                if (model.SelectedDeletionReasonId.HasValue)
+                    ad.DeletedReason = _repository.Get<DeletionReason>(model.SelectedDeletionReasonId);
                 _repository.Save<BaseAd>(ad);
 
                 SearchAdCache adCache = _repository.Get<SearchAdCache>(ad.Id);
@@ -73,6 +74,7 @@ namespace Bea.Services.Ads
                     _repository.Delete<SearchAdCache>(adCache);
 
                 result.IsDeleted = true;
+                result.InfoMessage = "Votre annonce a correctement été supprimée. Elle n'est plus disponible à la recherche.";
 
                 scope.Complete();
             }

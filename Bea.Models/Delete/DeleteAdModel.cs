@@ -11,7 +11,6 @@ namespace Bea.Models.Delete
         public String Password { get; set; }
         public int? SelectedDeletionReasonId { get; set; }
         public int NbTry { get; set; }
-
         public Boolean CanDeleteAd { get; set; }
         public Boolean IsDeleted { get; set; }
 

@@ -88,6 +88,9 @@ namespace Bea.Web.Controllers
         public ActionResult Delete(DeleteAdModel model)
         {
             var result = _adDeletionServices.DeleteAd(model);
+            if (result.NbTry > 0)
+                ModelState.AddModelError("Password", "Mot de passe incorrect");
+            
             return View(result);
         }
 
