@@ -51,7 +51,7 @@
     <Compile Include="Ads\AdImageServices.cs" />
     <Compile Include="Ads\AdServices.cs" />
     <Compile Include="CategoryServices.cs" />
-    <Compile Include="EmailService.cs" />
+    <Compile Include="EmailServices.cs" />
     <Compile Include="HelperService.cs" />
     <Compile Include="LocationServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

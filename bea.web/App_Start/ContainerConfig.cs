@@ -28,8 +28,8 @@ namespace Bea.Web.App_Start
             ContainerBuilder builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            builder.Register<ISessionFactory>(x => new SQLiteWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
-            //builder.Register<ISessionFactory>(x => new MySQLWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
+            //builder.Register<ISessionFactory>(x => new SQLiteWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
+            builder.Register<ISessionFactory>(x => new MySQLWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
             builder.RegisterType<Repository>().As<IRepository>().SingleInstance();
             builder.RegisterType<AdRepository>().As<IAdRepository>().SingleInstance();
             builder.RegisterType<UserRepository>().As<IUserRepository>().SingleInstance();
@@ -47,7 +47,7 @@ namespace Bea.Web.App_Start
             builder.RegisterType<AdDataConsistencyServices>().As<IAdDataConsistencyServices>().SingleInstance();
             builder.RegisterType<AdActivationServices>().As<IAdActivationServices>().SingleInstance();
             builder.RegisterType<AdDeletionServices>().As<IAdDeletionServices>().SingleInstance();
-            builder.RegisterType<EmailService>().As<IEmailService>().SingleInstance();
+            builder.RegisterType<EmailServices>().As<IEmailServices>().SingleInstance();
             builder.Register<ITemplatingService>(x => new TemplatingService(Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "App_Data\\Templates"))).SingleInstance();
             
             // Register the inMemoryData singleton to inject data

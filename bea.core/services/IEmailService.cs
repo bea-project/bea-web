@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Bea.Core.Services
 {
-    public interface IEmailService
+    public interface IEmailServices
     {
         void SendEmail(String subject, String content, String toAddress);
     }

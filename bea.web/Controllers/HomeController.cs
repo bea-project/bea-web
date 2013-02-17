@@ -23,9 +23,9 @@ namespace Bea.Web.Controllers
     {
         private ISearchServices _searchServices;
         private ICategoryServices _categoryServices;
-        private IEmailService _emailService;
+        private IEmailServices _emailService;
 
-        public HomeController(ISearchServices searchServices, ICategoryServices categoryServices, ILocationServices locationServices, IReferenceServices referenceServices, IEmailService emailService)
+        public HomeController(ISearchServices searchServices, ICategoryServices categoryServices, ILocationServices locationServices, IReferenceServices referenceServices, IEmailServices emailService)
             :base(locationServices,referenceServices)
         {
             if (searchServices == null)

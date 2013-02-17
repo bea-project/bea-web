@@ -17,10 +17,10 @@ namespace Bea.Services.Ads
     public class AdActivationServices : IAdActivationServices
     {
         private readonly IRepository _repository;
-        private readonly IEmailService _emailService;
+        private readonly IEmailServices _emailService;
         private readonly ITemplatingService _templatingService;
 
-        public AdActivationServices(IRepository repository, ITemplatingService templatingService, IEmailService emailService)
+        public AdActivationServices(IRepository repository, ITemplatingService templatingService, IEmailServices emailService)
         {
             _repository = repository;
             _templatingService = templatingService;

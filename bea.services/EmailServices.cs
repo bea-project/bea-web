@@ -7,7 +7,7 @@ using Bea.Core.Services;
 
 namespace Bea.Services
 {
-    public class EmailService : IEmailService
+    public class EmailServices : IEmailServices
     {
         public void SendEmail(string subject, string content, string toAddress)
         {
