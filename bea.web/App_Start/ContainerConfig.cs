@@ -16,6 +16,8 @@ using System.Reflection;
 using System.Web.Http;
 using Bea.Services.Ads;
 using Bea.Core.Services.Ads;
+using System.Web.Hosting;
+using System.IO;
 
 namespace Bea.Web.App_Start
 {
@@ -45,7 +47,9 @@ namespace Bea.Web.App_Start
             builder.RegisterType<AdDataConsistencyServices>().As<IAdDataConsistencyServices>().SingleInstance();
             builder.RegisterType<AdActivationServices>().As<IAdActivationServices>().SingleInstance();
             builder.RegisterType<AdDeletionServices>().As<IAdDeletionServices>().SingleInstance();
-
+            builder.RegisterType<EmailService>().As<IEmailService>().SingleInstance();
+            builder.Register<ITemplatingService>(x => new TemplatingService(Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "App_Data\\Templates"))).SingleInstance();
+            
             // Register the inMemoryData singleton to inject data
             builder.Register(x => new InMemoryDataInjector(x.Resolve<ISessionFactory>(), x.Resolve<IRepository>())).SingleInstance();
 

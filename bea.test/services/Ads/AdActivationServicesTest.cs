@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Bea.Core.Dal;
+using Bea.Core.Services;
 using Bea.Domain.Ads;
 using Bea.Domain.Categories;
 using Bea.Domain.Location;
@@ -27,7 +28,7 @@ namespace Bea.Test.Services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(x => x.Get<BaseAd>(78)).Returns(ad);
 
-            AdActivationServices service = new AdActivationServices(repoMock.Object);
+            AdActivationServices service = new AdActivationServices(repoMock.Object, null, null);
 
             // When
             AdActivationResultModel model = service.ActivateAd(78, null);
@@ -54,7 +55,7 @@ namespace Bea.Test.Services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(x => x.Get<BaseAd>(adId)).Returns(ad);
 
-            AdActivationServices service = new AdActivationServices(repoMock.Object);
+            AdActivationServices service = new AdActivationServices(repoMock.Object, null, null);
 
             // When
             AdActivationResultModel model = service.ActivateAd(78, null);
@@ -82,7 +83,7 @@ namespace Bea.Test.Services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(x => x.Get<BaseAd>(adId)).Returns(ad);
 
-            AdActivationServices service = new AdActivationServices(repoMock.Object);
+            AdActivationServices service = new AdActivationServices(repoMock.Object, null, null);
 
             // When
             AdActivationResultModel model = service.ActivateAd(adId, "BBB");
@@ -112,7 +113,7 @@ namespace Bea.Test.Services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(x => x.Get<BaseAd>(adId)).Returns(ad);
 
-            AdActivationServices service = new AdActivationServices(repoMock.Object);
+            AdActivationServices service = new AdActivationServices(repoMock.Object, null, null);
 
             // When
             AdActivationResultModel model = service.ActivateAd(78, "AAA");
@@ -126,25 +127,31 @@ namespace Bea.Test.Services
             repoMock.Verify(x => x.Save(Moq.It.IsAny<SearchAdCache>()), Moq.Times.Once());
         }
 
-        //[TestMethod]
-        public void SendActivationEmail_TestEmailIsSent()
+        [TestMethod]
+        public void SendActivationEmail_FillInTemplateAndCallEmailService()
         {
             // Given
-            BaseAd a = new Ad()
+            String templatedMail = "plouf";
+            String toAddress = "@@";
+            String subject = "BEA Activez votre annonce \"ss\"";
+            BaseAd ad = new Ad()
             {
-                Title = "The ad title",
-                CreatedBy = new Bea.Domain.User { Email = "customer@lagoon.nc" },
-                Id = 4567,
-                ActivationToken = "AZERTY"
+                Title = "ss",
+                CreatedBy = new Bea.Domain.User() { Email = toAddress }
             };
 
-            AdActivationServices service = new AdActivationServices(null);
+            var templatingMock = new Moq.Mock<ITemplatingService>();
+            templatingMock.Setup(x => x.GetTemplatedDocument("ActivationEmail.vm", Moq.It.IsAny<IDictionary<String, String>>())).Returns(templatedMail);
+
+            var emailMock = new Moq.Mock<IEmailService>();
+            
+            AdActivationServices service = new AdActivationServices(null, templatingMock.Object, emailMock.Object);
 
             // When
-            service.SendActivationEmail(a);
+            service.SendActivationEmail(ad);
 
-            // Assert ??
-            Assert.IsTrue(File.Exists(@"c:\temp\"));
+            // Then
+            //emailMock.Verify(x => x.SendEmail(subject, templatedMail, toAddress));
         }
     }
 }

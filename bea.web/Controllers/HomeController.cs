@@ -15,6 +15,7 @@ using Bea.Models.Search;
 using Bea.Models.Search.Vehicles;
 using Bea.Models.Search.WaterSport;
 using Bea.Models.Search.RealEstate;
+using System.Threading.Tasks;
 
 namespace Bea.Web.Controllers
 {
@@ -22,8 +23,9 @@ namespace Bea.Web.Controllers
     {
         private ISearchServices _searchServices;
         private ICategoryServices _categoryServices;
+        private IEmailService _emailService;
 
-        public HomeController(ISearchServices searchServices, ICategoryServices categoryServices, ILocationServices locationServices, IReferenceServices referenceServices)
+        public HomeController(ISearchServices searchServices, ICategoryServices categoryServices, ILocationServices locationServices, IReferenceServices referenceServices, IEmailService emailService)
             :base(locationServices,referenceServices)
         {
             if (searchServices == null)
@@ -31,6 +33,7 @@ namespace Bea.Web.Controllers
 
             _searchServices = searchServices;
             _categoryServices = categoryServices;
+            _emailService = emailService;
         }
 
         public ActionResult Index()
@@ -99,7 +102,6 @@ namespace Bea.Web.Controllers
             }
             return null;
         }
-
 
     }
 }

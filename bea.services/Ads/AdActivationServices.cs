@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Transactions;
 using Bea.Core.Dal;
+using Bea.Core.Services;
 using Bea.Core.Services.Ads;
 using Bea.Domain.Ads;
 using Bea.Domain.Search;
@@ -16,10 +17,14 @@ namespace Bea.Services.Ads
     public class AdActivationServices : IAdActivationServices
     {
         private readonly IRepository _repository;
+        private readonly IEmailService _emailService;
+        private readonly ITemplatingService _templatingService;
 
-        public AdActivationServices(IRepository repository)
+        public AdActivationServices(IRepository repository, ITemplatingService templatingService, IEmailService emailService)
         {
             _repository = repository;
+            _templatingService = templatingService;
+            _emailService = emailService;
         }
 
         public AdActivationResultModel ActivateAd(long adId, String activationToken)
@@ -72,26 +77,18 @@ namespace Bea.Services.Ads
             return Guid.NewGuid().ToString();
         }
 
-        //TODO: modify from and reply-to addresses
         public void SendActivationEmail(BaseAd ad)
         {
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("beaprojectnc@gmail.com");
-            mail.ReplyToList.Add("no-reply@bea.nc");
-            mail.To.Add(ad.CreatedBy.Email);
-            mail.Subject = String.Format("BEA Activez votre annonce \"{0}\"", ad.Title);
-            mail.Body = String.Format("Bonjour,"
-                 + "Vous venez de créer votre annonce. Afin que celle-ci soit visible sur bea.nc, nous avons besoin de valider votre adresse email."
-                         + "Pour cela, merci de bien vouloir cliquer sur le lien ci-dessous pour confirmer votre annonce."
-                         + "http://bea.nc/Post/Activate/{0}/{1}", ad.Id, ad.ActivationToken);
+            IDictionary<String, String> data = new Dictionary<String, String>();
+            data.Add("name", ad.CreatedBy.Firstname);
+            data.Add("title", ad.Title);
+            data.Add("id", ad.Id.ToString());
+            data.Add("activationToken", ad.ActivationToken);
 
-            SendEmailAsync(mail, ad);
-        }
+            String subject = String.Format("BEA Activez votre annonce\"{0}\"", ad.Title);
+            String body = _templatingService.GetTemplatedDocument("ActivationEmail.vm", data);
 
-        public void SendEmailAsync(MailMessage message, BaseAd ad)
-        {
-            SmtpClient SmtpServer = new SmtpClient();
-            SmtpServer.SendAsync(message, ad.Id);
+            _emailService.SendEmail(subject, body, ad.CreatedBy.Email);
         }
 
         public void SendEmailToUser(ContactUserFormModel model)

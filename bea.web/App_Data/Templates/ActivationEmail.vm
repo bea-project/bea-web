@@ -1,0 +1,26 @@
+﻿<html>
+
+	<head>
+		<title>Activez votre email</title>
+	</head>
+	<body>
+
+		<h3>Bonjour $name</h3>
+
+		<p>
+			Vous venez de créer votre annonce : <b>$subject</b>.<br/>
+			Afin que celle-ci soit visible sur bea.nc, nous avons besoin de valider votre adresse email.<br/>
+			Pour cela, merci de bien vouloir cliquer sur le lien ci-dessous pour valider votre adresse et confirmer votre annonce.
+		</p>
+
+		<p>
+			<a href="http://bea.nc/Post/Activate/$id/$activationToken">http://bea.nc/Post/Activate/$id/$activationToken</a>
+		</p>
+
+		<p>
+			L'équipe de BEA vous souhaite une bonne vente !
+		</p>
+
+	</body>
+
+</html>

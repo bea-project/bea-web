@@ -52,10 +52,12 @@
     <Compile Include="Services\Ads\IAdImageServices.cs" />
     <Compile Include="Services\Ads\IAdServices.cs" />
     <Compile Include="Services\ICategoryServices.cs" />
+    <Compile Include="Services\IEmailService.cs" />
     <Compile Include="Services\IHelperService.cs" />
     <Compile Include="Services\ILocationServices.cs" />
     <Compile Include="Services\IReferenceServices.cs" />
     <Compile Include="Services\ISearchServices.cs" />
+    <Compile Include="Services\ITemplatingService.cs" />
     <Compile Include="Services\IUserServices.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -59,6 +59,7 @@ namespace Bea.Services.Ads
                 _repository.Save(ad.CreatedBy);
                 _repository.Save(ad);
                 _repository.Flush();
+                _adActivationServices.SendActivationEmail(ad);
                 scope.Complete();
             }
         }

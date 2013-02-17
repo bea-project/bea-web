@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Bea.Core.Services;
 using Bea.Core.Services.Ads;
@@ -111,8 +112,10 @@ namespace Bea.Web.Controllers
             Dictionary<string, string> form = collection.AllKeys.ToDictionary(k => k, v => collection[v]);
             BaseAd newAd = _adServices.GetAdFromModel(model, form);
             IDictionary<string, string> errors = _adConsistencyServices.GetAdDataConsistencyErrors(newAd);
+            
             foreach (string key in errors.Keys)
                 ModelState.AddModelError(key, errors[key]);
+            
             if (ModelState.IsValid)
             {
                 newAd.IsActivated = false;
@@ -120,6 +123,7 @@ namespace Bea.Web.Controllers
                 _adActivationServices.SendActivationEmail(newAd);
                 return RedirectToAction("Index", "Home");
             }
+
             AdCreateModel returnModel = GetModelFromBaseAd(newAd, model);
             return View(returnModel);
         }
