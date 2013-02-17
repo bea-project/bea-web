@@ -13,7 +13,6 @@ namespace Bea.Domain
         public virtual DateTime CreationDate { get; set; }
         public virtual String Firstname { get; set; }
         public virtual String Lastname { get; set; }
-        public virtual Boolean IsAccount { get; set; }
 
         public User()
         {
