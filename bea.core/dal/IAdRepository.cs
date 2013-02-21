@@ -49,12 +49,6 @@ namespace Bea.Core.Dal
         /// <returns></returns>
         IList<SearchAdCache> SearchAds(String[] andSearchStrings, String[] orSearchStrings, int? provinceId, int? cityId, int[] categoryIds);
 
-        /// Insert an Ad
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        void AddAd(Ad ad);
-
         /// <summary>
         /// Returns whether or not an ad can be deleted
         /// (based on whether it exists and if it's not already been deleted)

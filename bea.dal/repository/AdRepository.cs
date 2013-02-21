@@ -86,11 +86,6 @@ namespace Bea.Dal.Repository
             return query.OrderByDescending(a => a.CreationDate).ToList();
         }
 
-        public void AddAd(Ad ad)
-        {
-            _sessionFactory.GetCurrentSession().Save(ad);
-        }
-
         public IList<SearchAdCache> SearchAds(string[] andSearchStrings = null, string[] orSearchStrings = null, int? provinceId = null, int? cityId = null, int[] categoryIds = null)
         {
             ICriteria query = _sessionFactory.GetCurrentSession().CreateCriteria<SearchAdCache>();

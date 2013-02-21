@@ -11,7 +11,7 @@
 </div>
 
 @using (Html.BeginForm("Create", "Post", FormMethod.Post, new { @class = "well form-horizontal" }))
-{       
+{   
     <div class="row">
 
         <div class="span6">
@@ -135,9 +135,10 @@
             </div>
         </div>
     </div>
-      
+    
     <div class="control-group">
         <div class="controls">
+            @Html.AntiForgeryToken()
             <button id="submitButton" type="submit" class="btn btn-primary">Valider</button>
         </div>
     </div>

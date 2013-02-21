@@ -107,6 +107,7 @@ namespace Bea.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(AdCreateModel model, FormCollection collection)
         {
             Dictionary<string, string> form = collection.AllKeys.ToDictionary(k => k, v => collection[v]);
@@ -120,8 +121,7 @@ namespace Bea.Web.Controllers
             {
                 newAd.IsActivated = false;
                 _adServices.AddAd(newAd);
-                _adActivationServices.SendActivationEmail(newAd);
-                return RedirectToAction("Index", "Home");
+                return View("Created");
             }
 
             AdCreateModel returnModel = GetModelFromBaseAd(newAd, model);
