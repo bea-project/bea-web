@@ -14,7 +14,7 @@ namespace Bea.Dal.Map.Ads
         public AdMap()
         {
             Map(x => x.Title).Not.Nullable();
-            Map(x => x.Body).Not.Nullable();
+            Map(x => x.Body).Not.Nullable().Length(500);
             Map(x => x.CreationDate).Not.Nullable();
             Map(x => x.Price).Nullable();
             Map(x => x.IsOffer).Not.Nullable();

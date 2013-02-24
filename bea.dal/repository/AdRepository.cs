@@ -53,7 +53,7 @@ namespace Bea.Dal.Repository
             return _sessionFactory.GetCurrentSession().Query<BaseAd>()
                 .Fetch(x => x.CreatedBy)
                 .Fetch(x=>x.Category)
-                .Where(x=>x.CreatedBy.Email.Equals(email))
+                .Where(x=>x.CreatedBy.Email.Equals(email) && x.IsActivated==true && x.IsDeleted==false)
                 .ToList();
         }
 
