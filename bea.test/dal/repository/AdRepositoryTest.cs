@@ -1297,7 +1297,8 @@ namespace Bea.Test.dal.repository
                     CreatedBy = u,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
                     Category = cat,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsActivated = true
                 };
 
                 Ad a2 = new Ad
@@ -1307,7 +1308,8 @@ namespace Bea.Test.dal.repository
                     CreatedBy = u,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
                     Category = cat2,
-                    IsDeleted = false
+                    IsDeleted = false, 
+                    IsActivated = true
                 };
 
                 Ad a3 = new Ad
@@ -1317,7 +1319,8 @@ namespace Bea.Test.dal.repository
                     CreatedBy = u2,
                     CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
                     Category = cat2,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    IsActivated = true
                 };
                 c.AddAd(a);
                 c.AddAd(a2);
