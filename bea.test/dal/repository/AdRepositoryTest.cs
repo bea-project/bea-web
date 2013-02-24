@@ -1248,98 +1248,100 @@ namespace Bea.Test.dal.repository
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
             AdRepository adRepo = new AdRepository(sessionFactory);
             Repository repo = new Repository(sessionFactory);
-            
-            #region test data
-            Province p1 = new Province
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
             {
-                Label = "p1"
-            };
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
 
-            User u = new User
-            {
-                Email = "test@test.com",
-                Password = "hihi"
-            };
-            repo.Save<User>(u);
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
 
-            User u2 = new User
-            {
-                Email = "test2@test2.com",
-                Password = "hihi"
-            };
-            repo.Save<User>(u2);
+                User u2 = new User
+                {
+                    Email = "test2@test2.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u2);
 
-            City c = new City
-            {
-                Label = "city"
-            };
-            p1.AddCity(c);
+                City c = new City
+                {
+                    Label = "city"
+                };
+                p1.AddCity(c);
 
-            Category cat = new Category
-            {
-                Label = "Informatique",
-                Type = AdTypeEnum.Ad
-            };
+                Category cat = new Category
+                {
+                    Label = "Informatique",
+                    Type = AdTypeEnum.Ad
+                };
 
-            Category cat2 = new Category
-            {
-                Label = "Voiture",
-                Type = AdTypeEnum.Ad
-            };
+                Category cat2 = new Category
+                {
+                    Label = "Voiture",
+                    Type = AdTypeEnum.Ad
+                };
 
 
 
-            Ad a = new Ad
-            {
-                Title = "video game",
-                Body = "the best!!",
-                CreatedBy = u,
-                CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
-                Category = cat,
-                IsDeleted = false
-            };
+                Ad a = new Ad
+                {
+                    Title = "video game",
+                    Body = "the best!!",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    IsDeleted = false
+                };
 
-            Ad a2 = new Ad
-            {
-                Title = "Ferrari F430",
-                Body = "Valab'",
-                CreatedBy = u,
-                CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
-                Category = cat2,
-                IsDeleted = false
-            };
+                Ad a2 = new Ad
+                {
+                    Title = "Ferrari F430",
+                    Body = "Valab'",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat2,
+                    IsDeleted = false
+                };
 
-            Ad a3 = new Ad
-            {
-                Title = "Ferrari F430",
-                Body = "Valab'",
-                CreatedBy = u2,
-                CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
-                Category = cat2,
-                IsDeleted = false
-            };
-            c.AddAd(a);
-            c.AddAd(a2);
-            c.AddAd(a3);
-            cat.AddAd(a);
-            cat2.AddAd(a2);
-            cat2.AddAd(a3);
-            repo.Save<Province>(p1);
-            repo.Save<City>(c);
-            repo.Save<Category>(cat);
-            repo.Save<Category>(cat2);
-            repo.Save<Ad, long>(a);
-            repo.Save<Ad, long>(a2);
-            repo.Save<Ad, long>(a3);
-            repo.Flush();
-            #endregion
+                Ad a3 = new Ad
+                {
+                    Title = "Ferrari F430",
+                    Body = "Valab'",
+                    CreatedBy = u2,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat2,
+                    IsDeleted = false
+                };
+                c.AddAd(a);
+                c.AddAd(a2);
+                c.AddAd(a3);
+                cat.AddAd(a);
+                cat2.AddAd(a2);
+                cat2.AddAd(a3);
+                repo.Save<Province>(p1);
+                repo.Save<City>(c);
+                repo.Save<Category>(cat);
+                repo.Save<Category>(cat2);
+                repo.Save<Ad, long>(a);
+                repo.Save<Ad, long>(a2);
+                repo.Save<Ad, long>(a3);
+                repo.Flush();
+                #endregion
 
-            List<BaseAd> adsUser1 = adRepo.GetAdsByEmail(u.Email).ToList();
-            List<BaseAd> adsUser2 = adRepo.GetAdsByEmail(u2.Email).ToList();
-            Assert.AreEqual(2, adsUser1.Count);
-            Assert.AreEqual(u.Email, adsUser1[0].CreatedBy.Email);
-            Assert.AreEqual(1, adsUser2.Count);
-            Assert.AreEqual(u2.Email, adsUser2[0].CreatedBy.Email);
+                List<BaseAd> adsUser1 = adRepo.GetAdsByEmail(u.Email).ToList();
+                List<BaseAd> adsUser2 = adRepo.GetAdsByEmail(u2.Email).ToList();
+                Assert.AreEqual(2, adsUser1.Count);
+                Assert.AreEqual(u.Email, adsUser1[0].CreatedBy.Email);
+                Assert.AreEqual(1, adsUser2.Count);
+                Assert.AreEqual(u2.Email, adsUser2[0].CreatedBy.Email);
+            }
         }
 
         [TestMethod]
