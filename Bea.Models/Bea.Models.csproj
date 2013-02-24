@@ -57,6 +57,7 @@
     <Compile Include="Create\WaterSport\AdWaterSportCreateModel.cs" />
     <Compile Include="Delete\DeleteAdModel.cs" />
     <Compile Include="Details\AdDetailsModel.cs" />
+    <Compile Include="Request\AdRequestModel.cs" />
     <Compile Include="Search\AdSearchModel.cs" />
     <Compile Include="Search\AdSearchResultModel.cs" />
     <Compile Include="Search\AdSearchResultItemModel.cs" />

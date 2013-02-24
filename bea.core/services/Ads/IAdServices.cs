@@ -17,7 +17,7 @@ namespace Bea.Core.Services.Ads
         IList<BaseAd> GetAllAds();
         Ad GetAdById(long adId);
         void AddAd(BaseAd ad);
-
+        IList<BaseAd> GetAdsByEmail(String email);
         AdDetailsModel GetAdDetails(long adId);
         BaseAd GetAdFromModel(AdCreateModel model, Dictionary<string, string> form);
     }

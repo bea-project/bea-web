@@ -379,6 +379,12 @@
   <ItemGroup>
     <Content Include="Views\Post\Created.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\Request.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Templates\AdsRequestEmail.vm" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

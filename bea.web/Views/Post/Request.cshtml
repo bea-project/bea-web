@@ -1,0 +1,37 @@
+﻿@model Bea.Models.Request.AdRequestModel
+
+@{
+    ViewBag.Title = "Mes annonces";
+}
+
+<div class="legend-like">Mes annonces</div>
+@if (Model.CanRequestAd)
+{
+    using (Html.BeginForm())
+    {
+    
+    <p>Pour recevoir vos annonces, entrez votre adresse email.</p>
+        
+    <dl class="dl-horizontal">
+
+        <dd>&nbsp;</dd>
+
+        <dt>Email</dt>
+        <dd>
+            @Html.TextBoxFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email, String.Empty, new { @class = "label label-important" })
+        </dd>
+        <dd>
+            @Html.ActionLink("Annuler", "Index", new { controller = "Home" }, new { @class = "btn" })
+            <input type="submit" value="Envoyer" class="btn btn-primary" />
+        </dd>
+    </dl>
+    }
+}
+else
+{
+    <p>@Model.InfoMessage</p>
+    <div>
+        @Html.ActionLink("Retour aux annonces", "Index", new { controller = "Home" })
+    </div> 
+}

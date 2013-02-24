@@ -13,6 +13,7 @@ using Bea.Models.Create.Vehicules;
 using Bea.Models.Create.WaterSport;
 using Bea.Models;
 using Bea.Models.Delete;
+using Bea.Models.Request;
 
 namespace Bea.Web.Controllers
 {
@@ -26,8 +27,9 @@ namespace Bea.Web.Controllers
         private IReferenceServices _referenceServices;
         private IAdActivationServices _adActivationServices;
         private IAdDeletionServices _adDeletionServices;
+        private IAdRequestServices _adRequestServices;
 
-        public PostController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices, IAdDeletionServices adDeletionServices)
+        public PostController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices, IAdDeletionServices adDeletionServices, IAdRequestServices adRequestServices)
         {
             _adServices = adServices;
             _locationServices = locationServices;
@@ -37,6 +39,7 @@ namespace Bea.Web.Controllers
             _referenceServices = referenceServices;
             _adActivationServices = adActivationServices;
             _adDeletionServices = adDeletionServices;
+            _adRequestServices = adRequestServices;
         }
 
         //
@@ -45,6 +48,8 @@ namespace Bea.Web.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+
+
 
         #region Consult
 
@@ -93,6 +98,32 @@ namespace Bea.Web.Controllers
             if (result.NbTry > 0)
                 ModelState.AddModelError("Password", "Mot de passe incorrect");
             
+            return View(result);
+        }
+
+        #endregion
+
+        #region Request
+
+        public ActionResult Request()
+        {
+            AdRequestModel model = new AdRequestModel();
+            model.CanRequestAd = true;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Request(AdRequestModel model)
+        {
+            AdRequestModel result = new AdRequestModel();
+            if (!_adConsistencyServices.IsEmailValid(model.Email))
+            {
+                result.CanRequestAd = true;
+                result.Email = model.Email;
+                ModelState.AddModelError("Email", "Email incorrect");
+                return View(result);
+            }
+            result = _adRequestServices.RequestAds(model);
             return View(result);
         }
 

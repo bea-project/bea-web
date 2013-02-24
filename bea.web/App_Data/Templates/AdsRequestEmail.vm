@@ -1,0 +1,18 @@
+﻿<html>
+
+	<head>
+		<title>Vos annonces</title>
+	</head>
+	<body>
+
+		<h3>Bonjour $name</h3>
+		<p>
+			Voici la liste de vos $adCount annonce(s) actuellement consultable sur bea.nc
+		</p>
+		<p>
+			L'équipe de <b>BEA</b> vous souhaite une bonne vente !
+		</p>
+
+	</body>
+
+</html>

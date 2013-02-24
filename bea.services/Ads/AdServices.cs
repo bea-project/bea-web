@@ -47,6 +47,12 @@ namespace Bea.Services.Ads
             return _adRepository.GetAllAds();
         }
 
+
+        public IList<BaseAd> GetAdsByEmail(String email)
+        {
+            return _adRepository.GetAdsByEmail(email);
+        }
+
         public Ad GetAdById(long adId)
         {
             return _adRepository.GetAdById<Ad>(adId);

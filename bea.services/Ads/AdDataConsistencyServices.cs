@@ -257,5 +257,12 @@ namespace Bea.Services.Ads
                 errors.Add("EmailBody", "Veuillez saisir un texte.");
             return errors;
         }
+
+        public Boolean IsEmailValid(String email)
+        {
+            if (_emailRegex.IsMatch(email))
+                return true;
+            return false;
+        }
     }
 }

@@ -30,6 +30,12 @@ namespace Bea.Core.Dal
         IList<BaseAd> GetAllAds();
 
         /// <summary>
+        /// Get all the Ads for given email
+        /// </summary>
+        /// <returns>A list of Ads</returns>
+        IList<BaseAd> GetAdsByEmail(String email);
+
+        /// <summary>
         /// Get a particular Ad by Id and Type
         /// </summary>
         /// <returns>An Ad</returns>

@@ -50,6 +50,7 @@
     <Compile Include="Services\Ads\IAdActivationServices.cs" />
     <Compile Include="Services\Ads\IAdDataConsistencyServices.cs" />
     <Compile Include="Services\Ads\IAdImageServices.cs" />
+    <Compile Include="Services\Ads\IAdRequestServices.cs" />
     <Compile Include="Services\Ads\IAdServices.cs" />
     <Compile Include="Services\ICategoryServices.cs" />
     <Compile Include="Services\IEmailService.cs" />

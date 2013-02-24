@@ -11,5 +11,6 @@ namespace Bea.Core.Services.Ads
     {
         IDictionary<string, string> GetAdDataConsistencyErrors(BaseAd ad);
         Dictionary<string, string> GetDataConsistencyErrors(ContactUserFormModel model);
+        Boolean IsEmailValid(String email);
     }
 }

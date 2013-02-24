@@ -48,6 +48,15 @@ namespace Bea.Dal.Repository
             return _sessionFactory.GetCurrentSession().Query<BaseAd>().Fetch(x => x.CreatedBy).Fetch(x => x.City).ToList();
         }
 
+        public IList<BaseAd> GetAdsByEmail(String email)
+        {
+            return _sessionFactory.GetCurrentSession().Query<BaseAd>()
+                .Fetch(x => x.CreatedBy)
+                .Fetch(x=>x.Category)
+                .Where(x=>x.CreatedBy.Email.Equals(email))
+                .ToList();
+        }
+
         public AdTypeEnum GetAdType(long adId)
         {
             AdTypeEnum result = _sessionFactory.GetCurrentSession().Query<BaseAd>()
