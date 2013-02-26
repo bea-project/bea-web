@@ -260,7 +260,7 @@ namespace Bea.Services.Ads
 
         public Boolean IsEmailValid(String email)
         {
-            if (_emailRegex.IsMatch(email))
+            if (!String.IsNullOrEmpty(email) && _emailRegex.IsMatch(email))
                 return true;
             return false;
         }

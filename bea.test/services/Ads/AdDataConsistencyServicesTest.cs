@@ -117,6 +117,50 @@ namespace Bea.Test.Services
             Assert.IsTrue(actual.Keys.Contains("SelectedCityId"));
         }
 
+        [TestMethod]
+        public void IsEmailValid_Null_Email_Returns_False()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+
+            // When
+            Boolean actual = service.IsEmailValid(null);
+
+            // Then
+            Assert.AreEqual(false, actual);
+        }
+
+        [TestMethod]
+        public void IsEmailValid_UnValid_Email_Returns_False()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            String Email = "toto";
+
+            // When
+            Boolean actual = service.IsEmailValid(Email);
+
+            // Then
+            Assert.AreEqual(false, actual);
+
+        }
+
+        [TestMethod]
+        public void IsEmailValid_Valid_Email_Returns_True()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            String Email = "toto@gmail.com";
+
+            // When
+            Boolean actual = service.IsEmailValid(Email);
+
+            // Then
+            Assert.AreEqual(true, actual);
+
+        }
+
+
         #region GetCarAdDataConsistencyErrors
 
         [TestMethod]
