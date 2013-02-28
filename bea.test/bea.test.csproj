@@ -93,6 +93,7 @@
     <Compile Include="Services\Ads\AdActivationServicesTest.cs" />
     <Compile Include="Services\Ads\AdDataConsistencyServicesTest.cs" />
     <Compile Include="Services\Ads\AdDeletionServicesTest.cs" />
+    <Compile Include="Services\Ads\AdDetailsServicesTest.cs" />
     <Compile Include="Services\Ads\AdImageServicesTest.cs" />
     <Compile Include="Services\Ads\AdServicesTest.cs" />
     <Compile Include="Services\CategoryServicesTest.cs" />

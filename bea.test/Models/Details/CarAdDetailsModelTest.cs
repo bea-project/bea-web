@@ -7,6 +7,7 @@ using Bea.Domain.Ads;
 using Bea.Domain.Location;
 using Bea.Domain.Reference;
 using Bea.Models.Details;
+using Bea.Models.Details.Vehicles;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bea.Test.Models.Details

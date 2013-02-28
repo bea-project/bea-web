@@ -12,6 +12,7 @@ using Bea.Domain.Location;
 using Bea.Domain.Reference;
 using Bea.Models.Create;
 using Bea.Models.Details;
+using Bea.Models.Details.Vehicles;
 
 namespace Bea.Services.Ads
 {
@@ -19,16 +20,12 @@ namespace Bea.Services.Ads
     {
         private readonly IAdRepository _adRepository;
         private readonly IRepository _repository;
-        private readonly IHelperService _helperService;
-        private readonly IUserServices _userServices;
         private readonly IAdActivationServices _adActivationServices;
 
-        public AdServices(IAdRepository adRepository, IHelperService helperService, IRepository repository, IUserServices userServices, IAdActivationServices adActivationServices)
+        public AdServices(IAdRepository adRepository, IRepository repository, IAdActivationServices adActivationServices)
         {
             _adRepository = adRepository;
-            _helperService = helperService;
             _repository = repository;
-            _userServices = userServices;
             _adActivationServices = adActivationServices;
         }
 
@@ -69,60 +66,6 @@ namespace Bea.Services.Ads
                 scope.Complete();
             }
         }
-
-        #region consultation
-
-        public AdDetailsModel GetAdDetails(long adId)
-        {
-            AdTypeEnum adType = _adRepository.GetAdType(adId);
-
-            if (adType == AdTypeEnum.Undefined)
-                return null;
-
-            AdDetailsModel model = CreateAdDetailsModelFromAd(adType, adId);
-
-            return model;
-        }
-
-        protected AdDetailsModel CreateAdDetailsModelFromAd(AdTypeEnum adType, long adId)
-        {
-            AdDetailsModel model = null;
-            BaseAd ad = null;
-
-            // Get the right Ad based on its type
-            switch (adType)
-            {
-                case AdTypeEnum.Ad:
-                    ad = _adRepository.GetAdById<Ad>(adId);
-                    model = new AdDetailsModel(ad);
-                    break;
-
-                case AdTypeEnum.CarAd:
-                    ad = _adRepository.GetAdById<CarAd>(adId);
-                    model = new CarAdDetailsModel(ad as CarAd);
-                    break;
-
-                case AdTypeEnum.MotoAd:
-                    ad = _adRepository.GetAdById<MotoAd>(adId);
-                    model = new MotoAdDetailsModel(ad as MotoAd);
-                    break;
-
-                case AdTypeEnum.OtherVehiculeAd:
-                    ad = _adRepository.GetAdById<OtherVehicleAd>(adId);
-                    model = new OtherVehicleAdDetailsModel(ad as OtherVehicleAd);
-                    break;
-
-                default:
-                    return null;
-            }
-
-            // Compute whether or not this Ad is new (less than 3 days)
-            model.IsNew = ad.CreationDate > _helperService.GetCurrentDateTime().AddHours(-72);
-
-            return model;
-        }
-
-        #endregion
 
         #region creation
 

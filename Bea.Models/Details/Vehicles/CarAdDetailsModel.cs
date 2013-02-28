@@ -1,7 +1,7 @@
 ﻿using System;
 using Bea.Domain.Ads;
 
-namespace Bea.Models.Details
+namespace Bea.Models.Details.Vehicles
 {
     public class CarAdDetailsModel : AdDetailsModel
     {

@@ -19,7 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Test", "Bea.Test\Bea.Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C536A3F7-D859-4E6E-9252-606157904E22}"
 	ProjectSection(SolutionItems) = preProject
-		bea4.vsmdi = bea4.vsmdi
 		default.testsettings = default.testsettings
 	EndProjectSection
 EndProject
@@ -32,9 +31,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Models", "Bea.Models\Bea.Models.csproj", "{5207CC9F-6AC5-42BD-AE46-82940DE48F78}"
 EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = bea4.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

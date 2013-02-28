@@ -48,6 +48,7 @@ namespace Bea.Web.App_Start
             builder.RegisterType<AdRequestServices>().As<IAdRequestServices>().SingleInstance();
             builder.RegisterType<AdActivationServices>().As<IAdActivationServices>().SingleInstance();
             builder.RegisterType<AdDeletionServices>().As<IAdDeletionServices>().SingleInstance();
+            builder.RegisterType<AdDetailsServices>().As<IAdDetailsServices>().SingleInstance();
             builder.RegisterType<EmailServices>().As<IEmailServices>().SingleInstance();
             builder.Register<ITemplatingService>(x => new TemplatingService(Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "App_Data\\Templates"))).SingleInstance();
             

@@ -48,6 +48,7 @@
     <Compile Include="Ads\AdActivationServices.cs" />
     <Compile Include="Ads\AdDataConsistencyServices.cs" />
     <Compile Include="Ads\AdDeletionServices.cs" />
+    <Compile Include="Ads\AdDetailsServices.cs" />
     <Compile Include="Ads\AdImageServices.cs" />
     <Compile Include="Ads\AdRequestServices.cs" />
     <Compile Include="Ads\AdServices.cs" />

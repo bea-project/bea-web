@@ -55,17 +55,17 @@
             @*Details display*@
             <div>
                 @*Specific details*@
-                @if (Model is Bea.Models.Details.CarAdDetailsModel)
+                @if (Model is Bea.Models.Details.Vehicles.CarAdDetailsModel)
                 {
-                    @Html.Partial("Shared/Details/_CarAdDetailsPartial", Model);
+                    @Html.Partial("Shared/Details/Vehicles/_CarAdDetailsPartial", Model);
                 }
-                else if (Model is Bea.Models.Details.MotoAdDetailsModel)
+                else if (Model is Bea.Models.Details.Vehicles.MotoAdDetailsModel)
                 {
-                    @Html.Partial("Shared/Details/_MotoAdDetailsPartial", Model);
+                    @Html.Partial("Shared/Details/Vehicles/_MotoAdDetailsPartial", Model);
                 }
-                else if (Model is Bea.Models.Details.OtherVehicleAdDetailsModel)
+                else if (Model is Bea.Models.Details.Vehicles.OtherVehicleAdDetailsModel)
                 {
-                    @Html.Partial("Shared/Details/_OtherVehicleAdDetailsPartial", Model);
+                    @Html.Partial("Shared/Details/Vehicles/_OtherVehicleAdDetailsPartial", Model);
                 }
 
                 <dl class="dl-horizontal">

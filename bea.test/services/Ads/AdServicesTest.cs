@@ -17,6 +17,7 @@ using Bea.Models.Create;
 using Bea.Domain.Search;
 using Bea.Core.Services.Ads;
 using Bea.Services.Ads;
+using Bea.Models.Details.Vehicles;
 
 namespace Bea.Test.services
 {
@@ -31,7 +32,7 @@ namespace Bea.Test.services
             var adRepoMock = new Moq.Mock<IAdRepository>();
             adRepoMock.Setup(r => r.CountAdsByCity()).Returns(result);
 
-            AdServices service = new AdServices(adRepoMock.Object, null, null, null, null);
+            AdServices service = new AdServices(adRepoMock.Object, null, null);
 
             // When
             IDictionary<City, int> actual = service.CountAdsByCities();
@@ -41,186 +42,7 @@ namespace Bea.Test.services
             adRepoMock.Verify();
         }
 
-        [TestMethod]
-        public void GetAdDetails_AdIsNotNew_GetAdFromRepoAndPopulateIsNewFalse()
-        {
-            // Given
-            Ad ad = new Ad();
-            ad.CreationDate = new DateTime(2012, 02, 05);
-            ad.CreatedBy = new User { Firstname = "Michel" };
-            ad.City = new City { Label = "Ville" };
-
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.Ad);
-            adRepoMock.Setup(r => r.GetAdById<Ad>(17)).Returns(ad);
-
-            var helperMock = new Moq.Mock<IHelperService>();
-            helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
-
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null, null);
-
-            // When
-            AdDetailsModel actual = service.GetAdDetails(17);
-
-            // Then
-            Assert.IsFalse(actual.IsNew);
-        }
-
-        [TestMethod]
-        public void GetAdDetails_AdIsNew_GetAdFromRepoAndPopulateIsNewTrue()
-        {
-            // Given
-            Ad ad = new Ad();
-            ad.CreationDate = new DateTime(2012, 02, 18);
-            ad.CreatedBy = new User { Firstname = "Michel" };
-            ad.City = new City { Label = "Ville" };
-
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.Ad);
-            adRepoMock.Setup(r => r.GetAdById<Ad>(17)).Returns(ad);
-
-            var helperMock = new Moq.Mock<IHelperService>();
-            helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
-
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null, null);
-
-            // When
-            AdDetailsModel actual = service.GetAdDetails(17);
-
-            // Then
-            Assert.IsTrue(actual.IsNew);
-        }
-
-        [TestMethod]
-        public void GetAdDetails_AdExists_GetAdFromRepoAndReturnAdModel()
-        {
-            // Given
-            Ad ad = new Ad() { Id = 17 };
-            ad.CreationDate = new DateTime(2012, 02, 18);
-            ad.CreatedBy = new User { Firstname = "Michel" };
-            ad.City = new City { Label = "Ville" };
-
-            var repoMock = new Moq.Mock<IRepository>();
-            repoMock.Setup(x => x.Get<BaseAd>(17)).Returns(ad as BaseAd);
-
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.Ad);
-            adRepoMock.Setup(r => r.GetAdById<Ad>(17)).Returns(ad);
-
-            var helperMock = new Moq.Mock<IHelperService>();
-            helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
-
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null, null);
-
-            // When
-            AdDetailsModel actual = service.GetAdDetails(17);
-
-            // Then
-            Assert.AreEqual(17, actual.AdId);
-        }
-
-        [TestMethod]
-        public void GetAdDetails_CarAdExists_GetAdFromRepoAndReturnCarAdModel()
-        {
-            // Given
-            CarAd ad = new CarAd() { Id = 17 };
-            ad.CreationDate = new DateTime(2012, 02, 18);
-            ad.CreatedBy = new User { Firstname = "Michel" };
-            ad.City = new City { Label = "Ville" };
-
-            var repoMock = new Moq.Mock<IRepository>();
-            repoMock.Setup(x => x.Get<BaseAd>(17)).Returns(ad as BaseAd);
-
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.CarAd);
-            adRepoMock.Setup(r => r.GetAdById<CarAd>(17)).Returns(ad);
-
-            var helperMock = new Moq.Mock<IHelperService>();
-            helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
-
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null, null);
-
-            // When
-            AdDetailsModel actual = service.GetAdDetails(17);
-
-            // Then
-            Assert.AreEqual(17, actual.AdId);
-            Assert.IsTrue(actual is CarAdDetailsModel);
-        }
-
-        [TestMethod]
-        public void GetAdDetails_MotoAdExists_GetAdFromRepoAndReturnMotoAdModel()
-        {
-            // Given
-            MotoAd ad = new MotoAd() { Id = 17 };
-            ad.CreationDate = new DateTime(2012, 02, 18);
-            ad.CreatedBy = new User { Firstname = "Michel" };
-            ad.City = new City { Label = "Ville" };
-
-            var repoMock = new Moq.Mock<IRepository>();
-            repoMock.Setup(x => x.Get<BaseAd>(17)).Returns(ad as BaseAd);
-
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.MotoAd);
-            adRepoMock.Setup(r => r.GetAdById<MotoAd>(17)).Returns(ad);
-
-            var helperMock = new Moq.Mock<IHelperService>();
-            helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
-
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null, null);
-
-            // When
-            AdDetailsModel actual = service.GetAdDetails(17);
-
-            // Then
-            Assert.AreEqual(17, actual.AdId);
-            Assert.IsTrue(actual is MotoAdDetailsModel);
-        }
-
-        [TestMethod]
-        public void GetAdDetails_OtherVehicleAdExists_GetAdFromRepoAndReturnMotoAdModel()
-        {
-            // Given
-            OtherVehicleAd ad = new OtherVehicleAd() { Id = 17 };
-            ad.CreationDate = new DateTime(2012, 02, 18);
-            ad.CreatedBy = new User { Firstname = "Michel" };
-            ad.City = new City { Label = "Ville" };
-
-            var repoMock = new Moq.Mock<IRepository>();
-            repoMock.Setup(x => x.Get<BaseAd>(17)).Returns(ad as BaseAd);
-
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.OtherVehiculeAd);
-            adRepoMock.Setup(r => r.GetAdById<OtherVehicleAd>(17)).Returns(ad);
-
-            var helperMock = new Moq.Mock<IHelperService>();
-            helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
-
-            AdServices service = new AdServices(adRepoMock.Object, helperMock.Object, null, null, null);
-
-            // When
-            AdDetailsModel actual = service.GetAdDetails(17);
-
-            // Then
-            Assert.AreEqual(17, actual.AdId);
-            Assert.IsTrue(actual is OtherVehicleAdDetailsModel);
-        }
-
-        [TestMethod]
-        public void GetAdDetails_AdDoesNotExist_ReturnNull()
-        {
-            // Given
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.Undefined);
-
-            AdServices service = new AdServices(adRepoMock.Object, null, null, null, null);
-
-            // When
-            AdDetailsModel actual = service.GetAdDetails(17);
-
-            // Then
-            Assert.IsNull(actual);
-        }
+        
 
         [TestMethod]
         public void GetAdFromModel_AdModel_ReturnsAd()
@@ -229,16 +51,11 @@ namespace Bea.Test.services
             var repoMock = new Moq.Mock<IRepository>();
             Category category = new Category() { Id = 17, Label = "Kite" };
             repoMock.Setup(r => r.Get<Category>(17)).Returns(category);
-
-            var userServicesMock = new Moq.Mock<IUserServices>();
-            string email = "bruno.deprez@gmail.com";
-            User user = new User() { Email = email };
-            userServicesMock.Setup(r => r.GetUserFromEmail(email)).Returns(user);
-
+            
             var activationServiceMock = new Moq.Mock<IAdActivationServices>();
             activationServiceMock.Setup(x => x.GenerateActivationToken()).Returns("activationToken");
 
-            AdServices service = new AdServices(null, null, repoMock.Object, userServicesMock.Object, activationServiceMock.Object);
+            AdServices service = new AdServices(null, repoMock.Object, activationServiceMock.Object);
 
             // When
             AdCreateModel model = new AdCreateModel() { SelectedCategoryId = 17 };
@@ -254,15 +71,10 @@ namespace Bea.Test.services
             // Given
             var repoMock = new Moq.Mock<IRepository>();
 
-            var userServicesMock = new Moq.Mock<IUserServices>();
-            string email = "bruno.deprez@gmail.com";
-            User user = new User() { Email = email };
-            userServicesMock.Setup(r => r.GetUserFromEmail(email)).Returns(user);
-
             var activationServiceMock = new Moq.Mock<IAdActivationServices>();
             activationServiceMock.Setup(x => x.GenerateActivationToken()).Returns("activationToken");
 
-            AdServices service = new AdServices(null, null, repoMock.Object, userServicesMock.Object, activationServiceMock.Object);
+            AdServices service = new AdServices(null, repoMock.Object, activationServiceMock.Object);
 
             // When
             AdCreateModel model = new AdCreateModel() { SelectedCategoryId = null };
@@ -280,15 +92,10 @@ namespace Bea.Test.services
             Category category = new Category() { Id = 17, Label = "Voitures" };
             repoMock.Setup(r => r.Get<Category>(17)).Returns(category);
 
-            var userServicesMock = new Moq.Mock<IUserServices>();
-            string email = "bruno.deprez@gmail.com";
-            User user = new User() { Email = email };
-            userServicesMock.Setup(r => r.GetUserFromEmail(email)).Returns(user);
-
             var activationServiceMock = new Moq.Mock<IAdActivationServices>();
             activationServiceMock.Setup(x => x.GenerateActivationToken()).Returns("activationToken");
 
-            AdServices service = new AdServices(null, null, repoMock.Object, userServicesMock.Object, activationServiceMock.Object);
+            AdServices service = new AdServices(null, repoMock.Object, activationServiceMock.Object);
 
             // When
             Dictionary<string, string> form = new Dictionary<string, string>();
@@ -313,7 +120,7 @@ namespace Bea.Test.services
             BaseAd ad = new Ad();
             String images = null;
 
-            AdServices service = new AdServices(null, null, null, null, null);
+            AdServices service = new AdServices(null, null, null);
 
             // When
             
@@ -338,7 +145,7 @@ namespace Bea.Test.services
             repoMock.Setup(x => x.Get<AdImage>(Guid.Parse("b9da8b1e-aa77-401b-84e0-a1290130b7b7"))).Returns(img1);
             repoMock.Setup(x => x.Get<AdImage>(Guid.Parse("b9da8b1e-aa77-401b-84e0-a1290130b999"))).Returns(img2);
 
-            AdServices service = new AdServices(null, null, repoMock.Object, null, null);
+            AdServices service = new AdServices(null, repoMock.Object, null);
 
             // When
             BaseAd result = service.GetAdPicturesFromModel(ad, images);

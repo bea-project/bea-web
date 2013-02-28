@@ -133,7 +133,6 @@ namespace Bea.Test.Services
             // Given
             String templatedMail = "plouf";
             String toAddress = "@@";
-            String subject = "BEA Activez votre annonce \"ss\"";
             BaseAd ad = new Ad()
             {
                 Title = "ss",

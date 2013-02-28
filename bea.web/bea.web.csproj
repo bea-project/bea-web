@@ -282,7 +282,7 @@
     <Content Include="Views\Post\Shared\Create\_CarAdCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Post\Shared\Details\_CarAdDetailsPartial.cshtml" />
+    <Content Include="Views\Post\Shared\Details\Vehicles\_CarAdDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Post\Shared\Details\_AdDetailBreadCrumbPartial.cshtml" />
@@ -297,10 +297,10 @@
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Post\Shared\Details\_MotoAdDetailsPartial.cshtml" />
+    <Content Include="Views\Post\Shared\Details\Vehicles\_MotoAdDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Post\Shared\Details\_OtherVehicleAdDetailsPartial.cshtml" />
+    <Content Include="Views\Post\Shared\Details\Vehicles\_OtherVehicleAdDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Post\Activate.cshtml" />

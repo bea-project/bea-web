@@ -20,6 +20,7 @@ namespace Bea.Web.Controllers
     public class PostController : Controller
     {
         private IAdServices _adServices;
+        private IAdDetailsServices _adDetailsServices;
         private ILocationServices _locationServices;
         private IUserServices _userServices;
         private ICategoryServices _categoryServices;
@@ -29,9 +30,10 @@ namespace Bea.Web.Controllers
         private IAdDeletionServices _adDeletionServices;
         private IAdRequestServices _adRequestServices;
 
-        public PostController(IAdServices adServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices, IAdDeletionServices adDeletionServices, IAdRequestServices adRequestServices)
+        public PostController(IAdServices adServices, IAdDetailsServices adDetailsServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices, IAdDeletionServices adDeletionServices, IAdRequestServices adRequestServices)
         {
             _adServices = adServices;
+            _adDetailsServices = adDetailsServices;
             _locationServices = locationServices;
             _userServices = userServices;
             _categoryServices = categoryServices;
@@ -57,7 +59,7 @@ namespace Bea.Web.Controllers
         // GET: /Post/Details/{id}
         public ActionResult Details(long id)
         {
-            var result = _adServices.GetAdDetails(id);
+            var result = _adDetailsServices.GetAdDetails(id);
 
             if (result == null)
                 return HttpNotFound("Cette annonce n'existe pas ou est désactivée");

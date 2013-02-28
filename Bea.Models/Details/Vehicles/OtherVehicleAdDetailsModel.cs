@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Domain.Ads;
 
-namespace Bea.Models.Details
+namespace Bea.Models.Details.Vehicles
 {
     public class OtherVehicleAdDetailsModel : AdDetailsModel
     {
