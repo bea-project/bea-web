@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Web", "bea.web\Bea.Web.csproj", "{5FB8F688-2104-4A45-B0C4-26A5746D6DBD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Dal", "bea.dal\Bea.Dal.csproj", "{E758260E-04BD-49C6-974A-D3EB9322716F}"
@@ -18,6 +18,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Test", "Bea.Test\Bea.Te
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C536A3F7-D859-4E6E-9252-606157904E22}"
+	ProjectSection(SolutionItems) = preProject
+		bea4.vsmdi = bea4.vsmdi
+		default.testsettings = default.testsettings
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Domain", "Bea.Domain\Bea.Domain.csproj", "{79C4229D-2A62-4FCA-BE59-60EDBB6BF747}"
 EndProject
@@ -29,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Models", "Bea.Models\Be
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = bea3.vsmdi
+		CategoryFile = bea4.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

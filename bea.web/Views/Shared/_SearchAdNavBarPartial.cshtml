@@ -59,9 +59,10 @@
             $.ajax({
                 url: url,
                 type: 'GET',
-                success: function (data) {
+                success: function (data, textStatus, jqXHR) {
                     $('#parameters').html("");
-                    $('#parameters').html(data);
+                    if (jqXHR.responseText != "")
+                        $('#parameters').html(data);
                 }
             });
         }

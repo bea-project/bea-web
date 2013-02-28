@@ -56,7 +56,7 @@
             <div class="control-group">
                 <label class="control-label" for="inputCategory">@Html.LabelFor(model => model.SelectedCategoryId)</label>
                 <div class="controls controls-row">
-                    @Html.DropDownListFor(model => model.SelectedCategoryId, Enumerable.Empty<SelectListItem>(), "Choisissez la catégorie", new { @class = "input-large" })
+                    @Html.DropDownListFor(model => model.SelectedCategoryId, Enumerable.Empty<SelectListItem>(), "Choisissez la catégorie", new { @class = "input-large", id = "categories" })
                     @Html.ValidationMessageFor(model => model.SelectedCategoryId, String.Empty, new { @class = "label label-important" })
                 </div>
 
@@ -187,18 +187,18 @@
             }
         });
 
-        $('#SelectedCategoryId').change(function () {
+        $('#categories').change(function () {
             if ($(this).val()) {
                 //The user selected a province
-                var categoryId = $('#SelectedCategoryId').val();
-
+                var categoryId = $('#categories').val();
                 var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Post", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
                 $.ajax({
                     url: url,
                     type: 'GET',
-                    success: function (data) {
+                    success: function (data, textStatus, jqXHR) {
                         $('#parameters').html("");
-                        $('#parameters').html(data);
+                        if (jqXHR.responseText != "")
+                            $('#parameters').html(data);
                     }
                 });
             }
@@ -244,28 +244,27 @@
 
 
         //Fill the category list
-        var url = '@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategories" })';
-        $.ajax({
-            url: url,
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                $('#SelectedCategoryId').empty();
-                $('#SelectedCategoryId').append($('<option/>', {
-                    value: "",
-                    text: "Choisissez la categorie"
-                }));
-                $(data).each(function () {
-                    var option = $('<option />');
-                    option.attr('value', this.Id).text(this.Label);
-                    $('#SelectedCategoryId').append(option);
-                });
-                var selectedCategoryId = '@Model.SelectedCategoryId';
-                if (selectedCategoryId != null) {
-                    $('#SelectedCategoryId').val(selectedCategoryId);
-                    isLoad = true;
+        $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategoriesAndGroups" })', function (result) {
+            var ddl = $('#categories');
+            ddl.empty();
+            $(document.createElement('option'))
+                    .attr('value', "")
+                    .text("Choisissez la categorie")
+                    .appendTo(ddl);
+            $(result).each(function () {
+                var selected = (this.Id == "@Model.SelectedCategoryId");
+                var optionElement = $(document.createElement('option'))
+                    .attr('value', this.Id)
+                    .attr('selected', selected)
+                    .text(this.Label);
+                    
+                if (this.IsGroup) {
+                    optionElement.attr('disabled', 1);
+                    optionElement.attr('style', 'color: #006DCC;');
                 }
-            }
+
+                optionElement.appendTo(ddl);
+            });
         });
     });
 </script>
