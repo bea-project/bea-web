@@ -57,6 +57,7 @@
     <Compile Include="Create\WaterSport\AdWaterSportCreateModel.cs" />
     <Compile Include="Delete\DeleteAdModel.cs" />
     <Compile Include="Details\AdDetailsModel.cs" />
+    <Compile Include="Details\RealEstate\RealEstateAdDetailsModel.cs" />
     <Compile Include="Details\WaterSport\MotorBoatAdDetailsModel.cs" />
     <Compile Include="Details\WaterSport\MotorBoatEngineAdDetailsModel.cs" />
     <Compile Include="Details\WaterSport\SailingBoatAdDetailsModel.cs" />
@@ -90,9 +91,7 @@
       <Name>Bea.Tools</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Details\RealEstate\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

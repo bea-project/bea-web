@@ -390,19 +390,22 @@
     <Content Include="App_Data\Templates\AdsRequestEmail.vm" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Post\Shared\Details\Vehicles\_MotorBoatAdDetailsPartial.cshtml" />
+    <Content Include="Views\Post\Shared\Details\WaterSport\_MotorBoatAdDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Post\Shared\Details\Vehicles\_SailingBoatAdDetailsPartial.cshtml" />
+    <Content Include="Views\Post\Shared\Details\WaterSport\_SailingBoatAdDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Post\Shared\Details\Vehicles\_MotorBoatEngineAdDetailsPartial.cshtml" />
+    <Content Include="Views\Post\Shared\Details\WaterSport\_MotorBoatEngineAdDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Post\Shared\Details\Vehicles\_WaterSportAdDetailsPartial.cshtml" />
+    <Content Include="Views\Post\Shared\Details\WaterSport\_WaterSportAdDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Post\Shared\Details\_RenderSpecificDetailsPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\Shared\Details\RealEstate\_RealEstateAdDetailsPartial.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -14,17 +14,21 @@ else if (Model is Bea.Models.Details.Vehicles.OtherVehicleAdDetailsModel)
 }
 else if (Model is Bea.Models.Details.WaterSport.MotorBoatAdDetailsModel)
 {
-    @Html.Partial("Shared/Details/Vehicles/_MotorBoatAdDetailsPartial", Model)
+    @Html.Partial("Shared/Details/WaterSport/_MotorBoatAdDetailsPartial", Model)
 }
 else if (Model is Bea.Models.Details.WaterSport.SailingBoatAdDetailsModel)
 {
-    @Html.Partial("Shared/Details/Vehicles/_SailingBoatAdDetailsPartial", Model)
+    @Html.Partial("Shared/Details/WaterSport/_SailingBoatAdDetailsPartial", Model)
 }
 else if (Model is Bea.Models.Details.WaterSport.MotorBoatEngineAdDetailsModel)
 {
-    @Html.Partial("Shared/Details/Vehicles/_MotorBoatEngineAdDetailsPartial", Model)
+    @Html.Partial("Shared/Details/WaterSport/_MotorBoatEngineAdDetailsPartial", Model)
 }
 else if (Model is Bea.Models.Details.WaterSport.WaterSportAdDetailsModel)
 {
-    @Html.Partial("Shared/Details/Vehicles/_WaterSportAdDetailsPartial", Model)
+    @Html.Partial("Shared/Details/WaterSport/_WaterSportAdDetailsPartial", Model)
+}
+else if (Model is Bea.Models.Details.RealEstate.RealEstateAdDetailsModel)
+{
+    @Html.Partial("Shared/Details/RealEstate/_RealEstateAdDetailsPartial", Model)
 }

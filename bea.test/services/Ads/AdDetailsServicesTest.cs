@@ -9,6 +9,7 @@ using Bea.Domain.Ads;
 using Bea.Domain.Ads.WaterSport;
 using Bea.Domain.Location;
 using Bea.Models.Details;
+using Bea.Models.Details.RealEstate;
 using Bea.Models.Details.Vehicles;
 using Bea.Models.Details.WaterSport;
 using Bea.Services.Ads;
@@ -315,6 +316,35 @@ namespace Bea.Test.Services.Ads
             // Then
             Assert.AreEqual(17, actual.AdId);
             Assert.IsTrue(actual is WaterSportAdDetailsModel);
+        }
+
+        [TestMethod]
+        public void GetAdDetails_RealEstateAdExists_GetAdFromRepoAndReturnMotoAdModel()
+        {
+            // Given
+            RealEstateAd ad = new RealEstateAd() { Id = 17 };
+            ad.CreationDate = new DateTime(2012, 02, 18);
+            ad.CreatedBy = new User { Firstname = "Michel" };
+            ad.City = new City { Label = "Ville" };
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(x => x.Get<BaseAd>(17)).Returns(ad as BaseAd);
+
+            var adRepoMock = new Moq.Mock<IAdRepository>();
+            adRepoMock.Setup(r => r.GetAdType(17)).Returns(AdTypeEnum.RealEstateAd);
+            adRepoMock.Setup(r => r.GetAdById<RealEstateAd>(17)).Returns(ad);
+
+            var helperMock = new Moq.Mock<IHelperService>();
+            helperMock.Setup(s => s.GetCurrentDateTime()).Returns(new DateTime(2012, 02, 20));
+
+            AdDetailsServices service = new AdDetailsServices(adRepoMock.Object, helperMock.Object);
+
+            // When
+            AdDetailsModel actual = service.GetAdDetails(17);
+
+            // Then
+            Assert.AreEqual(17, actual.AdId);
+            Assert.IsTrue(actual is RealEstateAdDetailsModel);
         }
     }
 }

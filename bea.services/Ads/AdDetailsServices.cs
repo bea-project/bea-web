@@ -8,6 +8,7 @@ using Bea.Core.Services.Ads;
 using Bea.Domain.Ads;
 using Bea.Domain.Ads.WaterSport;
 using Bea.Models.Details;
+using Bea.Models.Details.RealEstate;
 using Bea.Models.Details.Vehicles;
 using Bea.Models.Details.WaterSport;
 using Bea.Tools;
@@ -83,6 +84,11 @@ namespace Bea.Services.Ads
                 case AdTypeEnum.WaterSportAd:
                     ad = _adRepository.GetAdById<WaterSportAd>(adId);
                     model = new WaterSportAdDetailsModel(ad as WaterSportAd);
+                    break;
+
+                case AdTypeEnum.RealEstateAd:
+                    ad = _adRepository.GetAdById<RealEstateAd>(adId);
+                    model = new RealEstateAdDetailsModel(ad as RealEstateAd);
                     break;
 
                 default:

@@ -90,6 +90,7 @@
     <Compile Include="Models\Details\CarAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\OtherVehicleAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\MotoAdDetailsModelTest.cs" />
+    <Compile Include="Models\Details\RealEstate\RealEstateAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\WaterSport\MotorBoatAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\WaterSport\MotorBoatEngineAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\WaterSport\SailingBoatAdDetailsModelTest.cs" />
