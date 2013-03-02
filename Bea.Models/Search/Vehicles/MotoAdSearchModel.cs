@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Bea.Models.Search.Vehicles
 {
-    public class AdCarSearchModel : AdVehicleSearchModel
+    public class MotoAdSearchModel : VehicleAdSearchModel
     {
         public int? BrandSelectedId { get; set; }
-        public int? FuelSelectedId { get; set; }
-        
+        public int? MinEngineSizeSelectedId { get; set; }
+        public int? MaxEngineSizeSelectedId { get; set; }
     }
 }

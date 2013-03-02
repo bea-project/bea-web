@@ -5,13 +5,12 @@ using System.Text;
 
 namespace Bea.Models.Search.WaterSport
 {
-    public class AdSailingBoatSearchModel : AdSearchModel
+    public class MotorBoatEngineAdSearchModel : AdSearchModel
     {
         public int? SelectedTypeId { get; set; }
-        public int? SelectedHullTypeId { get; set; }
         public int? MinYearSelectedId { get; set; }
         public int? MaxYearSelectedId { get; set; }
-        public int? MinLengthSelectedId { get; set; }
-        public int? MaxLengthSelectedId { get; set; }
+        public int? MinHpSelectedId { get; set; }
+        public int? MaxHpSelectedId { get; set; }
     }
 }

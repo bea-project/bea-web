@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Bea.Models.Search.RealEstate
 {
-    public class AdRealEstateSearchModel : AdSearchModel
+    public class RealEstateAdSearchModel : AdSearchModel
     {
         public int? MinRoomNbSelectedId { get; set; }
         public int? MaxRoomNbSelectedId { get; set; }

@@ -56,48 +56,48 @@ namespace Bea.Web.Controllers
             {
                 case AdTypeEnum.CarAd:
                     ViewBag.Kms = base._referenceServices.GetAllKms().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    AdCarSearchModel carModel = new AdCarSearchModel();
+                    CarAdSearchModel carModel = new CarAdSearchModel();
                     return PartialView("Shared/Search/_CarAdSearch", carModel);
 
                 case AdTypeEnum.MotoAd:
                     ViewBag.Kms = base._referenceServices.GetAllKms().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                     ViewBag.Engines = base._referenceServices.GetAllEngineSizes().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    AdMotoSearchModel motoModel = new AdMotoSearchModel();
+                    MotoAdSearchModel motoModel = new MotoAdSearchModel();
                     return PartialView("Shared/Search/_MotoAdSearch", motoModel);
 
                 case AdTypeEnum.VehiculeAd:
                     ViewBag.Kms = base._referenceServices.GetAllKms().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    AdVehicleSearchModel vehicleModel = new AdVehicleSearchModel();
+                    VehicleAdSearchModel vehicleModel = new VehicleAdSearchModel();
                     return PartialView("Shared/Search/_VehicleAdSearch", vehicleModel);
 
                 case AdTypeEnum.OtherVehiculeAd:
                     ViewBag.Kms = base._referenceServices.GetAllKms().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    AdOtherVehicleSearchModel otherVehicleModel = new AdOtherVehicleSearchModel();
+                    OtherVehicleAdSearchModel otherVehicleModel = new OtherVehicleAdSearchModel();
                     return PartialView("Shared/Search/_OtherVehicleAdSearch", otherVehicleModel);
 
                 case AdTypeEnum.MotorBoatAd:
                     ViewBag.Hps = base._referenceServices.GetAllHps().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                     ViewBag.Lengths = base._referenceServices.GetAllMotorBoatLength().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    AdMotorBoatSearchModel motorBoatModel = new AdMotorBoatSearchModel();
+                    MotorBoatAdSearchModel motorBoatModel = new MotorBoatAdSearchModel();
                     return PartialView("Shared/Search/_MotorBoatAdSearch", motorBoatModel);
 
                 case AdTypeEnum.SailingBoatAd:
                     ViewBag.Lengths = base._referenceServices.GetAllSailingBoatLength().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    AdSailingBoatSearchModel sailingBoatModel = new AdSailingBoatSearchModel();
+                    SailingBoatAdSearchModel sailingBoatModel = new SailingBoatAdSearchModel();
                     return PartialView("Shared/Search/_SailingBoatAdSearch", sailingBoatModel);
 
                 case AdTypeEnum.MotorBoatEngineAd:
                     ViewBag.Hps = base._referenceServices.GetAllHps().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    AdMotorBoatEngineSearchModel motorBoatEngineModel = new AdMotorBoatEngineSearchModel();
+                    MotorBoatEngineAdSearchModel motorBoatEngineModel = new MotorBoatEngineAdSearchModel();
                     return PartialView("Shared/Search/_MotorBoatEngineAdSearch", motorBoatEngineModel);
 
                 case AdTypeEnum.WaterSportAd:
-                    AdWaterSportSearchModel waterSportModel = new AdWaterSportSearchModel();
+                    WaterSportAdSearchModel waterSportModel = new WaterSportAdSearchModel();
                     return PartialView("Shared/Search/_WaterSportAdSearch", waterSportModel);
 
                 case AdTypeEnum.RealEstateAd:
                     ViewBag.Rooms = base._referenceServices.GetAllRealEstateNbRoom().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    AdRealEstateSearchModel realEstateModel = new AdRealEstateSearchModel();
+                    RealEstateAdSearchModel realEstateModel = new RealEstateAdSearchModel();
                     return PartialView("Shared/Search/_realEstateAdSearch", realEstateModel);
             }
             return null;

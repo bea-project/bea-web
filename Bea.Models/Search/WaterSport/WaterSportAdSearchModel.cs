@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Bea.Models.Search.WaterSport
 {
-    public class AdWaterSportSearchModel : AdSearchModel
+    public class WaterSportAdSearchModel : AdSearchModel
     {
         public int? SelectedTypeId { get; set; }
     }

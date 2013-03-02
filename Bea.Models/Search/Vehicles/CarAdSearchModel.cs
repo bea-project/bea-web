@@ -5,8 +5,10 @@ using System.Text;
 
 namespace Bea.Models.Search.Vehicles
 {
-    public class AdOtherVehicleSearchModel : AdVehicleSearchModel
+    public class CarAdSearchModel : VehicleAdSearchModel
     {
+        public int? BrandSelectedId { get; set; }
         public int? FuelSelectedId { get; set; }
+        
     }
 }
