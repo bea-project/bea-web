@@ -18,6 +18,7 @@ using Bea.Services.Ads;
 using Bea.Core.Services.Ads;
 using System.Web.Hosting;
 using System.IO;
+using Bea.Tools;
 
 namespace Bea.Web.App_Start
 {
@@ -29,7 +30,7 @@ namespace Bea.Web.App_Start
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             //builder.Register<ISessionFactory>(x => new SQLiteWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
-            builder.Register<ISessionFactory>(x => new MySQLWebSessionFactoryFactory(true).GetSessionFactory()).SingleInstance();
+            builder.Register<ISessionFactory>(x => new MySQLWebSessionFactoryFactory(false).GetSessionFactory()).SingleInstance();
             builder.RegisterType<Repository>().As<IRepository>().SingleInstance();
             builder.RegisterType<AdRepository>().As<IAdRepository>().SingleInstance();
             builder.RegisterType<UserRepository>().As<IUserRepository>().SingleInstance();

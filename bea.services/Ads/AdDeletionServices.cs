@@ -11,6 +11,7 @@ using Bea.Domain.Ads;
 using Bea.Domain.Reference;
 using Bea.Domain.Search;
 using Bea.Models.Delete;
+using Bea.Tools;
 
 namespace Bea.Services.Ads
 {

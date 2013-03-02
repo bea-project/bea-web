@@ -55,19 +55,7 @@
             @*Details display*@
             <div>
                 @*Specific details*@
-                @if (Model is Bea.Models.Details.Vehicles.CarAdDetailsModel)
-                {
-                    @Html.Partial("Shared/Details/Vehicles/_CarAdDetailsPartial", Model);
-                }
-                else if (Model is Bea.Models.Details.Vehicles.MotoAdDetailsModel)
-                {
-                    @Html.Partial("Shared/Details/Vehicles/_MotoAdDetailsPartial", Model);
-                }
-                else if (Model is Bea.Models.Details.Vehicles.OtherVehicleAdDetailsModel)
-                {
-                    @Html.Partial("Shared/Details/Vehicles/_OtherVehicleAdDetailsPartial", Model);
-                }
-
+                @Html.Partial("Shared/Details/_RenderSpecificDetailsPartial", Model)
                 <dl class="dl-horizontal">
                     <dt>Prix</dt>
                     <dd>@Html.DisplayFor(model => model.Price)</dd>

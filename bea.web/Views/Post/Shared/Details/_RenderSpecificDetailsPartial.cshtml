@@ -1,0 +1,30 @@
+﻿@model Bea.Models.Details.AdDetailsModel
+
+@if (Model is Bea.Models.Details.Vehicles.CarAdDetailsModel)
+{
+    @Html.Partial("Shared/Details/Vehicles/_CarAdDetailsPartial", Model)
+}
+else if (Model is Bea.Models.Details.Vehicles.MotoAdDetailsModel)
+{
+    @Html.Partial("Shared/Details/Vehicles/_MotoAdDetailsPartial", Model)
+}
+else if (Model is Bea.Models.Details.Vehicles.OtherVehicleAdDetailsModel)
+{
+    @Html.Partial("Shared/Details/Vehicles/_OtherVehicleAdDetailsPartial", Model)
+}
+else if (Model is Bea.Models.Details.WaterSport.MotorBoatAdDetailsModel)
+{
+    @Html.Partial("Shared/Details/Vehicles/_MotorBoatAdDetailsPartial", Model)
+}
+else if (Model is Bea.Models.Details.WaterSport.SailingBoatAdDetailsModel)
+{
+    @Html.Partial("Shared/Details/Vehicles/_SailingBoatAdDetailsPartial", Model)
+}
+else if (Model is Bea.Models.Details.WaterSport.MotorBoatEngineAdDetailsModel)
+{
+    @Html.Partial("Shared/Details/Vehicles/_MotorBoatEngineAdDetailsPartial", Model)
+}
+else if (Model is Bea.Models.Details.WaterSport.WaterSportAdDetailsModel)
+{
+    @Html.Partial("Shared/Details/Vehicles/_WaterSportAdDetailsPartial", Model)
+}

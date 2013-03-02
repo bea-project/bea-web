@@ -90,6 +90,10 @@
     <Compile Include="Models\Details\CarAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\OtherVehicleAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\MotoAdDetailsModelTest.cs" />
+    <Compile Include="Models\Details\WaterSport\MotorBoatAdDetailsModelTest.cs" />
+    <Compile Include="Models\Details\WaterSport\MotorBoatEngineAdDetailsModelTest.cs" />
+    <Compile Include="Models\Details\WaterSport\SailingBoatAdDetailsModelTest.cs" />
+    <Compile Include="Models\Details\WaterSport\WaterSportAdDetailsModelTest.cs" />
     <Compile Include="Services\Ads\AdActivationServicesTest.cs" />
     <Compile Include="Services\Ads\AdDataConsistencyServicesTest.cs" />
     <Compile Include="Services\Ads\AdDeletionServicesTest.cs" />
@@ -132,6 +136,10 @@
     <ProjectReference Include="..\Bea.Services\Bea.Services.csproj">
       <Project>{2da715f9-c9ad-453a-b819-08997d81125d}</Project>
       <Name>Bea.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bea.Tools\Bea.Tools.csproj">
+      <Project>{75ca8300-ff33-4cc4-95bd-28fba8ab0849}</Project>
+      <Name>Bea.Tools</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

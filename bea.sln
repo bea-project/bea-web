@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Services", "Bea.Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Models", "Bea.Models\Bea.Models.csproj", "{5207CC9F-6AC5-42BD-AE46-82940DE48F78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bea.Tools", "Bea.Tools\Bea.Tools.csproj", "{75CA8300-FF33-4CC4-95BD-28FBA8AB0849}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{5207CC9F-6AC5-42BD-AE46-82940DE48F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5207CC9F-6AC5-42BD-AE46-82940DE48F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5207CC9F-6AC5-42BD-AE46-82940DE48F78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75CA8300-FF33-4CC4-95BD-28FBA8AB0849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75CA8300-FF33-4CC4-95BD-28FBA8AB0849}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75CA8300-FF33-4CC4-95BD-28FBA8AB0849}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75CA8300-FF33-4CC4-95BD-28FBA8AB0849}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

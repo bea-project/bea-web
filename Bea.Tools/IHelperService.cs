@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace Bea.Core.Services
+namespace Bea.Tools
 {
     public interface IHelperService
     {

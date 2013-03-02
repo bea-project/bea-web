@@ -10,6 +10,7 @@ using Bea.Domain.Reference;
 using Bea.Domain.Search;
 using Bea.Models.Delete;
 using Bea.Services.Ads;
+using Bea.Tools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

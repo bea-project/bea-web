@@ -6,8 +6,11 @@ using Bea.Core.Dal;
 using Bea.Core.Services;
 using Bea.Core.Services.Ads;
 using Bea.Domain.Ads;
+using Bea.Domain.Ads.WaterSport;
 using Bea.Models.Details;
 using Bea.Models.Details.Vehicles;
+using Bea.Models.Details.WaterSport;
+using Bea.Tools;
 
 namespace Bea.Services.Ads
 {
@@ -60,6 +63,26 @@ namespace Bea.Services.Ads
                 case AdTypeEnum.OtherVehiculeAd:
                     ad = _adRepository.GetAdById<OtherVehicleAd>(adId);
                     model = new OtherVehicleAdDetailsModel(ad as OtherVehicleAd);
+                    break;
+
+                case AdTypeEnum.SailingBoatAd:
+                    ad = _adRepository.GetAdById<SailingBoatAd>(adId);
+                    model = new SailingBoatAdDetailsModel(ad as SailingBoatAd, _helperService);
+                    break;
+
+                case AdTypeEnum.MotorBoatAd:
+                    ad = _adRepository.GetAdById<MotorBoatAd>(adId);
+                    model = new MotorBoatAdDetailsModel(ad as MotorBoatAd, _helperService);
+                    break;
+
+                case AdTypeEnum.MotorBoatEngineAd:
+                    ad = _adRepository.GetAdById<MotorBoatEngineAd>(adId);
+                    model = new MotorBoatEngineAdDetailsModel(ad as MotorBoatEngineAd);
+                    break;
+
+                case AdTypeEnum.WaterSportAd:
+                    ad = _adRepository.GetAdById<WaterSportAd>(adId);
+                    model = new WaterSportAdDetailsModel(ad as WaterSportAd);
                     break;
 
                 default:

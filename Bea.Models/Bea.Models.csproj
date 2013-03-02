@@ -57,6 +57,10 @@
     <Compile Include="Create\WaterSport\AdWaterSportCreateModel.cs" />
     <Compile Include="Delete\DeleteAdModel.cs" />
     <Compile Include="Details\AdDetailsModel.cs" />
+    <Compile Include="Details\WaterSport\MotorBoatAdDetailsModel.cs" />
+    <Compile Include="Details\WaterSport\MotorBoatEngineAdDetailsModel.cs" />
+    <Compile Include="Details\WaterSport\SailingBoatAdDetailsModel.cs" />
+    <Compile Include="Details\WaterSport\WaterSportAdDetailsModel.cs" />
     <Compile Include="Request\AdRequestModel.cs" />
     <Compile Include="Search\AdSearchModel.cs" />
     <Compile Include="Search\AdSearchResultModel.cs" />
@@ -81,10 +85,13 @@
       <Project>{79c4229d-2a62-4fca-be59-60edbb6bf747}</Project>
       <Name>Bea.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bea.Tools\Bea.Tools.csproj">
+      <Project>{75ca8300-ff33-4cc4-95bd-28fba8ab0849}</Project>
+      <Name>Bea.Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Details\RealEstate\" />
-    <Folder Include="Details\WaterSport\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

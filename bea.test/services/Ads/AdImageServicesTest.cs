@@ -7,6 +7,7 @@ using Bea.Core.Services;
 using Bea.Domain;
 using Bea.Services;
 using Bea.Services.Ads;
+using Bea.Tools;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Bea.Test.Services
