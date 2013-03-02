@@ -17,6 +17,8 @@ namespace Bea.Core.Services
         IList<SailingBoatType> GetAllSailingBoatTypes();
         IList<WaterSportType> GetAllWaterSportTypes();
         IList<RealEstateType> GetAllRealEstateTypes();
+        
+        // Static lists
         Dictionary<int, string> GetAllYears(int nbYears);
         Dictionary<int, string> GetAllKms();
         Dictionary<int, string> GetAllEngineSizes();
@@ -25,6 +27,9 @@ namespace Bea.Core.Services
         Dictionary<int, string> GetAllSailingBoatLength();
         Dictionary<int, string> GetAllRealEstateNbRoom();
         IList<DeletionReason> GetAllDeletionReasons();
+        
+        IDictionary<int, string> GetAllKmBrackets();
+        IDictionary<int, string> GetAllAgeBrackets();
     }
 
 }

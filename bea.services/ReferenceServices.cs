@@ -16,6 +16,20 @@ namespace Bea.Services
         public ReferenceServices(IRepository repository)
         {
             _repository = repository;
+
+            // Initialize static lists
+            _kmBrackets = new Dictionary<int, string>();
+            _kmBrackets.Add(1, "jusqu'à 5000 Km");
+            _kmBrackets.Add(2, "5000 - 10000 Km");
+            _kmBrackets.Add(3, "10000 - 20000 Km");
+            _kmBrackets.Add(4, "20000 - 50000 Km");
+            _kmBrackets.Add(5, "50000 Km et plus");
+
+            _ageBrackets = new Dictionary<int, string>();
+            _ageBrackets.Add(1, "jusqu'à 2 ans");
+            _ageBrackets.Add(2, "2 - 5 ans");
+            _ageBrackets.Add(3, "5 - 10 ans");
+            _ageBrackets.Add(4, "10 ans et plus");
         }
         
         public IList<MotoBrand> GetAllMotoBrands()
@@ -168,5 +182,21 @@ namespace Bea.Services
         {
             return _repository.GetAll<DeletionReason>();
         }
+
+        #region static lists
+
+        private IDictionary<int, string> _kmBrackets;
+        public IDictionary<int, string> GetAllKmBrackets()
+        {
+            return _kmBrackets;
+        }
+
+        private IDictionary<int, string> _ageBrackets;
+        public IDictionary<int, string> GetAllAgeBrackets()
+        {
+            return _ageBrackets;
+        }
+
+        #endregion
     }
 }

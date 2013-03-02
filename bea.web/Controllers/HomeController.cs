@@ -55,7 +55,7 @@ namespace Bea.Web.Controllers
             switch (selectedCategory.Type)
             {
                 case AdTypeEnum.CarAd:
-                    ViewBag.Kms = base._referenceServices.GetAllKms().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
+                    //ViewBag.Kms = base._referenceServices.GetAllKms().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                     CarAdSearchModel carModel = new CarAdSearchModel();
                     return PartialView("Shared/Search/_CarAdSearch", carModel);
 
@@ -98,7 +98,7 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.RealEstateAd:
                     ViewBag.Rooms = base._referenceServices.GetAllRealEstateNbRoom().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                     RealEstateAdSearchModel realEstateModel = new RealEstateAdSearchModel();
-                    return PartialView("Shared/Search/_realEstateAdSearch", realEstateModel);
+                    return PartialView("Shared/Search/_RealEstateAdSearch", realEstateModel);
             }
             return null;
         }

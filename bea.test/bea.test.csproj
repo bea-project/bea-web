@@ -102,6 +102,7 @@
     <Compile Include="Services\Ads\AdImageServicesTest.cs" />
     <Compile Include="Services\Ads\AdServicesTest.cs" />
     <Compile Include="Services\CategoryServicesTest.cs" />
+    <Compile Include="Services\ReferenceServicesTest.cs" />
     <Compile Include="Services\SearchServicesTest.cs" />
     <Compile Include="TestHelper\DataAccessTestBase.cs" />
     <Compile Include="InMemoryTest.cs" />

@@ -27,7 +27,9 @@ namespace Bea.Web.Controllers
             switch (category.Type)
             {
                 case AdTypeEnum.CarAd:
-                    ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
+                    ViewBag.KmBrackets = _referenceServices.GetAllKmBrackets().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() });
+                    ViewBag.AgeBrackets = _referenceServices.GetAllAgeBrackets().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() });
+                    //ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
                     ViewBag.Brands = _referenceServices.GetAllCarBrands().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     ViewBag.Fuels = _referenceServices.GetAllCarFuels().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;

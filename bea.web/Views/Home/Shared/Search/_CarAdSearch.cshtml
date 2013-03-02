@@ -5,10 +5,11 @@
     
     @Html.DropDownListFor(model => model.BrandSelectedId, (IEnumerable<SelectListItem>)ViewBag.Brands, "Marque", new { @class = "input-large" })
     @Html.DropDownListFor(model => model.FuelSelectedId, (IEnumerable<SelectListItem>)ViewBag.Fuels, "Energie", new { @class = "input-large" })
+    @Html.DropDownListFor(model => model.KmBracketSelectedId, (IEnumerable<SelectListItem>)ViewBag.KmBrackets, "Kms", new { @class = "input-large" })
+    @Html.DropDownListFor(model => model.AgeBracketSelectedId, (IEnumerable<SelectListItem>)ViewBag.AgeBrackets, "Age", new { @class = "input-large" })
     
-    
-    @Html.DropDownListFor(Model => Model.MinYearSelectedId, (IEnumerable<SelectListItem>)ViewBag.Years, "Annee Min", new { @class = "input-medium" })
+    @*@Html.DropDownListFor(Model => Model.MinYearSelectedId, (IEnumerable<SelectListItem>)ViewBag.Years, "Annee Min", new { @class = "input-medium" })
     @Html.DropDownListFor(Model => Model.MaxYearSelectedId, (IEnumerable<SelectListItem>)ViewBag.Years, "Annee Max", new { @class = "input-medium" })
     @Html.DropDownListFor(Model => Model.MinKmSelectedId, (IEnumerable<SelectListItem>)ViewBag.Kms, "Km Min", new { @class = "input-medium" })
-    @Html.DropDownListFor(Model => Model.MaxKmSelectedId, (IEnumerable<SelectListItem>)ViewBag.Kms, "Km Max", new { @class = "input-medium" })
+    @Html.DropDownListFor(Model => Model.MaxKmSelectedId, (IEnumerable<SelectListItem>)ViewBag.Kms, "Km Max", new { @class = "input-medium" })*@
 </div>
