@@ -6,8 +6,8 @@
             <li><a href="/">Accueil</a> <span class="divider">/</span></li>
             @if (!String.IsNullOrEmpty(Model.CategoryGroup))
             {
-                <li><a href="#">@Html.ActionLink(@Model.CategoryGroup, "Search", new { controller = "Annonces", id = Model.CategoryGroupUrlPart })</a> <span class="divider">/</span></li>
-                <li><a href="#">@Html.ActionLink(@Model.Category, "Categorie", new { controller = "Annonces", id = Model.CategoryUrlPart })</a> <span class="divider">/</span></li>
+                <li><a href="/Annonces/@Model.CategoryGroupUrlPart">@Model.CategoryGroup</a><span class="divider">/</span></li>
+                <li><a href="/Annonces/@Model.CategoryUrlPart">@Model.Category</a><span class="divider">/</span></li>
             }
             <li class="active">@Model.Title</li>
         </ul>

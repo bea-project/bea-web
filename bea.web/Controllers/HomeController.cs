@@ -44,9 +44,8 @@ namespace Bea.Web.Controllers
 
         public ActionResult SearchFromUrl(String cityLabel, String categoryLabel)
         {
-            //_searchServices.
-            //return View("Index", result);
-            return null;
+            AdSearchResultModel result = _searchServices.SearchAdsFromUrl(cityLabel, categoryLabel);
+            return View("Index", result);
         }
 
         public ActionResult Search(AdSearchModel model)

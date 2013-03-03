@@ -50,6 +50,7 @@ namespace Bea.Web.App_Start
             builder.RegisterType<AdDeletionServices>().As<IAdDeletionServices>().SingleInstance();
             builder.RegisterType<AdDetailsServices>().As<IAdDetailsServices>().SingleInstance();
             builder.RegisterType<EmailServices>().As<IEmailServices>().SingleInstance();
+            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().SingleInstance();
             builder.Register<ITemplatingService>(x => new TemplatingService(Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "App_Data\\Templates"))).SingleInstance();
             
             // Register the inMemoryData singleton to inject data
