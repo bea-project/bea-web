@@ -15,13 +15,17 @@ namespace Bea.Services
 {
     public class SearchServices : ISearchServices
     {
-        private IAdRepository _adRepository;
-        private IRepository _repository;
+        private readonly IAdRepository _adRepository;
+        private readonly IRepository _repository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly ILocationRepository _locationRepository;
 
-        public SearchServices(IAdRepository adRepository, IRepository repository)
+        public SearchServices(IAdRepository adRepository, IRepository repository, ICategoryRepository categoryRepository, ILocationRepository locationRepository)
         {
             _adRepository = adRepository;
             _repository = repository;
+            _categoryRepository = categoryRepository;
+            _locationRepository = locationRepository;
         }
 
         public AdSearchResultModel SearchAds(AdSearchModel searchQuery)
@@ -62,14 +66,17 @@ namespace Bea.Services
             return categories;
         }
 
-        public int[] GetCategoryIdsFromQuery(String categoryLabelUrl)
-        {
-            return null;
-        }
-
         public AdSearchResultModel SearchAdsFromUrl(string cityLabel, string categoryLabel)
         {
-            throw new NotImplementedException();
+            AdSearchModel model = new AdSearchModel();
+
+            if (!String.IsNullOrEmpty(categoryLabel))
+            {
+                Category c = _categoryRepository.GetCategoryFromUrlPart(categoryLabel);
+                model.CategorySelectedId = c != null ? c.Id : (int?) null;
+            }
+
+            return SearchAds(model);
         }
     }
 }

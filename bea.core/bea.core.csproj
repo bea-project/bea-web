@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dal\IAdRepository.cs" />
+    <Compile Include="Dal\ICategoryRepository.cs" />
     <Compile Include="Dal\ILocationRepository.cs" />
     <Compile Include="Dal\IReferenceRepository.cs" />
     <Compile Include="Dal\IRepository.cs" />

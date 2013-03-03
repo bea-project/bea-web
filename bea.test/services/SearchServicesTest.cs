@@ -46,7 +46,7 @@ namespace Bea.Test.services
                 CitySelectedId = 98
             };
 
-            SearchServices service = new SearchServices(adRepoMock.Object, null);
+            SearchServices service = new SearchServices(adRepoMock.Object, null, null, null);
             
             // When
             AdSearchResultModel result = service.SearchAds(model);
@@ -91,7 +91,7 @@ namespace Bea.Test.services
                 CitySelectedId = 98
             };
 
-            SearchServices service = new SearchServices(adRepoMock.Object, null);
+            SearchServices service = new SearchServices(adRepoMock.Object, null, null, null);
 
             // When
             AdSearchResultModel result = service.SearchAds(model);
@@ -134,7 +134,7 @@ namespace Bea.Test.services
                 CategorySelectedId = 12
             };
 
-            SearchServices service = new SearchServices(adRepoMock.Object, repoMock.Object);
+            SearchServices service = new SearchServices(adRepoMock.Object, repoMock.Object, null, null);
 
             // When
             AdSearchResultModel result = service.SearchAds(model);
@@ -180,10 +180,56 @@ namespace Bea.Test.services
                 CategorySelectedId = 12
             };
 
-            SearchServices service = new SearchServices(adRepoMock.Object, repoMock.Object);
+            SearchServices service = new SearchServices(adRepoMock.Object, repoMock.Object, null, null);
 
             // When
             AdSearchResultModel result = service.SearchAds(model);
+
+            // Then
+            Assert.AreEqual("ship", result.SearchString);
+            Assert.IsNull(result.ProvinceSelectedId);
+            Assert.IsNull(result.CitySelectedId);
+            Assert.AreEqual(12, result.CategorySelectedId);
+            Assert.AreEqual(1, result.SearchResult.Count);
+            Assert.AreEqual(1, result.SearchResultTotalCount);
+            Assert.AreEqual("ship", result.SearchResult[0].Title);
+
+            adRepoMock.VerifyAll();
+        }
+
+        //[TestMethod]
+        public void SearchAdsFromUrl_CategoryIsSelected_RunSearchWithCategory()
+        {
+            // Given
+            Category cat = new Category { Id = 12, LabelUrlPart = "cat-url-label" };
+
+            IList<SearchAdCache> searchResult = new List<SearchAdCache>();
+            searchResult.Add(new SearchAdCache
+            {
+                Title = "ship",
+                City = new City() { Label = "the city" },
+                Category = cat
+            });
+
+            var adRepoMock = new Moq.Mock<IAdRepository>();
+            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship" }, null, null, null, new int[] { cat.Id })).Returns(searchResult);
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(r => r.Get<Category>(cat.Id)).Returns(cat);
+
+            var catRepoMock = new Moq.Mock<ICategoryRepository>();
+            catRepoMock.Setup(r => r.GetCategoryFromUrlPart("cat-url-label")).Returns(cat);
+
+            AdSearchModel model = new AdSearchModel()
+            {
+                SearchString = "ship",
+                CategorySelectedId = cat.Id
+            };
+
+            SearchServices service = new SearchServices(adRepoMock.Object, repoMock.Object, catRepoMock.Object, null);
+
+            // When
+            AdSearchResultModel result = service.SearchAdsFromUrl(null, "cat-url-label");
 
             // Then
             Assert.AreEqual("ship", result.SearchString);
