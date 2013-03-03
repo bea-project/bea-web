@@ -20,7 +20,6 @@ namespace Bea.Dal.Map.Search
             Map(x => x.AdImageId);
             References(x => x.Province);
             References(x => x.City);
-            References(x => x.CategoryGroup);
             References(x => x.Category);
         }
     }

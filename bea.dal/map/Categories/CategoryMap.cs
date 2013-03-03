@@ -15,8 +15,10 @@ namespace Bea.Dal.Map.Categories
         {
             Id(x => x.Id).GeneratedBy.Identity();
             Map(x => x.Label).Not.Nullable();
+            Map(x => x.LabelUrlPart).Not.Nullable();
             Map(x => x.Type).Not.Nullable();
-            References(x => x.CategoryGroup);
+            References(x => x.ParentCategory);
+            HasMany(x => x.SubCategories).KeyColumn("ParentCategory_Id").Cascade.All();
             HasMany(x => x.Ads).AsBag();
         }
     }

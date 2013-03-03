@@ -16,7 +16,6 @@ namespace Bea.Domain.Search
         public virtual Province Province { get; set; }
         public virtual City City { get; set; }
         public virtual Category Category { get; set; }
-        public virtual CategoryGroup CategoryGroup { get; set; }
         public virtual Double Price { get; set; }
         public virtual DateTime CreationDate { get; set; }
         public virtual AdTypeEnum AdType { get; set; }
@@ -33,7 +32,6 @@ namespace Bea.Domain.Search
             Body = ad.Body;
             Province = ad.City.Province;
             City = ad.City;
-            CategoryGroup = ad.Category.CategoryGroup;
             Category = ad.Category;
             Price = ad.Price;
             CreationDate = ad.CreationDate;

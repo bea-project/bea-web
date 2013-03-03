@@ -20,6 +20,18 @@ namespace Bea.Web
             );
 
             routes.MapRoute(
+                name: "FrenchRouteWithCategory",
+                url: "Annonces/{categoryLabel}",
+                defaults: new { controller = "Home", action = "SearchFromUrl" }
+            );
+
+            routes.MapRoute(
+                name: "FrenchRouteWithCityAndCategory",
+                url: "Annonces/{cityLabel}/{categoryLabel}",
+                defaults: new { controller = "Home", action = "SearchFromUrl" }
+            );
+
+            routes.MapRoute(
                 name: "DefaultWithParameter",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

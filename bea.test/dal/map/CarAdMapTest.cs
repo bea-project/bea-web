@@ -23,7 +23,7 @@ namespace Bea.Test.Dal.map
             using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
             {
                 Province p = new Province { Label = "Province Sud" };
-                City c = new City { Label = "Nouméa", Province = p };
+                City c = new City { Label = "Nouméa", Province = p, LabelUrlPart = "city" };
                 p.AddCity(c);
                 repo.Save(p);
                 repo.Save(c);
@@ -37,7 +37,8 @@ namespace Bea.Test.Dal.map
 
                 Category cat = new Category
                 {
-                    Label = "label"
+                    Label = "label",
+                    LabelUrlPart = "label"
                 };
                 repo.Save(cat);
 

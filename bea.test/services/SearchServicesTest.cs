@@ -26,13 +26,13 @@ namespace Bea.Test.services
             searchResult.Add(new SearchAdCache
             {
                 Title = "the ad title",
-                City = new City() { Label = "the city" },
+                City = new City() { Label = "the city", LabelUrlPart = "city" },
                 Category = new Bea.Domain.Categories.Category()
             });
             searchResult.Add(new SearchAdCache
             {
                 Title = "the ad title 2",
-                City = new City() { Label = "the city" },
+                City = new City() { Label = "the city", LabelUrlPart = "city" },
                 Category = new Bea.Domain.Categories.Category()
             });
 
@@ -112,16 +112,21 @@ namespace Bea.Test.services
         public void SearchAds_CategoryIsSelected_CallAdRepoWithOneCategoryId()
         {
             // Given
+            Category cat = new Category { Id = 12 };
+
             IList<SearchAdCache> searchResult = new List<SearchAdCache>();
             searchResult.Add(new SearchAdCache
             {
                 Title = "ship",
                 City = new City() { Label = "the city" },
-                Category = new Bea.Domain.Categories.Category()
+                Category = cat
             });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
             adRepoMock.Setup(r => r.SearchAds(new string[] { "ship" }, null, null, null, new int[] { 12 })).Returns(searchResult);
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(r => r.Get<Category>(12)).Returns(cat);
 
             AdSearchModel model = new AdSearchModel()
             {
@@ -129,7 +134,7 @@ namespace Bea.Test.services
                 CategorySelectedId = 12
             };
 
-            SearchServices service = new SearchServices(adRepoMock.Object, null);
+            SearchServices service = new SearchServices(adRepoMock.Object, repoMock.Object);
 
             // When
             AdSearchResultModel result = service.SearchAds(model);
@@ -158,26 +163,21 @@ namespace Bea.Test.services
                 Category = new Bea.Domain.Categories.Category()
             });
 
-            CategoryGroup group = new CategoryGroup()
-            {
-                Categories = new List<Category>
-                {
-                    new Category { Id = 12 },
-                    new Category { Id = 17 },
-                }
-            };
+            Category group = new Category();
+            group.AddCategory(new Category { Id = 12 });
+            group.AddCategory(new Category { Id = 17 });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
             adRepoMock.Setup(r => r.SearchAds(new string[] { "ship" }, null, null, null, new int[] { 12, 17 })).Returns(searchResult);
 
             var repoMock = new Moq.Mock<IRepository>();
-            repoMock.Setup(r => r.Get<CategoryGroup>(12)).Returns(group);
+            repoMock.Setup(r => r.Get<Category>(12)).Returns(group);
 
 
             AdSearchModel model = new AdSearchModel()
             {
                 SearchString = "ship",
-                CategorySelectedId = CategoryServices.ID_MULTIPLIER + 12
+                CategorySelectedId = 12
             };
 
             SearchServices service = new SearchServices(adRepoMock.Object, repoMock.Object);
@@ -189,7 +189,7 @@ namespace Bea.Test.services
             Assert.AreEqual("ship", result.SearchString);
             Assert.IsNull(result.ProvinceSelectedId);
             Assert.IsNull(result.CitySelectedId);
-            Assert.AreEqual(CategoryServices.ID_MULTIPLIER + 12, result.CategorySelectedId);
+            Assert.AreEqual(12, result.CategorySelectedId);
             Assert.AreEqual(1, result.SearchResult.Count);
             Assert.AreEqual(1, result.SearchResultTotalCount);
             Assert.AreEqual("ship", result.SearchResult[0].Title);

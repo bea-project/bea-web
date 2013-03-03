@@ -10,5 +10,7 @@ namespace Bea.Core.Services
     public interface ISearchServices
     {
         AdSearchResultModel SearchAds(AdSearchModel searchQuery);
+
+        AdSearchResultModel SearchAdsFromUrl(String cityLabel, String categoryLabel);
     }
 }

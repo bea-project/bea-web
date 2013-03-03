@@ -184,6 +184,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\PostImages\262dcc07-8c90-4af8-b99c-12e48afac89f.jpg" />
+    <Content Include="Content\PostImages\262dcc07-8c90-4af8-b99c-12e48afac89f.small.jpg" />
+    <Content Include="Content\PostImages\acd04523-f2fc-47b5-a7af-50b33c49694f.jpg" />
+    <Content Include="Content\PostImages\acd04523-f2fc-47b5-a7af-50b33c49694f.small.jpg" />
     <Content Include="Content\PostImages\Index.html" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
@@ -406,6 +410,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Post\Shared\Details\RealEstate\_RealEstateAdDetailsPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\Shared\Details\_AdDetailsContentPartial.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

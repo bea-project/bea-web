@@ -27,15 +27,11 @@ namespace Bea.Test.Models
 
             Category cat = new Category()
             {
-                Label = "Auto"
+                Label = "Auto",
+                LabelUrlPart = "Auto",
+                ParentCategory = new Category { Label = "Véhicules", LabelUrlPart = "Vehicules" }
             };
-            
-            CategoryGroup catg = new CategoryGroup
-            {
-                Label = "Véhicule",
-            };
-            catg.AddCategory(cat);
-            
+
             Ad ad = new Ad()
             {
                 Id = 17,
@@ -65,7 +61,10 @@ namespace Bea.Test.Models
             Assert.AreEqual("e9da8b1e-aa77-401b-84e0-a1290130b7b7", model.ImagesIds[0]);
             Assert.AreEqual("e9da8b1e-aa77-401b-84e0-a1290130b7b9", model.ImagesIds[1]);
             Assert.AreEqual("Auto", model.Category);
-            Assert.AreEqual("Véhicule", model.CategoryGroup);
+            Assert.AreEqual("Auto", model.CategoryUrlPart);
+            Assert.AreEqual("Véhicules", model.CategoryGroup);
+            Assert.AreEqual("Vehicules", model.CategoryGroupUrlPart); 
+            
         }
     }
 }

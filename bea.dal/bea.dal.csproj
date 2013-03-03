@@ -67,7 +67,6 @@
     <Compile Include="Map\Ads\RealEstateAdMap.cs" />
     <Compile Include="Map\Ads\WaterSport\SailingBoatAdMap.cs" />
     <Compile Include="Map\Ads\WaterSport\WaterSportAdMap.cs" />
-    <Compile Include="Map\Categories\CategoryGroupMap.cs" />
     <Compile Include="Map\Categories\CategoryMap.cs" />
     <Compile Include="Map\Location\CityMap.cs">
       <SubType>Code</SubType>
@@ -92,7 +91,6 @@
     <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AdRepository.cs" />
-    <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
     <Compile Include="Repository\ReferenceRepository.cs" />
     <Compile Include="Repository\Repository.cs" />

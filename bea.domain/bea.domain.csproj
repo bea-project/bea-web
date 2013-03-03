@@ -55,7 +55,6 @@
     <Compile Include="Ads\WaterSport\SailingBoatAd.cs" />
     <Compile Include="Ads\WaterSport\WaterSportAd.cs" />
     <Compile Include="Categories\Category.cs" />
-    <Compile Include="Categories\CategoryGroup.cs" />
     <Compile Include="Location\City.cs" />
     <Compile Include="Location\District.cs" />
     <Compile Include="Location\Province.cs" />

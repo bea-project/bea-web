@@ -11,14 +11,10 @@ namespace Bea.Services
 {
     public class CategoryServices : ICategoryServices
     {
-        public static readonly int ID_MULTIPLIER = 1000000;
-
-        private readonly ICategoryRepository _categoryRepository;
         private readonly IRepository _repository;
 
-        public CategoryServices(ICategoryRepository categoryRepository, IRepository repository)
+        public CategoryServices(IRepository repository)
         {
-            _categoryRepository = categoryRepository;
             _repository = repository;
         }
 
@@ -28,7 +24,7 @@ namespace Bea.Services
         /// <returns>A Category</returns>
         public Category GetCategoryById(int categoryId)
         {
-            return _categoryRepository.GetCategoryById(categoryId);
+            return _repository.Get<Category>(categoryId);
         }
 
         public IList<Category> GetAllCategories()
@@ -40,16 +36,18 @@ namespace Bea.Services
         {
             IList<CategoryItemModel> result = new List<CategoryItemModel>();
 
-            foreach (CategoryGroup group in _repository.GetAll<CategoryGroup>())
+            IList<Category> categories = _repository.GetAll<Category>();
+
+            foreach (Category c in categories.Where(x => x.SubCategories.Count != 0))
             {
                 result.Add(new CategoryItemModel
-                    {
-                        Id = ID_MULTIPLIER + group.Id,
-                        Label = group.Label.ToUpper(),
-                        IsGroup = true
-                    });
+                {
+                    Id = c.Id,
+                    Label = c.Label.ToUpper(),
+                    IsGroup = true
+                });
 
-                group.Categories.ToList().ForEach(x => result.Add(new CategoryItemModel { Id = x.Id, Label = x.Label, IsGroup = false }));
+                c.SubCategories.ToList().ForEach(x => result.Add(new CategoryItemModel { Id = x.Id, Label = x.Label, IsGroup = false }));
             }
 
             return result;

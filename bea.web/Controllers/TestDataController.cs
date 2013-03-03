@@ -25,5 +25,13 @@ namespace Bea.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        //
+        // GET: /TestData/
+        public ActionResult Reference()
+        {
+            _inMemoryDataInjector.InsertReferenceData();
+            return RedirectToAction("Index", "Home");
+        }
+
     }
 }

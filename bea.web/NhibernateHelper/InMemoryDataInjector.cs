@@ -40,23 +40,23 @@ namespace Bea.Web.NhibernateHelper
                 //Create Provinces
                 Province provinceNord = new Province();
                 provinceNord.Label = "Province Nord";
-                provinceNord.AddCity(new City { Label = "Poya Nord" });
-                provinceNord.AddCity(new City { Label = "Pouembout" });
-                provinceNord.AddCity(new City { Label = "Koné" });
-                provinceNord.AddCity(new City { Label = "Voh" });
-                provinceNord.AddCity(new City { Label = "Kaala-Gomen" });
-                provinceNord.AddCity(new City { Label = "Koumac" });
-                provinceNord.AddCity(new City { Label = "Poum" });
-                provinceNord.AddCity(new City { Label = "Iles Belep" });
-                provinceNord.AddCity(new City { Label = "Ouégoa" });
-                provinceNord.AddCity(new City { Label = "Pouébo" });
-                provinceNord.AddCity(new City { Label = "Hienghène" });
-                provinceNord.AddCity(new City { Label = "Touho" });
-                provinceNord.AddCity(new City { Label = "Poindimié" });
-                provinceNord.AddCity(new City { Label = "Ponérihouen" });
-                provinceNord.AddCity(new City { Label = "Houaïlou" });
-                provinceNord.AddCity(new City { Label = "Kouaoua" });
-                provinceNord.AddCity(new City { Label = "Canala" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Poya-Nord", Label = "Poya Nord" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Pouembout", Label = "Pouembout" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Kone", Label = "Koné" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Voh", Label = "Voh" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Kaala-Gomen", Label = "Kaala-Gomen" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Koumac", Label = "Koumac" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Poum", Label = "Poum" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Iles-Belep", Label = "Iles Belep" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Ouegoa", Label = "Ouégoa" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Pouebo", Label = "Pouébo" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Hienghene", Label = "Hienghène" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Touho", Label = "Touho" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Poindimie", Label = "Poindimié" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Ponerihouen", Label = "Ponérihouen" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Houailou", Label = "Houaïlou" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Kouaoua", Label = "Kouaoua" });
+                provinceNord.AddCity(new City { LabelUrlPart = "Canala", Label = "Canala" });
                 _repository.Save(provinceNord);
 
                 Province provinceSud = new Province();
@@ -64,6 +64,7 @@ namespace Bea.Web.NhibernateHelper
 
                 City noumea = new City();
                 noumea.Label = "Nouméa";
+                noumea.LabelUrlPart = "Noumea";
 
                 noumea.AddDistrict(new District { Label = "Centre-Ville"});
                 noumea.AddDistrict(new District { Label = "Nouville" });
@@ -101,6 +102,7 @@ namespace Bea.Web.NhibernateHelper
 
                 City dumbea = new City();
                 dumbea.Label = "Dumbéa";
+                dumbea.LabelUrlPart = "Dumbea";
                 dumbea.AddDistrict(new District { Label = "Auteuil" });
                 dumbea.AddDistrict(new District { Label = "Centre" });
                 dumbea.AddDistrict(new District { Label = "Dumbéa sur Mer" });
@@ -115,6 +117,7 @@ namespace Bea.Web.NhibernateHelper
 
                 City montDor = new City();
                 montDor.Label = "Mont-Dore";
+                montDor.LabelUrlPart = "Mont-Dore";
                 montDor.AddDistrict(new District { Label = "Boulari" });
                 montDor.AddDistrict(new District { Label = "La Conception" });
                 montDor.AddDistrict(new District { Label = "La Coulée" });
@@ -131,6 +134,7 @@ namespace Bea.Web.NhibernateHelper
 
                 City paita = new City();
                 paita.Label = "Païta";
+                paita.LabelUrlPart = "Paita";
                 paita.AddDistrict(new District { Label = "Val Boisé" });
                 paita.AddDistrict(new District { Label = "Tontouta" });
                 paita.AddDistrict(new District { Label = "Tamoa" });
@@ -143,23 +147,23 @@ namespace Bea.Web.NhibernateHelper
                 provinceSud.AddCity(paita);
                 _repository.Save(paita);
 
-                provinceSud.AddCity(new City { Label = "Thio" });
-                provinceSud.AddCity(new City { Label = "Yaté" });
-                provinceSud.AddCity(new City { Label = "Ile des Pins" });
-                provinceSud.AddCity(new City { Label = "Boulouparis" });
-                provinceSud.AddCity(new City { Label = "La Foa" });
-                provinceSud.AddCity(new City { Label = "Sarraméa" });
-                provinceSud.AddCity(new City { Label = "Farino" });
-                provinceSud.AddCity(new City { Label = "Moindou" });
-                provinceSud.AddCity(new City { Label = "Bourail" });
-                provinceSud.AddCity(new City { Label = "Poya Sud" });
+                provinceSud.AddCity(new City { LabelUrlPart = "Thio", Label = "Thio" });
+                provinceSud.AddCity(new City { LabelUrlPart = "Yate", Label = "Yaté" });
+                provinceSud.AddCity(new City { LabelUrlPart = "Ile-des-Pins", Label = "Ile des Pins" });
+                provinceSud.AddCity(new City { LabelUrlPart = "Boulouparis", Label = "Boulouparis" });
+                provinceSud.AddCity(new City { LabelUrlPart = "La-Foa", Label = "La Foa" });
+                provinceSud.AddCity(new City { LabelUrlPart = "Sarramea", Label = "Sarraméa" });
+                provinceSud.AddCity(new City { LabelUrlPart = "Farino", Label = "Farino" });
+                provinceSud.AddCity(new City { LabelUrlPart = "Moindou", Label = "Moindou" });
+                provinceSud.AddCity(new City { LabelUrlPart = "Bourail", Label = "Bourail" });
+                provinceSud.AddCity(new City { LabelUrlPart = "Poya-Sud", Label = "Poya Sud" });
                 _repository.Save(provinceSud);
 
                 Province ilesLoyaute = new Province();
                 ilesLoyaute.Label = "Iles Loyauté";
-                ilesLoyaute.AddCity(new City { Label = "Ouvéa" });
-                ilesLoyaute.AddCity(new City { Label = "Lifou" });
-                ilesLoyaute.AddCity(new City { Label = "Maré" });
+                ilesLoyaute.AddCity(new City { LabelUrlPart = "Ouvea", Label = "Ouvéa" });
+                ilesLoyaute.AddCity(new City { LabelUrlPart = "Lifou", Label = "Lifou" });
+                ilesLoyaute.AddCity(new City { LabelUrlPart = "Mare", Label = "Maré" });
                 _repository.Save(ilesLoyaute);
 
                 _repository.Flush();
@@ -372,84 +376,102 @@ namespace Bea.Web.NhibernateHelper
             if (_repository.CountAll<Category>() != 0)
                 return;
 
-            CategoryGroup vehicles = new CategoryGroup();
+            Category vehicles = new Category();
             vehicles.Label = "Véhicules";
-            vehicles.AddCategory(new Category { Label = "Voitures", Type = AdTypeEnum.CarAd });
-            vehicles.AddCategory(new Category { Label = "Motos", Type = AdTypeEnum.MotoAd });
-            vehicles.AddCategory(new Category { Label = "Voiturettes", Type = AdTypeEnum.VehiculeAd });
-            vehicles.AddCategory(new Category { Label = "4 x 4", Type = AdTypeEnum.CarAd });
-            vehicles.AddCategory(new Category { Label = "Autres Vehicules", Type = AdTypeEnum.OtherVehiculeAd });
-            vehicles.AddCategory(new Category { Label = "Equipement auto", Type = AdTypeEnum.Ad });
-            vehicles.AddCategory(new Category { Label = "Equipement moto", Type = AdTypeEnum.Ad });
-            vehicles.AddCategory(new Category { Label = "Tuning", Type = AdTypeEnum.Ad });
+            vehicles.LabelUrlPart = "Vehicules";
+            vehicles.AddCategory(new Category { Label = "Voitures", LabelUrlPart = "Voitures", Type = AdTypeEnum.CarAd });
+            vehicles.AddCategory(new Category { Label = "Motos", LabelUrlPart = "Motos", Type = AdTypeEnum.MotoAd });
+            vehicles.AddCategory(new Category { Label = "Voiturettes", LabelUrlPart = "Voiturettes", Type = AdTypeEnum.VehiculeAd });
+            vehicles.AddCategory(new Category { Label = "4 x 4", LabelUrlPart = "4x4-Tout-Terrain", Type = AdTypeEnum.CarAd });
+            vehicles.AddCategory(new Category { Label = "Autres Véhicules", LabelUrlPart = "AutresVehicules", Type = AdTypeEnum.OtherVehiculeAd });
+            vehicles.AddCategory(new Category { Label = "Equipement auto", LabelUrlPart = "Equipement-Auto", Type = AdTypeEnum.Ad });
+            vehicles.AddCategory(new Category { Label = "Equipement moto", LabelUrlPart = "Equipement-Moto", Type = AdTypeEnum.Ad });
+            vehicles.AddCategory(new Category { Label = "Tuning", LabelUrlPart = "Tuning", Type = AdTypeEnum.Ad });
             _sessionFactory.GetCurrentSession().Save(vehicles);
 
-            CategoryGroup nautisme = new CategoryGroup();
+            Category nautisme = new Category();
             nautisme.Label = "Nautisme";
-            nautisme.AddCategory(new Category { Label = "Bateaux à moteur", Type = AdTypeEnum.MotorBoatAd });
-            nautisme.AddCategory(new Category { Label = "Propulseurs", Type = AdTypeEnum.MotorBoatEngineAd });
-            nautisme.AddCategory(new Category { Label = "Voiliers", Type = AdTypeEnum.SailingBoatAd });
-            nautisme.AddCategory(new Category { Label = "Accastillage / Sécurité", Type = AdTypeEnum.Ad });
-            nautisme.AddCategory(new Category { Label = "Remorques", Type = AdTypeEnum.Ad });
-            nautisme.AddCategory(new Category { Label = "Sports / Loisirs", Type = AdTypeEnum.WaterSportAd });
-            nautisme.AddCategory(new Category { Label = "Matériel de pêche", Type = AdTypeEnum.Ad });
-            nautisme.AddCategory(new Category { Label = "Moto Marines", Type = AdTypeEnum.Ad });
-            nautisme.AddCategory(new Category { Label = "Equipement / Electronique", Type = AdTypeEnum.Ad });
-            nautisme.AddCategory(new Category { Label = "Divers", Type = AdTypeEnum.Ad });
+            nautisme.LabelUrlPart = "Nautisme";
+            nautisme.AddCategory(new Category { Label = "Bateaux à moteur", LabelUrlPart = "BateauxMoteur", Type = AdTypeEnum.MotorBoatAd });
+            nautisme.AddCategory(new Category { Label = "Propulseurs", LabelUrlPart = "Propulseurs", Type = AdTypeEnum.MotorBoatEngineAd });
+            nautisme.AddCategory(new Category { Label = "Voiliers", LabelUrlPart = "Voiliers", Type = AdTypeEnum.SailingBoatAd });
+            nautisme.AddCategory(new Category { Label = "Accastillage / Sécurité", LabelUrlPart = "Accastillage-Securite", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { Label = "Remorques", LabelUrlPart = "Remorques", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { Label = "Sports / Loisirs", LabelUrlPart = "Sports-Loisirs", Type = AdTypeEnum.WaterSportAd });
+            nautisme.AddCategory(new Category { Label = "Matériel de pêche", LabelUrlPart = "Peche", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { Label = "Moto Marines", LabelUrlPart = "MotoMarines", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { Label = "Equipement / Electronique", LabelUrlPart = "Equipement-Electronique", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { Label = "Divers", LabelUrlPart = "Divers", Type = AdTypeEnum.Ad });
 
             _sessionFactory.GetCurrentSession().Save(nautisme);
 
-            CategoryGroup realEstate = new CategoryGroup();
+            Category realEstate = new Category();
             realEstate.Label = "Immobilier";
-            realEstate.AddCategory(new Category { Label = "Locations", Type = AdTypeEnum.RealEstateAd });
-            realEstate.AddCategory(new Category { Label = "Ventes immobilières", Type = AdTypeEnum.RealEstateAd });
-            realEstate.AddCategory(new Category { Label = "Colocations", Type = AdTypeEnum.RealEstateAd });
-            realEstate.AddCategory(new Category { Label = "Locations de vacances", Type = AdTypeEnum.RealEstateAd });
-            realEstate.AddCategory(new Category { Label = "Gardiennage", Type = AdTypeEnum.RealEstateAd });
+            realEstate.LabelUrlPart = "Immobilier";
+            realEstate.AddCategory(new Category { Label = "Locations", LabelUrlPart = "Locations", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { Label = "Ventes immobilières", LabelUrlPart = "Ventes", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { Label = "Colocations", LabelUrlPart = "Colocations", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { Label = "Locations de vacances", LabelUrlPart = "Vacances", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { Label = "Gardiennage", LabelUrlPart = "Gardiennage", Type = AdTypeEnum.RealEstateAd });
             _sessionFactory.GetCurrentSession().Save(realEstate);
 
-            CategoryGroup multimedia = new CategoryGroup();
+            Category multimedia = new Category();
             multimedia.Label = "Multimedia";
-            multimedia.AddCategory(new Category { Label = "Informatique", Type = AdTypeEnum.Ad });
-            multimedia.AddCategory(new Category { Label = "Consoles & Jeux vidéo", Type = AdTypeEnum.Ad });
-            multimedia.AddCategory(new Category { Label = "Image & Son", Type = AdTypeEnum.Ad });
-            multimedia.AddCategory(new Category { Label = "Téléphonie", Type = AdTypeEnum.Ad });
+            multimedia.LabelUrlPart = "Multimedia";
+            multimedia.AddCategory(new Category { Label = "Informatique", LabelUrlPart = "Informatique", Type = AdTypeEnum.Ad });
+            multimedia.AddCategory(new Category { Label = "Consoles & Jeux vidéo", LabelUrlPart = "Jeux-Videos-Consoles", Type = AdTypeEnum.Ad });
+            multimedia.AddCategory(new Category { Label = "Image & Son", LabelUrlPart = "Image-Son", Type = AdTypeEnum.Ad });
+            multimedia.AddCategory(new Category { Label = "Téléphonie", LabelUrlPart = "Telephonie", Type = AdTypeEnum.Ad });
             _sessionFactory.GetCurrentSession().Save(multimedia);
 
-            CategoryGroup maison = new CategoryGroup();
+            Category maison = new Category();
             maison.Label = "Maison";
-            maison.AddCategory(new Category { Label = "Meubles", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category { Label = "Electroménager", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category { Label = "Arts de la table", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category { Label = "Décoration", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category { Label = "Linge de maison", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category { Label = "Bricolage", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category { Label = "Jardin", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category { Label = "Vêtements", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category { Label = "Chaussures", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category { Label = "Accessoires & Bagagerie", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category { Label = "Montres & Bijoux", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category { Label = "Equipements bébé", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category { Label = "Vêtements bébé", Type = AdTypeEnum.Ad });
+            maison.LabelUrlPart = "Maison";
+            maison.AddCategory(new Category { Label = "Meubles", LabelUrlPart = "Meubles", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Electroménager", LabelUrlPart = "Electromenager", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Arts de la table", LabelUrlPart = "Arts-Table", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Décoration", LabelUrlPart = "Decoration", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Linge de maison", LabelUrlPart = "Linge-Maison", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Bricolage", LabelUrlPart = "Bricolage", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Jardin", LabelUrlPart = "Jardin", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Vêtements", LabelUrlPart = "Vetements", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Chaussures", LabelUrlPart = "Chassures", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Accessoires & Bagagerie", LabelUrlPart = "Accessoires-Bagagerie", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Montres & Bijoux", LabelUrlPart = "Montres-Bijoux", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { Label = "Bébé", LabelUrlPart = "Bebe", Type = AdTypeEnum.Ad });
             _sessionFactory.GetCurrentSession().Save(maison);
 
-            CategoryGroup loisirs = new CategoryGroup();
+            Category loisirs = new Category();
             loisirs.Label = "Loisirs";
-            loisirs.AddCategory(new Category { Label = "DVD & Films", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category { Label = "CD & Musique", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category { Label = "Livres", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category { Label = "Animaux", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category { Label = "Vélos", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category { Label = "Sports & Hobbies", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category { Label = "Instruments de musique", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category { Label = "Collections", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category { Label = "Jeux & Jouets", Type = AdTypeEnum.Ad });
+            loisirs.LabelUrlPart = "Loisirs";
+            loisirs.AddCategory(new Category { Label = "DVD & Films", LabelUrlPart = "DVD-Films", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "CD & Musique", LabelUrlPart = "CD-Musique", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Livres", LabelUrlPart = "Livres", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Animaux", LabelUrlPart = "Animaux", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Vélos", LabelUrlPart = "Velos", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Sports & Hobbies", LabelUrlPart = "Sports-Hobbies", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Instruments de musique", LabelUrlPart = "Instruments-Musique", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Collections", LabelUrlPart = "Collections", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { Label = "Jeux & Jouets", LabelUrlPart = "Jeux-Jouets", Type = AdTypeEnum.Ad });
             _sessionFactory.GetCurrentSession().Save(loisirs);
 
-            CategoryGroup autre = new CategoryGroup();
+            Category autre = new Category();
             autre.Label = "Autres";
-            autre.AddCategory(new Category { Label = "Autres", Type = AdTypeEnum.Ad });
+            autre.LabelUrlPart = "Autres";
+            autre.AddCategory(new Category { Label = "Autres", LabelUrlPart = "Autres", Type = AdTypeEnum.Ad });
             _sessionFactory.GetCurrentSession().Save(autre);
+        }
+
+        public void InsertReferenceData()
+        {
+            using (ITransaction transaction = _sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                InsertLocations();
+                InsertReferences();
+                InsertCategories();
+
+                transaction.Commit();
+            }
         }
 
         public void InsertInMemoryData()
@@ -459,11 +481,6 @@ namespace Bea.Web.NhibernateHelper
             //-------------------------------------------
             using (ITransaction transaction = _sessionFactory.GetCurrentSession().BeginTransaction())
             {
-
-                InsertLocations();
-                InsertReferences();
-                InsertCategories();
-
                 //-------------------------------------------
                 //         USER TABLE
                 //-------------------------------------------

@@ -16,6 +16,7 @@ namespace Bea.Domain.Location
 
         public virtual int Id { get; set; }
         public virtual string Label { get; set; }
+        public virtual string LabelUrlPart { get; set; }
         public virtual Province Province { get; set; }
         public virtual IList<BaseAd> Ads { get; set; }
         public virtual IList<District> Districts { get; set; }

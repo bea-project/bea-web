@@ -24,7 +24,7 @@ namespace Bea.Test.Domain
                 Title = "title",
                 Body = "body",
                 City = new City { Id = 45, Province = new Province { Id = 11 } },
-                Category = new Category { Id = 89, CategoryGroup = new CategoryGroup { Id = 1447 } },
+                Category = new Category { Id = 89 },
                 Price = 200457,
                 CreationDate = new DateTime(2013, 01, 05)
             };
@@ -39,7 +39,6 @@ namespace Bea.Test.Domain
             Assert.AreEqual(ad.City, actual.City);
             Assert.AreEqual(ad.City.Province, actual.Province);
             Assert.AreEqual(ad.Category, actual.Category);
-            Assert.AreEqual(ad.Category.CategoryGroup, actual.CategoryGroup);
             Assert.AreEqual(ad.Price, actual.Price);
             Assert.AreEqual(ad.CreationDate, actual.CreationDate);
             Assert.AreEqual(ad.Category.Type, actual.AdType);
@@ -56,7 +55,7 @@ namespace Bea.Test.Domain
                 Title = "title",
                 Body = "body",
                 City = new City { Id = 45, Province = new Province { Id = 11 } },
-                Category = new Category { Id = 89, CategoryGroup = new CategoryGroup { Id = 1447 } },
+                Category = new Category { Id = 89 },
                 Images = new List<AdImage>() 
                 {
                     new AdImage { Id = Guid.Parse("b9da8b1e-aa77-401b-84e0-a1290130b7b7"), IsPrimary = false },

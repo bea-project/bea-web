@@ -38,12 +38,14 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "CherzmOi"
+                    Label = "CherzmOi",
+                    LabelUrlPart = "city"
                 };
 
                 Category cat = new Category
                 {
-                    Label = "Bateau"
+                    Label = "Bateau",
+                    LabelUrlPart = "Bateau"
                 };
 
                 Ad a = new Ad
@@ -73,7 +75,8 @@ namespace Bea.Test.dal.repository
 
                 City c2 = new City
                 {
-                    Label = "CherzmOi 2"
+                    Label = "CherzmOi 2",
+                    LabelUrlPart = "city2",
                 };
                 Ad a3 = new Ad
                 {
@@ -122,12 +125,14 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "CherzmOi"
+                    Label = "CherzmOi",
+                    LabelUrlPart = "city"
                 };
 
                 Category cat = new Category
                 {
-                    Label = "Moto"
+                    Label = "Moto",
+                    LabelUrlPart = "Moto"
                 };
 
                 Ad a = new Ad
@@ -190,12 +195,14 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "CherzmOi"
+                    Label = "CherzmOi",
+                    LabelUrlPart = "city"
                 };
 
                 Category cat = new Category 
                 {
-                    Label = "Voiture"
+                    Label = "Voiture",
+                    LabelUrlPart = "Voiture"
                 };
 
                 Ad a = new Ad
@@ -259,12 +266,14 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "CherzmOi"
+                    Label = "CherzmOi",
+                    LabelUrlPart = "city"
                 };
 
                 Category cat = new Category
                 {
-                    Label = "Voiture"
+                    Label = "Voiture",
+                    LabelUrlPart = "Voiture"
                 };
 
                 Ad a = new Ad
@@ -326,12 +335,14 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "CherzmOi"
+                    Label = "CherzmOi",
+                    LabelUrlPart = "city"
                 };
 
                 Category cat = new Category
                 {
-                    Label = "Moto"
+                    Label = "Moto",
+                    LabelUrlPart = "Moto"
                 };
 
                 SearchAdCache a = new SearchAdCache
@@ -392,12 +403,14 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "CherzmOi"
+                    Label = "CherzmOi",
+                    LabelUrlPart = "city",
                 };
 
                 Category cat = new Category
                 {
-                    Label = "Moto"
+                    Label = "Moto",
+                    LabelUrlPart = "Moto",
                 };
 
                 SearchAdCache a = new SearchAdCache
@@ -415,12 +428,14 @@ namespace Bea.Test.dal.repository
 
                 City c2 = new City
                 {
-                    Label = "CherzmOi2"
+                    Label = "CherzmOi2",
+                    LabelUrlPart = "city2",
                 };
 
                 Category cat2 = new Category
                 {
-                    Label = "Auto"
+                    Label = "Auto",
+                    LabelUrlPart = "Auto",
                 };
 
                 SearchAdCache a2 = new SearchAdCache
@@ -471,12 +486,14 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "CherzmOi"
+                    Label = "CherzmOi",
+                    LabelUrlPart = "city"
                 };
 
                 Category cat = new Category
                 {
-                    Label = "Moto"
+                    Label = "Moto",
+                    LabelUrlPart = "Moto"
                 };
 
                 SearchAdCache a = new SearchAdCache
@@ -494,12 +511,14 @@ namespace Bea.Test.dal.repository
 
                 City c2 = new City
                 {
-                    Label = "CherzmOi2"
+                    Label = "CherzmOi2",
+                    LabelUrlPart = "city2"
                 };
 
                 Category cat2 = new Category
                 {
-                    Label = "Auto"
+                    Label = "Auto",
+                    LabelUrlPart = "Auto"
                 };
 
                 SearchAdCache a2 = new SearchAdCache
@@ -555,13 +574,15 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "CherzmOi"
+                    Label = "CherzmOi",
+                    LabelUrlPart = "city",
                 };
                 p1.AddCity(c);
                 
                 Category cat = new Category
                 {
-                    Label = "Moto"
+                    Label = "Moto",
+                    LabelUrlPart = "Moto",
                 };
 
                 SearchAdCache a = new SearchAdCache
@@ -585,7 +606,8 @@ namespace Bea.Test.dal.repository
                 };
                 City c2 = new City
                 {
-                    Label = "CherzmOi2"
+                    Label = "CherzmOi2",
+                    LabelUrlPart = "city2",
                 };
                 p2.AddCity(c2);
                 SearchAdCache a2 = new SearchAdCache
@@ -640,13 +662,15 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "CherzmOi"
+                    Label = "CherzmOi",
+                    LabelUrlPart = "city"
                 };
                 p1.AddCity(c);
 
                 Category cat = new Category
                 {
-                    Label = "Moto"
+                    Label = "Moto",
+                    LabelUrlPart = "Moto"
                 };
 
                 SearchAdCache a = new SearchAdCache
@@ -670,7 +694,8 @@ namespace Bea.Test.dal.repository
                 };
                 City c2 = new City
                 {
-                    Label = "CherzmOi2"
+                    Label = "CherzmOi2",
+                    LabelUrlPart = "city2"
                 };
                 p2.AddCity(c2);
                 SearchAdCache a2 = new SearchAdCache
@@ -726,13 +751,15 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "ship"
+                    Label = "ship",
+                    LabelUrlPart = "city"
                 };
                 p1.AddCity(c);
                 
                 Category cat = new Category
                 {
-                    Label = "Moto"
+                    Label = "Moto",
+                    LabelUrlPart = "Moto"
                 };
 
                 SearchAdCache a = new SearchAdCache
@@ -751,11 +778,12 @@ namespace Bea.Test.dal.repository
 
                 Province p2 = new Province
                 {
-                    Label = "p2"
+                    Label = "p2",
                 };
                 City c2 = new City
                 {
-                    Label = "CherzmOi2"
+                    Label = "CherzmOi2",
+                    LabelUrlPart = "city2",
                 };
                 p2.AddCity(c2);
 
@@ -812,13 +840,15 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "city"
+                    Label = "city",
+                    LabelUrlPart = "city"
                 };
                 p1.AddCity(c);
 
                 Category cat = new Category
                 {
-                    Label = "Moto"
+                    Label = "Moto",
+                    LabelUrlPart = "Moto"
                 };
 
                 SearchAdCache a = new SearchAdCache
@@ -841,7 +871,8 @@ namespace Bea.Test.dal.repository
                 };
                 City c2 = new City
                 {
-                    Label = "CherzmOi2"
+                    Label = "CherzmOi2",
+                    LabelUrlPart = "city2"
                 };
                 p2.AddCity(c2);
                 SearchAdCache a2 = new SearchAdCache
@@ -895,13 +926,15 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "city"
+                    Label = "city",
+                    LabelUrlPart = "city"
                 };
                 p1.AddCity(c);
 
                 Category cat = new Category
                 {
-                    Label = "Moto"
+                    Label = "Moto",
+                    LabelUrlPart = "Moto"
                 };
 
                 Ad a = new Ad
@@ -951,13 +984,15 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "city"
+                    Label = "city",
+                    LabelUrlPart = "city"
                 };
                 p1.AddCity(c);
 
                 Category cat = new Category
                 {
-                    Label = "Moto"
+                    Label = "Moto",
+                    LabelUrlPart = "Moto"
                 };
 
                 CarAd a = new CarAd
@@ -1010,13 +1045,15 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "city"
+                    Label = "city",
+                    LabelUrlPart = "city"
                 };
                 p1.AddCity(c);
 
                 Category cat = new Category
                 {
                     Label = "Auto",
+                    LabelUrlPart = "Auto",
                     Type = AdTypeEnum.CarAd
                 };
 
@@ -1069,13 +1106,15 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "city"
+                    Label = "city",
+                    LabelUrlPart = "city",
                 };
                 p1.AddCity(c);
 
                 Category cat = new Category
                 {
                     Label = "Informatique",
+                    LabelUrlPart = "Informatique",
                     Type = AdTypeEnum.Ad
                 };
 
@@ -1151,13 +1190,15 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "city"
+                    Label = "city",
+                    LabelUrlPart = "city"
                 };
                 p1.AddCity(c);
 
                 Category cat = new Category
                 {
                     Label = "Informatique",
+                    LabelUrlPart = "Informatique",
                     Type = AdTypeEnum.Ad
                 };
 
@@ -1209,13 +1250,15 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "city"
+                    Label = "city",
+                    LabelUrlPart = "city"
                 };
                 p1.AddCity(c);
 
                 Category cat = new Category
                 {
                     Label = "Informatique",
+                    LabelUrlPart = "Informatique",
                     Type = AdTypeEnum.Ad
                 };
 
@@ -1272,19 +1315,22 @@ namespace Bea.Test.dal.repository
 
                 City c = new City
                 {
-                    Label = "city"
+                    Label = "city",
+                    LabelUrlPart = "city",
                 };
                 p1.AddCity(c);
 
                 Category cat = new Category
                 {
                     Label = "Informatique",
+                    LabelUrlPart = "Informatique",
                     Type = AdTypeEnum.Ad
                 };
 
                 Category cat2 = new Category
                 {
                     Label = "Voiture",
+                    LabelUrlPart = "Voiture",
                     Type = AdTypeEnum.Ad
                 };
 

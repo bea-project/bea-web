@@ -28,6 +28,13 @@ namespace Bea.Models.Details
 
         #endregion
 
+        #region BreadCrumb properties
+
+        public String CategoryGroupUrlPart { get; set; }
+        public String CategoryUrlPart { get; set; }
+
+        #endregion
+
         public AdDetailsModel()
         {
             ImagesIds = new List<String>();
@@ -46,7 +53,9 @@ namespace Bea.Models.Details
             if (ad.Category != null)
             {
                 Category = ad.Category.Label;
-                CategoryGroup = ad.Category.CategoryGroup.Label;
+                CategoryUrlPart = ad.Category.LabelUrlPart;
+                CategoryGroup = ad.Category.ParentCategory.Label;
+                CategoryGroupUrlPart = ad.Category.ParentCategory.LabelUrlPart;
             }
 
             UserFirstName = ad.CreatedBy.Firstname;

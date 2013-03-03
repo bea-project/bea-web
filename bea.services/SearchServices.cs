@@ -32,10 +32,8 @@ namespace Bea.Services
                 andSearchStrings = searchQuery.SearchString.Trim().Split(' ');
 
             int[] categories = GetCategoryIdsFromQuery(searchQuery);
-
             
             Dictionary<String, String> searchParams = new Dictionary<String, String>();
-
 
             IList<SearchAdCache> searchResult = _adRepository.SearchAds(andSearchStrings, null, searchQuery.ProvinceSelectedId, searchQuery.CitySelectedId, categories);
             
@@ -50,20 +48,28 @@ namespace Bea.Services
         {
             int[] categories = null;
 
-            if (searchQuery.CategorySelectedId.HasValue)
-            {
-                if (searchQuery.CategorySelectedId.Value - CategoryServices.ID_MULTIPLIER > 0)
-                {
-                    categories = _repository.Get<CategoryGroup>(searchQuery.CategorySelectedId.Value - CategoryServices.ID_MULTIPLIER)
-                        .Categories.ToList()
-                        .Select(x => x.Id).ToArray();
-                }
-                else
-                {
-                    categories = new int[] { searchQuery.CategorySelectedId.Value };
-                }
-            }
+            if (!searchQuery.CategorySelectedId.HasValue)
+                return categories;
+
+            Category selectedCategory = _repository.Get<Category>(searchQuery.CategorySelectedId);
+            
+            // If this is a prent category
+            if (selectedCategory.SubCategories.Count != 0)
+                categories = selectedCategory.SubCategories.Select(x => x.Id).ToArray();
+            else
+                categories = new int[] { searchQuery.CategorySelectedId.Value };
+
             return categories;
+        }
+
+        public int[] GetCategoryIdsFromQuery(String categoryLabelUrl)
+        {
+            return null;
+        }
+
+        public AdSearchResultModel SearchAdsFromUrl(string cityLabel, string categoryLabel)
+        {
+            throw new NotImplementedException();
         }
     }
 }
