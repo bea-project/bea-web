@@ -9,6 +9,11 @@
 		<p>
 			Voici la liste de vos $adCount annonce(s) actuellement consultable sur bea.nc
 		</p>
+		#foreach($ad in $ads)
+			<p>
+				<a href="http://bea.nc/Post/$ad.Id">$ad.Category.Label - $ad.Title</a>
+			</p>
+		#end
 		<p>
 			L'équipe de <b>BEA</b> vous souhaite une bonne vente !
 		</p>

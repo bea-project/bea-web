@@ -7,6 +7,6 @@ namespace Bea.Core.Services
 {
     public interface ITemplatingService
     {
-        String GetTemplatedDocument(String templateName, IDictionary<String, String> data);
+        String GetTemplatedDocument(String templateName, IDictionary<String, String> data, IDictionary<String, object[]> list = null);
     }
 }

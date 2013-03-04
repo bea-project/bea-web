@@ -38,8 +38,9 @@ namespace Bea.Services.Ads
             data.Add("name", ads[0].CreatedBy.Firstname);
             data.Add("adCount", ads.Count.ToString());
             String subject = "BEA Vos Annonces";
-            String body = _templatingServices.GetTemplatedDocument("AdsRequestEmail.vm", data);
-
+            IDictionary<String, object[]> list = new Dictionary<String, object[]>();
+            list.Add("ads", ads.ToArray());
+            String body = _templatingServices.GetTemplatedDocument("AdsRequestEmail.vm", data, list);
             _emailServices.SendEmail(subject, body, model.Email);
             result.InfoMessage = "Un email vient de vous etre envoye avec la liste de vos annonces";
             return result;

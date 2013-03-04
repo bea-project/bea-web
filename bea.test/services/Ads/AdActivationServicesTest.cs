@@ -140,7 +140,7 @@ namespace Bea.Test.Services
             };
 
             var templatingMock = new Moq.Mock<ITemplatingService>();
-            templatingMock.Setup(x => x.GetTemplatedDocument("ActivationEmail.vm", Moq.It.IsAny<IDictionary<String, String>>())).Returns(templatedMail);
+            templatingMock.Setup(x => x.GetTemplatedDocument("ActivationEmail.vm", Moq.It.IsAny<IDictionary<String, String>>(),null)).Returns(templatedMail);
 
             var emailMock = new Moq.Mock<IEmailServices>();
             

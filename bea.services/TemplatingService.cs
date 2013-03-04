@@ -21,13 +21,16 @@ namespace Bea.Services
             _engine.Init();
         }
 
-        public String GetTemplatedDocument(String templateName, IDictionary<String, String> data)
+        public String GetTemplatedDocument(String templateName, IDictionary<String, String> data, IDictionary<String, object[]> list = null)
         {
             Template template = _engine.GetTemplate(templateName);
 
             VelocityContext context = new VelocityContext();
             data.Keys.ToList().ForEach(k => context.Put(k, data[k]));
-            
+
+            if (list != null)
+                context.Put(list.Keys.FirstOrDefault(), list.Values.FirstOrDefault());
+
             StringWriter writer = new StringWriter();
             template.Merge(context, writer);
             
