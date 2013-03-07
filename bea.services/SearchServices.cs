@@ -57,7 +57,7 @@ namespace Bea.Services
 
             Category selectedCategory = _repository.Get<Category>(searchQuery.CategorySelectedId);
             
-            // If this is a prent category
+            // If this is a parent category
             if (selectedCategory.SubCategories.Count != 0)
                 categories = selectedCategory.SubCategories.Select(x => x.Id).ToArray();
             else

@@ -12,6 +12,7 @@ using Bea.Models;
 using Bea.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bea.Models.Search;
+using Moq;
 
 namespace Bea.Test.services
 {
@@ -197,7 +198,7 @@ namespace Bea.Test.services
             adRepoMock.VerifyAll();
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void SearchAdsFromUrl_CategoryIsSelected_RunSearchWithCategory()
         {
             // Given
@@ -212,7 +213,7 @@ namespace Bea.Test.services
             });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship" }, null, null, null, new int[] { cat.Id })).Returns(searchResult);
+            adRepoMock.Setup(r => r.SearchAds(null, null, null, null, It.Is<int[]>(x => x[0] == cat.Id))).Returns(searchResult);
 
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(r => r.Get<Category>(cat.Id)).Returns(cat);
@@ -220,19 +221,13 @@ namespace Bea.Test.services
             var catRepoMock = new Moq.Mock<ICategoryRepository>();
             catRepoMock.Setup(r => r.GetCategoryFromUrlPart("cat-url-label")).Returns(cat);
 
-            AdSearchModel model = new AdSearchModel()
-            {
-                SearchString = "ship",
-                CategorySelectedId = cat.Id
-            };
-
             SearchServices service = new SearchServices(adRepoMock.Object, repoMock.Object, catRepoMock.Object, null);
 
             // When
             AdSearchResultModel result = service.SearchAdsFromUrl(null, "cat-url-label");
 
             // Then
-            Assert.AreEqual("ship", result.SearchString);
+            Assert.IsNull(result.SearchString);
             Assert.IsNull(result.ProvinceSelectedId);
             Assert.IsNull(result.CitySelectedId);
             Assert.AreEqual(12, result.CategorySelectedId);
