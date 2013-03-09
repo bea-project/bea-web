@@ -20,14 +20,6 @@
 
                 <li class="bea-nav-li">
                     @Html.DropDownListFor(
-                        x => x.ProvinceSelectedId,
-                        Enumerable.Empty<SelectListItem>(),
-                        "Toutes les provinces",
-                        new { id = "provinces" })
-                </li>
-                
-                <li class="bea-nav-li">
-                    @Html.DropDownListFor(
                         x => x.CitySelectedId,
                         Enumerable.Empty<SelectListItem>(),
                         "Toutes les villes",
@@ -90,47 +82,22 @@
     });
 
     $(function () {
-        $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "LocationApi", action = "GetAllProvinces" })', function (result) {
-            var ddl = $('#provinces');
+        $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "LocationApi", action = "GetAllCities" })', function (result) {
+            var ddl = $('#cities');
             ddl.empty();
             $(document.createElement('option'))
-                    .attr('value', "")
-                    .text("Toutes les provinces")
-                    .appendTo(ddl);
+                            .attr('value', "")
+                            .text("Toutes les villes")
+                            .appendTo(ddl);
             $(result).each(function () {
-                var selected = (this.Id == "@Model.ProvinceSelectedId");
+                var selected = (this.Id == "@Model.CitySelectedId");
                 $(document.createElement('option'))
                     .attr('value', this.Id)
                     .attr('selected', selected)
                     .text(this.Label)
                     .appendTo(ddl);
             });
-            $(this).reloadCities();
         });
     });
-
-    $.fn.reloadCities = function () {
-        var ddl = $('#cities');
-        ddl.empty();
-        $(document.createElement('option'))
-                        .attr('value', "")
-                        .text("Toutes les villes")
-                        .appendTo(ddl);
-
-        if ($('#provinces').val()) {
-            //The user selected a province
-            var provinceId = $('#provinces').val();
-            $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "LocationApi", action = "GetCitiesFromProvince", provinceId = "id" })'.replace("id", provinceId), function (result) {
-                $(result).each(function () {
-                    var selected = (this.Id == "@Model.CitySelectedId");
-                    $(document.createElement('option'))
-                        .attr('value', this.Id)
-                        .attr('selected', selected)
-                        .text(this.Label)
-                        .appendTo(ddl);
-                });
-            });
-        }
-    };
 
 </script>

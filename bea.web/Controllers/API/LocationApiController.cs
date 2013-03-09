@@ -33,6 +33,18 @@ namespace Bea.Web.Controllers.API
             return response;
         }
 
+        // GET /api/locationapi/GetAllCities
+        public HttpResponseMessage GetAllCities()
+        {
+            HttpResponseMessage response;
+
+            var list = _locationServices.GetAllCities().Select(x => new { Id = x.Id, Label = x.Label });
+
+            response = Request.CreateResponse(HttpStatusCode.OK, list);
+
+            return response;
+        }
+
         // GET /api/locationapi/GetCitiesFromProvince?provinceId=
         public HttpResponseMessage GetCitiesFromProvince(int provinceId)
         {

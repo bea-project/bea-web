@@ -11,7 +11,9 @@ namespace Bea.Core.Services
         City GetCityFromLabel(string label);
         City GetCityFromId(int cityId);
         IList<Province> GetAllProvinces();
+        IList<City> GetAllCities();
         IList<City> GetCitiesFromProvince(int provinceId);
         IList<District> GetAllDistricts();
+
     }
 }

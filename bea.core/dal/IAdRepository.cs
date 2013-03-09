@@ -53,7 +53,7 @@ namespace Bea.Core.Dal
         /// using "like" %searchString%
         /// </summary>
         /// <returns></returns>
-        IList<SearchAdCache> SearchAds(String[] andSearchStrings, String[] orSearchStrings, int? provinceId, int? cityId, int[] categoryIds);
+        IList<SearchAdCache> SearchAds(String[] andSearchStrings, String[] orSearchStrings, int? cityId, int[] categoryIds);
 
         /// <summary>
         /// Returns whether or not an ad can be deleted

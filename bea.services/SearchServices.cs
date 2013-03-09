@@ -39,7 +39,7 @@ namespace Bea.Services
             
             Dictionary<String, String> searchParams = new Dictionary<String, String>();
 
-            IList<SearchAdCache> searchResult = _adRepository.SearchAds(andSearchStrings, null, searchQuery.ProvinceSelectedId, searchQuery.CitySelectedId, categories);
+            IList<SearchAdCache> searchResult = _adRepository.SearchAds(andSearchStrings, null, searchQuery.CitySelectedId, categories);
             
             AdSearchResultModel model = new AdSearchResultModel(searchQuery);
             model.SearchResultTotalCount = searchResult.Count;

@@ -95,7 +95,7 @@ namespace Bea.Dal.Repository
             return query.OrderByDescending(a => a.CreationDate).ToList();
         }
 
-        public IList<SearchAdCache> SearchAds(string[] andSearchStrings = null, string[] orSearchStrings = null, int? provinceId = null, int? cityId = null, int[] categoryIds = null)
+        public IList<SearchAdCache> SearchAds(string[] andSearchStrings = null, string[] orSearchStrings = null, int? cityId = null, int[] categoryIds = null)
         {
             ICriteria query = _sessionFactory.GetCurrentSession().CreateCriteria<SearchAdCache>();
 
@@ -127,9 +127,7 @@ namespace Bea.Dal.Repository
             // Add AND clause to the location (either city or province)
             if (cityId.HasValue)
                 query.Add(Restrictions.Eq("City.Id", cityId.Value));
-            else if (provinceId.HasValue)
-                query.Add(Restrictions.Eq("Province.Id", provinceId.Value));
-
+            
             // Add AND clause to the category
             if (categoryIds != null && categoryIds.Length > 0)
                 query.Add(Restrictions.In("Category.Id", categoryIds));

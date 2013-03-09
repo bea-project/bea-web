@@ -18,7 +18,6 @@ namespace Bea.Test.Models
             AdSearchModel searchModel = new AdSearchModel
             {
                 SearchString = "toto",
-                ProvinceSelectedId = 78,
                 CitySelectedId = 12,
                 CategorySelectedId = 7
             };
@@ -28,7 +27,6 @@ namespace Bea.Test.Models
 
             // Then
             Assert.AreEqual(searchModel.SearchString, instance.SearchString);
-            Assert.AreEqual(searchModel.ProvinceSelectedId, instance.ProvinceSelectedId);
             Assert.AreEqual(searchModel.CitySelectedId, instance.CitySelectedId);
             Assert.AreEqual(searchModel.CategorySelectedId, instance.CategorySelectedId);
         }

@@ -19,7 +19,6 @@ namespace Bea.Models.Search
         public AdSearchResultModel(AdSearchModel searchModel) : this()
         {
             this.SearchString = searchModel.SearchString;
-            this.ProvinceSelectedId = searchModel.ProvinceSelectedId;
             this.CitySelectedId = searchModel.CitySelectedId;
             this.CategorySelectedId = searchModel.CategorySelectedId;
         }

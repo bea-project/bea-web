@@ -38,12 +38,11 @@ namespace Bea.Test.services
             });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(new string[] { "title" }, null, null, 98, null)).Returns(searchResult);
+            adRepoMock.Setup(r => r.SearchAds(new string[] { "title" }, null, 98, null)).Returns(searchResult);
 
             AdSearchModel model = new AdSearchModel()
             {
                 SearchString = "title",
-                ProvinceSelectedId = null,
                 CitySelectedId = 98
             };
 
@@ -54,7 +53,6 @@ namespace Bea.Test.services
 
             // Then
             Assert.AreEqual("title", result.SearchString);
-            Assert.IsNull(result.ProvinceSelectedId);
             Assert.AreEqual(98, result.CitySelectedId);
             Assert.AreEqual(2, result.SearchResult.Count);
             Assert.AreEqual(2, result.SearchResultTotalCount);
@@ -83,12 +81,11 @@ namespace Bea.Test.services
             });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship", "computer" }, null, null, 98, null)).Returns(searchResult);
+            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship", "computer" }, null, 98, null)).Returns(searchResult);
 
             AdSearchModel model = new AdSearchModel()
             {
                 SearchString = "ship computer",
-                ProvinceSelectedId = null,
                 CitySelectedId = 98
             };
 
@@ -99,7 +96,6 @@ namespace Bea.Test.services
 
             // Then
             Assert.AreEqual("ship computer", result.SearchString);
-            Assert.IsNull(result.ProvinceSelectedId);
             Assert.AreEqual(98, result.CitySelectedId);
             Assert.AreEqual(2, result.SearchResult.Count);
             Assert.AreEqual(2, result.SearchResultTotalCount);
@@ -124,7 +120,7 @@ namespace Bea.Test.services
             });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship" }, null, null, null, new int[] { 12 })).Returns(searchResult);
+            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship" }, null, null, new int[] { 12 })).Returns(searchResult);
 
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(r => r.Get<Category>(12)).Returns(cat);
@@ -142,7 +138,6 @@ namespace Bea.Test.services
 
             // Then
             Assert.AreEqual("ship", result.SearchString);
-            Assert.IsNull(result.ProvinceSelectedId);
             Assert.IsNull(result.CitySelectedId);
             Assert.AreEqual(12, result.CategorySelectedId);
             Assert.AreEqual(1, result.SearchResult.Count);
@@ -169,7 +164,7 @@ namespace Bea.Test.services
             group.AddCategory(new Category { Id = 17 });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship" }, null, null, null, new int[] { 12, 17 })).Returns(searchResult);
+            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship" }, null, null, new int[] { 12, 17 })).Returns(searchResult);
 
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(r => r.Get<Category>(12)).Returns(group);
@@ -188,7 +183,6 @@ namespace Bea.Test.services
 
             // Then
             Assert.AreEqual("ship", result.SearchString);
-            Assert.IsNull(result.ProvinceSelectedId);
             Assert.IsNull(result.CitySelectedId);
             Assert.AreEqual(12, result.CategorySelectedId);
             Assert.AreEqual(1, result.SearchResult.Count);
@@ -213,7 +207,7 @@ namespace Bea.Test.services
             });
 
             var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(null, null, null, null, It.Is<int[]>(x => x[0] == cat.Id))).Returns(searchResult);
+            adRepoMock.Setup(r => r.SearchAds(null, null, null, It.Is<int[]>(x => x[0] == cat.Id))).Returns(searchResult);
 
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(r => r.Get<Category>(cat.Id)).Returns(cat);
@@ -228,7 +222,6 @@ namespace Bea.Test.services
 
             // Then
             Assert.IsNull(result.SearchString);
-            Assert.IsNull(result.ProvinceSelectedId);
             Assert.IsNull(result.CitySelectedId);
             Assert.AreEqual(12, result.CategorySelectedId);
             Assert.AreEqual(1, result.SearchResult.Count);

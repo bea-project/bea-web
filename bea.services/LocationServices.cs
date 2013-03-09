@@ -34,6 +34,11 @@ namespace Bea.Services
             return _locationRepository.GetAllProvinces().ToList();
         }
 
+        public IList<City> GetAllCities()
+        {
+            return _repository.GetAll<City>().ToList();
+        }
+
         public IList<City> GetCitiesFromProvince(int provinceId)
         {
             return _locationRepository.GetCitiesFromProvince(provinceId).ToList();
