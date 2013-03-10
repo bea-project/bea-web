@@ -52,7 +52,7 @@
                 </div>
             }
 
-            @*Details display*@
+@*Details display*@
             <div>
                 @*Specific details*@
                 @Html.Partial("Shared/Details/_RenderSpecificDetailsPartial", Model)
@@ -77,7 +77,7 @@
             <div class="legend-like">
                 <h4>Contacter</h4>
             </div>
-            <i class="icon-envelope"></i>&nbsp;@Html.ActionLink("Envoyer un message", "Contact", new { Id = Model.AdId})<br />
+            <i class="icon-envelope"></i>&nbsp;@Html.ActionLink("Envoyer un message", "Contact", new { Id = Model.AdId })<br />
             <i class="icon-comment"></i>&nbsp;@Html.ActionLink(String.Format("Appeler {0} au {1}", Model.UserFirstName, Model.UserPhoneNumber), "#")<br />
             <i class="icon-bullhorn"></i>&nbsp;@Html.ActionLink("Partager avec un ami", "#")<br />
             <br />
@@ -92,7 +92,7 @@
     <div class="row-fluid">
         <div class="span12">
             <p>
-                @Html.ActionLink("Retour à la liste", "Index", new { controller = "Home" })
+                <a href="javascript:history.go(-1)">Retour à la liste</a>
             </p>
         </div>
     </div>
