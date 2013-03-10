@@ -1,7 +1,7 @@
 ﻿@model Bea.Models.Search.AdSearchResultModel
 
 @{
-    ViewBag.Title = "BEA - Bienvenue";
+    ViewBag.Title = String.Format("BEA - {0}", String.IsNullOrEmpty(Model.CategorySelectedLabel) ? "Recherche" : Model.CategorySelectedLabel);
 }
 
 @*Adding the search nav bar*@

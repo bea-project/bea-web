@@ -73,7 +73,11 @@ namespace Bea.Services
             if (!String.IsNullOrEmpty(categoryLabel))
             {
                 Category c = _categoryRepository.GetCategoryFromUrlPart(categoryLabel);
-                model.CategorySelectedId = c != null ? c.Id : (int?) null;
+                if (c != null)
+                {
+                    model.CategorySelectedId = c.Id;
+                    model.CategorySelectedLabel = c.Label;
+                }
             }
 
             return SearchAds(model);

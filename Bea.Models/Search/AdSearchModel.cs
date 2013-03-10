@@ -10,5 +10,6 @@ namespace Bea.Models.Search
         public String SearchString { get; set; }
         public int? CitySelectedId { get; set; }
         public int? CategorySelectedId { get; set; }
+        public String CategorySelectedLabel { get; set; }
     }
 }

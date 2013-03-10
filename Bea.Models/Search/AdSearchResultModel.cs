@@ -21,6 +21,7 @@ namespace Bea.Models.Search
             this.SearchString = searchModel.SearchString;
             this.CitySelectedId = searchModel.CitySelectedId;
             this.CategorySelectedId = searchModel.CategorySelectedId;
+            this.CategorySelectedLabel = searchModel.CategorySelectedLabel;
         }
     }
 }

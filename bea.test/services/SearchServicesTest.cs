@@ -196,7 +196,7 @@ namespace Bea.Test.services
         public void SearchAdsFromUrl_CategoryIsSelected_RunSearchWithCategory()
         {
             // Given
-            Category cat = new Category { Id = 12, LabelUrlPart = "cat-url-label" };
+            Category cat = new Category { Id = 12, LabelUrlPart = "cat-url-label", Label = "Label" };
 
             IList<SearchAdCache> searchResult = new List<SearchAdCache>();
             searchResult.Add(new SearchAdCache
@@ -224,6 +224,7 @@ namespace Bea.Test.services
             Assert.IsNull(result.SearchString);
             Assert.IsNull(result.CitySelectedId);
             Assert.AreEqual(12, result.CategorySelectedId);
+            Assert.AreEqual("Label", result.CategorySelectedLabel);
             Assert.AreEqual(1, result.SearchResult.Count);
             Assert.AreEqual(1, result.SearchResultTotalCount);
             Assert.AreEqual("ship", result.SearchResult[0].Title);
