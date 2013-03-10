@@ -182,8 +182,16 @@
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\ball.png" />
+    <Content Include="Content\images\building.png" />
+    <Content Include="Content\images\car.png" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\hanger.png" />
+    <Content Include="Content\images\home.png" />
+    <Content Include="Content\images\shake.png" />
+    <Content Include="Content\images\ship.png" />
+    <Content Include="Content\images\tv.png" />
     <Content Include="Content\PostImages\Index.html" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
@@ -265,7 +273,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Post\Details.cshtml" />
@@ -409,6 +417,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Post\Shared\Details\_AdDetailsContentPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_NavBar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

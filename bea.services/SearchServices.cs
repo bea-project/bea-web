@@ -78,5 +78,10 @@ namespace Bea.Services
 
             return SearchAds(model);
         }
+
+        public AdSearchResultModel AdvancedSearchAds(AdSearchModel searchQuery)
+        {
+            return null;
+        }
     }
 }

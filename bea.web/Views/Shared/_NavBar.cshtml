@@ -1,0 +1,19 @@
+﻿<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            @Html.ActionLink("BEA PROJECT", "Index", new { controller = "Home" }, new { @class = "brand" })
+            <div class="nav-collapse">
+                <ul class="nav pull-left">
+                    <li>@Html.ActionLink("DEPOSER UNE ANNONCE", "Create", "Post")</li>
+                    <li><a href="#">OFFRES</a></li>
+                    <li><a href="#">DEMANDES</a></li>
+                    <li>@Html.ActionLink("MES ANNONCES", "Request", "Post")</li>
+                </ul>
+                <ul class="nav pull-right">
+                    <li><a href="#" class="dropdown-toggle">AIDE</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>

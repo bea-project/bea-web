@@ -1,0 +1,74 @@
+﻿@model Bea.Models.Search.AdSearchResultModel
+
+@{
+    ViewBag.Title = "BEA - Bienvenue";
+}
+
+@*Adding the search nav bar*@
+@Html.Partial("_SearchAdNavBarPartial", Model)
+
+@*If this is a search, display the number of results*@
+@if (!String.IsNullOrEmpty(Model.SearchString))
+{
+    <h3>Recherche (@Model.SearchResultTotalCount annonces)</h3>
+}
+
+<table class="table table-bordered table-condensed table-striped">
+    <tr>
+        <th>
+             @Html.DisplayName("Image")
+        </th>
+        <th>
+            @Html.DisplayName("Date")
+        </th>
+        <th>
+            @Html.DisplayName("Ville")
+        </th>
+        <th>
+            @Html.DisplayName("Catégorie")
+        </th>
+        <th>
+            @Html.DisplayName("Titre")
+        </th>
+        <th>
+            @Html.DisplayName("Prix")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.SearchResult)
+    {
+        <tr>
+            <td>
+                @if (!String.IsNullOrEmpty(item.MainImageId))
+                {
+                    <img alt="@item.Title" src="@Url.Content(String.Format("~/Content/PostImages/{0}.small.jpg", item.MainImageId))" class="img-polaroid">
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "Details", new { controller = "Post", id = item.AdId })
+            </td>
+
+        </tr>
+    }
+</table>
+
+<div>
+    @Html.Partial("_TestData")
+</div>
