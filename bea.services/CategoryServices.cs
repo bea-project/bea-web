@@ -12,10 +12,12 @@ namespace Bea.Services
     public class CategoryServices : ICategoryServices
     {
         private readonly IRepository _repository;
+        private readonly ICategoryRepository _categoryRepo;
 
-        public CategoryServices(IRepository repository)
+        public CategoryServices(IRepository repository, ICategoryRepository categoryRepo)
         {
             _repository = repository;
+            _categoryRepo = categoryRepo;
         }
 
         /// <summary>
@@ -51,6 +53,17 @@ namespace Bea.Services
             }
 
             return result;
+        }
+
+        public IList<String> GetCategoryChildrenLabelFromParentLabel(String parentLabel)
+        {
+            Category parentCategory = _categoryRepo.GetCategoryFromLabel(parentLabel);
+            if (parentCategory.SubCategories.Count == 0)
+                return null;
+            List<String> childrenLabels = new List<String>();
+            foreach (Category child in parentCategory.SubCategories)
+                childrenLabels.Add(child.Label.ToUpper());
+            return childrenLabels;
         }
     }
 }

@@ -41,5 +41,16 @@ namespace Bea.Web.Controllers.API
 
             return response;
         }
+
+        public HttpResponseMessage GetAllCategoryChildrenLabels(string parentLabel)
+        {
+            HttpResponseMessage response;
+
+            List<String> list = _categoryServices.GetCategoryChildrenLabelFromParentLabel(parentLabel).ToList();
+
+            response = Request.CreateResponse(HttpStatusCode.OK, list);
+
+            return response;
+        }
     }
 }

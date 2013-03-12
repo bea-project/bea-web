@@ -24,5 +24,13 @@ namespace Bea.Dal.Repository
                         .Where(c => c.LabelUrlPart.ToLower().Equals(categoryUrlPart.ToLower()))
                         .SingleOrDefault();
         }
+        public Category GetCategoryFromLabel(string label)
+        {
+            return _sessionFactory.GetCurrentSession()
+                                  .Query<Category>()
+                                  .Where(c => c.Label.ToLower().Equals(label.ToLower()))
+                                  .SingleOrDefault();
+        }
+
     }
 }

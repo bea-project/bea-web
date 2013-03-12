@@ -9,5 +9,6 @@ namespace Bea.Core.Dal
     public interface ICategoryRepository
     {
         Category GetCategoryFromUrlPart(String categoryUrlPart);
+        Category GetCategoryFromLabel(string label);
     }
 }

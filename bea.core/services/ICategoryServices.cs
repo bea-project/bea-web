@@ -32,5 +32,11 @@ namespace Bea.Core.Services
         /// </summary>
         /// <returns>The list of categories with groups</returns>
         IList<CategoryItemModel> GetAllCategoriesAndGroups();
+
+        /// <summary>
+        /// List all children of a category
+        /// </summary>
+        /// <returns>The list of children labels</returns>
+        IList<String> GetCategoryChildrenLabelFromParentLabel(String parentLabel);
     }
 }
