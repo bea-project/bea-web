@@ -36,7 +36,7 @@
 <div class="show-grid row-fluid">
 
     <a href="/Annonces/Vehicules">
-        <div class="span2 offset2 category" style="padding-top: 20px;" id="Véhicules" data-placement="left">
+        <div class="span2 offset2 category" style="padding-top: 20px;" id="1" data-placement="left">
             <img src="~/Content/images/car.png" />
             <br />
             Véhicules
@@ -44,7 +44,7 @@
     </a>
 
     <a href="/Annonces/Nautisme">
-        <div class="span2 offset1 category" style="padding-top: 20px;" id="Nautisme" data-placement="bottom">
+        <div class="span2 offset1 category" style="padding-top: 20px;" id="10" data-placement="bottom">
             <img src="~/Content/images/ship.png" />
             <br />
             Nautisme
@@ -52,7 +52,7 @@
     </a>
 
     <a href="/Annonces/Immobilier">
-        <div class="span2 offset1 category" style="padding-top: 20px;" id="Immobilier" data-placement="right">
+        <div class="span2 offset1 category" style="padding-top: 20px;" id="21" data-placement="right">
             <img src="~/Content/images/building.png" />
             <br />
             Immobilier
@@ -62,7 +62,7 @@
 
 <div class="row-fluid show-grid">
     <a href="/Annonces/Maison">
-        <div class="span2 offset2 category" style="padding-top: 20px;" id="Maison" data-placement="left">
+        <div class="span2 offset2 category" style="padding-top: 20px;" id="32" data-placement="left">
             <img src="~/Content/images/home.png" />
             <br />
             Maison
@@ -70,7 +70,7 @@
     </a>
 
     <a href="/Annonces/Multimedia">
-        <div class="span2 offset1 category" style="padding-top: 20px;" id="Multimedia" data-placement="bottom">
+        <div class="span2 offset1 category" style="padding-top: 20px;" id="27" data-placement="bottom">
             <img src="~/Content/images/tv.png" />
             <br />
             Multimédia
@@ -78,7 +78,7 @@
     </a>
 
     <a href="/Annonces/Loisirs">
-        <div class="span2 offset1 category" style="padding-top: 20px;" id="Loisirs" data-placement="right">
+        <div class="span2 offset1 category" style="padding-top: 20px;" id="45" data-placement="right">
             <img src="~/Content/images/ball.png" />
             <br />
             Loisirs
@@ -114,15 +114,14 @@
         'content': function () {
             var popup_div_id = this.id + $.now();
             var div_id = this.id;
-            //console.log(this);
             return details_in_popup(popup_div_id, div_id);
         },
-        'placement': function () { console.log(this); return this.placement; },
+        'placement': function () { return this.placement; },
         'html': 'true'
     });
 
     function details_in_popup(popup_div_id, div_id) {
-        var url = '@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategoryChildrenLabels", parentLabel = "id" })'.replace("id", div_id);
+        var url = '@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategoryChildrenLabels", parentId = "id" })'.replace("id", div_id);
         $.ajax({
             url: url,
             dataType: 'json',

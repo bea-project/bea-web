@@ -42,11 +42,11 @@ namespace Bea.Web.Controllers.API
             return response;
         }
 
-        public HttpResponseMessage GetAllCategoryChildrenLabels(string parentLabel)
+        public HttpResponseMessage GetAllCategoryChildrenLabels(int parentId)
         {
             HttpResponseMessage response;
 
-            List<String> list = _categoryServices.GetCategoryChildrenLabelFromParentLabel(parentLabel).ToList();
+            List<String> list = _categoryServices.GetCategoryChildrenLabelFromParentId(parentId).ToList();
 
             response = Request.CreateResponse(HttpStatusCode.OK, list);
 

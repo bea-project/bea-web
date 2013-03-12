@@ -33,7 +33,7 @@ namespace Bea.Test.Services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(x => x.GetAll<Category>()).Returns(new List<Category>() { g1, g2, g3 });
 
-            CategoryServices service = new CategoryServices(repoMock.Object,null);
+            CategoryServices service = new CategoryServices(repoMock.Object);
 
             // When
             IList<CategoryItemModel> result = service.GetAllCategoriesAndGroups();
@@ -83,13 +83,13 @@ namespace Bea.Test.Services
             Category c4 = new Category { Id = 5, Label = "first c4" };
             g1.AddCategory(c4);
 
-            var categoryRepoMock = new Moq.Mock<ICategoryRepository>();
-            categoryRepoMock.Setup(x => x.GetCategoryFromLabel("first")).Returns(g1);
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(x => x.Get<Category>(1)).Returns(g1);
 
-            CategoryServices service = new CategoryServices(null, categoryRepoMock.Object);
+            CategoryServices service = new CategoryServices(repoMock.Object);
 
             // When
-            IList<String> result = service.GetCategoryChildrenLabelFromParentLabel("first");
+            IList<String> result = service.GetCategoryChildrenLabelFromParentId(1);
 
             // Then
             Assert.AreEqual("FIRST C1", result[0]);
@@ -104,13 +104,13 @@ namespace Bea.Test.Services
             // Given
             Category g1 = new Category { Id = 1, Label = "first" };
 
-            var categoryRepoMock = new Moq.Mock<ICategoryRepository>();
-            categoryRepoMock.Setup(x => x.GetCategoryFromLabel("first")).Returns(g1);
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(x => x.Get<Category>(1)).Returns(g1);
 
-            CategoryServices service = new CategoryServices(null, categoryRepoMock.Object);
+            CategoryServices service = new CategoryServices(repoMock.Object);
 
             // When
-            IList<String> result = service.GetCategoryChildrenLabelFromParentLabel("first");
+            IList<String> result = service.GetCategoryChildrenLabelFromParentId(1);
 
             // Then
             Assert.AreEqual(null, result);
