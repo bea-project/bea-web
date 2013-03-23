@@ -27,9 +27,10 @@ namespace Bea.Core.Services
         Dictionary<int, string> GetAllSailingBoatLength();
         Dictionary<int, string> GetAllRealEstateNbRoom();
         IList<DeletionReason> GetAllDeletionReasons();
-        
-        IDictionary<int, string> GetAllKmBrackets();
-        IDictionary<int, string> GetAllAgeBrackets();
+
+        IDictionary<int, BracketItemReference> GetAllKmBrackets();
+        IDictionary<int, BracketItemReference> GetAllAgeBrackets();
+        IDictionary<int, BracketItemReference> GetAllEngineSizeBrackets();
     }
 
 }

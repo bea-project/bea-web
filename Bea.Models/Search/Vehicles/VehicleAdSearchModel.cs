@@ -12,11 +12,6 @@ namespace Bea.Models.Search.Vehicles
         public int? KmBracketSelectedId { get; set; }
         public int Type { get; set; }
 
-        public int? MinYearSelectedId { get; set; }
-        public int? MaxYearSelectedId { get; set; }
-        public int? MinKmSelectedId { get; set; }
-        public int? MaxKmSelectedId { get; set; }
-
         public VehicleAdSearchModel()
         {
             this.Type = (int)AdTypeEnum.VehiculeAd;

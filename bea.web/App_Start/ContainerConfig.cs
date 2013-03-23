@@ -36,6 +36,7 @@ namespace Bea.Web.App_Start
             builder.RegisterType<UserRepository>().As<IUserRepository>().SingleInstance();
             builder.RegisterType<LocationRepository>().As<ILocationRepository>().SingleInstance();
             builder.RegisterType<ReferenceRepository>().As<IReferenceRepository>().SingleInstance();
+            builder.RegisterType<SearchRepository>().As<ISearchRepository>().SingleInstance();
             builder.RegisterType<AdServices>().As<IAdServices>().SingleInstance();
             builder.RegisterType<SearchServices>().As<ISearchServices>().SingleInstance();
             builder.RegisterType<AdImageServices>().As<IAdImageServices>().SingleInstance();

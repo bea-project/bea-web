@@ -13,6 +13,10 @@ using Bea.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bea.Models.Search;
 using Moq;
+using Bea.Tools;
+using Bea.Core.Services;
+using Bea.Models.Search.Vehicles;
+using Bea.Domain.Reference;
 
 namespace Bea.Test.services
 {
@@ -37,8 +41,8 @@ namespace Bea.Test.services
                 Category = new Bea.Domain.Categories.Category()
             });
 
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(new string[] { "title" }, null, 98, null)).Returns(searchResult);
+            var adRepoMock = new Moq.Mock<ISearchRepository>();
+            adRepoMock.Setup(r => r.SearchAds(new string[] { "title" }, 98, null)).Returns(searchResult);
 
             AdSearchModel model = new AdSearchModel()
             {
@@ -46,7 +50,7 @@ namespace Bea.Test.services
                 CitySelectedId = 98
             };
 
-            SearchServices service = new SearchServices(adRepoMock.Object, null, null, null);
+            SearchServices service = new SearchServices(null, null, adRepoMock.Object, null, null);
             
             // When
             AdSearchResultModel result = service.SearchAds(model);
@@ -80,8 +84,8 @@ namespace Bea.Test.services
                 Category = new Bea.Domain.Categories.Category()
             });
 
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship", "computer" }, null, 98, null)).Returns(searchResult);
+            var adRepoMock = new Moq.Mock<ISearchRepository>();
+            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship", "computer" }, 98, null)).Returns(searchResult);
 
             AdSearchModel model = new AdSearchModel()
             {
@@ -89,7 +93,7 @@ namespace Bea.Test.services
                 CitySelectedId = 98
             };
 
-            SearchServices service = new SearchServices(adRepoMock.Object, null, null, null);
+            SearchServices service = new SearchServices(null, null, adRepoMock.Object, null, null);
 
             // When
             AdSearchResultModel result = service.SearchAds(model);
@@ -119,8 +123,8 @@ namespace Bea.Test.services
                 Category = cat
             });
 
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship" }, null, null, new int[] { 12 })).Returns(searchResult);
+            var adRepoMock = new Moq.Mock<ISearchRepository>();
+            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship" }, null, new int[] { 12 })).Returns(searchResult);
 
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(r => r.Get<Category>(12)).Returns(cat);
@@ -131,7 +135,7 @@ namespace Bea.Test.services
                 CategorySelectedId = 12
             };
 
-            SearchServices service = new SearchServices(adRepoMock.Object, repoMock.Object, null, null);
+            SearchServices service = new SearchServices(repoMock.Object, null, adRepoMock.Object, null, null);
 
             // When
             AdSearchResultModel result = service.SearchAds(model);
@@ -163,8 +167,8 @@ namespace Bea.Test.services
             group.AddCategory(new Category { Id = 12 });
             group.AddCategory(new Category { Id = 17 });
 
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship" }, null, null, new int[] { 12, 17 })).Returns(searchResult);
+            var adRepoMock = new Moq.Mock<ISearchRepository>();
+            adRepoMock.Setup(r => r.SearchAds(new string[] { "ship" }, null, new int[] { 12, 17 })).Returns(searchResult);
 
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(r => r.Get<Category>(12)).Returns(group);
@@ -176,7 +180,7 @@ namespace Bea.Test.services
                 CategorySelectedId = 12
             };
 
-            SearchServices service = new SearchServices(adRepoMock.Object, repoMock.Object, null, null);
+            SearchServices service = new SearchServices(repoMock.Object, null, adRepoMock.Object, null, null);
 
             // When
             AdSearchResultModel result = service.SearchAds(model);
@@ -206,8 +210,8 @@ namespace Bea.Test.services
                 Category = cat
             });
 
-            var adRepoMock = new Moq.Mock<IAdRepository>();
-            adRepoMock.Setup(r => r.SearchAds(null, null, null, It.Is<int[]>(x => x[0] == cat.Id))).Returns(searchResult);
+            var adRepoMock = new Moq.Mock<ISearchRepository>();
+            adRepoMock.Setup(r => r.SearchAds(null, null, It.Is<int[]>(x => x[0] == cat.Id))).Returns(searchResult);
 
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(r => r.Get<Category>(cat.Id)).Returns(cat);
@@ -215,7 +219,7 @@ namespace Bea.Test.services
             var catRepoMock = new Moq.Mock<ICategoryRepository>();
             catRepoMock.Setup(r => r.GetCategoryFromUrlPart("cat-url-label")).Returns(cat);
 
-            SearchServices service = new SearchServices(adRepoMock.Object, repoMock.Object, catRepoMock.Object, null);
+            SearchServices service = new SearchServices(repoMock.Object, catRepoMock.Object, adRepoMock.Object, null, null);
 
             // When
             AdSearchResultModel result = service.SearchAdsFromUrl(null, "cat-url-label");
@@ -230,6 +234,222 @@ namespace Bea.Test.services
             Assert.AreEqual("ship", result.SearchResult[0].Title);
 
             adRepoMock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void AdvancedSearchAds_SearchThroughAds_CallSearchRepoOnAds()
+        {
+            // Given
+            Category cat = new Category { Id = 1, LabelUrlPart = "cat-url-label", Label = "Label", Type = AdTypeEnum.Ad };
+
+            AdSearchModel model = new AdSearchModel();
+            model.CategorySelectedId = 1;
+            model.SearchString = "toto";
+            model.CitySelectedId = 12;
+
+            IList<SearchAdCache> searchResult = new List<SearchAdCache>();
+            searchResult.Add(new SearchAdCache
+            {
+                Title = "ship",
+                City = new City() { Label = "the city" },
+                Category = cat
+            });
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(r => r.Get<Category>(cat.Id)).Returns(cat);
+
+            var searchRepoMock = new Moq.Mock<ISearchRepository>();
+            searchRepoMock.Setup(r => r.SearchAds(It.Is<String[]>(x => x[0] == "toto"), 12, It.Is<int[]>(x => x[0] == 1))).Returns(searchResult);
+
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, null);
+
+            // When
+            AdSearchResultModel result = service.AdvancedSearchAds(model);
+
+            // Then
+            Assert.AreEqual(1, result.SearchResultTotalCount);
+
+        }
+
+        [TestMethod]
+        public void AdvancedSearchAds_SearchThroughCarAds_CallSearchRepoOnCarAds()
+        {
+            // Given
+            Category cat = new Category { Id = 1, LabelUrlPart = "cat-url-label", Label = "Label", Type = AdTypeEnum.CarAd };
+
+            CarAdSearchModel model = new CarAdSearchModel();
+            model.CategorySelectedId = 1;
+            model.SearchString = "toto";
+            model.CitySelectedId = 12;
+            model.AgeBracketSelectedId = 1;
+            model.KmBracketSelectedId = 1;
+            model.BrandSelectedId = 19;
+            model.FuelSelectedId = 89;
+            model.IsAutomatic = true;
+
+            IList<SearchAdCache> searchResult = new List<SearchAdCache>();
+            searchResult.Add(new SearchAdCache
+            {
+                Title = "car",
+                City = new City() { Label = "the city" },
+                Category = cat
+            });
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(r => r.Get<Category>(cat.Id)).Returns(cat);
+
+            var helperMock = new Moq.Mock<IHelperService>();
+            helperMock.Setup(r => r.GetCurrentDateTime()).Returns(new DateTime(2013, 01, 01));
+
+            IDictionary<int, BracketItemReference> ageRef = new Dictionary<int, BracketItemReference>();
+            ageRef.Add(1, new BracketItemReference { LowValue = 0, HighValue = 3 });
+            IDictionary<int, BracketItemReference> kmRef = new Dictionary<int, BracketItemReference>();
+            kmRef.Add(1, new BracketItemReference { LowValue = 50, HighValue = 100 });
+            
+            var refMock = new Moq.Mock<IReferenceServices>();
+            refMock.Setup(s => s.GetAllAgeBrackets()).Returns(ageRef);
+            refMock.Setup(s => s.GetAllKmBrackets()).Returns(kmRef);
+
+            var searchRepoMock = new Moq.Mock<ISearchRepository>();
+            searchRepoMock.Setup(r => r.SearchVehicleAds<CarAd>(
+                It.Is<String[]>(x => x[0] == "toto"), 
+                12, 
+                It.Is<int[]>(x => x[0] == 1),
+                50, 100,
+                2010, 2013,
+                19,
+                89,
+                true,
+                null, null)).Returns(searchResult);
+
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
+
+            // When
+            AdSearchResultModel result = service.AdvancedSearchAds(model);
+
+            // Then
+            Assert.AreEqual(1, result.SearchResultTotalCount);
+        }
+
+
+        [TestMethod]
+        public void AdvancedSearchAds_SearchThroughMotoAds_CallSearchRepoOnMotoAds()
+        {
+            // Given
+            Category cat = new Category { Id = 1, LabelUrlPart = "cat-url-label", Label = "Label", Type = AdTypeEnum.MotoAd };
+
+            MotoAdSearchModel model = new MotoAdSearchModel();
+            model.CategorySelectedId = 1;
+            model.SearchString = "toto";
+            model.CitySelectedId = 12;
+            model.AgeBracketSelectedId = 1;
+            model.KmBracketSelectedId = 1;
+            model.BrandSelectedId = 19;
+            model.EngineSizeBracketSelectedId = 2;
+
+            IList<SearchAdCache> searchResult = new List<SearchAdCache>();
+            searchResult.Add(new SearchAdCache
+            {
+                Title = "car",
+                City = new City() { Label = "the city" },
+                Category = cat
+            });
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(r => r.Get<Category>(cat.Id)).Returns(cat);
+
+            var helperMock = new Moq.Mock<IHelperService>();
+            helperMock.Setup(r => r.GetCurrentDateTime()).Returns(new DateTime(2013, 01, 01));
+
+            IDictionary<int, BracketItemReference> ageRef = new Dictionary<int, BracketItemReference>();
+            ageRef.Add(1, new BracketItemReference { LowValue = 0, HighValue = 3 });
+            IDictionary<int, BracketItemReference> kmRef = new Dictionary<int, BracketItemReference>();
+            kmRef.Add(1, new BracketItemReference { LowValue = 50, HighValue = 100 });
+            IDictionary<int, BracketItemReference> esRef = new Dictionary<int, BracketItemReference>();
+            esRef.Add(2, new BracketItemReference { LowValue = 250, HighValue = 650 });
+
+            var refMock = new Moq.Mock<IReferenceServices>();
+            refMock.Setup(s => s.GetAllAgeBrackets()).Returns(ageRef);
+            refMock.Setup(s => s.GetAllKmBrackets()).Returns(kmRef);
+            refMock.Setup(s => s.GetAllEngineSizeBrackets()).Returns(esRef);
+
+            var searchRepoMock = new Moq.Mock<ISearchRepository>();
+            searchRepoMock.Setup(r => r.SearchVehicleAds<MotoAd>(
+                It.Is<String[]>(x => x[0] == "toto"),
+                12,
+                It.Is<int[]>(x => x[0] == 1),
+                50, 100,
+                2010, 2013,
+                19,
+                null,
+                null,
+                250, 650)).Returns(searchResult);
+
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
+
+            // When
+            AdSearchResultModel result = service.AdvancedSearchAds(model);
+
+            // Then
+            Assert.AreEqual(1, result.SearchResultTotalCount);
+        }
+
+        [TestMethod]
+        public void AdvancedSearchAds_SearchThroughOtherVehicleAds_CallSearchRepoOnOtherVehicleAds()
+        {
+            // Given
+            Category cat = new Category { Id = 1, LabelUrlPart = "cat-url-label", Label = "Label", Type = AdTypeEnum.OtherVehiculeAd };
+
+            OtherVehicleAdSearchModel model = new OtherVehicleAdSearchModel();
+            model.CategorySelectedId = 1;
+            model.SearchString = "toto";
+            model.CitySelectedId = 12;
+            model.AgeBracketSelectedId = 1;
+            model.KmBracketSelectedId = 1;
+            model.FuelSelectedId = 89;
+
+            IList<SearchAdCache> searchResult = new List<SearchAdCache>();
+            searchResult.Add(new SearchAdCache
+            {
+                Title = "car",
+                City = new City() { Label = "the city" },
+                Category = cat
+            });
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(r => r.Get<Category>(cat.Id)).Returns(cat);
+
+            var helperMock = new Moq.Mock<IHelperService>();
+            helperMock.Setup(r => r.GetCurrentDateTime()).Returns(new DateTime(2013, 01, 01));
+
+            IDictionary<int, BracketItemReference> ageRef = new Dictionary<int, BracketItemReference>();
+            ageRef.Add(1, new BracketItemReference { LowValue = 0, HighValue = 3 });
+            IDictionary<int, BracketItemReference> kmRef = new Dictionary<int, BracketItemReference>();
+            kmRef.Add(1, new BracketItemReference { LowValue = 50, HighValue = 100 });
+
+            var refMock = new Moq.Mock<IReferenceServices>();
+            refMock.Setup(s => s.GetAllAgeBrackets()).Returns(ageRef);
+            refMock.Setup(s => s.GetAllKmBrackets()).Returns(kmRef);
+
+            var searchRepoMock = new Moq.Mock<ISearchRepository>();
+            searchRepoMock.Setup(r => r.SearchVehicleAds<OtherVehicleAd>(
+                It.Is<String[]>(x => x[0] == "toto"),
+                12,
+                It.Is<int[]>(x => x[0] == 1),
+                50, 100,
+                2010, 2013,
+                null,
+                89,
+                null,
+                null, null)).Returns(searchResult);
+
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
+
+            // When
+            AdSearchResultModel result = service.AdvancedSearchAds(model);
+
+            // Then
+            Assert.AreEqual(1, result.SearchResultTotalCount);
         }
     }
 }

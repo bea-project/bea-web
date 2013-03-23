@@ -52,8 +52,8 @@ namespace Bea.Dal.Repository
         {
             return _sessionFactory.GetCurrentSession().Query<BaseAd>()
                 .Fetch(x => x.CreatedBy)
-                .Fetch(x=>x.Category)
-                .Where(x=>x.CreatedBy.Email.Equals(email) && x.IsActivated==true && x.IsDeleted==false)
+                .Fetch(x => x.Category)
+                .Where(x => x.CreatedBy.Email.Equals(email) && x.IsActivated == true && x.IsDeleted == false)
                 .ToList();
         }
 
@@ -93,49 +93,6 @@ namespace Bea.Dal.Repository
                 query = query.Where(a => a.Title.Contains(searchString));
 
             return query.OrderByDescending(a => a.CreationDate).ToList();
-        }
-
-        public IList<SearchAdCache> SearchAds(string[] andSearchStrings = null, string[] orSearchStrings = null, int? cityId = null, int[] categoryIds = null)
-        {
-            ICriteria query = _sessionFactory.GetCurrentSession().CreateCriteria<SearchAdCache>();
-
-            // Add AND clause between search strings
-            if (andSearchStrings != null && andSearchStrings.Length != 0)
-            {
-                Conjunction andQuery = Restrictions.Conjunction();
-
-                foreach (String andString in andSearchStrings)
-                {
-                    Disjunction subAndQuery = Restrictions.Disjunction();
-                    subAndQuery.Add(Restrictions.Like("Title", andString, MatchMode.Anywhere));
-                    subAndQuery.Add(Restrictions.Like("Body", andString, MatchMode.Anywhere));
-                    andQuery.Add(subAndQuery);
-                }
-                query.Add(andQuery);
-            }
-
-            // Add OR clause between search strings
-            if (orSearchStrings != null && orSearchStrings.Length != 0)
-            {
-                Disjunction orQuery = Restrictions.Disjunction();
-                orSearchStrings.ForEach(s => orQuery.Add(Restrictions.Like("Title", s, MatchMode.Anywhere)));
-                orSearchStrings.ForEach(s => orQuery.Add(Restrictions.Like("Body", s, MatchMode.Anywhere)));
-
-                query.Add(orQuery);
-            }
-
-            // Add AND clause to the location (either city or province)
-            if (cityId.HasValue)
-                query.Add(Restrictions.Eq("City.Id", cityId.Value));
-            
-            // Add AND clause to the category
-            if (categoryIds != null && categoryIds.Length > 0)
-                query.Add(Restrictions.In("Category.Id", categoryIds));
-
-            // Order results by creation date descending (most recent first)
-            query.AddOrder(Order.Desc("CreationDate"));
-
-            return query.List<SearchAdCache>();
         }
     }
 }

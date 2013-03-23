@@ -97,6 +97,7 @@
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Configuration\AbstractSessionFactoryFactory.cs" />
+    <Compile Include="Repository\SearchRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>

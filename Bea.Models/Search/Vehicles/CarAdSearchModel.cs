@@ -9,6 +9,6 @@ namespace Bea.Models.Search.Vehicles
     {
         public int? BrandSelectedId { get; set; }
         public int? FuelSelectedId { get; set; }
-        
+        public Boolean? IsAutomatic { get; set; }
     }
 }

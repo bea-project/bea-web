@@ -18,18 +18,27 @@ namespace Bea.Services
             _repository = repository;
 
             // Initialize static lists
-            _kmBrackets = new Dictionary<int, string>();
-            _kmBrackets.Add(1, "jusqu'à 5000 Km");
-            _kmBrackets.Add(2, "5000 - 10000 Km");
-            _kmBrackets.Add(3, "10000 - 20000 Km");
-            _kmBrackets.Add(4, "20000 - 50000 Km");
-            _kmBrackets.Add(5, "50000 Km et plus");
+            _kmBrackets = new Dictionary<int, BracketItemReference>();
+            _kmBrackets.Add(1, new BracketItemReference { Id = 1, Label = "jusqu'à 5000 Km", LowValue = 0, HighValue = 5999 });
+            _kmBrackets.Add(2, new BracketItemReference { Id = 2, Label = "5000 - 10000 Km", LowValue = 4500, HighValue = 10999 });
+            _kmBrackets.Add(3, new BracketItemReference { Id = 3, Label = "10000 - 20000 Km", LowValue = 9500, HighValue = 20999 });
+            _kmBrackets.Add(4, new BracketItemReference { Id = 4, Label = "20000 - 50000 Km", LowValue = 19500, HighValue = 50999 });
+            _kmBrackets.Add(5, new BracketItemReference { Id = 5, Label = "50000 Km et plus", LowValue = 49500, HighValue = 1000000 });
+            
+            _ageBrackets = new Dictionary<int, BracketItemReference>();
+            _ageBrackets.Add(1, new BracketItemReference { Id = 1, Label = "jusqu'à 2 ans", LowValue = 0, HighValue = 3 });
+            _ageBrackets.Add(2, new BracketItemReference { Id = 2, Label = "2 - 5 ans", LowValue = 1, HighValue = 6 });
+            _ageBrackets.Add(3, new BracketItemReference { Id = 3, Label = "5 - 10 ans", LowValue = 4, HighValue = 11 });
+            _ageBrackets.Add(4, new BracketItemReference { Id = 4, Label = "10 ans et plus", LowValue = 9, HighValue = 200 });
 
-            _ageBrackets = new Dictionary<int, string>();
-            _ageBrackets.Add(1, "jusqu'à 2 ans");
-            _ageBrackets.Add(2, "2 - 5 ans");
-            _ageBrackets.Add(3, "5 - 10 ans");
-            _ageBrackets.Add(4, "10 ans et plus");
+
+            _engineSierBrackets = new Dictionary<int, BracketItemReference>();
+            _engineSierBrackets.Add(1, new BracketItemReference { Id = 1, Label = "jusqu'à 50 cm3", LowValue = 0, HighValue = 50 });
+            _engineSierBrackets.Add(2, new BracketItemReference { Id = 2, Label = "50 - 125 cm3", LowValue = 50, HighValue = 125 });
+            _engineSierBrackets.Add(3, new BracketItemReference { Id = 3, Label = "125 - 250 cm3", LowValue = 125, HighValue = 301 });
+            _engineSierBrackets.Add(4, new BracketItemReference { Id = 4, Label = "250 - 650 cm3", LowValue = 250, HighValue = 651 });
+            _engineSierBrackets.Add(5, new BracketItemReference { Id = 5, Label = "650 - 1000 cm3", LowValue = 649, HighValue = 1001 });
+            _engineSierBrackets.Add(6, new BracketItemReference { Id = 6, Label = "1000 cm3 et plus", LowValue = 999, HighValue = 5000 });
         }
         
         public IList<MotoBrand> GetAllMotoBrands()
@@ -185,16 +194,22 @@ namespace Bea.Services
 
         #region static lists
 
-        private IDictionary<int, string> _kmBrackets;
-        public IDictionary<int, string> GetAllKmBrackets()
+        private IDictionary<int, BracketItemReference> _kmBrackets;
+        public IDictionary<int, BracketItemReference> GetAllKmBrackets()
         {
             return _kmBrackets;
         }
 
-        private IDictionary<int, string> _ageBrackets;
-        public IDictionary<int, string> GetAllAgeBrackets()
+        private IDictionary<int, BracketItemReference> _ageBrackets;
+        public IDictionary<int, BracketItemReference> GetAllAgeBrackets()
         {
             return _ageBrackets;
+        }
+
+        private IDictionary<int, BracketItemReference> _engineSierBrackets;
+        public IDictionary<int, BracketItemReference> GetAllEngineSizeBrackets()
+        {
+            return _engineSierBrackets;
         }
 
         #endregion

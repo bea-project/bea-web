@@ -60,6 +60,7 @@
     <Compile Include="Location\Province.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ads\AdTypeEnum.cs" />
+    <Compile Include="Reference\BracketItemReference.cs" />
     <Compile Include="Reference\DeletionReason.cs" />
     <Compile Include="Reference\MotoBrand.cs" />
     <Compile Include="Reference\MotorBoatEngineType.cs" />

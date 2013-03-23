@@ -49,18 +49,12 @@ namespace Bea.Core.Dal
         AdTypeEnum GetAdType(long adId);
 
         /// <summary>
-        /// Searches through all the announces by title, body, province or city and category
-        /// using "like" %searchString%
-        /// </summary>
-        /// <returns></returns>
-        IList<SearchAdCache> SearchAds(String[] andSearchStrings, String[] orSearchStrings, int? cityId, int[] categoryIds);
-
-        /// <summary>
         /// Returns whether or not an ad can be deleted
         /// (based on whether it exists and if it's not already been deleted)
         /// </summary>
         /// <param name="adId">The ad id to check</param>
         /// <returns>true or false depending on the possibility</returns>
         Boolean CanDeleteAd(long adId);
+
     }
 }
