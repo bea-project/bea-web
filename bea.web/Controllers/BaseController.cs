@@ -24,6 +24,7 @@ namespace Bea.Web.Controllers
         {
             if (category == null)
                 return;
+
             switch (category.Type)
             {
                 case AdTypeEnum.CarAd:

@@ -63,28 +63,21 @@ namespace Bea.Web.Controllers
         {
             Category selectedCategory = _categoryServices.GetCategoryById(categoryId);
             FillViewLists(selectedCategory);
+            AdvancedAdSearchModel model = new AdvancedAdSearchModel();
+
             switch (selectedCategory.Type)
             {
                 case AdTypeEnum.CarAd:
-                    //ViewBag.Kms = base._referenceServices.GetAllKms().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    CarAdSearchModel carModel = new CarAdSearchModel();
-                    return PartialView("Shared/Search/_CarAdSearch", carModel);
+                    return PartialView("Shared/Search/_CarAdSearch", model);
 
                 case AdTypeEnum.MotoAd:
-                    ViewBag.Kms = base._referenceServices.GetAllKms().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    ViewBag.Engines = base._referenceServices.GetAllEngineSizes().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    MotoAdSearchModel motoModel = new MotoAdSearchModel();
-                    return PartialView("Shared/Search/_MotoAdSearch", motoModel);
+                    return PartialView("Shared/Search/_MotoAdSearch", model);
 
                 case AdTypeEnum.VehiculeAd:
-                    ViewBag.Kms = base._referenceServices.GetAllKms().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    VehicleAdSearchModel vehicleModel = new VehicleAdSearchModel();
-                    return PartialView("Shared/Search/_VehicleAdSearch", vehicleModel);
+                    return PartialView("Shared/Search/_VehicleAdSearch", model);
 
                 case AdTypeEnum.OtherVehiculeAd:
-                    ViewBag.Kms = base._referenceServices.GetAllKms().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    OtherVehicleAdSearchModel otherVehicleModel = new OtherVehicleAdSearchModel();
-                    return PartialView("Shared/Search/_OtherVehicleAdSearch", otherVehicleModel);
+                    return PartialView("Shared/Search/_OtherVehicleAdSearch", model);
 
                 case AdTypeEnum.MotorBoatAd:
                     ViewBag.Hps = base._referenceServices.GetAllHps().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();

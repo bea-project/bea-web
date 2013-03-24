@@ -44,9 +44,18 @@
         });
     });
 
-    $('#categories').change(function () { loadAdditionalParameters(); });
+    $.getUrlVars = function () {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
 
-    function loadAdditionalParameters() {
+    $.loadAdditionalParameters = function() {
         var categoryId = $('#categories').val();
 
         if (!categoryId)
@@ -58,11 +67,24 @@
             type: 'GET',
             success: function (data, textStatus, jqXHR) {
                 $('#parameters').html("");
-                if (jqXHR.responseText != "")
-                    $('#parameters').html(data);
+                if (jqXHR.responseText == "")
+                    return;
+
+                $('#parameters').html(data);
+
+                // for all the select elements, pre fill in the values present in URL
+                var vars = $.getUrlVars();
+                $('#parameters').find('select').each(function () {
+                    $('#' + this.id).val(vars[this.name]);
+                });
+
             }
         });
     }
+
+    
+
+    $('#categories').change(function () { $.loadAdditionalParameters(); });
 
     $(function () {
         $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategoriesAndGroups" })', function (result) {
@@ -81,7 +103,7 @@
                     .text(this.Label)
                     .appendTo(ddl);
             });
-            loadAdditionalParameters();
+            $.loadAdditionalParameters();
         });
     });
 
