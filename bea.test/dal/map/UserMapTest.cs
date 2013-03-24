@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bea.Dal;
+using Bea.Dal.Repository;
 using Bea.Domain;
 using Bea.Test.TestHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -22,14 +23,13 @@ namespace Bea.Test.dal.map
                 Password = "secret"
             };
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
-            Repository<User> repo = new Repository<User>(sessionFactory.GetCurrentSession());
+            Repository repo = new Repository(sessionFactory);
 
             using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
             {
                 sessionFactory.GetCurrentSession().Save(userToBeAdded);
 
-                sessionFactory.GetCurrentSession().Get<User>(userToBeAdded.Id);
-                IQueryable<User> userToBeAddedFromDb = repo.FilterBy(x => x.Email.Equals("userToBeAdded@bea.com"));
+                IList<User> userToBeAddedFromDb = repo.GetAll<User>();
                 Assert.IsTrue(userToBeAddedFromDb.Count() == 1);
             }
         }
@@ -44,14 +44,13 @@ namespace Bea.Test.dal.map
                 Password = "secret"
             };
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
-            Repository<User> repo = new Repository<User>(sessionFactory.GetCurrentSession());
+            Repository repo = new Repository(sessionFactory);
 
             using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
             {
                 sessionFactory.GetCurrentSession().Save(userToBeAdded);
 
-                sessionFactory.GetCurrentSession().Get<User>(userToBeAdded.Id);
-                IQueryable<User> userToBeAddedFromDb = repo.FilterBy(x => x.Email.Equals("userToBeAdded@bea.com"));
+                IList<User> userToBeAddedFromDb = repo.GetAll<User>();
                 Assert.IsTrue(userToBeAddedFromDb.Count() == 1);
             }
         }

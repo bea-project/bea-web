@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bea.Core.Dal;
 using Bea.Dal.Repository;
 using Bea.Domain;
 using Bea.Domain.Ads;
@@ -341,7 +342,7 @@ namespace Bea.Test.Dal.repository
         }
 
         [TestMethod]
-        public void SearchCarAds_TitleOnly_ReturnAd()
+        public void AdvancedSearchAds_CarAds_TitleOnly_ReturnAd()
         {
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
             Repository repo = new Repository(sessionFactory);
@@ -437,8 +438,13 @@ namespace Bea.Test.Dal.repository
 
                 #endregion
 
+                AdSearchParameters param = new AdSearchParameters
+                {
+                    AndSearchStrings = new String[] { "aveo" }
+                };
+
                 // When
-                IList<SearchAdCache> result = adRepo.SearchVehicleAds<CarAd>(new String[] { "aveo" }, null, null, null, null, null, null, null, null, null, null, null);
+                IList<SearchAdCache> result = adRepo.AdvancedSearchAds<CarAd>(param);
 
                 // Then
                 Assert.AreEqual(1, result.Count);
@@ -447,7 +453,7 @@ namespace Bea.Test.Dal.repository
         }
 
         [TestMethod]
-        public void SearchCarAds_CarProperties_ReturnCarAd()
+        public void AdvancedSearchAds_CarAds_CarProperties_ReturnCarAd()
         {
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
             Repository repo = new Repository(sessionFactory);
@@ -556,8 +562,20 @@ namespace Bea.Test.Dal.repository
 
                 #endregion
 
+                AdSearchParameters param = new AdSearchParameters
+                {
+                    AndSearchStrings = new String[] { "aveo" },
+                    MinKm = 0,
+                    MaxKm = 11000,
+                    MinYear = 2000,
+                    MaxYear = 2012,
+                    BrandId = brand.Id,
+                    FueldId = fuel.Id,
+                    IsAuto = true
+                };
+
                 // When
-                IList<SearchAdCache> result = adRepo.SearchVehicleAds<CarAd>(new String[] { "aveo" }, null, null, 0, 11000, 2000, 2012, brand.Id, fuel.Id, true, null, null);
+                IList<SearchAdCache> result = adRepo.AdvancedSearchAds<CarAd>(param);
 
                 // Then
                 Assert.AreEqual(1, result.Count);
@@ -566,7 +584,7 @@ namespace Bea.Test.Dal.repository
         }
 
         [TestMethod]
-        public void SearchCarAds_MotoProperties_ReturnMotoAd()
+        public void AdvancedSearchAds_MotoAds_MotoProperties_ReturnMotoAd()
         {
             ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
             Repository repo = new Repository(sessionFactory);
@@ -671,8 +689,16 @@ namespace Bea.Test.Dal.repository
 
                 #endregion
 
+                AdSearchParameters param = new AdSearchParameters
+                {
+                    AndSearchStrings = new String[] { "aveo" },
+                    BrandId = brand.Id,
+                    MinEngineSize = 250,
+                    MaxEngineSize = 800
+                };
+
                 // When
-                IList<SearchAdCache> result = adRepo.SearchVehicleAds<MotoAd>(new String[] { "aveo" }, null, null, null, null, null, null, brand.Id, null, null, 250, 800);
+                IList<SearchAdCache> result = adRepo.AdvancedSearchAds<MotoAd>(param);
 
                 // Then
                 Assert.AreEqual(1, result.Count);

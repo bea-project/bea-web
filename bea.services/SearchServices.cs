@@ -40,7 +40,7 @@ namespace Bea.Services
             if (!String.IsNullOrEmpty(searchQuery.SearchString))
                 andSearchStrings = searchQuery.SearchString.Trim().Split(' ');
 
-            int[] categories = GetCategoryIdsFromQuery(searchQuery);
+            int[] categories = GetCategoryIdsFromQuery(searchQuery.CategorySelectedId);
 
             Dictionary<String, String> searchParams = new Dictionary<String, String>();
 
@@ -53,27 +53,27 @@ namespace Bea.Services
             return model;
         }
 
-        private int[] GetCategoryIdsFromQuery(AdSearchModel searchQuery)
+        private int[] GetCategoryIdsFromQuery(int? categorySelectedId)
         {
             int[] categories = null;
 
-            if (!searchQuery.CategorySelectedId.HasValue)
+            if (!categorySelectedId.HasValue)
                 return categories;
 
-            Category selectedCategory = _repository.Get<Category>(searchQuery.CategorySelectedId);
+            Category selectedCategory = _repository.Get<Category>(categorySelectedId);
 
             // If this is a parent category
             if (selectedCategory.SubCategories.Count != 0)
                 categories = selectedCategory.SubCategories.Select(x => x.Id).ToArray();
             else
-                categories = new int[] { searchQuery.CategorySelectedId.Value };
+                categories = new int[] { categorySelectedId.Value };
 
             return categories;
         }
 
         public AdSearchResultModel SearchAdsFromUrl(string cityLabel, string categoryLabel)
         {
-            AdSearchModel model = new AdSearchModel();
+            AdvancedAdSearchModel model = new AdvancedAdSearchModel();
 
             if (!String.IsNullOrEmpty(categoryLabel))
             {
@@ -88,126 +88,84 @@ namespace Bea.Services
             return SearchAds(model);
         }
 
-        public AdSearchResultModel AdvancedSearchAds(AdSearchModel searchQuery)
+        public AdSearchResultModel AdvancedSearchAds(AdvancedAdSearchModel searchQuery)
         {
+            // If this is a broad search, redirect to the base search through all ads
+            if (!searchQuery.CategorySelectedId.HasValue)
+                return SearchAds(searchQuery);
+
+            // create search parameters object from AdvancedAdSearchModel
+            AdSearchParameters searchParameters = CreateSearchParameters(searchQuery);
+
             Category selectedCategory = _repository.Get<Category>(searchQuery.CategorySelectedId);
-            
-            String[] andSearchStrings = null;
 
-            if (!String.IsNullOrEmpty(searchQuery.SearchString))
-                andSearchStrings = searchQuery.SearchString.Trim().Split(' ');
-
-            int[] categories = GetCategoryIdsFromQuery(searchQuery);
-
+            // call repo with Type T based on switch on category with parameters (same for all objects)
             IList<SearchAdCache> searchResult = null;
 
-            switch (selectedCategory.Type)
+            switch(selectedCategory.Type)
             {
                 case AdTypeEnum.CarAd:
-                    searchResult = SearchThroughVehicleAds<CarAd>(searchQuery as VehicleAdSearchModel, andSearchStrings, categories);
+                    searchResult = _searchRepository.AdvancedSearchAds<CarAd>(searchParameters);
                     break;
                 case AdTypeEnum.OtherVehiculeAd:
-                    searchResult = SearchThroughVehicleAds<OtherVehicleAd>(searchQuery as VehicleAdSearchModel, andSearchStrings, categories);
+                    searchResult = _searchRepository.AdvancedSearchAds<OtherVehicleAd>(searchParameters);
                     break;
                 case AdTypeEnum.MotoAd:
-                    searchResult = SearchThroughVehicleAds<MotoAd>(searchQuery as VehicleAdSearchModel, andSearchStrings, categories);
+                    searchResult = _searchRepository.AdvancedSearchAds<MotoAd>(searchParameters);
                     break;
 
-                case AdTypeEnum.SailingBoatAd:
-
-                    break;
-
-                case AdTypeEnum.MotorBoatAd:
-
-                    break;
-
-                case AdTypeEnum.MotorBoatEngineAd:
-
-                    break;
-
-                case AdTypeEnum.WaterSportAd:
-
-                    break;
-
-                case AdTypeEnum.RealEstateAd:
-
-                    break;
+                //TODO: add the other types
 
                 case AdTypeEnum.Ad:
                 default:
-                    searchResult = _searchRepository.SearchAds(andSearchStrings, searchQuery.CitySelectedId, categories);
-                break;
+                    searchResult = _searchRepository.AdvancedSearchAds<Ad>(searchParameters);
+                    break;
             }
 
             // Create models for search results
             AdSearchResultModel model = new AdSearchResultModel(searchQuery);
             model.SearchResultTotalCount = searchResult.Count;
             model.SearchResult = searchResult.Select(a => new AdSearchResultItemModel(a)).ToList();
-            
+
             return model;
         }
 
-        public IList<SearchAdCache> SearchThroughVehicleAds<T>(VehicleAdSearchModel searchQuery, String[] andSearchStrings, int[] selectedCategoryIds) where T : VehicleAd
+        public AdSearchParameters CreateSearchParameters(AdvancedAdSearchModel searchQuery)
         {
-            int? minYear = null, maxYear = null, minKm = null, maxKm = null;
-            int? brandSelectedId = null;
-            int? fuelSelectedId = null;
-            Boolean? isAutomatic = null;
-            int? minEngineSize = null, maxEngineSize = null;
+            AdSearchParameters parameters = new AdSearchParameters();
 
-            // First get all root restrictions for all vehicles
+            if (!String.IsNullOrEmpty(searchQuery.SearchString))
+                parameters.AndSearchStrings = searchQuery.SearchString.Trim().Split(' ');
+
+            parameters.CategoryIds = GetCategoryIdsFromQuery(searchQuery.CategorySelectedId);
+            parameters.CityId = searchQuery.CitySelectedId;
+
+            // -- Vehicles specific properties -- //
             if (searchQuery.AgeBracketSelectedId.HasValue)
             {
-                maxYear = _referenceServices.GetAllAgeBrackets()[searchQuery.AgeBracketSelectedId.Value].LowValue;
-                maxYear = _helperService.GetCurrentDateTime().Year - maxYear;
-                minYear = _referenceServices.GetAllAgeBrackets()[searchQuery.AgeBracketSelectedId.Value].HighValue;
-                minYear = _helperService.GetCurrentDateTime().Year - minYear;
+                parameters.MaxYear = _referenceServices.GetAllAgeBrackets()[searchQuery.AgeBracketSelectedId.Value].LowValue;
+                parameters.MaxYear = _helperService.GetCurrentDateTime().Year - parameters.MaxYear;
+                parameters.MinYear = _referenceServices.GetAllAgeBrackets()[searchQuery.AgeBracketSelectedId.Value].HighValue;
+                parameters.MinYear = _helperService.GetCurrentDateTime().Year - parameters.MinYear;
             }
 
             if (searchQuery.KmBracketSelectedId.HasValue)
             {
-                minKm = _referenceServices.GetAllKmBrackets()[searchQuery.KmBracketSelectedId.Value].LowValue;
-                maxKm = _referenceServices.GetAllKmBrackets()[searchQuery.KmBracketSelectedId.Value].HighValue;
+                parameters.MinKm = _referenceServices.GetAllKmBrackets()[searchQuery.KmBracketSelectedId.Value].LowValue;
+                parameters.MaxKm = _referenceServices.GetAllKmBrackets()[searchQuery.KmBracketSelectedId.Value].HighValue;
             }
 
-            // Add custom car restrictions
-            if (searchQuery is CarAdSearchModel)
+            if (searchQuery.EngineSizeBracketSelectedId.HasValue)
             {
-                CarAdSearchModel refinedSearchQuery = searchQuery as CarAdSearchModel;
-                brandSelectedId = refinedSearchQuery.BrandSelectedId;
-                fuelSelectedId = refinedSearchQuery.FuelSelectedId;
-                isAutomatic = refinedSearchQuery.IsAutomatic;
+                parameters.MinEngineSize = _referenceServices.GetAllEngineSizeBrackets()[searchQuery.EngineSizeBracketSelectedId.Value].LowValue;
+                parameters.MaxEngineSize = _referenceServices.GetAllEngineSizeBrackets()[searchQuery.EngineSizeBracketSelectedId.Value].HighValue;
             }
 
-            // Add custom moto restrictions
-            if (searchQuery is MotoAdSearchModel)
-            {
-                MotoAdSearchModel refinedSearchQuery = searchQuery as MotoAdSearchModel;
-                brandSelectedId = refinedSearchQuery.BrandSelectedId;
+            parameters.BrandId = searchQuery.BrandSelectedId;
+            parameters.FueldId = searchQuery.FuelSelectedId;
+            parameters.IsAuto = searchQuery.IsAutomatic;
 
-                if (refinedSearchQuery.EngineSizeBracketSelectedId.HasValue)
-                {
-                    minEngineSize = _referenceServices.GetAllEngineSizeBrackets()[refinedSearchQuery.EngineSizeBracketSelectedId.Value].LowValue;
-                    maxEngineSize = _referenceServices.GetAllEngineSizeBrackets()[refinedSearchQuery.EngineSizeBracketSelectedId.Value].HighValue;
-                }
-            }
-
-            // Add custom other vehicles restrictions
-            if (searchQuery is OtherVehicleAdSearchModel)
-            {
-                fuelSelectedId = (searchQuery as OtherVehicleAdSearchModel).FuelSelectedId;
-            }
-
-            return _searchRepository.SearchVehicleAds<T>(
-                    andSearchStrings,
-                    searchQuery.CitySelectedId,
-                    selectedCategoryIds,
-                    minKm, maxKm,
-                    minYear, maxYear,
-                    brandSelectedId,
-                    fuelSelectedId,
-                    isAutomatic,
-                    minEngineSize, maxEngineSize);
+            return parameters;
         }
     }
 }

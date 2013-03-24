@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dal\AdSearchParameters.cs" />
     <Compile Include="Dal\IAdRepository.cs" />
     <Compile Include="Dal\ICategoryRepository.cs" />
     <Compile Include="Dal\ILocationRepository.cs" />

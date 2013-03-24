@@ -53,6 +53,12 @@ namespace Bea.Web.Controllers
             return View(result);
         }
 
+        public ActionResult AdvancedSearch(AdvancedAdSearchModel model)
+        {
+            AdSearchResultModel result = _searchServices.AdvancedSearchAds(model);
+            return View("Search", result);
+        }
+
         public PartialViewResult AddParamters(int categoryId)
         {
             Category selectedCategory = _categoryServices.GetCategoryById(categoryId);

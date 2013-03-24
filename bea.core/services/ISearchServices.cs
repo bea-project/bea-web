@@ -13,6 +13,6 @@ namespace Bea.Core.Services
 
         AdSearchResultModel SearchAdsFromUrl(String cityLabel, String categoryLabel);
 
-        AdSearchResultModel AdvancedSearchAds(AdSearchModel searchQuery);
+        AdSearchResultModel AdvancedSearchAds(AdvancedAdSearchModel searchQuery);
     }
 }

@@ -44,7 +44,7 @@ namespace Bea.Test.services
             var adRepoMock = new Moq.Mock<ISearchRepository>();
             adRepoMock.Setup(r => r.SearchAds(new string[] { "title" }, 98, null)).Returns(searchResult);
 
-            AdSearchModel model = new AdSearchModel()
+            AdvancedAdSearchModel model = new AdvancedAdSearchModel()
             {
                 SearchString = "title",
                 CitySelectedId = 98
@@ -87,7 +87,7 @@ namespace Bea.Test.services
             var adRepoMock = new Moq.Mock<ISearchRepository>();
             adRepoMock.Setup(r => r.SearchAds(new string[] { "ship", "computer" }, 98, null)).Returns(searchResult);
 
-            AdSearchModel model = new AdSearchModel()
+            AdvancedAdSearchModel model = new AdvancedAdSearchModel()
             {
                 SearchString = "ship computer",
                 CitySelectedId = 98
@@ -129,7 +129,7 @@ namespace Bea.Test.services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(r => r.Get<Category>(12)).Returns(cat);
 
-            AdSearchModel model = new AdSearchModel()
+            AdvancedAdSearchModel model = new AdvancedAdSearchModel()
             {
                 SearchString = "ship",
                 CategorySelectedId = 12
@@ -174,7 +174,7 @@ namespace Bea.Test.services
             repoMock.Setup(r => r.Get<Category>(12)).Returns(group);
 
 
-            AdSearchModel model = new AdSearchModel()
+            AdvancedAdSearchModel model = new AdvancedAdSearchModel()
             {
                 SearchString = "ship",
                 CategorySelectedId = 12
@@ -264,7 +264,7 @@ namespace Bea.Test.services
             SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, null);
 
             // When
-            AdSearchResultModel result = service.AdvancedSearchAds(model);
+            AdSearchResultModel result = service.SearchAds(model);
 
             // Then
             Assert.AreEqual(1, result.SearchResultTotalCount);
@@ -277,7 +277,7 @@ namespace Bea.Test.services
             // Given
             Category cat = new Category { Id = 1, LabelUrlPart = "cat-url-label", Label = "Label", Type = AdTypeEnum.CarAd };
 
-            CarAdSearchModel model = new CarAdSearchModel();
+            AdvancedAdSearchModel model = new AdvancedAdSearchModel();
             model.CategorySelectedId = 1;
             model.SearchString = "toto";
             model.CitySelectedId = 12;
@@ -311,16 +311,18 @@ namespace Bea.Test.services
             refMock.Setup(s => s.GetAllKmBrackets()).Returns(kmRef);
 
             var searchRepoMock = new Moq.Mock<ISearchRepository>();
-            searchRepoMock.Setup(r => r.SearchVehicleAds<CarAd>(
-                It.Is<String[]>(x => x[0] == "toto"), 
-                12, 
-                It.Is<int[]>(x => x[0] == 1),
-                50, 100,
-                2010, 2013,
-                19,
-                89,
-                true,
-                null, null)).Returns(searchResult);
+            searchRepoMock.Setup(r => r.AdvancedSearchAds<CarAd>(
+                It.Is<AdSearchParameters>(p =>
+                    p.AndSearchStrings[0].Equals("toto")
+                    && p.CityId == 12
+                    && p.CategoryIds[0] == 1
+                    && p.MinKm == 50
+                    && p.MaxKm == 100
+                    && p.MinYear == 2010
+                    && p.MaxYear == 2013
+                    && p.BrandId == 19
+                    && p.FueldId == 89
+                    && p.IsAuto.Value))).Returns(searchResult);
 
             SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
 
@@ -331,14 +333,13 @@ namespace Bea.Test.services
             Assert.AreEqual(1, result.SearchResultTotalCount);
         }
 
-
         [TestMethod]
         public void AdvancedSearchAds_SearchThroughMotoAds_CallSearchRepoOnMotoAds()
         {
             // Given
             Category cat = new Category { Id = 1, LabelUrlPart = "cat-url-label", Label = "Label", Type = AdTypeEnum.MotoAd };
 
-            MotoAdSearchModel model = new MotoAdSearchModel();
+            AdvancedAdSearchModel model = new AdvancedAdSearchModel();
             model.CategorySelectedId = 1;
             model.SearchString = "toto";
             model.CitySelectedId = 12;
@@ -374,17 +375,19 @@ namespace Bea.Test.services
             refMock.Setup(s => s.GetAllEngineSizeBrackets()).Returns(esRef);
 
             var searchRepoMock = new Moq.Mock<ISearchRepository>();
-            searchRepoMock.Setup(r => r.SearchVehicleAds<MotoAd>(
-                It.Is<String[]>(x => x[0] == "toto"),
-                12,
-                It.Is<int[]>(x => x[0] == 1),
-                50, 100,
-                2010, 2013,
-                19,
-                null,
-                null,
-                250, 650)).Returns(searchResult);
-
+            searchRepoMock.Setup(r => r.AdvancedSearchAds<MotoAd>(
+                It.Is<AdSearchParameters>(p =>
+                    p.AndSearchStrings[0].Equals("toto")
+                    && p.CityId == 12
+                    && p.CategoryIds[0] == 1
+                    && p.MinKm == 50
+                    && p.MaxKm == 100
+                    && p.MinYear == 2010
+                    && p.MaxYear == 2013
+                    && p.BrandId == 19
+                    && p.MinEngineSize == 250
+                    && p.MaxEngineSize == 650))).Returns(searchResult);
+            
             SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
 
             // When
@@ -400,7 +403,7 @@ namespace Bea.Test.services
             // Given
             Category cat = new Category { Id = 1, LabelUrlPart = "cat-url-label", Label = "Label", Type = AdTypeEnum.OtherVehiculeAd };
 
-            OtherVehicleAdSearchModel model = new OtherVehicleAdSearchModel();
+            AdvancedAdSearchModel model = new AdvancedAdSearchModel();
             model.CategorySelectedId = 1;
             model.SearchString = "toto";
             model.CitySelectedId = 12;
@@ -432,16 +435,16 @@ namespace Bea.Test.services
             refMock.Setup(s => s.GetAllKmBrackets()).Returns(kmRef);
 
             var searchRepoMock = new Moq.Mock<ISearchRepository>();
-            searchRepoMock.Setup(r => r.SearchVehicleAds<OtherVehicleAd>(
-                It.Is<String[]>(x => x[0] == "toto"),
-                12,
-                It.Is<int[]>(x => x[0] == 1),
-                50, 100,
-                2010, 2013,
-                null,
-                89,
-                null,
-                null, null)).Returns(searchResult);
+            searchRepoMock.Setup(r => r.AdvancedSearchAds<OtherVehicleAd>(
+                It.Is<AdSearchParameters>(p =>
+                    p.AndSearchStrings[0].Equals("toto")
+                    && p.CityId == 12
+                    && p.CategoryIds[0] == 1
+                    && p.MinKm == 50
+                    && p.MaxKm == 100
+                    && p.MinYear == 2010
+                    && p.MaxYear == 2013
+                    && p.FueldId == 89))).Returns(searchResult);
 
             SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
 

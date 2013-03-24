@@ -52,8 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\CustomLongLastingSQLiteConnectionProvider.cs" />
-    <Compile Include="InMemoryData.cs" />
-    <Compile Include="InMemoryDatabase.cs" />
     <Compile Include="Map\AdImageMap.cs" />
     <Compile Include="Map\Ads\AdMap.cs">
       <SubType>Code</SubType>
@@ -88,18 +86,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Map\Ads\CarAdMap.cs" />
-    <Compile Include="NHibernateHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AdRepository.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\LocationRepository.cs" />
     <Compile Include="Repository\ReferenceRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
-    <Compile Include="Repository.cs" />
     <Compile Include="Configuration\AbstractSessionFactoryFactory.cs" />
     <Compile Include="Repository\SearchRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
-    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

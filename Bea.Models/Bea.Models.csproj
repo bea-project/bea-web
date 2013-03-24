@@ -71,6 +71,7 @@
     <Compile Include="Details\Vehicles\OtherVehicleAdDetailsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="References\CategoryItemModel.cs" />
+    <Compile Include="Search\AdvancedAdSearchModel.cs" />
     <Compile Include="Search\RealEstate\RealEstateAdSearchModel.cs" />
     <Compile Include="Search\Vehicles\CarAdSearchModel.cs" />
     <Compile Include="Search\Vehicles\MotoAdSearchModel.cs" />

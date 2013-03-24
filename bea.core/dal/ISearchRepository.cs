@@ -20,31 +20,13 @@ namespace Bea.Core.Dal
         IList<SearchAdCache> SearchAds(string[] andSearchStrings = null, int? cityId = null, int[] categoryIds = null);
 
         /// <summary>
-        /// Searches through the SearchAdCache table inner joining on the <typeparam name="T">Vehicle</typeparam> table
-        /// while restraining search results over this table with the following restrictions
+        /// Searches through the SearchAdCache table inner joining on the <typeparamref name="T">T</typeparamref> table
+        /// adding the parameters passed as an object
         /// </summary>
-        /// <param name="andSearchStrings">The search terms</param>
-        /// <param name="cityId">The city where to look for</param>
-        /// <param name="minKm">The minimum Km</param>
-        /// <param name="maxKm">The maximum Km</param>
-        /// <param name="minYear">The minimum year</param>
-        /// <param name="maxYear">The maximum year</param>
-        /// <param name="brandId">The brand</param>
-        /// <param name="fueldId">The fuel type</param>
-        /// <param name="isAuto">The gear type</param>
-        /// <param name="engineSizeMin">The minimum engine size</param>
-        /// <param name="engineSizeMax">The maximum engine size</param>
-        /// <returns></returns>
-        IList<SearchAdCache> SearchVehicleAds<T>(
-            string[] andSearchStrings,
-            int? cityId,
-            int[] categorySelectedId,
-            int? minKm, int? maxKm,
-            int? minYear, int? maxYear,
-            int? brandId,
-            int? fueldId,
-            Boolean? isAuto,
-            int? engineSizeMin, int? engineSizeMax) where T : VehicleAd;
+        /// <typeparam name="T">The Ad type where to search for an ad</typeparam>
+        /// <param name="parameters">The list of parameters for the search</param>
+        /// <returns>The list of ads of type T as SearchAdCache matching the restrictions</returns>
+        IList<SearchAdCache> AdvancedSearchAds<T>(AdSearchParameters parameters) where T : BaseAd;
 
     }
 }

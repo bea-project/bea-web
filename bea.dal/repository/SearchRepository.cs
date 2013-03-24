@@ -59,20 +59,6 @@ namespace Bea.Dal.Repository
             return query;
         }
 
-        /// <summary>
-        /// Method creating an advanced DetachedCriteria for any subtype of VehicleAd, based on the parameters
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="minKm"></param>
-        /// <param name="maxKm"></param>
-        /// <param name="minYear"></param>
-        /// <param name="maxYear"></param>
-        /// <param name="brandId"></param>
-        /// <param name="fueldId"></param>
-        /// <param name="isAuto"></param>
-        /// <param name="engineSizeMin"></param>
-        /// <param name="engineSizeMax"></param>
-        /// <returns>A DetachedCriteria initialized with restrictions</returns>
         private DetachedCriteria createVehicleCriteria<T>(int? minKm, int? maxKm, int? minYear, int? maxYear, int? brandId, int? fueldId, Boolean? isAuto, int? engineSizeMin, int? engineSizeMax) where T : VehicleAd
         {
             DetachedCriteria crit = DetachedCriteria.For<T>();
@@ -109,23 +95,6 @@ namespace Bea.Dal.Repository
             return crit;
         }
 
-        /// <summary>
-        /// Searches through all subtypes of VehicleAd, based on given properties
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="andSearchStrings"></param>
-        /// <param name="cityId"></param>
-        /// <param name="categoryIds"></param>
-        /// <param name="minKm"></param>
-        /// <param name="maxKm"></param>
-        /// <param name="minYear"></param>
-        /// <param name="maxYear"></param>
-        /// <param name="brandId"></param>
-        /// <param name="fueldId"></param>
-        /// <param name="isAuto"></param>
-        /// <param name="engineSizeMin"></param>
-        /// <param name="engineSizeMax"></param>
-        /// <returns></returns>
         public IList<SearchAdCache> SearchVehicleAds<T>(string[] andSearchStrings, int? cityId, int[] categoryIds, int? minKm, int? maxKm, int? minYear, int? maxYear, int? brandId, int? fueldId, Boolean? isAuto, int? engineSizeMin, int? engineSizeMax) where T : VehicleAd
         {
             ICriteria query = createRootCriteria(andSearchStrings, cityId, categoryIds);
@@ -149,6 +118,53 @@ namespace Bea.Dal.Repository
             ICriteria query = createRootCriteria(andSearchStrings, cityId, categoryIds);
 
             return query.List<SearchAdCache>();
+        }
+
+        public IList<SearchAdCache> AdvancedSearchAds<T>(AdSearchParameters parameters) where T : BaseAd
+        {
+            ICriteria query = createRootCriteria(parameters.AndSearchStrings, parameters.CityId, parameters.CategoryIds);
+
+            DetachedCriteria crit = creatDetachedCriteria<T>(parameters);
+
+            query.Add(Subqueries.PropertyIn("AdId", crit));
+
+            return query.List<SearchAdCache>();
+        }
+
+        private DetachedCriteria creatDetachedCriteria<T>(AdSearchParameters parameters) where T : BaseAd
+        {
+            DetachedCriteria crit = DetachedCriteria.For<T>();
+
+            if (parameters.MinKm.HasValue)
+                crit.Add(Restrictions.Gt("Kilometers", parameters.MinKm.Value));
+
+            if (parameters.MaxKm.HasValue)
+                crit.Add(Restrictions.Lt("Kilometers", parameters.MaxKm.Value));
+
+            if (parameters.MinYear.HasValue)
+                crit.Add(Restrictions.Gt("Year", parameters.MinYear.Value));
+
+            if (parameters.MaxYear.HasValue)
+                crit.Add(Restrictions.Lt("Year", parameters.MaxYear.Value));
+
+            if (parameters.BrandId.HasValue)
+                crit.Add(Restrictions.Eq("Brand.Id", parameters.BrandId));
+
+            if (parameters.FueldId.HasValue)
+                crit.Add(Restrictions.Eq("Fuel.Id", parameters.FueldId));
+
+            if (parameters.IsAuto.HasValue)
+                crit.Add(Restrictions.Eq("IsAutomatic", parameters.IsAuto));
+
+            if (parameters.MinEngineSize.HasValue)
+                crit.Add(Restrictions.Gt("EngineSize", parameters.MinEngineSize));
+
+            if (parameters.MaxEngineSize.HasValue)
+                crit.Add(Restrictions.Lt("EngineSize", parameters.MaxEngineSize));
+
+            crit.SetProjection(Projections.Property("Id"));
+
+            return crit;
         }
     }
 }
