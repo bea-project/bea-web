@@ -2,7 +2,7 @@
 
 <div class="navbar">
     <div class="navbar-inner">
-        @using (Html.BeginForm("AdvancedSearch", "Home", FormMethod.Post, new { @class = "navbar-form" }))
+        @using (Html.BeginForm("AdvancedSearch", "Home", FormMethod.Get, new { @class = "navbar-form" }))
         {
             <div class="controls controls-row">
             <ul class="nav">
@@ -44,22 +44,25 @@
         });
     });
 
-    $('#categories').change(function () {
-        if ($(this).val()) {
-            var categoryId = $('#categories').val();
-            var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Home", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
-            $.ajax({
-                url: url,
-                type: 'GET',
-                success: function (data, textStatus, jqXHR) {
-                    $('#parameters').html("");
-                    if (jqXHR.responseText != "")
-                        $('#parameters').html(data);
-                }
-            });
-        }
-    });
+    $('#categories').change(function () { loadAdditionalParameters(); });
 
+    function loadAdditionalParameters() {
+        var categoryId = $('#categories').val();
+
+        if (!categoryId)
+            return;
+
+        var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Home", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (data, textStatus, jqXHR) {
+                $('#parameters').html("");
+                if (jqXHR.responseText != "")
+                    $('#parameters').html(data);
+            }
+        });
+    }
 
     $(function () {
         $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategoriesAndGroups" })', function (result) {
@@ -78,6 +81,7 @@
                     .text(this.Label)
                     .appendTo(ddl);
             });
+            loadAdditionalParameters();
         });
     });
 
