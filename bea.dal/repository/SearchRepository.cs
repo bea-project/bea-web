@@ -162,6 +162,18 @@ namespace Bea.Dal.Repository
             if (parameters.MaxEngineSize.HasValue)
                 crit.Add(Restrictions.Lt("EngineSize", parameters.MaxEngineSize));
 
+            if (parameters.MinNbRooms.HasValue)
+                crit.Add(Restrictions.Gt("RoomsNumber", parameters.MinNbRooms - 1));
+
+            if (parameters.MaxNbRooms.HasValue)
+                crit.Add(Restrictions.Lt("RoomsNumber", parameters.MaxNbRooms + 1));
+
+            if (parameters.DistrictId.HasValue)
+                crit.Add(Restrictions.Eq("District.Id", parameters.DistrictId));
+
+            if (parameters.RealEstateTypeId.HasValue)
+                crit.Add(Restrictions.Eq("Type.Id", parameters.RealEstateTypeId));
+
             crit.SetProjection(Projections.Property("Id"));
 
             return crit;

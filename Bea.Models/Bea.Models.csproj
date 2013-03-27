@@ -72,11 +72,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="References\CategoryItemModel.cs" />
     <Compile Include="Search\AdvancedAdSearchModel.cs" />
-    <Compile Include="Search\RealEstate\RealEstateAdSearchModel.cs" />
-    <Compile Include="Search\Vehicles\CarAdSearchModel.cs" />
-    <Compile Include="Search\Vehicles\MotoAdSearchModel.cs" />
-    <Compile Include="Search\Vehicles\OtherVehicleAdSearchModel.cs" />
-    <Compile Include="Search\Vehicles\VehicleAdSearchModel.cs" />
     <Compile Include="Search\WaterSport\MotorBoatEngineAdSearchModel.cs" />
     <Compile Include="Search\WaterSport\MotorBoatAdSearchModel.cs" />
     <Compile Include="Search\WaterSport\SailingBoatAdSearchModel.cs" />

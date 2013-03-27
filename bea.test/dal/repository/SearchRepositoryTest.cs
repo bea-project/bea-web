@@ -705,5 +705,139 @@ namespace Bea.Test.Dal.repository
                 Assert.AreEqual(a2, result[0]);
             }
         }
+
+
+        [TestMethod]
+        public void AdvancedSearchAds_RealEstateAds_RealEstateProperties_ReturnRealEstateAd()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            SearchRepository adRepo = new SearchRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                // Given
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city",
+                    LabelUrlPart = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Location",
+                    LabelUrlPart = "Location"
+                };
+
+                SearchAdCache a = new SearchAdCache
+                {
+                    AdId = 1,
+                    Title = "appart",
+                    Body = "boite a chaussure",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
+                };
+
+                RealEstateType t1 = new RealEstateType
+                {
+                    Label = "Location"
+                };
+
+                District d = new District
+                {
+                    City = c,
+                    Label = "Cheznous"
+                };
+
+                RealEstateAd loc = new RealEstateAd
+                {
+                    Id = 1,
+                    Title = "appart",
+                    Body = "boite a chaussure",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    CreatedBy = u,
+                    Type = t1,
+                    District = d,
+                    RoomsNumber = 5
+                };
+                
+                repo.Save(t1);
+                repo.Save(d);
+                repo.Save(p1);
+                repo.Save(c);
+                repo.Save(cat);
+                repo.Save(u);
+                repo.Save(loc);
+                repo.Save(a);
+
+                MotoBrand brand = new MotoBrand
+                {
+                    Label = "Suzuki"
+                };
+
+                SearchAdCache a2 = new SearchAdCache
+                {
+                    AdId = 2,
+                    Title = "appart2",
+                    Body = "boite a chaussure",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
+                };
+
+                RealEstateAd loc2 = new RealEstateAd
+                {
+                    Id = 2,
+                    Title = "appart2",
+                    Body = "boite a chaussure",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    CreatedBy = u,
+                    Type = t1,
+                    District = d,
+                    RoomsNumber = 4
+                };
+                repo.Save(loc2);
+                repo.Save(a2);
+
+                repo.Flush();
+
+                #endregion
+
+                AdSearchParameters param = new AdSearchParameters
+                {
+                    AndSearchStrings = new String[] { "appart" },
+                    MinNbRooms = 2,
+                    MaxNbRooms = 4,
+                    DistrictId = 1,
+                    RealEstateTypeId = 1
+                };
+
+                // When
+                IList<SearchAdCache> result = adRepo.AdvancedSearchAds<RealEstateAd>(param);
+
+                // Then
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(a2, result[0]);
+            }
+        }
     }
 }

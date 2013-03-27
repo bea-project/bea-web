@@ -39,6 +39,23 @@ namespace Bea.Services
             _engineSierBrackets.Add(4, new BracketItemReference { Id = 4, Label = "250 - 650 cm3", LowValue = 250, HighValue = 651 });
             _engineSierBrackets.Add(5, new BracketItemReference { Id = 5, Label = "650 - 1000 cm3", LowValue = 649, HighValue = 1001 });
             _engineSierBrackets.Add(6, new BracketItemReference { Id = 6, Label = "1000 cm3 et plus", LowValue = 999, HighValue = 5000 });
+
+            _realEstateNbRooms = new Dictionary<int, string>();
+            _realEstateNbRooms.Add(1, "1");
+            _realEstateNbRooms.Add(2, "2");
+            _realEstateNbRooms.Add(3, "3");
+            _realEstateNbRooms.Add(4, "4");
+            _realEstateNbRooms.Add(5, "5");
+            _realEstateNbRooms.Add(6, "6");
+            _realEstateNbRooms.Add(7, "7");
+            _realEstateNbRooms.Add(8, "8 et plus");
+
+            int currentYear = DateTime.Now.Year;
+            int minYear = currentYear - 40;
+            _years = new Dictionary<int, string>();
+            for (int year = currentYear; year >= minYear; year--)
+                _years.Add(year, year.ToString());
+            _years[minYear] = minYear + " ou avant";
         }
         
         public IList<MotoBrand> GetAllMotoBrands()
@@ -74,56 +91,6 @@ namespace Bea.Services
         public IList<SailingBoatType> GetAllSailingBoatTypes()
         {
             return _repository.GetAll<SailingBoatType>().ToList();
-        }
-
-        public Dictionary<int, string> GetAllYears(int nbYears)
-        {
-            
-            int currentYear = DateTime.Now.Year;
-            int minYear = currentYear - nbYears;
-            Dictionary<int, string> years = new Dictionary<int,string>();
-            for (int year = currentYear; year >= minYear; year--)
-                years.Add(year,year.ToString());
-            years[minYear] = minYear + " ou avant";
-            return years;
-        }
-
-        public Dictionary<int, string> GetAllKms()
-        {
-            Dictionary<int, string> kms = new Dictionary<int, string>();
-            kms.Add(0, "0");
-            kms.Add(10000, "10000");
-            kms.Add(20000, "20000");
-            kms.Add(30000, "30000");
-            kms.Add(40000, "40000");
-            kms.Add(50000, "50000");
-            kms.Add(60000, "10000");
-            kms.Add(70000, "10000");
-            kms.Add(80000, "10000");
-            kms.Add(90000, "10000");
-            kms.Add(100000, "100000");
-            kms.Add(125000, "125000");
-            kms.Add(150000, "150000");
-            kms.Add(175000, "175000");
-            kms.Add(200000, "200000");
-            kms.Add(225000, "225000");
-            kms.Add(250000, "250000");
-            return kms;
-        }
-
-        public Dictionary<int, string> GetAllEngineSizes()
-        {
-            Dictionary<int, string> engineSizes = new Dictionary<int, string>();
-            engineSizes.Add(0, "0");
-            engineSizes.Add(50, "50");
-            engineSizes.Add(80, "80");
-            engineSizes.Add(125, "125");
-            engineSizes.Add(250, "250");
-            engineSizes.Add(500, "500");
-            engineSizes.Add(600, "600");
-            engineSizes.Add(750, "750");
-            engineSizes.Add(1000, "1000");
-            return engineSizes;
         }
 
         public Dictionary<int, string> GetAllHps()
@@ -162,21 +129,6 @@ namespace Bea.Services
             return motorBoatLength;
         }
 
-        public Dictionary<int, string> GetAllRealEstateNbRoom()
-        {
-            Dictionary<int, string> realEstateNbRooms = new Dictionary<int, string>();
-            realEstateNbRooms.Add(0, "0");
-            realEstateNbRooms.Add(1, "1");
-            realEstateNbRooms.Add(2, "2");
-            realEstateNbRooms.Add(3, "3");
-            realEstateNbRooms.Add(4, "4");
-            realEstateNbRooms.Add(5, "5");
-            realEstateNbRooms.Add(6, "6");
-            realEstateNbRooms.Add(7, "7");
-            realEstateNbRooms.Add(8, "8");
-            return realEstateNbRooms;
-        }
-
         public IList<WaterSportType> GetAllWaterSportTypes()
         {
             return _repository.GetAll<WaterSportType>().ToList();
@@ -212,7 +164,18 @@ namespace Bea.Services
             return _engineSierBrackets;
         }
 
-        #endregion
+        private IDictionary<int, String> _realEstateNbRooms;
+        public IDictionary<int, String> GetAllRealEstateNbRoom()
+        {
+            return _realEstateNbRooms;
+        }
 
+        private IDictionary<int, string> _years;
+        public IDictionary<int, string> GetAllYears()
+        {
+            return _years;
+        }
+
+        #endregion
     }
 }

@@ -10,7 +10,6 @@ using Bea.Domain.Ads;
 using Bea.Domain.Search;
 using Bea.Domain.Categories;
 using Bea.Models.Search;
-using Bea.Models.Search.Vehicles;
 using Bea.Tools;
 
 namespace Bea.Services
@@ -113,7 +112,10 @@ namespace Bea.Services
                 case AdTypeEnum.MotoAd:
                     searchResult = _searchRepository.AdvancedSearchAds<MotoAd>(searchParameters);
                     break;
-
+                case AdTypeEnum.RealEstateAd:
+                    searchResult = _searchRepository.AdvancedSearchAds<RealEstateAd>(searchParameters);
+                    break;
+                    
                 //TODO: add the other types
 
                 case AdTypeEnum.Ad:
@@ -164,6 +166,12 @@ namespace Bea.Services
             parameters.BrandId = searchQuery.BrandSelectedId;
             parameters.FueldId = searchQuery.FuelSelectedId;
             parameters.IsAuto = searchQuery.IsAutomatic;
+
+            //-- Real Estate specific properties --//
+            parameters.RealEstateTypeId = searchQuery.SelectedRealEstateTypeId;
+            parameters.DistrictId = searchQuery.SelectedDistrictId;
+            parameters.MinNbRooms = searchQuery.MinNbRooms;
+            parameters.MaxNbRooms = searchQuery.MaxNbRooms;
 
             return parameters;
         }

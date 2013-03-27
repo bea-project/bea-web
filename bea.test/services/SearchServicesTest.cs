@@ -15,7 +15,6 @@ using Bea.Models.Search;
 using Moq;
 using Bea.Tools;
 using Bea.Core.Services;
-using Bea.Models.Search.Vehicles;
 using Bea.Domain.Reference;
 
 namespace Bea.Test.services
@@ -447,6 +446,49 @@ namespace Bea.Test.services
                     && p.FueldId == 89))).Returns(searchResult);
 
             SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
+
+            // When
+            AdSearchResultModel result = service.AdvancedSearchAds(model);
+
+            // Then
+            Assert.AreEqual(1, result.SearchResultTotalCount);
+        }
+
+        [TestMethod]
+        public void AdvancedSearchAds_SearchThroughRealEstateAds_CallSearchRepoOnRealEstateAds()
+        {
+            // Given
+            Category cat = new Category { Id = 1, LabelUrlPart = "cat-url-label", Label = "Label", Type = AdTypeEnum.RealEstateAd };
+
+            AdvancedAdSearchModel model = new AdvancedAdSearchModel();
+            model.CategorySelectedId = 1;
+            model.SearchString = "appart";
+            model.MinNbRooms = 2;
+            model.MaxNbRooms = 4;
+            model.SelectedDistrictId = 71;
+            model.SelectedRealEstateTypeId = 2;
+
+            IList<SearchAdCache> searchResult = new List<SearchAdCache>();
+            searchResult.Add(new SearchAdCache
+            {
+                Title = "appart",
+                City = new City() { Label = "the city" },
+                Category = cat
+            });
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(r => r.Get<Category>(cat.Id)).Returns(cat);
+
+            var searchRepoMock = new Moq.Mock<ISearchRepository>();
+            searchRepoMock.Setup(r => r.AdvancedSearchAds<RealEstateAd>(
+                It.Is<AdSearchParameters>(p =>
+                    p.AndSearchStrings[0].Equals("appart")
+                    && p.MinNbRooms == 2
+                    && p.MaxNbRooms == 4
+                    && p.RealEstateTypeId == 2
+                    && p.DistrictId == 71))).Returns(searchResult);
+
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, null);
 
             // When
             AdSearchResultModel result = service.AdvancedSearchAds(model);

@@ -29,6 +29,7 @@ namespace Bea.Dal.Map.Ads
             Map(x => x.SurfaceArea);
             Map(x => x.IsFurnished).Default("0");
             References<RealEstateType>(x => x.Type);
+            References<District>(x => x.District);
         }
     }
 }

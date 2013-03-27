@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Bea.Models.Search.Vehicles;
 
 namespace Bea.Models.Search
 {
@@ -20,14 +19,13 @@ namespace Bea.Models.Search
         // Moto specific properties
         public int? EngineSizeBracketSelectedId { get; set; }
 
+        // Real Estate
+        public int? MinNbRooms { get; set; }
+        public int? MaxNbRooms { get; set; }
+        public int? SelectedRealEstateTypeId { get; set; }
+        public int? SelectedDistrictId { get; set; }
 
         //TODO: later v--------------------------v
-
-        // Real Estate
-        public int? MinRoomNbSelectedId { get; set; }
-        public int? MaxRoomNbSelectedId { get; set; }
-        public int? SelectedTypeId { get; set; }
-        public int? SelectedDistrictId { get; set; }
 
         // WaterSport
         public int? SelectedHullTypeId { get; set; }
