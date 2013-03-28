@@ -9,9 +9,7 @@ using Bea.Models;
 using Bea.Domain.Categories;
 using Bea.Domain.Ads;
 using Bea.Models.Search;
-using Bea.Models.Search.Vehicles;
 using Bea.Models.Search.WaterSport;
-using Bea.Models.Search.RealEstate;
 using System.Threading.Tasks;
 
 namespace Bea.Web.Controllers
@@ -75,6 +73,9 @@ namespace Bea.Web.Controllers
 
                 case AdTypeEnum.OtherVehiculeAd:
                     return PartialView("Shared/Search/_OtherVehicleAdSearch", model);
+                
+                case AdTypeEnum.RealEstateAd:
+                    return PartialView("Shared/Search/_RealEstateAdSearch", model);
 
                 case AdTypeEnum.MotorBoatAd:
                     ViewBag.Hps = base._referenceServices.GetAllHps().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
@@ -95,12 +96,8 @@ namespace Bea.Web.Controllers
                 case AdTypeEnum.WaterSportAd:
                     WaterSportAdSearchModel waterSportModel = new WaterSportAdSearchModel();
                     return PartialView("Shared/Search/_WaterSportAdSearch", waterSportModel);
-
-                case AdTypeEnum.RealEstateAd:
-                    ViewBag.Rooms = base._referenceServices.GetAllRealEstateNbRoom().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    RealEstateAdSearchModel realEstateModel = new RealEstateAdSearchModel();
-                    return PartialView("Shared/Search/_RealEstateAdSearch", realEstateModel);
             }
+
             return null;
         }
     }

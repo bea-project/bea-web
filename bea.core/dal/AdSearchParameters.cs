@@ -20,5 +20,10 @@ namespace Bea.Core.Dal
         public Boolean? IsAuto { get; set; }
         public int? MinEngineSize { get; set; }
         public int? MaxEngineSize { get; set; }
+
+        public int? MinNbRooms { get; set; }
+        public int? MaxNbRooms { get; set; }
+        public int? RealEstateTypeId { get; set; }
+        public int? DistrictId { get; set; }
     }
 }
