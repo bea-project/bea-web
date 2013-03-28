@@ -1,8 +1,8 @@
-﻿@model Bea.Models.Create.Vehicules.AdOtherVehicleCreateModel
+﻿@model Bea.Models.Create.AdvancedAdCreateModel
 @Html.HiddenFor(model => model.Type)
 <div class="row">
     <div class="span3">
-        <label class="control-label" for="inputBrand">@Html.LabelFor(model => model.SelectedFuelId)</label>
+        <label class="control-label" for="inputBrand">Carburant:</label>
         <div class="controls">
             @Html.DropDownListFor(model => model.SelectedFuelId, (IEnumerable<SelectListItem>)ViewBag.Fuels, "Choisissez un type", new { @class = "input-large" })
             @Html.ValidationMessageFor(model => model.SelectedFuelId, String.Empty, new { @class = "label label-important" })
@@ -11,14 +11,14 @@
     <div class="span1">
     </div>
     <div class="span3">
-        <label class="control-label" for="inputYear">@Html.LabelFor(model => model.SelectedYearId)</label>
+        <label class="control-label" for="inputYear">Année-Modele:</label>
         <div class="controls">
             @Html.DropDownListFor(model => model.SelectedYearId, (IEnumerable<SelectListItem>)ViewBag.Years, "Choisissez une année", new { @class = "input-large" })
             @Html.ValidationMessageFor(model => model.SelectedYearId, String.Empty, new { @class = "label label-important" })
         </div>
     </div>
 </div>
-<label class="control-label" for="inputKm">@Html.LabelFor(model => model.Km)</label>
+<label class="control-label" for="inputKm">Kilométrage:</label>
 <div class="controls controls-row">
     @Html.TextBoxFor(model => model.Km, new { @class = "input-large" })
     @Html.ValidationMessageFor(model => model.Km, String.Empty, new { @class = "label label-important" })

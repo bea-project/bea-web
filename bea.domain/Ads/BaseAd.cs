@@ -31,7 +31,7 @@ namespace Bea.Domain.Ads
         public virtual DateTime DeletionDate { get; set; }
         public virtual DeletionReason DeletedReason { get; set; }
 
-        protected BaseAd()
+        public BaseAd()
         {
             Images = new List<AdImage>();
         }

@@ -1,4 +1,5 @@
-﻿@model Bea.Models.Create.AdCreateModel
+﻿
+@model Bea.Models.Create.AdvancedAdCreateModel
 @{
     ViewBag.Title = "Create";
 }
@@ -18,13 +19,13 @@
 
             <h4><i class="icon-globe"></i>&nbsp;Localisation</h4>
             <div class="control-group">
-                <label class="control-label" for="inputProvince">@Html.LabelFor(model => model.SelectedProvinceId)</label>
+                <label class="control-label" for="inputProvince">Province:</label>
                 <div class="controls controls-row">
                     @Html.DropDownListFor(model => model.SelectedProvinceId, Enumerable.Empty<SelectListItem>(), "Choisissez la province", new { @class = "input-large" })
                     @Html.ValidationMessageFor(model => model.SelectedProvinceId, String.Empty, new { @class = "label label-important" })
                 </div>
 
-                <label class="control-label" for="inputCity">@Html.LabelFor(model => model.SelectedCityId)</label>
+                <label class="control-label" for="inputCity">Ville:</label>
                 <div class="controls controls-row">
                     @Html.DropDownListFor(model => model.SelectedCityId, Enumerable.Empty<SelectListItem>(), "Choisissez la ville", new { @class = "input-large" })
                     @Html.ValidationMessageFor(model => model.SelectedCityId, String.Empty, new { @class = "label label-important" })
@@ -33,19 +34,19 @@
 
             <h4><i class="icon-user"></i>&nbsp;Vos informations</h4>
             <div class="control-group">
-                <label class="control-label" for="inputName">@Html.LabelFor(model => model.Name)</label>
+                <label class="control-label" for="inputName">Votre nom:</label>
                 <div class="controls controls-row">
                     @Html.TextBoxFor(model => model.Name, new { @class = "input-large", rel = "tooltip" })
                     @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "label label-important" })
                 </div>
 
-                <label class="control-label" for="inputEmail">@Html.LabelFor(model => model.Email)</label>
+                <label class="control-label" for="inputEmail">Email:</label>
                 <div class="controls controls-row">
                     @Html.TextBoxFor(model => model.Email, new { @class = "input-large", rel = "tooltip" })
                     @Html.ValidationMessageFor(model => model.Email, String.Empty, new { @class = "label label-important" })
                 </div>
 
-                <label class="control-label" for="inputPhone">@Html.LabelFor(model => model.Telephone)</label>
+                <label class="control-label" for="inputPhone">Téléphone:</label>
                 <div class="controls controls-row">
                     @Html.TextBoxFor(model => model.Telephone, new { @class = "input-large", rel = "tooltip" })
                     @Html.ValidationMessageFor(model => model.Telephone, String.Empty, new { @class = "label label-important" })
@@ -54,13 +55,13 @@
 
             <h4><i class="icon-th-list"></i>&nbsp;Categorie</h4>
             <div class="control-group">
-                <label class="control-label" for="inputCategory">@Html.LabelFor(model => model.SelectedCategoryId)</label>
+                <label class="control-label" for="inputCategory">Catégorie:</label>
                 <div class="controls controls-row">
                     @Html.DropDownListFor(model => model.SelectedCategoryId, Enumerable.Empty<SelectListItem>(), "Choisissez la catégorie", new { @class = "input-large", id = "categories" })
                     @Html.ValidationMessageFor(model => model.SelectedCategoryId, String.Empty, new { @class = "label label-important" })
                 </div>
 
-                <label class="control-label " for="inputIsOffer">@Html.LabelFor(model => model.IsOffer)</label>
+                <label class="control-label " for="inputIsOffer">ype d'annonce:</label>
                 <div class="controls controls-row">
                     <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, true, new { @checked = "checked", @style = "vertical-align: top" }) Offre</label>
                     <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, false, new { @style = "vertical-align: top" }) Demande</label>
@@ -75,52 +76,52 @@
     
     <h4><i class="  icon-pencil"></i>&nbsp;Votre annonce</h4>
     <div class="control-group">
-        <label class="control-label" for="inputTitle">@Html.LabelFor(model => model.Title)</label>
+        <label class="control-label" for="inputTitle">Titre de l'annonce:</label>
         <div class="controls controls-row">
             @Html.TextBoxFor(x => x.Title, new { @class = "input-xxlarge" })
             @Html.ValidationMessageFor(model => model.Title, String.Empty, new { @class = "label label-important" })
         </div>
 
         <div id="parameters">
-            @if (Model is Bea.Models.Create.Vehicules.AdCarCreateModel)
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.CarAd)
             {
                 @Html.Partial("Shared/Create/_CarAdCreate", Model);
             }
-            @if (Model is Bea.Models.Create.Vehicules.AdMotoCreateModel)
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.MotoAd)
             {
                 @Html.Partial("Shared/Create/_MotoAdCreate", Model);
             }
-            @if (Model is Bea.Models.Create.Vehicules.AdOtherVehicleCreateModel)
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.OtherVehiculeAd)
             {
                 @Html.Partial("Shared/Create/_OtherVehicleAdCreate", Model);
             }
-            @if (Model is Bea.Models.Create.Vehicules.AdVehicleCreateModel)
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.VehiculeAd)
             {
                 @Html.Partial("Shared/Create/_VehicleAdCreate", Model);
             }
-            @if (Model is Bea.Models.Create.WaterSport.AdMotorBoatCreateModel)
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.MotorBoatAd)
             {
                 @Html.Partial("Shared/Create/_MotorBoatAdCreate", Model);
             }
-            @if (Model is Bea.Models.Create.WaterSport.AdSailingBoatCreateModel)
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.SailingBoatAd)
             {
                 @Html.Partial("Shared/Create/_SailingBoatAdCreate", Model);
             }
-            @if (Model is Bea.Models.Create.WaterSport.AdMotorBoatEngineCreateModel)
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.MotorBoatEngineAd)
             {
                 @Html.Partial("Shared/Create/_MotorBoatEngineAdCreate", Model);
             }
-            @if (Model is Bea.Models.Create.WaterSport.AdWaterSportCreateModel)
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.WaterSportAd)
             {
                 @Html.Partial("Shared/Create/_WaterSportAdCreate", Model);
             }
-            @if (Model is Bea.Models.Create.RealEstate.AdRealEstateCreateModel)
+             @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.RealEstateAd)
             {
                 @Html.Partial("Shared/Create/_RealEstateAdCreate", Model);
             }
         </div>
 
-        <label class="control-label" for="inputBody">@Html.LabelFor(model => model.Body)</label>
+        <label class="control-label" for="inputBody">Texte de l'annonce:</label>
         <div class="controls controls-row">
             @Html.TextAreaFor(model => model.Body, new { @rows = 10, @class = "input-xxlarge", style = "resize: none;" })
             @Html.ValidationMessageFor(model => model.Body, String.Empty, new { @class = "label label-important" })
@@ -128,7 +129,7 @@
         <br />
 
         <div class="control-group">
-            <label class="control-label" for="inputPrice">@Html.LabelFor(model => model.Price)</label>
+            <label class="control-label" for="inputPrice">Prix:</label>
             <div class="controls controls-row">
                 @Html.TextBoxFor(model => model.Price, new { @class = "input-large" })
                 @Html.ValidationMessageFor(model => model.Price, String.Empty, new { @class = "label label-important" })

@@ -8,12 +8,10 @@ using Bea.Domain.Ads;
 using Bea.Domain.Ads.WaterSport;
 using Bea.Domain.Categories;
 using Bea.Models.Create;
-using Bea.Models.Create.RealEstate;
-using Bea.Models.Create.Vehicules;
-using Bea.Models.Create.WaterSport;
 using Bea.Models;
 using Bea.Models.Delete;
 using Bea.Models.Request;
+using System;
 
 namespace Bea.Web.Controllers
 {
@@ -135,135 +133,79 @@ namespace Bea.Web.Controllers
 
         public ActionResult Create()
         {
-            AdCreateModel model = new AdCreateModel();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel();
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AdCreateModel model, FormCollection collection)
+        public ActionResult Create(AdvancedAdCreateModel model)
         {
-            Dictionary<string, string> form = collection.AllKeys.ToDictionary(k => k, v => collection[v]);
-            BaseAd newAd = _adServices.GetAdFromModel(model, form);
-            IDictionary<string, string> errors = _adConsistencyServices.GetAdDataConsistencyErrors(newAd);
-            
+            IDictionary<string, string> errors = _adConsistencyServices.GetAdDataConsistencyErrors(model);
+
             foreach (string key in errors.Keys)
                 ModelState.AddModelError(key, errors[key]);
-            
+
             if (ModelState.IsValid)
             {
+                BaseAd newAd = _adServices.GetAdFromAdCreateModel(model);
                 newAd.IsActivated = false;
                 _adServices.AddAd(newAd);
                 return View("Created");
             }
-
-            AdCreateModel returnModel = GetModelFromBaseAd(newAd, model);
-            return View(returnModel);
+            FillViewLists(model.Type);
+            return View(model);
         }
 
-        //
-        // GET: /Post/AddParamters/{id}
         public PartialViewResult AddParamters(int categoryId)
         {
             Category selectedCategory = _categoryServices.GetCategoryById(categoryId);
-            FillViewLists(selectedCategory);
+            FillViewLists(selectedCategory.Type);
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel();
             switch (selectedCategory.Type)
             {
                 case AdTypeEnum.CarAd:
-                    AdCarCreateModel carModel = new AdCarCreateModel();
-                    return PartialView("Shared/Create/_CarAdCreate", carModel);
+                    model.Type = AdTypeEnum.CarAd;
+                    return PartialView("Shared/Create/_CarAdCreate", model);
 
                 case AdTypeEnum.MotoAd:
-                    AdMotoCreateModel motoModel = new AdMotoCreateModel();
-                    return PartialView("Shared/Create/_MotoAdCreate", motoModel);
+                    model.Type = AdTypeEnum.MotoAd;
+                    return PartialView("Shared/Create/_MotoAdCreate", model);
 
                 case AdTypeEnum.VehiculeAd:
-                    AdVehicleCreateModel vehicleModel = new AdVehicleCreateModel();
-                    return PartialView("Shared/Create/_VehicleAdCreate", vehicleModel);
+                    model.Type = AdTypeEnum.VehiculeAd;
+                    return PartialView("Shared/Create/_VehicleAdCreate", model);
 
                 case AdTypeEnum.OtherVehiculeAd:
-                    AdOtherVehicleCreateModel otherVehicleModel = new AdOtherVehicleCreateModel();
-                    return PartialView("Shared/Create/_OtherVehicleAdCreate", otherVehicleModel);
+                    model.Type = AdTypeEnum.OtherVehiculeAd;
+                    return PartialView("Shared/Create/_OtherVehicleAdCreate", model);
 
                 case AdTypeEnum.MotorBoatAd:
-                    AdMotorBoatCreateModel motorBoatModel = new AdMotorBoatCreateModel();
-                    return PartialView("Shared/Create/_MotorBoatAdCreate", motorBoatModel);
+                    model.Type = AdTypeEnum.MotorBoatAd;
+                    return PartialView("Shared/Create/_MotorBoatAdCreate", model);
 
                 case AdTypeEnum.SailingBoatAd:
-                    AdSailingBoatCreateModel sailingBoatModel = new AdSailingBoatCreateModel();
-                    return PartialView("Shared/Create/_SailingBoatAdCreate", sailingBoatModel);
+                    model.Type = AdTypeEnum.SailingBoatAd;
+                    return PartialView("Shared/Create/_SailingBoatAdCreate", model);
 
                 case AdTypeEnum.MotorBoatEngineAd:
-                    AdMotorBoatEngineCreateModel motorBoatEngineModel = new AdMotorBoatEngineCreateModel();
-                    return PartialView("Shared/Create/_MotorBoatEngineAdCreate", motorBoatEngineModel);
+                    model.Type = AdTypeEnum.MotorBoatEngineAd;
+                    return PartialView("Shared/Create/_MotorBoatEngineAdCreate", model);
 
                 case AdTypeEnum.WaterSportAd:
-                    AdWaterSportCreateModel waterSportModel = new AdWaterSportCreateModel();
-                    return PartialView("Shared/Create/_WaterSportAdCreate", waterSportModel);
+                    model.Type = AdTypeEnum.WaterSportAd;
+                    return PartialView("Shared/Create/_WaterSportAdCreate", model);
 
                 case AdTypeEnum.RealEstateAd:
-                    AdRealEstateCreateModel realEstateModel = new AdRealEstateCreateModel();
-                    return PartialView("Shared/Create/_realEstateAdCreate", realEstateModel);
+                    model.Type = AdTypeEnum.RealEstateAd;
+                    return PartialView("Shared/Create/_realEstateAdCreate", model);
             }
             return null;
         }
 
-        private AdCreateModel GetModelFromBaseAd(BaseAd ad, AdCreateModel createModel)
-        {   
-            if (ad.Category == null)
-                return createModel;
-         
-            FillViewLists(ad.Category);
-            
-            switch (ad.Category.Type)
-            {
-                case AdTypeEnum.CarAd:
-                    AdCarCreateModel adCarCreateModel = new AdCarCreateModel(ad as CarAd);
-                    return adCarCreateModel;
-
-                case AdTypeEnum.MotoAd:
-                    AdMotoCreateModel adMotoCreateModel = new AdMotoCreateModel(ad as MotoAd);
-                    return adMotoCreateModel;
-
-                case AdTypeEnum.OtherVehiculeAd:
-                    AdOtherVehicleCreateModel adOtherVehicleCreateModel = new AdOtherVehicleCreateModel(ad as OtherVehicleAd);
-                    return adOtherVehicleCreateModel;
-
-                case AdTypeEnum.VehiculeAd:
-                    AdVehicleCreateModel adVehicleCreateModel = new AdVehicleCreateModel(ad as VehicleAd);
-                    return adVehicleCreateModel;
-
-                case AdTypeEnum.MotorBoatAd:
-                    AdMotorBoatCreateModel adMotorBoatCreateModel = new AdMotorBoatCreateModel(ad as MotorBoatAd);
-                    return adMotorBoatCreateModel;
-
-                case AdTypeEnum.SailingBoatAd:
-                    AdSailingBoatCreateModel adSailingBoatCreateModel = new AdSailingBoatCreateModel(ad as SailingBoatAd);
-                    return adSailingBoatCreateModel;
-
-                case AdTypeEnum.MotorBoatEngineAd:
-                    AdMotorBoatEngineCreateModel adMotorBoatEngineCreateModel = new AdMotorBoatEngineCreateModel(ad as MotorBoatEngineAd);
-                    return adMotorBoatEngineCreateModel;
-
-                case AdTypeEnum.WaterSportAd:
-                    AdWaterSportCreateModel adWaterSportCreateModel = new AdWaterSportCreateModel(ad as WaterSportAd);
-                    return adWaterSportCreateModel;
-
-                case AdTypeEnum.RealEstateAd:
-                    AdRealEstateCreateModel adRealEstateCreateModel = new AdRealEstateCreateModel(ad as RealEstateAd);
-                    return adRealEstateCreateModel;
-
-                case AdTypeEnum.Ad:
-                    return createModel;
-            }
-            return null;
-        }
-
-        public void FillViewLists(Category category)
+        public void FillViewLists(AdTypeEnum type)
         {
-            if (category == null)
-                return;
-            switch (category.Type)
+            switch (type)
             {
                 case AdTypeEnum.CarAd:
                     ViewBag.Years = _referenceServices.GetAllYears(40).Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();

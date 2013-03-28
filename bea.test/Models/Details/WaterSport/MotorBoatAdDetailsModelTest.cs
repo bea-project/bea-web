@@ -21,7 +21,7 @@ namespace Bea.Test.Models.Details.WaterSport
             MotorBoatAd ad = new MotorBoatAd
             {
                 Title = "title",
-                Type  = new Bea.Domain.Reference.MotorBoatType { Label = "type" },
+                MotorBoatType = new Bea.Domain.Reference.MotorBoatType { Label = "type" },
                 MotorType = new Bea.Domain.Reference.MotorBoatEngineType { Label = "motor type" },
                 Year = 2012,
                 Length = 15.80000M,
@@ -38,7 +38,7 @@ namespace Bea.Test.Models.Details.WaterSport
 
             // Then
             Assert.AreEqual(ad.Title, actual.Title);
-            Assert.AreEqual(ad.Type.Label, actual.BoatType);
+            Assert.AreEqual(ad.MotorBoatType.Label, actual.BoatType);
             Assert.AreEqual(ad.MotorType.Label, actual.MotorType);
             Assert.AreEqual(ad.Year, actual.Year);
             Assert.AreEqual("15,80 Mtr", actual.Length);

@@ -42,76 +42,74 @@ namespace Bea.Test.services
             adRepoMock.Verify();
         }
 
-        
-
-        [TestMethod]
-        public void GetAdFromModel_AdModel_ReturnsAd()
-        {
-            // Given
-            var repoMock = new Moq.Mock<IRepository>();
-            Category category = new Category() { Id = 17, Label = "Kite" };
-            repoMock.Setup(r => r.Get<Category>(17)).Returns(category);
+        //[TestMethod]
+        //public void GetAdFromModel_AdModel_ReturnsAd()
+        //{
+        //    // Given
+        //    var repoMock = new Moq.Mock<IRepository>();
+        //    Category category = new Category() { Id = 17, Label = "Kite" };
+        //    repoMock.Setup(r => r.Get<Category>(17)).Returns(category);
             
-            var activationServiceMock = new Moq.Mock<IAdActivationServices>();
-            activationServiceMock.Setup(x => x.GenerateActivationToken()).Returns("activationToken");
+        //    var activationServiceMock = new Moq.Mock<IAdActivationServices>();
+        //    activationServiceMock.Setup(x => x.GenerateActivationToken()).Returns("activationToken");
 
-            AdServices service = new AdServices(null, repoMock.Object, activationServiceMock.Object);
+        //    AdServices service = new AdServices(null, repoMock.Object, activationServiceMock.Object);
 
-            // When
-            AdCreateModel model = new AdCreateModel() { SelectedCategoryId = 17 };
-            BaseAd ad = service.GetAdFromModel(model, null);
+        //    // When
+        //    AdCreateModel model = new AdCreateModel() { SelectedCategoryId = 17 };
+        //    BaseAd ad = service.GetAdFromModel(model, null);
 
-            // Then
-            Assert.IsTrue(ad is Ad);
-        }
+        //    // Then
+        //    Assert.IsTrue(ad is Ad);
+        //}
 
-        [TestMethod]
-        public void GetAdFromModel_NoCategory_ReturnsAd()
-        {
-            // Given
-            var repoMock = new Moq.Mock<IRepository>();
+        //[TestMethod]
+        //public void GetAdFromModel_NoCategory_ReturnsAd()
+        //{
+        //    // Given
+        //    var repoMock = new Moq.Mock<IRepository>();
 
-            var activationServiceMock = new Moq.Mock<IAdActivationServices>();
-            activationServiceMock.Setup(x => x.GenerateActivationToken()).Returns("activationToken");
+        //    var activationServiceMock = new Moq.Mock<IAdActivationServices>();
+        //    activationServiceMock.Setup(x => x.GenerateActivationToken()).Returns("activationToken");
 
-            AdServices service = new AdServices(null, repoMock.Object, activationServiceMock.Object);
+        //    AdServices service = new AdServices(null, repoMock.Object, activationServiceMock.Object);
 
-            // When
-            AdCreateModel model = new AdCreateModel() { SelectedCategoryId = null };
-            BaseAd ad = service.GetAdFromModel(model, null);
+        //    // When
+        //    AdCreateModel model = new AdCreateModel() { SelectedCategoryId = null };
+        //    BaseAd ad = service.GetAdFromModel(model, null);
 
-            // Then
-            Assert.IsTrue(ad is Ad);
-        }
+        //    // Then
+        //    Assert.IsTrue(ad is Ad);
+        //}
 
-        [TestMethod]
-        public void GetAdFromModel_CarAdModel_ReturnsCarAd()
-        {
-            // Given
-            var repoMock = new Moq.Mock<IRepository>();
-            Category category = new Category() { Id = 17, Label = "Voitures" };
-            repoMock.Setup(r => r.Get<Category>(17)).Returns(category);
+        //[TestMethod]
+        //public void GetAdFromModel_CarAdModel_ReturnsCarAd()
+        //{
+        //    // Given
+        //    var repoMock = new Moq.Mock<IRepository>();
+        //    Category category = new Category() { Id = 17, Label = "Voitures" };
+        //    repoMock.Setup(r => r.Get<Category>(17)).Returns(category);
 
-            var activationServiceMock = new Moq.Mock<IAdActivationServices>();
-            activationServiceMock.Setup(x => x.GenerateActivationToken()).Returns("activationToken");
+        //    var activationServiceMock = new Moq.Mock<IAdActivationServices>();
+        //    activationServiceMock.Setup(x => x.GenerateActivationToken()).Returns("activationToken");
 
-            AdServices service = new AdServices(null, repoMock.Object, activationServiceMock.Object);
+        //    AdServices service = new AdServices(null, repoMock.Object, activationServiceMock.Object);
 
-            // When
-            Dictionary<string, string> form = new Dictionary<string, string>();
-            form.Add("Type", "10");
-            form.Add("SelectedYearId", "");
-            form.Add("Km", "");
-            form.Add("SelectedFuelId", "");
-            form.Add("SelectedBrandId", "");
+        //    // When
+        //    Dictionary<string, string> form = new Dictionary<string, string>();
+        //    form.Add("Type", "10");
+        //    form.Add("SelectedYearId", "");
+        //    form.Add("Km", "");
+        //    form.Add("SelectedFuelId", "");
+        //    form.Add("SelectedBrandId", "");
 
-            AdCreateModel model = new AdCreateModel() { SelectedCategoryId = 17 };
-            BaseAd ad = service.GetAdFromModel(model, form);
+        //    AdCreateModel model = new AdCreateModel() { SelectedCategoryId = 17 };
+        //    BaseAd ad = service.GetAdFromModel(model, form);
 
-            // Then
-            Assert.IsTrue(ad is CarAd);
+        //    // Then
+        //    Assert.IsTrue(ad is CarAd);
 
-        }
+        //}
 
         [TestMethod]
         public void GetAdPicturesFromModel_NoPictures_ReturnAdWithoutPictures()

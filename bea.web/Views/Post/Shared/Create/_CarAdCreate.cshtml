@@ -1,19 +1,16 @@
-﻿@model Bea.Models.Create.Vehicules.AdCarCreateModel
-
-
-@Html.HiddenFor(model => model.Type)
-
+﻿@model Bea.Models.Create.AdvancedAdCreateModel
+    @Html.HiddenFor(model => model.Type)
     <div class="row">
         <div class="span3">
-            <label class="control-label" for="inputBrand">@Html.LabelFor(model => model.SelectedBrandId)</label>
+            <label class="control-label" for="inputBrand">Marque:</label>
             <div class="controls">
-                @Html.DropDownListFor(model => model.SelectedBrandId, (IEnumerable<SelectListItem>)ViewBag.Brands, "Choisissez une marque", new { @class = "input-large" })
-                @Html.ValidationMessageFor(model => model.SelectedBrandId, String.Empty, new { @class = "label label-important" })
+                @Html.DropDownListFor(model => model.SelectedCarBrandId, (IEnumerable<SelectListItem>)ViewBag.Brands, "Choisissez une marque", new { @class = "input-large" })
+                @Html.ValidationMessageFor(model => model.SelectedCarBrandId, String.Empty, new { @class = "label label-important" })
             </div>
         </div>
         <div class="span1"></div>
         <div class="span3">
-            <label class="control-label" for="inputFuel">@Html.LabelFor(model => model.SelectedFuelId)</label>
+            <label class="control-label" for="inputFuel">Carburant:</label>
             <div class="controls">
                 @Html.DropDownListFor(model => model.SelectedFuelId, (IEnumerable<SelectListItem>)ViewBag.Fuels, "Choisissez un type", new { @class = "input-large" })
                 @Html.ValidationMessageFor(model => model.SelectedFuelId, String.Empty, new { @class = "label label-important" })
@@ -22,7 +19,7 @@
     </div>
     <div class="row">
         <div class="span3">
-                <label class="control-label" for="inputYear">@Html.LabelFor(model => model.SelectedYearId)</label>
+                <label class="control-label" for="inputYear">Année-Modele:</label>
                 <div class="controls">
                 @Html.DropDownListFor(model => model.SelectedYearId, (IEnumerable<SelectListItem>)ViewBag.Years, "Choisissez une année", new { @class = "input-large" })
                 @Html.ValidationMessageFor(model => model.SelectedYearId, String.Empty, new { @class = "label label-important" })
@@ -30,7 +27,7 @@
         </div>
         <div class="span1"></div>
         <div class="span3">
-                <label class="control-label" for="inputKm">@Html.LabelFor(model => model.Km)</label>
+                <label class="control-label" for="inputKm">Kilométrage:</label>
                 <div class="controls">
                     @Html.TextBoxFor(model => model.Km, new { @class = "input-large" })
                     @Html.ValidationMessageFor(model => model.Km, String.Empty, new { @class = "label label-important" })
@@ -39,7 +36,7 @@
      </div>
 
 
-        <label class="control-label" for="inputIsOffer">@Html.LabelFor(model => model.IsAutomatic)</label>
+        <label class="control-label" for="inputIsOffer">Boîte de vitesses:</label>
         <div class="controls controls-row">
             <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsAutomatic, true, new { @checked = "checked", @style = "vertical-align: top" }) Automatique</label>
             <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsAutomatic, false, new { @style = "vertical-align: top" }) Manuelle</label>

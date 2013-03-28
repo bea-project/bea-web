@@ -1,18 +1,18 @@
-﻿@model Bea.Models.Create.WaterSport.AdSailingBoatCreateModel
+﻿@model Bea.Models.Create.AdvancedAdCreateModel
 
 @Html.HiddenFor(model => model.Type)
 
     <div class="row">
         <div class="span3">
-            <label class="control-label" for="inputType">@Html.LabelFor(model => model.SelectedTypeId)</label>
+            <label class="control-label" for="inputType">Matériaux:</label>
             <div class="controls">
-                @Html.DropDownListFor(model => model.SelectedTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Choisissez un type", new { @class = "input-large" })
-                @Html.ValidationMessageFor(model => model.SelectedTypeId, String.Empty, new { @class = "label label-important" })
+                @Html.DropDownListFor(model => model.SelectedSailingBoatTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Choisissez un type", new { @class = "input-large" })
+                @Html.ValidationMessageFor(model => model.SelectedSailingBoatTypeId, String.Empty, new { @class = "label label-important" })
             </div>
         </div>
         <div class="span1"></div>
         <div class="span3">
-            <label class="control-label" for="inputMotorType">@Html.LabelFor(model => model.SelectedHullTypeId)</label>
+            <label class="control-label" for="inputMotorType">Coque:</label>
             <div class="controls">
                 @Html.DropDownListFor(model => model.SelectedHullTypeId, (IEnumerable<SelectListItem>)ViewBag.HullTypes, "Choisissez une coque", new { @class = "input-large" })
                 @Html.ValidationMessageFor(model => model.SelectedHullTypeId, String.Empty, new { @class = "label label-important" })
@@ -21,7 +21,7 @@
     </div>
     <div class="row">
         <div class="span3">
-                <label class="control-label" for="inputYear">@Html.LabelFor(model => model.SelectedYearId)</label>
+                <label class="control-label" for="inputYear">Année-Modele:</label>
                 <div class="controls">
                 @Html.DropDownListFor(model => model.SelectedYearId, (IEnumerable<SelectListItem>)ViewBag.Years, "Choisissez une année", new { @class = "input-large" })
                 @Html.ValidationMessageFor(model => model.SelectedYearId, String.Empty, new { @class = "label label-important" })
@@ -29,7 +29,7 @@
         </div>
         <div class="span1"></div>
         <div class="span3">
-                <label class="control-label" for="inputLength">@Html.LabelFor(model => model.Length)</label>
+                <label class="control-label" for="inputLength">Longueur:</label>
                 <div class="controls">
                     <div class="input-prepend">
                         @Html.TextBoxFor(model => model.Length, new { @class = "input-medium" })

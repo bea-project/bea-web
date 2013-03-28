@@ -69,51 +69,130 @@ namespace Bea.Services.Ads
 
         #region creation
 
-        public BaseAd GetAdFromModel(AdCreateModel model, Dictionary<string, string> form)
+        public BaseAd GetAdFromAdCreateModel(AdvancedAdCreateModel model)
         {
-            BaseAd ad = null;
-
-            if (form != null && form.ContainsKey("Type"))
+            BaseAd baseAd = GetBaseAdFromCreateModel(model);
+            if (!model.SelectedCategoryId.HasValue)
+                return baseAd;
+            Category selectedCategory = _repository.Get<Category>(model.SelectedCategoryId);
+            if(selectedCategory.Type == AdTypeEnum.Ad)
+                return baseAd;
+            switch (selectedCategory.Type)
             {
-                switch (Int32.Parse(form["Type"]))
-                {
-                    case (int)AdTypeEnum.CarAd:
-                        ad = GetCarAdFromModel(form);
-                        break;
-                    case (int)AdTypeEnum.MotoAd:
-                        ad = GetMotoAdFromModel(form);
-                        break;
-                    case (int)AdTypeEnum.OtherVehiculeAd:
-                        ad = GetOtherVehicleAdFromModel(form);
-                        break;
-                    case (int)AdTypeEnum.VehiculeAd:
-                        ad = GetVehicleAdFromModel(form);
-                        break;
-                    case (int)AdTypeEnum.MotorBoatAd:
-                        ad = GetMotorBoatAdFromModel(form);
-                        break;
-                    case (int)AdTypeEnum.SailingBoatAd:
-                        ad = GetSailingBoatAdFromModel(form);
-                        break;
-                    case (int)AdTypeEnum.MotorBoatEngineAd:
-                        ad = MotorBoatEngineAdFromModel(form);
-                        break;
-                    case (int)AdTypeEnum.WaterSportAd:
-                        ad = WaterSportAdFromModel(form);
-                        break;
-                    case (int)AdTypeEnum.RealEstateAd:
-                        ad = RealEstateAdFromModel(form);
-                        break;
-                    default:
-                        ad = new Ad();
-                        break;
-                }
+                case AdTypeEnum.CarAd:
+                    baseAd = GetAdFromCreateModel<CarAd>(baseAd, model);
+                    break;
+                case AdTypeEnum.RealEstateAd:
+                    baseAd = GetAdFromCreateModel<RealEstateAd>(baseAd, model);
+                    break;
+                case AdTypeEnum.MotoAd:
+                    baseAd = GetAdFromCreateModel<MotoAd>(baseAd, model);
+                    break;
+                case AdTypeEnum.OtherVehiculeAd:
+                    baseAd = GetAdFromCreateModel<OtherVehicleAd>(baseAd, model);
+                    break;
+                case AdTypeEnum.VehiculeAd:
+                    baseAd = GetAdFromCreateModel<VehicleAd>(baseAd, model);
+                    break;
+                case AdTypeEnum.MotorBoatAd:
+                    baseAd = GetAdFromCreateModel<MotorBoatAd>(baseAd, model);
+                    break;
+                case AdTypeEnum.MotorBoatEngineAd:
+                    baseAd = GetAdFromCreateModel<MotorBoatEngineAd>(baseAd, model);
+                    break;
+                case AdTypeEnum.SailingBoatAd:
+                    baseAd = GetAdFromCreateModel<SailingBoatAd>(baseAd, model);
+                    break;
             }
-            else
-                ad = new Ad();
+            return baseAd;
+        }
 
-            return GetCommonAdFromModel(ad, model);
+        private T GetAdFromCreateModel<T>(BaseAd baseAd, AdvancedAdCreateModel model) where T : BaseAd, new()
+        {
+            dynamic ad = new T();
+            //Common data
+            if (model.SelectedCityId.HasValue)
+                ad.City = _repository.Get<City>(model.SelectedCityId.Value);
+            if (model.SelectedCategoryId.HasValue)
+                ad.Category = _repository.Get<Category>(model.SelectedCategoryId.Value);
+            ad.Body = model.Body;
+            ad.CreationDate = DateTime.Now;
+            ad.Price = model.Price.GetValueOrDefault();
+            ad.Title = model.Title;
+            ad.IsOffer = model.IsOffer;
+            ad.PhoneNumber = model.Telephone;
+            ad.ActivationToken = _adActivationServices.GenerateActivationToken();
+            User createdBy = new User();
+            createdBy.Firstname = model.Name;
+            createdBy.Email = model.Email;
+            createdBy.Password = "Password";
+            ad.CreatedBy = createdBy;
+            GetAdPicturesFromModel(ad, model.ImageIds);
+            
+            //Other Data
+            if (model.Km.HasValue)
+                ad.Kilometers = model.Km.Value;
+            if (model.SelectedYearId.HasValue)
+                ad.Year = model.SelectedYearId.Value;
+            if (model.IsAutomatic.HasValue)
+                ad.IsAutomatic = model.IsAutomatic.Value;
+            if (model.SelectedCarBrandId.HasValue)
+                ad.Brand = _repository.Get<VehicleBrand>(model.SelectedCarBrandId.Value);
+            if (model.SelectedFuelId.HasValue)
+                ad.Fuel = _repository.Get<CarFuel>(model.SelectedFuelId);
+            if (model.SelectedMotoBrandId.HasValue)
+                ad.Brand = _repository.Get<MotoBrand>(model.SelectedMotoBrandId.Value);
+            if (model.EngineSize.HasValue)
+                ad.EngineSize = model.EngineSize.Value;
+            
+            if (model.RoomNb.HasValue)
+                ad.RoomsNumber = model.RoomNb.Value;
+            if (model.SelectedRealEstateTypeId.HasValue)
+                ad.Type = _repository.Get<RealEstateType>(model.SelectedRealEstateTypeId);
+            if (model.SurfaceArea.HasValue)
+                ad.SurfaceArea = model.SurfaceArea.Value;
+            if (model.IsFurnished.HasValue)
+                ad.IsFurnished = model.IsFurnished.Value;
+            if (model.SelectedDistrictId.HasValue)
+                ad.District = _repository.Get<District>(model.SelectedDistrictId.Value);
 
+            if (model.Length.HasValue)
+                ad.Length = model.Length.Value;
+            if(model.SelectedSailingBoatTypeId.HasValue)
+                ad.Type = _repository.Get<SailingBoatType>(model.SelectedSailingBoatTypeId);
+            if (model.SelectedHullTypeId.HasValue)
+                ad.HullType = _repository.Get<SailingBoatHullType>(model.SelectedHullTypeId);
+            if (model.SelectedMotorBoatTypeId.HasValue)
+                ad.MotorBoatType = _repository.Get<MotorBoatType>(model.SelectedMotorBoatTypeId);
+            if (model.Hp.HasValue)
+                ad.Hp = model.Hp.Value;
+            if (model.SelectedMotorBoatEngineTypeId.HasValue)
+                ad.Type = _repository.Get<MotorBoatEngineType>(model.SelectedMotorBoatEngineTypeId);
+
+            return ad;
+        }
+
+        private BaseAd GetBaseAdFromCreateModel(AdvancedAdCreateModel model)
+        {
+            BaseAd baseAd = new BaseAd();
+            if (model.SelectedCityId.HasValue)
+                baseAd.City = _repository.Get<City>(model.SelectedCityId.Value);
+            if (model.SelectedCategoryId.HasValue)
+                baseAd.Category = _repository.Get<Category>(model.SelectedCategoryId.Value);
+            baseAd.Body = model.Body;
+            baseAd.CreationDate = DateTime.Now;
+            baseAd.Price = model.Price.GetValueOrDefault();
+            baseAd.Title = model.Title;
+            baseAd.IsOffer = model.IsOffer;
+            baseAd.PhoneNumber = model.Telephone;
+            baseAd.ActivationToken = _adActivationServices.GenerateActivationToken();
+            User createdBy = new User();
+            createdBy.Firstname = model.Name;
+            createdBy.Email = model.Email;
+            createdBy.Password = "Password";
+            baseAd.CreatedBy = createdBy;
+            GetAdPicturesFromModel(baseAd, model.ImageIds);
+            return baseAd;
         }
 
         private BaseAd GetCommonAdFromModel(BaseAd ad, AdCreateModel model)
@@ -143,70 +222,7 @@ namespace Bea.Services.Ads
             return ad;
         }
 
-        private BaseAd WaterSportAdFromModel(Dictionary<string, string> form)
-        {
-            WaterSportAd waterSportsAd = new WaterSportAd();
-
-            int selectedTypeId;
-            bool result = Int32.TryParse(form["SelectedTypeId"], out selectedTypeId);
-            if (result)
-                waterSportsAd.Type = _repository.Get<WaterSportType>(selectedTypeId);
-            return (waterSportsAd);
-        }
-
-        private BaseAd RealEstateAdFromModel(Dictionary<string, string> form)
-        {
-            RealEstateAd realEstateAd = new RealEstateAd();
-
-            int selectedTypeId;
-            bool result = Int32.TryParse(form["SelectedTypeId"], out selectedTypeId);
-            if (result)
-                realEstateAd.Type = _repository.Get<RealEstateType>(selectedTypeId);
-
-            int selectedDistrictId;
-            result = Int32.TryParse(form["SelectedDistrictId"], out selectedDistrictId);
-            if (result)
-                realEstateAd.District = _repository.Get<District>(selectedDistrictId);
-
-            int surface;
-            result = Int32.TryParse(form["SurfaceArea"], out surface);
-            if (result)
-                realEstateAd.SurfaceArea = surface;
-
-            int roomNb;
-            result = Int32.TryParse(form["RoomNb"], out roomNb);
-            if (result)
-                realEstateAd.RoomsNumber = roomNb;
-
-            Boolean isFurnished;
-            result = Boolean.TryParse(form["IsFurnished"], out isFurnished);
-            if (result)
-                realEstateAd.IsFurnished = isFurnished;
-
-            return (realEstateAd);
-        }
-
-        private BaseAd MotorBoatEngineAdFromModel(Dictionary<string, string> form)
-        {
-            MotorBoatEngineAd motorBoatEngineAd = new MotorBoatEngineAd();
-
-            int selectedTypeId;
-            bool result = Int32.TryParse(form["SelectedTypeId"], out selectedTypeId);
-            if (result)
-                motorBoatEngineAd.Type = _repository.Get<MotorBoatEngineType>(selectedTypeId);
-
-            int selectedYearId;
-            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
-            if (result)
-                motorBoatEngineAd.Year = selectedYearId;
-
-            int hP;
-            result = Int32.TryParse(form["Hp"], out hP);
-            if (result)
-                motorBoatEngineAd.Hp = hP;
-
-            return (motorBoatEngineAd);
-        }
+        
 
         public BaseAd GetAdPicturesFromModel(BaseAd ad, String imageIds)
         {
@@ -223,149 +239,9 @@ namespace Bea.Services.Ads
                     image.IsPrimary = true;
                     first = false;
                 }
-
                 ad.AddImage(image);
             }
-
             return ad;
-        }
-
-
-
-
-        private BaseAd GetCarAdFromModel(Dictionary<string, string> form)
-        {
-            CarAd carAd = new CarAd();
-            int kilometer;
-            bool result = Int32.TryParse(form["Km"], out kilometer);
-            if (result)
-                carAd.Kilometers = kilometer;
-            int selectedYearId;
-            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
-            if (result)
-                carAd.Year = selectedYearId;
-            int selectedFuelId;
-            result = Int32.TryParse(form["SelectedFuelId"], out selectedFuelId);
-            if (result)
-                carAd.Fuel = _repository.Get<CarFuel>(selectedFuelId);
-            int selectedBrandId;
-            result = Int32.TryParse(form["SelectedBrandId"], out selectedBrandId);
-            if (result)
-                carAd.Brand = _repository.Get<VehicleBrand>(selectedBrandId);
-            return (carAd);
-        }
-
-        private BaseAd GetSailingBoatAdFromModel(Dictionary<string, string> form)
-        {
-            SailingBoatAd sailingBoatAd = new SailingBoatAd();
-
-            int selectedTypeId;
-            bool result = Int32.TryParse(form["SelectedTypeId"], out selectedTypeId);
-            if (result)
-                sailingBoatAd.Type = _repository.Get<SailingBoatType>(selectedTypeId);
-
-            int selectedHullTypeId;
-            result = Int32.TryParse(form["SelectedHullTypeId"], out selectedHullTypeId);
-            if (result)
-                sailingBoatAd.HullType = _repository.Get<SailingBoatHullType>(selectedHullTypeId);
-
-            int selectedYearId;
-            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
-            if (result)
-                sailingBoatAd.Year = selectedYearId;
-
-            Decimal length;
-            result = Decimal.TryParse(form["Length"], out length);
-            if (result)
-                sailingBoatAd.Length = length;
-
-            return (sailingBoatAd);
-        }
-
-        private BaseAd GetMotorBoatAdFromModel(Dictionary<string, string> form)
-        {
-            MotorBoatAd motorBoatAd = new MotorBoatAd();
-
-            int selectedTypeId;
-            bool result = Int32.TryParse(form["SelectedTypeId"], out selectedTypeId);
-            if (result)
-                motorBoatAd.Type = _repository.Get<MotorBoatType>(selectedTypeId);
-
-            int selectedMotorTypeId;
-            result = Int32.TryParse(form["SelectedMotorTypeId"], out selectedMotorTypeId);
-            if (result)
-                motorBoatAd.MotorType = _repository.Get<MotorBoatEngineType>(selectedMotorTypeId);
-
-            int selectedYearId;
-            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
-            if (result)
-                motorBoatAd.Year = selectedYearId;
-
-            int hP;
-            result = Int32.TryParse(form["Hp"], out hP);
-            if (result)
-                motorBoatAd.Hp = hP;
-
-            Decimal length;
-            result = Decimal.TryParse(form["Length"], out length);
-            if (result)
-                motorBoatAd.Length = length;
-
-            return (motorBoatAd);
-        }
-
-        private BaseAd GetVehicleAdFromModel(Dictionary<string, string> form)
-        {
-            VehicleAd vehicleAd = new VehicleAd();
-            int kilometer;
-            bool result = Int32.TryParse(form["Km"], out kilometer);
-            if (result)
-                vehicleAd.Kilometers = kilometer;
-            int selectedYearId;
-            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
-            if (result)
-                vehicleAd.Year = selectedYearId;
-            return (vehicleAd);
-        }
-
-        private BaseAd GetOtherVehicleAdFromModel(Dictionary<string, string> form)
-        {
-            OtherVehicleAd otherVehicleAd = new OtherVehicleAd();
-            int kilometer;
-            bool result = Int32.TryParse(form["Km"], out kilometer);
-            if (result)
-                otherVehicleAd.Kilometers = kilometer;
-            int selectedYearId;
-            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
-            if (result)
-                otherVehicleAd.Year = selectedYearId;
-            int selectedFuelId;
-            result = Int32.TryParse(form["SelectedFuelId"], out selectedFuelId);
-            if (result)
-                otherVehicleAd.Fuel = _repository.Get<CarFuel>(selectedFuelId);
-            return (otherVehicleAd);
-        }
-
-        private MotoAd GetMotoAdFromModel(Dictionary<string, string> form)
-        {
-            MotoAd motoAd = new MotoAd();
-            int kilometer;
-            bool result = Int32.TryParse(form["Km"], out kilometer);
-            if (result)
-                motoAd.Kilometers = kilometer;
-            int selectedYearId;
-            result = Int32.TryParse(form["SelectedYearId"], out selectedYearId);
-            if (result)
-                motoAd.Year = selectedYearId;
-            int selectedBrandId;
-            result = Int32.TryParse(form["SelectedBrandId"], out selectedBrandId);
-            if (result)
-                motoAd.Brand = _repository.Get<MotoBrand>(selectedBrandId);
-            int engineSize;
-            result = Int32.TryParse(form["EngineSize"], out engineSize);
-            if (result)
-                motoAd.EngineSize = engineSize;
-            return (motoAd);
         }
 
         #endregion

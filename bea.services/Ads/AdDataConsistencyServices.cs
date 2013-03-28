@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using Bea.Domain.Ads.WaterSport;
 using Bea.Models;
 using Bea.Core.Services.Ads;
+using Bea.Models.Create;
 
 namespace Bea.Services.Ads
 {
@@ -16,56 +17,56 @@ namespace Bea.Services.Ads
         private Regex _phoneRegex = new Regex(@"^[0-9]{6}$");
         private Regex _emailRegex = new Regex(@"^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$");
 
-        public IDictionary<string, string> GetAdDataConsistencyErrors(BaseAd ad)
+        public IDictionary<string, string> GetAdDataConsistencyErrors(AdvancedAdCreateModel model)
         {
             IDictionary<string, string> errors = new Dictionary<string, string>();
-            
+
             // Check base ad data consistency
-            GetBaseAdDataConsistencyErrors(ad, errors);
+            GetBaseAdDataConsistencyErrors(model, errors);
 
             // Check user data consistency
-            GetUserDataConsistencyErrors(ad, errors);
+            GetUserDataConsistencyErrors(model, errors);
 
-            if (ad.Category == null)
+            if (model.Type == AdTypeEnum.Undefined)
                 return errors;
 
             // Check specifyc ad data consistency
-            switch (ad.Category.Type)
+            switch (model.Type)
             {
                 case AdTypeEnum.CarAd:
-                    GetCarAdDataConsistencyErrors(ad as CarAd, errors);
+                    GetCarAdDataConsistencyErrors(model, errors);
                     break;
 
                 case AdTypeEnum.MotoAd:
-                    GetMotoAdDataConsistencyErrors(ad as MotoAd, errors);
+                    GetMotoAdDataConsistencyErrors(model, errors);
                     break;
 
                 case AdTypeEnum.OtherVehiculeAd:
-                    GetOtherVehicleAdDataConsistencyErrors(ad as OtherVehicleAd, errors);
+                    GetOtherVehicleAdDataConsistencyErrors(model, errors);
                     break;
 
                 case AdTypeEnum.VehiculeAd:
-                    GetVehicleAdDataConsistencyErrors(ad as VehicleAd, errors);
+                    GetVehicleAdDataConsistencyErrors(model, errors);
                     break;
 
                 case AdTypeEnum.MotorBoatAd:
-                    GetMotorBoatAdDataConsistencyErrors(ad as MotorBoatAd, errors);
+                    GetMotorBoatAdDataConsistencyErrors(model, errors);
                     break;
 
                 case AdTypeEnum.SailingBoatAd:
-                    GetSailingBoatAdDataConsistencyErrors(ad as SailingBoatAd, errors);
+                    GetSailingBoatAdDataConsistencyErrors(model, errors);
                     break;
 
                 case AdTypeEnum.MotorBoatEngineAd:
-                    GetMotorBoatEngineAdDataConsistencyErrors(ad as MotorBoatEngineAd, errors);
+                    GetMotorBoatEngineAdDataConsistencyErrors(model, errors);
                     break;
 
                 case AdTypeEnum.WaterSportAd:
-                    GetWaterSportAdDataConsistencyErrors(ad as WaterSportAd, errors);
+                    GetWaterSportAdDataConsistencyErrors(model, errors);
                     break;
 
                 case AdTypeEnum.RealEstateAd:
-                    GetRealEstateAdDataConsistencyErrors(ad as RealEstateAd, errors);
+                    GetRealEstateAdDataConsistencyErrors(model, errors);
                     break;
                 default:
                     break;
@@ -74,171 +75,171 @@ namespace Bea.Services.Ads
             return errors;
         }
 
-        public IDictionary<string, string> GetBaseAdDataConsistencyErrors(BaseAd ad, IDictionary<string, string> errors)
+        public IDictionary<string, string> GetBaseAdDataConsistencyErrors(AdvancedAdCreateModel model, IDictionary<string, string> errors)
         {
-            if (String.IsNullOrEmpty(ad.Title))
+            if (String.IsNullOrEmpty(model.Title))
                 errors.Add("Title", "Veuillez donner un titre à votre annonce.");
 
-            if (String.IsNullOrEmpty(ad.Body))
+            if (String.IsNullOrEmpty(model.Body))
                 errors.Add("Body", "Veuillez rédiger un texte d'annonce.");
 
-            if (ad.Price < 0)
+            if (model.Price < 0)
                 errors.Add("Price", "Veuillez saisir un prix positif.");
 
-            if (!String.IsNullOrEmpty(ad.PhoneNumber) && !_phoneRegex.IsMatch(ad.PhoneNumber))
+            if (!String.IsNullOrEmpty(model.Telephone) && !_phoneRegex.IsMatch(model.Telephone))
                 errors.Add("Telephone", "Telephone invalide.");
 
-            if (ad.City == null)
+            if (model.SelectedCityId == null)
                 errors.Add("SelectedCityId", "Veuillez sélectionner une ville.");
 
-            if (ad.Category == null)
+            if (model.SelectedCategoryId == null)
                 errors.Add("SelectedCategoryId", "Veuillez séléctionner une catégorie.");
 
             return errors;
         }
 
-        public IDictionary<string, string> GetWaterSportAdDataConsistencyErrors(WaterSportAd waterSportAd, IDictionary<string, string> errors)
+        public IDictionary<string, string> GetWaterSportAdDataConsistencyErrors(AdvancedAdCreateModel model, IDictionary<string, string> errors)
         {
-            if (waterSportAd.Type == null)
-                errors.Add("SelectedTypeId", "Veuillez sélectionner une discipline.");
+            if (model.SelectedWaterSportTypeId == null)
+                errors.Add("SelectedWaterSportTypeId", "Veuillez sélectionner une discipline.");
 
             return errors;
         }
 
-        public IDictionary<string, string> GetMotorBoatEngineAdDataConsistencyErrors(MotorBoatEngineAd motorBoatEngineAd, IDictionary<string, string> errors)
+        public IDictionary<string, string> GetMotorBoatEngineAdDataConsistencyErrors(AdvancedAdCreateModel model, IDictionary<string, string> errors)
         {
-            if (motorBoatEngineAd.Type == null)
-                errors.Add("SelectedTypeId", "Veuillez sélectionner un type de moteur.");
+            if (model.SelectedMotorBoatEngineTypeId == null)
+                errors.Add("SelectedMotorBoatEngineTypeId", "Veuillez sélectionner un type de moteur.");
 
-            if (motorBoatEngineAd.Year == 0)
+            if (model.SelectedYearId == null)
                 errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
 
-            if (motorBoatEngineAd.Hp == 0)
+            if (model.Hp == null)
                 errors.Add("Hp", "Veuillez saisir une puissance.");
 
             return errors;
         }
 
-        public IDictionary<string, string> GetRealEstateAdDataConsistencyErrors(RealEstateAd realEstateAd, IDictionary<string, string> errors)
+        public IDictionary<string, string> GetRealEstateAdDataConsistencyErrors(AdvancedAdCreateModel model, IDictionary<string, string> errors)
         {
-            if (realEstateAd.Type == null)
-                errors.Add("SelectedTypeId", "Veuillez sélectionner un type de bien.");
+            if (model.SelectedRealEstateTypeId == null)
+                errors.Add("SelectedRealEstateTypeId", "Veuillez sélectionner un type de bien.");
 
-            if (realEstateAd.RoomsNumber == 0)
+            if (model.RoomNb == null)
                 errors.Add("RoomNb", "Veuillez sélectionner un nombre de pieces.");
 
-            if (realEstateAd.SurfaceArea == 0)
+            if (model.SurfaceArea == null)
                 errors.Add("SurfaceArea", "Veuillez saisir une superficie.");
 
-            if (realEstateAd.IsFurnished == null)
+            if (model.IsFurnished == null)
                 errors.Add("IsFurnished", "Veuillez selectionner une option.");
 
             return errors;
         }
 
-        public IDictionary<string, string> GetSailingBoatAdDataConsistencyErrors(SailingBoatAd sailingBoatAd, IDictionary<string, string> errors)
+        public IDictionary<string, string> GetSailingBoatAdDataConsistencyErrors(AdvancedAdCreateModel model, IDictionary<string, string> errors)
         {
-            if (sailingBoatAd.HullType == null)
+            if (model.SelectedHullTypeId == null)
                 errors.Add("SelectedHullTypeId", "Veuillez sélectionner une coque.");
 
-            if (sailingBoatAd.Type == null)
-                errors.Add("SelectedTypeId", "Veuillez sélectionner un matériaux.");
+            if (model.SelectedSailingBoatTypeId == null)
+                errors.Add("SelectedSailingBoatTypeId", "Veuillez sélectionner un matériaux.");
 
-            if (sailingBoatAd.Year == 0)
+            if (model.SelectedYearId == null)
                 errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
 
-            if (sailingBoatAd.Length == 0)
+            if (model.Length == null)
                 errors.Add("Length", "Veuillez saisir une longueur.");
 
             return errors;
         }
 
-        public IDictionary<string, string> GetMotorBoatAdDataConsistencyErrors(MotorBoatAd motorBoatAd, IDictionary<string, string> errors)
+        public IDictionary<string, string> GetMotorBoatAdDataConsistencyErrors(AdvancedAdCreateModel model, IDictionary<string, string> errors)
         {
-            if (motorBoatAd.MotorType == null)
+            if (model.SelectedMotorTypeId == null)
                 errors.Add("SelectedMotorTypeId", "Veuillez sélectionner un type de moteur.");
 
-            if (motorBoatAd.Type == null)
-                errors.Add("SelectedTypeId", "Veuillez sélectionner un type.");
+            if (model.SelectedMotorBoatTypeId == null)
+                errors.Add("SelectedMotorBoatTypeId", "Veuillez sélectionner un type.");
 
-            if (motorBoatAd.Year == 0)
+            if (model.SelectedYearId == null)
                 errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
 
-            if (motorBoatAd.Hp == 0)
+            if (model.Hp == null)
                 errors.Add("Hp", "Veuillez saisir une puissance.");
 
-            if (motorBoatAd.Length == 0)
+            if (model.Length == null)
                 errors.Add("Length", "Veuillez saisir une longueur.");
 
             return errors;
         }
 
-        public IDictionary<string, string> GetCarAdDataConsistencyErrors(CarAd carAd, IDictionary<string, string> errors)
+        public IDictionary<string, string> GetCarAdDataConsistencyErrors(AdvancedAdCreateModel model, IDictionary<string, string> errors)
         {
-            if (carAd.Kilometers == 0)
+            if (model.Km==null)
                 errors.Add("Km", "Veuillez séléctionner un kilométrage.");
 
-            if (carAd.Fuel == null)
+            if (model.SelectedFuelId == null)
                 errors.Add("SelectedFuelId", "Veuillez sélectionner un type.");
 
-            if (carAd.Brand == null)
-                errors.Add("SelectedBrandId", "Veuillez sélectionner une marque.");
+            if (model.SelectedCarBrandId == null)
+                errors.Add("SelectedCarBrandId", "Veuillez sélectionner une marque.");
 
-            if (carAd.Year == 0)
+            if (model.SelectedYearId == null)
                 errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
 
             return errors;
         }
 
-        public IDictionary<string, string> GetVehicleAdDataConsistencyErrors(VehicleAd vehicleAd, IDictionary<string, string> errors)
+        public IDictionary<string, string> GetVehicleAdDataConsistencyErrors(AdvancedAdCreateModel model, IDictionary<string, string> errors)
         {
-            if (vehicleAd.Kilometers == 0)
+            if (model.Km == null)
                 errors.Add("Km", "Veuillez séléctionner un kilométrage.");
-            if (vehicleAd.Year == 0)
+            if (model.SelectedYearId == null)
                 errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
 
             return errors;
         }
 
-        public IDictionary<string, string> GetOtherVehicleAdDataConsistencyErrors(OtherVehicleAd carAd, IDictionary<string, string> errors)
+        public IDictionary<string, string> GetOtherVehicleAdDataConsistencyErrors(AdvancedAdCreateModel model, IDictionary<string, string> errors)
         {
-            if (carAd.Kilometers == 0)
+            if (model.Km == null)
                 errors.Add("Km", "Veuillez séléctionner un kilométrage.");
 
-            if (carAd.Fuel == null)
+            if (model.SelectedFuelId == null)
                 errors.Add("SelectedFuelId", "Veuillez sélectionner un type.");
 
-            if (carAd.Year == 0)
+            if (model.SelectedYearId == null)
                 errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
 
             return errors;
         }
 
-        public IDictionary<string, string> GetMotoAdDataConsistencyErrors(MotoAd motoAd, IDictionary<string, string> errors)
+        public IDictionary<string, string> GetMotoAdDataConsistencyErrors(AdvancedAdCreateModel model, IDictionary<string, string> errors)
         {
-            if (motoAd.Kilometers == 0)
+            if (model.Km == null)
                 errors.Add("Km", "Veuillez séléctionner un kilométrage.");
 
-            if (motoAd.Year == 0)
+            if (model.SelectedYearId == null)
                 errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
 
-            if (motoAd.EngineSize == 0)
+            if (model.EngineSize == null)
                 errors.Add("EngineSize", "Veuillez sélectionner une cylindrée.");
 
-            if (motoAd.Brand == null)
-                errors.Add("SelectedBrandId", "Veuillez sélectionner une marque.");
+            if (model.SelectedMotoBrandId == null)
+                errors.Add("SelectedMotoBrandId", "Veuillez sélectionner une marque.");
 
             return errors;
         }
 
-        public IDictionary<string,string> GetUserDataConsistencyErrors(BaseAd ad, IDictionary<string, string> errors)
+        public IDictionary<string, string> GetUserDataConsistencyErrors(AdvancedAdCreateModel model, IDictionary<string, string> errors)
         {
-            if (ad.CreatedBy != null && String.IsNullOrEmpty(ad.CreatedBy.Firstname))
+            if (String.IsNullOrEmpty(model.Name))
                     errors.Add("Name", "Veuillez saisir un nom.");
-            if (ad.CreatedBy != null && String.IsNullOrEmpty(ad.CreatedBy.Email))
+            if (String.IsNullOrEmpty(model.Email))
                     errors.Add("Email", "Veuillez insérer une adresse email.");
             else
-                if (ad.CreatedBy != null && !_emailRegex.IsMatch(ad.CreatedBy.Email))
+                if (!_emailRegex.IsMatch(model.Email))
                             errors.Add("Email", "Email invalide.");
             return errors;
         }

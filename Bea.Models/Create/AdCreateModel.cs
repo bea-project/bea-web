@@ -27,7 +27,7 @@ namespace Bea.Models.Create
         [DisplayName("Email:")]
         public String Email { get; set; }
 
-        [DisplayName("Telephone:")]
+        [DisplayName("Téléphone:")]
         public String Telephone { get; set; }
         
         [DisplayName("Province:")]

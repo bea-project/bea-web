@@ -1,20 +1,17 @@
-﻿using System;
+﻿using Bea.Domain.Ads;
+using Bea.Domain.Categories;
+using Bea.Domain.Location;
+using FluentNHibernate.Mapping;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using FluentNHibernate.Mapping;
-using Bea.Domain.Ads;
-using Bea.Domain;
-using Bea.Domain.Location;
-using Bea.Domain.Categories;
-using Bea.Domain.Reference;
-using Bea.Domain.Ads.WaterSport;
 
-namespace Bea.Dal.Map.Ads.WaterSport
+namespace Bea.Dal.Map.Ads
 {
-    public class MotorBoatMap : SubclassMap<MotorBoatAd>
+    public class VehicleAdMap : SubclassMap<VehicleAd>
     {
-        public MotorBoatMap()
+        public VehicleAdMap()
         {
             Map(x => x.Title).Not.Nullable();
             Map(x => x.Body).Not.Nullable();
@@ -26,12 +23,8 @@ namespace Bea.Dal.Map.Ads.WaterSport
             References<City>(x => x.City).Not.Nullable();
             References<Category>(x => x.Category).Not.Nullable();
 
-            Map(x => x.Length);
+            Map(x => x.Kilometers);
             Map(x => x.Year);
-            Map(x=>x.Hp);
-
-            References<MotorBoatType>(x => x.MotorBoatType);
-            References<MotorBoatEngineType>(x => x.MotorType);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Bea.Models.Details.WaterSport
         public MotorBoatAdDetailsModel(MotorBoatAd ad, IHelperService helper)
             : base(ad)
         {
-            BoatType = ad.Type != null ? ad.Type.Label : String.Empty;
+            BoatType = ad.MotorBoatType != null ? ad.MotorBoatType.Label : String.Empty;
             MotorType = ad.MotorType != null ? ad.MotorType.Label : String.Empty;
             Year = ad.Year != 0 ? ad.Year : (int?) null;
             Length = ad.Length != 0 ? String.Format(helper.GetCulture(), "{0:F2} Mtr", ad.Length) : String.Empty;
