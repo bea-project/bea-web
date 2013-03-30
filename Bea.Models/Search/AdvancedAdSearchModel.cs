@@ -20,10 +20,11 @@ namespace Bea.Models.Search
         public int? EngineSizeBracketSelectedId { get; set; }
 
         // Real Estate
-        public int? MinNbRooms { get; set; }
-        public int? MaxNbRooms { get; set; }
+        public int? NbRoomsBracketSelectedId { get; set; }
         public int? SelectedRealEstateTypeId { get; set; }
         public int? SelectedDistrictId { get; set; }
+        public int? SurfaceAreaBracketSelectedId { get; set; }
+        public Boolean? IsFurnished { get; set; }
 
         //TODO: later v--------------------------v
 

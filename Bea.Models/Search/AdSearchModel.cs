@@ -12,5 +12,7 @@ namespace Bea.Models.Search
         public int? CitySelectedId { get; set; }
         public int? CategorySelectedId { get; set; }
         public String CategorySelectedLabel { get; set; }
+        public double? MinPrice { get; set; }
+        public double? MaxPrice { get; set; }
     }
 }

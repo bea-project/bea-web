@@ -49,7 +49,7 @@ namespace Bea.Web.Controllers
                     ViewBag.KmBrackets = _referenceServices.GetAllKmBrackets().Select(x => new SelectListItem { Text = x.Value.Label, Value = x.Key.ToString() });
                     break;
                 case AdTypeEnum.RealEstateAd:
-                    ViewBag.Rooms = _referenceServices.GetAllRealEstateNbRoom().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
+                    ViewBag.Rooms = _referenceServices.GetAllRealEstateNbRoomsBrackets().Select(x => new SelectListItem { Text = x.Value.Label, Value = x.Key.ToString() }).ToList();
                     ViewBag.Types = _referenceServices.GetAllRealEstateTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     ViewBag.Districts = _locationServices.GetAllDistricts().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;

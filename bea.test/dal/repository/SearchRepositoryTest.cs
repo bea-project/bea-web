@@ -706,7 +706,6 @@ namespace Bea.Test.Dal.repository
             }
         }
 
-
         [TestMethod]
         public void AdvancedSearchAds_RealEstateAds_RealEstateProperties_ReturnRealEstateAd()
         {
@@ -837,6 +836,114 @@ namespace Bea.Test.Dal.repository
                 // Then
                 Assert.AreEqual(1, result.Count);
                 Assert.AreEqual(a2, result[0]);
+            }
+        }
+
+        [TestMethod]
+        public void AdvancedSearchAds_Ad_MinMaxPrice_ReturnMatchingAds()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            SearchRepository adRepo = new SearchRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                // Given
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city",
+                    LabelUrlPart = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Location",
+                    LabelUrlPart = "Location"
+                };
+
+                SearchAdCache a = new SearchAdCache
+                {
+                    AdId = 1,
+                    Title = "chaussure",
+                    Body = "boite a chaussure",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
+                };
+
+                Ad loc = new Ad
+                {
+                    Id = 1,
+                    Title = "chaussure",
+                    Body = "boite a chaussure",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    CreatedBy = u,
+                    Price = 1000
+                };
+
+                repo.Save(p1);
+                repo.Save(c);
+                repo.Save(cat);
+                repo.Save(u);
+                repo.Save(loc);
+                repo.Save(a);
+                
+                SearchAdCache a2 = new SearchAdCache
+                {
+                    AdId = 2,
+                    Title = "chaussure",
+                    Body = "boite a chaussure",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
+                };
+
+                Ad loc2 = new Ad
+                {
+                    Id = 2,
+                    Title = "chaussure",
+                    Body = "boite a chaussure",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    CreatedBy = u,
+                    Price = 2000
+                };
+                repo.Save(loc2);
+                repo.Save(a2);
+
+                repo.Flush();
+
+                #endregion
+
+                AdSearchParameters param = new AdSearchParameters
+                {
+                    MinPrice = 0,
+                    MaxPrice = 1000
+                };
+
+                // When
+                IList<SearchAdCache> result = adRepo.AdvancedSearchAds<Ad>(param);
+
+                // Then
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(a, result[0]);
             }
         }
     }

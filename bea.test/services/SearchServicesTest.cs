@@ -463,10 +463,11 @@ namespace Bea.Test.services
             AdvancedAdSearchModel model = new AdvancedAdSearchModel();
             model.CategorySelectedId = 1;
             model.SearchString = "appart";
-            model.MinNbRooms = 2;
-            model.MaxNbRooms = 4;
+            model.NbRoomsBracketSelectedId = 2;
             model.SelectedDistrictId = 71;
             model.SelectedRealEstateTypeId = 2;
+            model.MinPrice = 0;
+            model.MaxPrice = 100000;
 
             IList<SearchAdCache> searchResult = new List<SearchAdCache>();
             searchResult.Add(new SearchAdCache
@@ -476,6 +477,12 @@ namespace Bea.Test.services
                 Category = cat
             });
 
+            IDictionary<int, BracketItemReference> nbRoomsBr = new Dictionary<int, BracketItemReference>();
+            nbRoomsBr.Add(2, new BracketItemReference { LowValue = 2, HighValue = 3 });
+
+            var refMock = new Moq.Mock<IReferenceServices>();
+            refMock.Setup(s => s.GetAllRealEstateNbRoomsBrackets()).Returns(nbRoomsBr);
+
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(r => r.Get<Category>(cat.Id)).Returns(cat);
 
@@ -484,11 +491,13 @@ namespace Bea.Test.services
                 It.Is<AdSearchParameters>(p =>
                     p.AndSearchStrings[0].Equals("appart")
                     && p.MinNbRooms == 2
-                    && p.MaxNbRooms == 4
+                    && p.MaxNbRooms == 3
+                    && p.MinPrice == 0d
+                    && p.MaxPrice == 100000d
                     && p.RealEstateTypeId == 2
                     && p.DistrictId == 71))).Returns(searchResult);
 
-            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, null);
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, refMock.Object);
 
             // When
             AdSearchResultModel result = service.AdvancedSearchAds(model);

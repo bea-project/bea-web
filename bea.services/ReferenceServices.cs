@@ -10,7 +10,7 @@ namespace Bea.Services
 {
     public class ReferenceServices : IReferenceServices
     {
-       
+
         private readonly IRepository _repository;
 
         public ReferenceServices(IRepository repository)
@@ -24,7 +24,7 @@ namespace Bea.Services
             _kmBrackets.Add(3, new BracketItemReference { Id = 3, Label = "10000 - 20000 Km", LowValue = 9500, HighValue = 20999 });
             _kmBrackets.Add(4, new BracketItemReference { Id = 4, Label = "20000 - 50000 Km", LowValue = 19500, HighValue = 50999 });
             _kmBrackets.Add(5, new BracketItemReference { Id = 5, Label = "50000 Km et plus", LowValue = 49500, HighValue = 1000000 });
-            
+
             _ageBrackets = new Dictionary<int, BracketItemReference>();
             _ageBrackets.Add(1, new BracketItemReference { Id = 1, Label = "jusqu'à 2 ans", LowValue = 0, HighValue = 3 });
             _ageBrackets.Add(2, new BracketItemReference { Id = 2, Label = "2 - 5 ans", LowValue = 1, HighValue = 6 });
@@ -40,15 +40,13 @@ namespace Bea.Services
             _engineSierBrackets.Add(5, new BracketItemReference { Id = 5, Label = "650 - 1000 cm3", LowValue = 649, HighValue = 1001 });
             _engineSierBrackets.Add(6, new BracketItemReference { Id = 6, Label = "1000 cm3 et plus", LowValue = 999, HighValue = 5000 });
 
-            _realEstateNbRooms = new Dictionary<int, string>();
-            _realEstateNbRooms.Add(1, "1");
-            _realEstateNbRooms.Add(2, "2");
-            _realEstateNbRooms.Add(3, "3");
-            _realEstateNbRooms.Add(4, "4");
-            _realEstateNbRooms.Add(5, "5");
-            _realEstateNbRooms.Add(6, "6");
-            _realEstateNbRooms.Add(7, "7");
-            _realEstateNbRooms.Add(8, "8 et plus");
+            _realEstateNbRoomsBracket = new Dictionary<int, BracketItemReference>();
+            _realEstateNbRoomsBracket.Add(1, new BracketItemReference { Id = 1, Label = "1 et 2 pièces", LowValue = 1, HighValue = 2 });
+            _realEstateNbRoomsBracket.Add(2, new BracketItemReference { Id = 2, Label = "2 et 3 pièces", LowValue = 2, HighValue = 3 });
+            _realEstateNbRoomsBracket.Add(3, new BracketItemReference { Id = 3, Label = "3 et 5 pièces", LowValue = 3, HighValue = 5 });
+            _realEstateNbRoomsBracket.Add(4, new BracketItemReference { Id = 4, Label = "6 et 8 pièces", LowValue = 6, HighValue = 8 });
+            _realEstateNbRoomsBracket.Add(5, new BracketItemReference { Id = 5, Label = "8 et plus", LowValue = 8, HighValue = 100 });
+
 
             int currentYear = DateTime.Now.Year;
             int minYear = currentYear - 40;
@@ -57,7 +55,7 @@ namespace Bea.Services
                 _years.Add(year, year.ToString());
             _years[minYear] = minYear + " ou avant";
         }
-        
+
         public IList<MotoBrand> GetAllMotoBrands()
         {
             return _repository.GetAll<MotoBrand>().ToList();
@@ -163,17 +161,17 @@ namespace Bea.Services
         {
             return _engineSierBrackets;
         }
-
-        private IDictionary<int, String> _realEstateNbRooms;
-        public IDictionary<int, String> GetAllRealEstateNbRoom()
-        {
-            return _realEstateNbRooms;
-        }
-
+        
         private IDictionary<int, string> _years;
         public IDictionary<int, string> GetAllYears()
         {
             return _years;
+        }
+
+        private IDictionary<int, BracketItemReference> _realEstateNbRoomsBracket;
+        public IDictionary<int, BracketItemReference> GetAllRealEstateNbRoomsBrackets()
+        {
+            return _realEstateNbRoomsBracket;
         }
 
         #endregion

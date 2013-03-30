@@ -149,10 +149,10 @@ namespace Bea.Web.Controllers
             if (ModelState.IsValid)
             {
                 BaseAd newAd = _adServices.GetAdFromAdCreateModel(model);
-                newAd.IsActivated = false;
                 _adServices.AddAd(newAd);
                 return View("Created");
             }
+
             FillViewLists(model.Type);
             return View(model);
         }
@@ -247,6 +247,7 @@ namespace Bea.Web.Controllers
             }
         }
         #endregion
+
         public ActionResult Contact(long id)
         {
             var result = _adServices.GetAdById(id);

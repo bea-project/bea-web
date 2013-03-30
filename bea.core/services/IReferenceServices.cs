@@ -28,7 +28,7 @@ namespace Bea.Core.Services
         IDictionary<int, BracketItemReference> GetAllAgeBrackets();
         IDictionary<int, BracketItemReference> GetAllEngineSizeBrackets();
         IDictionary<int, String> GetAllYears();
-        IDictionary<int, String> GetAllRealEstateNbRoom();
+        IDictionary<int, BracketItemReference> GetAllRealEstateNbRoomsBrackets();
     }
 
 }

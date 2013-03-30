@@ -142,6 +142,9 @@ namespace Bea.Services
             parameters.CategoryIds = GetCategoryIdsFromQuery(searchQuery.CategorySelectedId);
             parameters.CityId = searchQuery.CitySelectedId;
 
+            parameters.MinPrice = searchQuery.MinPrice;
+            parameters.MaxPrice = searchQuery.MaxPrice;
+
             // -- Vehicles specific properties -- //
             if (searchQuery.AgeBracketSelectedId.HasValue)
             {
@@ -170,8 +173,11 @@ namespace Bea.Services
             //-- Real Estate specific properties --//
             parameters.RealEstateTypeId = searchQuery.SelectedRealEstateTypeId;
             parameters.DistrictId = searchQuery.SelectedDistrictId;
-            parameters.MinNbRooms = searchQuery.MinNbRooms;
-            parameters.MaxNbRooms = searchQuery.MaxNbRooms;
+            if (searchQuery.NbRoomsBracketSelectedId.HasValue)
+            {
+                parameters.MinNbRooms = _referenceServices.GetAllRealEstateNbRoomsBrackets()[searchQuery.NbRoomsBracketSelectedId.Value].LowValue;
+                parameters.MaxNbRooms = _referenceServices.GetAllRealEstateNbRoomsBrackets()[searchQuery.NbRoomsBracketSelectedId.Value].HighValue;
+            }
 
             return parameters;
         }
