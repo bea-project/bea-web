@@ -173,10 +173,16 @@ namespace Bea.Services
             //-- Real Estate specific properties --//
             parameters.RealEstateTypeId = searchQuery.SelectedRealEstateTypeId;
             parameters.DistrictId = searchQuery.SelectedDistrictId;
+            parameters.IsFurnished = searchQuery.IsFurnished;
             if (searchQuery.NbRoomsBracketSelectedId.HasValue)
             {
                 parameters.MinNbRooms = _referenceServices.GetAllRealEstateNbRoomsBrackets()[searchQuery.NbRoomsBracketSelectedId.Value].LowValue;
                 parameters.MaxNbRooms = _referenceServices.GetAllRealEstateNbRoomsBrackets()[searchQuery.NbRoomsBracketSelectedId.Value].HighValue;
+            }
+            if (searchQuery.SurfaceAreaBracketSelectedId.HasValue)
+            {
+                parameters.MinSurfaceArea = _referenceServices.GetAllSurfaceAreaBrackets()[searchQuery.SurfaceAreaBracketSelectedId.Value].LowValue;
+                parameters.MaxSurfaceArea = _referenceServices.GetAllSurfaceAreaBrackets()[searchQuery.SurfaceAreaBracketSelectedId.Value].HighValue;
             }
 
             return parameters;

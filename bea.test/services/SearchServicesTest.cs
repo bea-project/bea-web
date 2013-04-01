@@ -50,7 +50,7 @@ namespace Bea.Test.services
             };
 
             SearchServices service = new SearchServices(null, null, adRepoMock.Object, null, null);
-            
+
             // When
             AdSearchResultModel result = service.SearchAds(model);
 
@@ -304,7 +304,7 @@ namespace Bea.Test.services
             ageRef.Add(1, new BracketItemReference { LowValue = 0, HighValue = 3 });
             IDictionary<int, BracketItemReference> kmRef = new Dictionary<int, BracketItemReference>();
             kmRef.Add(1, new BracketItemReference { LowValue = 50, HighValue = 100 });
-            
+
             var refMock = new Moq.Mock<IReferenceServices>();
             refMock.Setup(s => s.GetAllAgeBrackets()).Returns(ageRef);
             refMock.Setup(s => s.GetAllKmBrackets()).Returns(kmRef);
@@ -386,7 +386,7 @@ namespace Bea.Test.services
                     && p.BrandId == 19
                     && p.MinEngineSize == 250
                     && p.MaxEngineSize == 650))).Returns(searchResult);
-            
+
             SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
 
             // When
@@ -460,14 +460,18 @@ namespace Bea.Test.services
             // Given
             Category cat = new Category { Id = 1, LabelUrlPart = "cat-url-label", Label = "Label", Type = AdTypeEnum.RealEstateAd };
 
-            AdvancedAdSearchModel model = new AdvancedAdSearchModel();
-            model.CategorySelectedId = 1;
-            model.SearchString = "appart";
-            model.NbRoomsBracketSelectedId = 2;
-            model.SelectedDistrictId = 71;
-            model.SelectedRealEstateTypeId = 2;
-            model.MinPrice = 0;
-            model.MaxPrice = 100000;
+            AdvancedAdSearchModel model = new AdvancedAdSearchModel()
+            {
+                CategorySelectedId = 1,
+                SearchString = "appart",
+                NbRoomsBracketSelectedId = 2,
+                SelectedDistrictId = 71,
+                SelectedRealEstateTypeId = 2,
+                MinPrice = 0,
+                MaxPrice = 100000,
+                SurfaceAreaBracketSelectedId = 3,
+                IsFurnished = true
+            };
 
             IList<SearchAdCache> searchResult = new List<SearchAdCache>();
             searchResult.Add(new SearchAdCache
@@ -480,8 +484,12 @@ namespace Bea.Test.services
             IDictionary<int, BracketItemReference> nbRoomsBr = new Dictionary<int, BracketItemReference>();
             nbRoomsBr.Add(2, new BracketItemReference { LowValue = 2, HighValue = 3 });
 
+            IDictionary<int, BracketItemReference> surfBr = new Dictionary<int, BracketItemReference>();
+            surfBr.Add(3, new BracketItemReference { LowValue = 45, HighValue = 70 });
+
             var refMock = new Moq.Mock<IReferenceServices>();
             refMock.Setup(s => s.GetAllRealEstateNbRoomsBrackets()).Returns(nbRoomsBr);
+            refMock.Setup(s => s.GetAllSurfaceAreaBrackets()).Returns(surfBr);
 
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(r => r.Get<Category>(cat.Id)).Returns(cat);
@@ -495,6 +503,9 @@ namespace Bea.Test.services
                     && p.MinPrice == 0d
                     && p.MaxPrice == 100000d
                     && p.RealEstateTypeId == 2
+                    && p.MinSurfaceArea == 45
+                    && p.MaxSurfaceArea == 70
+                    && p.IsFurnished.Value
                     && p.DistrictId == 71))).Returns(searchResult);
 
             SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, refMock.Object);

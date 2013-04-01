@@ -774,7 +774,9 @@ namespace Bea.Test.Dal.repository
                     CreatedBy = u,
                     Type = t1,
                     District = d,
-                    RoomsNumber = 5
+                    RoomsNumber = 5,
+                    IsFurnished = true,
+                    SurfaceArea = 45
                 };
                 
                 repo.Save(t1);
@@ -812,7 +814,9 @@ namespace Bea.Test.Dal.repository
                     CreatedBy = u,
                     Type = t1,
                     District = d,
-                    RoomsNumber = 4
+                    RoomsNumber = 4,
+                    IsFurnished = true,
+                    SurfaceArea = 65
                 };
                 repo.Save(loc2);
                 repo.Save(a2);
@@ -827,7 +831,10 @@ namespace Bea.Test.Dal.repository
                     MinNbRooms = 2,
                     MaxNbRooms = 4,
                     DistrictId = 1,
-                    RealEstateTypeId = 1
+                    RealEstateTypeId = 1,
+                    IsFurnished = true,
+                    MinSurfaceArea = 60,
+                    MaxSurfaceArea = 65
                 };
 
                 // When

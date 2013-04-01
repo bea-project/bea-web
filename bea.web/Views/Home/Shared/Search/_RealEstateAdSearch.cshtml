@@ -2,8 +2,13 @@
 
 <h6><i class="  icon-pencil"></i>&nbsp; Filtrer les annonces (optionnel)</h6>
 <div class="controls controls-row">
-    @Html.TextBoxFor(Model => Model.MaxPrice, new { @class = "input-medium", @placeholder = "montant max..." })
     @Html.DropDownListFor(Model => Model.SelectedRealEstateTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Type", new { @class = "input-medium" })
     @Html.DropDownListFor(Model => Model.NbRoomsBracketSelectedId, (IEnumerable<SelectListItem>)ViewBag.Rooms, "Nb pièces", new { @class = "input-medium" })
+    @Html.DropDownListFor(Model => Model.SurfaceAreaBracketSelectedId, (IEnumerable<SelectListItem>)ViewBag.SurfaceAreas, "Surface", new { @class = "input-medium" })
     @Html.DropDownListFor(Model => Model.SelectedDistrictId, (IEnumerable<SelectListItem>)ViewBag.Districts, "Quartier", new { @class = "input-medium" })
+    @Html.DropDownListFor(Model => Model.IsFurnished, (IEnumerable<SelectListItem>)ViewBag.FurnishedList, "Vide/Meublé", new { @class = "input-medium" })
+    <div class="input-append">
+        @Html.TextBoxFor(Model => Model.MaxPrice, new { @class = "input-small", @placeholder = "Montant max..." })
+        <span class="add-on">Cfp</span>
+    </div>
 </div>

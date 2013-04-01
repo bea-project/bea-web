@@ -47,7 +47,13 @@ namespace Bea.Services
             _realEstateNbRoomsBracket.Add(4, new BracketItemReference { Id = 4, Label = "6 et 8 pièces", LowValue = 6, HighValue = 8 });
             _realEstateNbRoomsBracket.Add(5, new BracketItemReference { Id = 5, Label = "8 et plus", LowValue = 8, HighValue = 100 });
 
-
+            _surfaceAreaBrackets = new Dictionary<int, BracketItemReference>();
+            _surfaceAreaBrackets.Add(1, new BracketItemReference { Id = 1, Label = "jusqu'à 30 m²", LowValue = 0, HighValue = 30 });
+            _surfaceAreaBrackets.Add(2, new BracketItemReference { Id = 2, Label = "25 à 50 m²", LowValue = 25, HighValue = 50 });
+            _surfaceAreaBrackets.Add(3, new BracketItemReference { Id = 3, Label = "45 à 70 m²", LowValue = 45, HighValue = 70 });
+            _surfaceAreaBrackets.Add(4, new BracketItemReference { Id = 3, Label = "60 à 90 m²", LowValue = 60, HighValue = 90 });
+            _surfaceAreaBrackets.Add(5, new BracketItemReference { Id = 3, Label = "90 m² et plus", LowValue = 90, HighValue = 1000 });
+            
             int currentYear = DateTime.Now.Year;
             int minYear = currentYear - 40;
             _years = new Dictionary<int, string>();
@@ -172,6 +178,12 @@ namespace Bea.Services
         public IDictionary<int, BracketItemReference> GetAllRealEstateNbRoomsBrackets()
         {
             return _realEstateNbRoomsBracket;
+        }
+
+        private IDictionary<int, BracketItemReference> _surfaceAreaBrackets;
+        public IDictionary<int, BracketItemReference> GetAllSurfaceAreaBrackets()
+        {
+            return _surfaceAreaBrackets;
         }
 
         #endregion

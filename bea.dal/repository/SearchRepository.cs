@@ -133,6 +133,15 @@ namespace Bea.Dal.Repository
             if (parameters.RealEstateTypeId.HasValue)
                 crit.Add(Restrictions.Eq("Type.Id", parameters.RealEstateTypeId));
 
+            if (parameters.IsFurnished.HasValue)
+                crit.Add(Restrictions.Eq("IsFurnished", parameters.IsFurnished));
+
+            if (parameters.MinSurfaceArea.HasValue)
+                crit.Add(Restrictions.Ge("SurfaceArea", parameters.MinSurfaceArea));
+
+            if (parameters.MaxSurfaceArea.HasValue)
+                crit.Add(Restrictions.Le("SurfaceArea", parameters.MaxSurfaceArea));
+
             crit.SetProjection(Projections.Property("Id"));
 
             return crit;

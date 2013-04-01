@@ -50,8 +50,10 @@ namespace Bea.Web.Controllers
                     break;
                 case AdTypeEnum.RealEstateAd:
                     ViewBag.Rooms = _referenceServices.GetAllRealEstateNbRoomsBrackets().Select(x => new SelectListItem { Text = x.Value.Label, Value = x.Key.ToString() }).ToList();
+                    ViewBag.SurfaceAreas = _referenceServices.GetAllSurfaceAreaBrackets().Select(x => new SelectListItem { Text = x.Value.Label, Value = x.Key.ToString() }).ToList();
                     ViewBag.Types = _referenceServices.GetAllRealEstateTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     ViewBag.Districts = _locationServices.GetAllDistricts().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                    ViewBag.FurnishedList = new List<SelectListItem>() { new SelectListItem { Text = "Meublé", Value = "true" }, new SelectListItem { Text = "Non meublé", Value = "false" } };
                     break;
                 case AdTypeEnum.MotorBoatAd:
                     ViewBag.Years = _referenceServices.GetAllYears().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();

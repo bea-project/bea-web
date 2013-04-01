@@ -27,7 +27,7 @@ namespace Bea.Core.Dal
         public int? MaxNbRooms { get; set; }
         public int? RealEstateTypeId { get; set; }
         public int? DistrictId { get; set; }
-        public int? IsFurnished { get; set; }
+        public Boolean? IsFurnished { get; set; }
         public int? MinSurfaceArea { get; set; }
         public int? MaxSurfaceArea { get; set; }
     }
