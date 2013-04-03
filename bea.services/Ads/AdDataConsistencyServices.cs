@@ -116,6 +116,9 @@ namespace Bea.Services.Ads
 
             if (model.Hp == null)
                 errors.Add("Hp", "Veuillez saisir une puissance.");
+            else
+                if (model.Hp.Value < 0)
+                    errors.Add("Hp", "Puissance incorrecte.");
 
             return errors;
         }
@@ -127,9 +130,15 @@ namespace Bea.Services.Ads
 
             if (model.RoomNb == null)
                 errors.Add("RoomNb", "Veuillez sélectionner un nombre de pieces.");
+            else
+                if(model.RoomNb.Value<0)
+                    errors.Add("RoomNb", "Nombre de pieces incorrecte.");
 
             if (model.SurfaceArea == null)
                 errors.Add("SurfaceArea", "Veuillez saisir une superficie.");
+            else
+                if (model.SurfaceArea.Value<0)
+                    errors.Add("SurfaceArea", "Superficie incorrecte.");
 
             if (model.IsFurnished == null)
                 errors.Add("IsFurnished", "Veuillez selectionner une option.");
@@ -150,6 +159,9 @@ namespace Bea.Services.Ads
 
             if (model.Length == null)
                 errors.Add("Length", "Veuillez saisir une longueur.");
+            else
+                if(model.Length.Value<0)
+                    errors.Add("Length", "Longueur incorrecte.");
 
             return errors;
         }
@@ -167,9 +179,15 @@ namespace Bea.Services.Ads
 
             if (model.Hp == null)
                 errors.Add("Hp", "Veuillez saisir une puissance.");
+            else
+                if (model.Hp.Value<0)
+                    errors.Add("Hp", "Puissance incorrecte.");
 
             if (model.Length == null)
                 errors.Add("Length", "Veuillez saisir une longueur.");
+            else
+                if (model.Length.Value < 0)
+                    errors.Add("Length", "Longueur incorrecte.");
 
             return errors;
         }
@@ -178,6 +196,9 @@ namespace Bea.Services.Ads
         {
             if (model.Km==null)
                 errors.Add("Km", "Veuillez séléctionner un kilométrage.");
+            else
+                if (model.Km.Value < 0)
+                    errors.Add("Km", "Kilométrage incorrecte.");
 
             if (model.SelectedFuelId == null)
                 errors.Add("SelectedFuelId", "Veuillez sélectionner un type.");
@@ -195,6 +216,9 @@ namespace Bea.Services.Ads
         {
             if (model.Km == null)
                 errors.Add("Km", "Veuillez séléctionner un kilométrage.");
+            else
+                if (model.Km.Value < 0)
+                    errors.Add("Km", "Kilométrage incorrecte.");
             if (model.SelectedYearId == null)
                 errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
 
@@ -205,6 +229,9 @@ namespace Bea.Services.Ads
         {
             if (model.Km == null)
                 errors.Add("Km", "Veuillez séléctionner un kilométrage.");
+            else
+                if (model.Km.Value < 0)
+                    errors.Add("Km", "Kilométrage incorrecte.");
 
             if (model.SelectedFuelId == null)
                 errors.Add("SelectedFuelId", "Veuillez sélectionner un type.");
@@ -219,12 +246,18 @@ namespace Bea.Services.Ads
         {
             if (model.Km == null)
                 errors.Add("Km", "Veuillez séléctionner un kilométrage.");
+            else
+                if (model.Km.Value < 0)
+                    errors.Add("Km", "Kilométrage incorrecte.");
 
             if (model.SelectedYearId == null)
                 errors.Add("SelectedYearId", "Veuillez sélectionner une annee-modele.");
 
             if (model.EngineSize == null)
                 errors.Add("EngineSize", "Veuillez sélectionner une cylindrée.");
+            else
+                if(model.EngineSize.Value<0)
+                    errors.Add("EngineSize", "Cylindrée incorrecte.");
 
             if (model.SelectedMotoBrandId == null)
                 errors.Add("SelectedMotoBrandId", "Veuillez sélectionner une marque.");

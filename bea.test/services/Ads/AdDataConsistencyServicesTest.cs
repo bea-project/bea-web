@@ -229,6 +229,34 @@ namespace Bea.Test.Services
         }
 
         [TestMethod]
+        public void GetAdDataConsistencyErrors_CarAd_NegativeKilometer_ReturnsDictionaryWithKilometerError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedFuelId = 1,
+                SelectedCarBrandId = 1,
+                SelectedYearId = 2008,
+                Km = -55000,
+                Type = AdTypeEnum.CarAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Km"));
+        }
+
+        [TestMethod]
         public void GetAdDataConsistencyErrors_CarAd_MissingFuel_ReturnsDictionaryWithFuelError()
         {
             // Given
@@ -366,6 +394,34 @@ namespace Bea.Test.Services
         }
 
         [TestMethod]
+        public void GetAdDataConsistencyErrors_MotoAd_NegativeKilometer_ReturnsDictionaryWithKilometerError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotoBrandId = 1,
+                SelectedYearId = 2008,
+                EngineSize = 600,
+                Km = -55000,
+                Type = AdTypeEnum.MotoAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Km"));
+        }
+
+        [TestMethod]
         public void GetAdDataConsistencyErrors_MotoAd_MissingEngineSize_ReturnsDictionaryWithEngineSizeError()
         {
             // Given
@@ -393,6 +449,34 @@ namespace Bea.Test.Services
         }
 
         [TestMethod]
+        public void GetAdDataConsistencyErrors_MotoAd_NegativeEngineSize_ReturnsDictionaryWithEngineSizeError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotoBrandId = 1,
+                SelectedYearId = 2008,
+                Km = 55000,
+                EngineSize = -600,
+                Type = AdTypeEnum.MotoAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("EngineSize"));
+        }
+
+        [TestMethod]
         public void GetAdDataConsistencyErrors_MotoAd_MissingYear_ReturnsDictionaryWithYearError()
         {
             // Given
@@ -406,7 +490,6 @@ namespace Bea.Test.Services
                 Name = "My Name",
                 Email = "name@isp.com",
                 SelectedMotoBrandId = 1,
-                
                 Km = 55000,
                 EngineSize = 600,
                 Type = AdTypeEnum.MotoAd
@@ -498,6 +581,31 @@ namespace Bea.Test.Services
         }
 
         [TestMethod]
+        public void GetAdDataConsistencyErrors_VehicleAd_NegativeKiliometer_ReturnsDictionaryWithKmError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedYearId = 2008,
+                Km = -55000,
+                Type = AdTypeEnum.VehiculeAd
+            };
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Km"));
+        }
+
+        [TestMethod]
         public void GetAdDataConsistencyErrors_VehicleAd_NoYear_ReturnsDictionaryWithYear()
         {
             // Given
@@ -565,6 +673,32 @@ namespace Bea.Test.Services
                 Email = "name@isp.com",
                 SelectedYearId = 2008,
                 SelectedFuelId = 1,
+                Type = AdTypeEnum.OtherVehiculeAd
+            };
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Km"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_OtherVehicleAd_NegativeKiliometer_ReturnsDictionaryWithKmError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedYearId = 2008,
+                SelectedFuelId = 1,
+                Km = -55000,
                 Type = AdTypeEnum.OtherVehiculeAd
             };
             // When
@@ -685,6 +819,34 @@ namespace Bea.Test.Services
         }
 
         [TestMethod]
+        public void GetAdDataConsistencyErrors_RealEstateAd_NegativeRoomNb_ReturnsDictionaryWithRoomNbError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SurfaceArea = 50,
+                SelectedRealEstateTypeId = 1,
+                IsFurnished = true,
+                RoomNb = -5,
+                Type = AdTypeEnum.RealEstateAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("RoomNb"));
+        }
+
+        [TestMethod]
         public void GetAdDataConsistencyErrors_RealEstateAd_NoSurfaceArea_ReturnsDictionaryWithSurfaceAreaError()
         {
             // Given
@@ -700,6 +862,34 @@ namespace Bea.Test.Services
                 RoomNb = 5,
                 SelectedRealEstateTypeId = 1,
                 IsFurnished = true,
+                Type = AdTypeEnum.RealEstateAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SurfaceArea"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_RealEstateAd_NegativeSurfaceArea_ReturnsDictionaryWithSurfaceAreaError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                RoomNb = 5,
+                SelectedRealEstateTypeId = 1,
+                IsFurnished = true,
+                SurfaceArea = -50,
                 Type = AdTypeEnum.RealEstateAd
             };
 
@@ -767,5 +957,590 @@ namespace Bea.Test.Services
 
         
         #endregion
+
+        #region GetMotorBoatAdDataConsistencyErrors
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatAdAd_NoError_ReturnsEmptyDictionary()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotorBoatTypeId = 1,
+                Length = 5,
+                SelectedYearId = 2011,
+                SelectedMotorTypeId = 1,
+                Hp=200,
+                Type = AdTypeEnum.MotorBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(0, actual.Count);
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatAdAd_NegativeHp_ReturnsDictionaryWithHpError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotorBoatTypeId = 1,
+                Length = 5,
+                SelectedYearId = 2011,
+                SelectedMotorTypeId = 1,
+                Hp = -200,
+                Type = AdTypeEnum.MotorBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Hp"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatAdAd_NoHp_ReturnsDictionaryWithHpError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotorBoatTypeId = 1,
+                Length = 5,
+                SelectedYearId = 2011,
+                SelectedMotorTypeId = 1,
+                Type = AdTypeEnum.MotorBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Hp"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatAdAd_NoSelectedMotorBoatTypeId_ReturnsDictionaryWithSelectedMotorBoatTypeIdError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                Length = 5,
+                SelectedYearId = 2011,
+                SelectedMotorTypeId = 1,
+                Hp = 220,
+                Type = AdTypeEnum.MotorBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedMotorBoatTypeId"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatAdAd_NegativeLength_ReturnsDictionaryWithLengthError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotorBoatTypeId = 1,
+                Length = -5,
+                SelectedYearId = 2011,
+                SelectedMotorTypeId = 1,
+                Hp = 220,
+                Type = AdTypeEnum.MotorBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Length"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatAdAd_NoLength_ReturnsDictionaryWithLengthError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotorBoatTypeId = 1,
+                SelectedYearId = 2011,
+                SelectedMotorTypeId = 1,
+                Hp = 220,
+                Type = AdTypeEnum.MotorBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Length"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatAdAd_NoYear_ReturnsDictionaryWithYearError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotorBoatTypeId = 1,
+                Length = 5,
+                SelectedMotorTypeId = 1,
+                Hp = 200,
+                Type = AdTypeEnum.MotorBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedYearId"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatAdAd_NoSelectedMotorTypeId_ReturnsDictionaryWithSelectedMotorTypeIdError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotorBoatTypeId = 1,
+                Length = 5,
+                SelectedYearId = 2011,
+                Hp = 200,
+                Type = AdTypeEnum.MotorBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedMotorTypeId"));
+        }
+
+        #endregion
+
+        #region GetSailingBoatAdDataConsistencyErrors
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_SailingBoatAdAd_NoError_ReturnsEmptyDictionary()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedSailingBoatTypeId = 1,
+                Length = 5,
+                SelectedYearId = 2011,
+                SelectedHullTypeId = 1,
+                Type = AdTypeEnum.SailingBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(0, actual.Count);
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_SailingBoatAdAd_NoSelectedSailingBoatTypeId_ReturnsDictionaryWithSelectedSailingBoatTypeIdErrors()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                Length = 5,
+                SelectedYearId = 2011,
+                SelectedHullTypeId = 1,
+                Type = AdTypeEnum.SailingBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedSailingBoatTypeId"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_SailingBoatAdAd_NoLength_ReturnsDictionaryWithoLengthErrors()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedSailingBoatTypeId = 1,
+                SelectedYearId = 2011,
+                SelectedHullTypeId = 1,
+                Type = AdTypeEnum.SailingBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Length"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_SailingBoatAdAd_NegativeLength_ReturnsDictionaryWithoLengthErrors()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedSailingBoatTypeId = 1,
+                Length = -5,
+                SelectedYearId = 2011,
+                SelectedHullTypeId = 1,
+                Type = AdTypeEnum.SailingBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Length"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_SailingBoatAdAd_NoSelectedYearId_ReturnsDictionaryWithSelectedYearIdErrors()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedSailingBoatTypeId = 1,
+                Length = 5,
+                SelectedHullTypeId = 1,
+                Type = AdTypeEnum.SailingBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedYearId"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_SailingBoatAdAd_NoSelectedHullTypeId_ReturnsDictionaryWithSelectedHullTypeIdErrors()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedSailingBoatTypeId = 1,
+                Length = 5,
+                SelectedYearId = 2011,
+                Type = AdTypeEnum.SailingBoatAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedHullTypeId"));
+        }
+
+        #endregion
+
+        #region GetMotorBoatEngineAdDataConsistencyErrors
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatEngineAdAd_NoError_ReturnsEmptyDictionary()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotorBoatEngineTypeId =1,
+                Hp=500,
+                SelectedYearId=2011,
+                Type = AdTypeEnum.MotorBoatEngineAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(0, actual.Count);
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatEngineAdAd_NoSelectedMotorBoatEngineTypeId_ReturnsDictionaryWithSelectedMotorBoatEngineTypeIdError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                Hp = 500,
+                SelectedYearId = 2011,
+                Type = AdTypeEnum.MotorBoatEngineAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedMotorBoatEngineTypeId"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatEngineAdAd_NoHp_ReturnsDictionaryWithSelectedHpError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotorBoatEngineTypeId = 1,
+                SelectedYearId = 2011,
+                Type = AdTypeEnum.MotorBoatEngineAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Hp"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatEngineAdAd_NegativeHp_ReturnsDictionaryWithSelectedHpError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotorBoatEngineTypeId = 1,
+                Hp = -500,
+                SelectedYearId = 2011,
+                Type = AdTypeEnum.MotorBoatEngineAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Hp"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_MotorBoatEngineAdAd_NoSelectedYearId_ReturnsDictionaryWithSelectedYearId()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedMotorBoatEngineTypeId = 1,
+                Hp = 500,
+                Type = AdTypeEnum.MotorBoatEngineAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedYearId"));
+        }
+
+        #endregion
+
+        #region GetWaterSportAdDataConsistencyErrors
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_WaterSportAdAd_NoError_ReturnsEmptyDictionary()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SelectedWaterSportTypeId = 1,
+                Type = AdTypeEnum.WaterSportAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(0, actual.Count);
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_WaterSportAdAd_NoSelectedWaterSportTypeId_ReturnsDictionaryWithWaterSportError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                Type = AdTypeEnum.WaterSportAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedWaterSportTypeId"));
+        }
+
+        #endregion
+
     }
 }
