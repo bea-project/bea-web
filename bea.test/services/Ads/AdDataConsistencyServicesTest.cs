@@ -127,6 +127,7 @@ namespace Bea.Test.Services
         }
         #endregion
 
+        #region CheckEmailConsistency
         [TestMethod]
         public void IsEmailValid_Null_Email_Returns_False()
         {
@@ -154,7 +155,7 @@ namespace Bea.Test.Services
             Assert.AreEqual(false, actual);
 
         }
-
+        
         [TestMethod]
         public void IsEmailValid_Valid_Email_Returns_True()
         {
@@ -169,7 +170,7 @@ namespace Bea.Test.Services
             Assert.AreEqual(true, actual);
 
         }
-
+        #endregion
 
         #region GetCarAdDataConsistencyErrors
 
@@ -625,6 +626,146 @@ namespace Bea.Test.Services
         }
 
 
+        #endregion
+
+        #region GetRealEstateAdDataConsistencyErrors
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_RealEstateAd_NoError_ReturnsEmptyDictionary()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                RoomNb = 5,
+                SurfaceArea = 50,
+                SelectedRealEstateTypeId = 1,
+                IsFurnished = true,
+                Type = AdTypeEnum.RealEstateAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(0, actual.Count);
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_RealEstateAd_NoRoomNb_ReturnsDictionaryWithRoomNbError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                SurfaceArea = 50,
+                SelectedRealEstateTypeId = 1,
+                IsFurnished = true,
+                Type = AdTypeEnum.RealEstateAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("RoomNb"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_RealEstateAd_NoSurfaceArea_ReturnsDictionaryWithSurfaceAreaError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                RoomNb = 5,
+                SelectedRealEstateTypeId = 1,
+                IsFurnished = true,
+                Type = AdTypeEnum.RealEstateAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SurfaceArea"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_RealEstateAd_NoRealEstateType_ReturnsDictionaryWithSelectedRealEstateTypeIdError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                RoomNb = 5,
+                SurfaceArea = 50,
+                IsFurnished = true,
+                Type = AdTypeEnum.RealEstateAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("SelectedRealEstateTypeId"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_RealEstateAd_NoIsFurnished_ReturnsDictionaryWithIsFurnishedError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                RoomNb = 5,
+                SurfaceArea = 50,
+                SelectedRealEstateTypeId = 1,
+                Type = AdTypeEnum.RealEstateAd
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("IsFurnished"));
+        }
+
+        
         #endregion
     }
 }
