@@ -1,35 +1,26 @@
 ﻿@model Bea.Models.Create.AdvancedAdCreateModel
-
 @Html.HiddenFor(model => model.Type)
-
-    <div class="row">
-        <div class="span3">
-            <label class="control-label" for="inputType">Type:</label>
-            <div class="controls">
-                @Html.DropDownListFor(model => model.SelectedMotorBoatEngineTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Choisissez un type", new { @class = "input-large" })
-                @Html.ValidationMessageFor(model => model.SelectedMotorBoatEngineTypeId, String.Empty, new { @class = "label label-important" })
+<div class="row-fluid">
+    <div class="span6">
+        <dt>Type:</dt>
+        <dd>
+            @Html.DropDownListFor(model => model.SelectedMotorBoatEngineTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Choisissez un type", new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.SelectedMotorBoatEngineTypeId, String.Empty, new { @class = "label label-important" })
+        </dd>
+        <dt>Puissance Moteur:</dt>
+        <dd>
+            <div class="input-prepend">
+                @Html.TextBoxFor(model => model.Hp, new { @class = "input- input-mini" })
+                <span class="add-on">CV</span>
             </div>
-        </div>
-        <div class="span1"></div>
-        <div class="span3">
-                <label class="control-label" for="inputYear">Année-Modele:</label>
-                <div class="controls">
-                @Html.DropDownListFor(model => model.SelectedYearId, (IEnumerable<SelectListItem>)ViewBag.Years, "Choisissez une année", new { @class = "input-large" })
-                @Html.ValidationMessageFor(model => model.SelectedYearId, String.Empty, new { @class = "label label-important" })
-                </div>
-        </div>
+            @Html.ValidationMessageFor(model => model.Hp, String.Empty, new { @class = "label label-important" })
+        </dd>
     </div>
-     <div class="row">
-        <div class="span3">
-                <label class="control-label" for="inputHp">Puissance Moteur:</label>
-                <div class="controls">
-                    <div class="input-prepend">
-                        @Html.TextBoxFor(model => model.Hp, new { @class = "input- input-medium" })
-                        <span class="add-on">Cv</span>
-                    </div>
-                    @Html.ValidationMessageFor(model => model.Hp, String.Empty, new { @class = "label label-important" })
-                </div>
-        </div>
-        <div class="span1"></div>
-        
-     </div>
+    <div class="span3">
+        <dt>Année-Modele:</dt>
+        <dd>
+            @Html.DropDownListFor(model => model.SelectedYearId, (IEnumerable<SelectListItem>)ViewBag.Years, "Choisissez une année", new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.SelectedYearId, String.Empty, new { @class = "label label-important" })
+        </dd>
+    </div>
+</div>

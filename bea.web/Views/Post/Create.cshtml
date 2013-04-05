@@ -4,76 +4,139 @@
     ViewBag.Title = "Create";
 }
 <div class="hero-unit">
-    <h1>Créez votre annonce !
-    </h1>
+    <h3>Créez votre annonce !
+    </h3>
     <p class="tagline">
         C'est simple et gratuit. Remplissez le formulaire ci-dessous, cliquez sur le lien que nous vous envoyons par email et voila, votre annonce est en ligne !
     </p>
 </div>
 
-@using (Html.BeginForm("Create", "Post", FormMethod.Post, new { @class = "well form-horizontal" }))
+
+@using (Html.BeginForm("Create", "Post", FormMethod.Post))
 {   
-    <div class="row">
-
-        <div class="span6">
-
-            <h4><i class="icon-globe"></i>&nbsp;Localisation</h4>
-            <div class="control-group">
-                <label class="control-label" for="inputProvince">Province:</label>
-                <div class="controls controls-row">
+    
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="span7">
+                <div class="legend-like"><i class="icon-globe"></i>&nbsp;&nbsp;Localisation</div>
+                <dt>Province:</dt>
+                <dd>
                     @Html.DropDownListFor(model => model.SelectedProvinceId, Enumerable.Empty<SelectListItem>(), "Choisissez la province", new { @class = "input-large" })
                     @Html.ValidationMessageFor(model => model.SelectedProvinceId, String.Empty, new { @class = "label label-important" })
-                </div>
-
-                <label class="control-label" for="inputCity">Ville:</label>
-                <div class="controls controls-row">
+                </dd>
+                <dt>Ville:</dt>
+                <dd>
                     @Html.DropDownListFor(model => model.SelectedCityId, Enumerable.Empty<SelectListItem>(), "Choisissez la ville", new { @class = "input-large" })
                     @Html.ValidationMessageFor(model => model.SelectedCityId, String.Empty, new { @class = "label label-important" })
-                </div>
-            </div>
+                </dd>
 
-            <h4><i class="icon-user"></i>&nbsp;Vos informations</h4>
-            <div class="control-group">
-                <label class="control-label" for="inputName">Votre nom:</label>
-                <div class="controls controls-row">
+                <div class="legend-like"><i class="icon-user"></i>&nbsp;&nbsp;Vos informations</div>
+                <dt>Votre nom:</dt>
+                <dd>
                     @Html.TextBoxFor(model => model.Name, new { @class = "input-large", rel = "tooltip" })
                     @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "label label-important" })
-                </div>
-
-                <label class="control-label" for="inputEmail">Email:</label>
-                <div class="controls controls-row">
+                </dd>
+                <dt>Email:</dt>
+                <dd>
                     @Html.TextBoxFor(model => model.Email, new { @class = "input-large", rel = "tooltip" })
                     @Html.ValidationMessageFor(model => model.Email, String.Empty, new { @class = "label label-important" })
-                </div>
-
-                <label class="control-label" for="inputPhone">Téléphone:</label>
-                <div class="controls controls-row">
+                </dd>
+                <dt>Téléphone:</dt>
+                <dd>
                     @Html.TextBoxFor(model => model.Telephone, new { @class = "input-large", rel = "tooltip" })
                     @Html.ValidationMessageFor(model => model.Telephone, String.Empty, new { @class = "label label-important" })
-                </div>
-            </div>
+                </dd>
 
-            <h4><i class="icon-th-list"></i>&nbsp;Categorie</h4>
-            <div class="control-group">
-                <label class="control-label" for="inputCategory">Catégorie:</label>
-                <div class="controls controls-row">
+                <div class="legend-like"><i class="icon-th-list"></i>&nbsp;&nbsp;Categorie</div>
+                <dt>Catégorie:</dt>
+                <dd>
                     @Html.DropDownListFor(model => model.SelectedCategoryId, Enumerable.Empty<SelectListItem>(), "Choisissez la catégorie", new { @class = "input-large", id = "categories" })
                     @Html.ValidationMessageFor(model => model.SelectedCategoryId, String.Empty, new { @class = "label label-important" })
-                </div>
-
-                <label class="control-label " for="inputIsOffer">ype d'annonce:</label>
-                <div class="controls controls-row">
-                    <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, true, new { @checked = "checked", @style = "vertical-align: top" }) Offre</label>
-                    <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, false, new { @style = "vertical-align: top" }) Demande</label>
-                </div>
+                </dd>
+                <dt>Type d'annonce:</dt>
+                <dd>
+                    <div class="controls controls-row">
+                        <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, true, new { @checked = "checked", @style = "vertical-align: top" }) Offre</label>
+                        <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsOffer, false, new { @style = "vertical-align: top" }) Demande</label>
+                    </div>
+                </dd>
+                <dd>&nbsp;</dd>
+            </div>
+            <div class="span5">
+                <div class="legend-like"><i class="icon-camera"></i>&nbsp;&nbsp;Vos photos</div>
+                @Html.Partial("Shared/Create/_ImageUpload", Model)
+                
             </div>
         </div>
-        <div class="span5">
-            @Html.Partial("Shared/Create/_ImageUpload", Model)
+        <div class="row">
+            <div class="span9">
+                <div class="legend-like"><i class="  icon-pencil"></i>&nbsp;&nbsp;Votre annonce</div>
+                <dt>Titre de l'annonce:</dt>
+                <dd>
+                    @Html.TextBoxFor(x => x.Title, new { @class = "input-xxlarge" })
+                    @Html.ValidationMessageFor(model => model.Title, String.Empty, new { @class = "label label-important" })
+                </dd>
+                <div id="parameters">
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.CarAd)
+            {
+                @Html.Partial("Shared/Create/_CarAdCreate", Model);
+            }
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.MotoAd)
+            {
+                @Html.Partial("Shared/Create/_MotoAdCreate", Model);
+            }
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.OtherVehiculeAd)
+            {
+                @Html.Partial("Shared/Create/_OtherVehicleAdCreate", Model);
+            }
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.VehiculeAd)
+            {
+                @Html.Partial("Shared/Create/_VehicleAdCreate", Model);
+            }
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.MotorBoatAd)
+            {
+                @Html.Partial("Shared/Create/_MotorBoatAdCreate", Model);
+            }
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.SailingBoatAd)
+            {
+                @Html.Partial("Shared/Create/_SailingBoatAdCreate", Model);
+            }
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.MotorBoatEngineAd)
+            {
+                @Html.Partial("Shared/Create/_MotorBoatEngineAdCreate", Model);
+            }
+            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.WaterSportAd)
+            {
+                @Html.Partial("Shared/Create/_WaterSportAdCreate", Model);
+            }
+             @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.RealEstateAd)
+            {
+                @Html.Partial("Shared/Create/_RealEstateAdCreate", Model);
+            }
         </div>
+                <dt>Corps de l'annonce:</dt>
+                <dd>
+                    @Html.TextAreaFor(model => model.Body, new { @rows = 10, @class = "input-xxlarge", style = "resize: none;" })
+                    @Html.ValidationMessageFor(model => model.Body, String.Empty, new { @class = "label label-important" })
+                </dd>
+                <dt>Prix:</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.Price, new { @class = "input-large" })
+                    @Html.ValidationMessageFor(model => model.Price, String.Empty, new { @class = "label label-important" })
+                </dd>
+            </div>
+        </div>
+        <dd>&nbsp;</dd>
+        <dd>
+            @Html.AntiForgeryToken()
+            @Html.ActionLink("Annuler", "Index", new { controller = "Home" }, new { @class = "btn" })
+            <button id="submitButton" type="submit" class="btn btn-primary">Valider</button>
+        </dd>
+    </dl>
 
-    </div>
-    
+           @*
+
+        
     <h4><i class="  icon-pencil"></i>&nbsp;Votre annonce</h4>
     <div class="control-group">
         <label class="control-label" for="inputTitle">Titre de l'annonce:</label>
@@ -142,7 +205,8 @@
             @Html.AntiForgeryToken()
             <button id="submitButton" type="submit" class="btn btn-primary">Valider</button>
         </div>
-    </div>
+    </div>*@
+        
 }
 
 
@@ -258,7 +322,7 @@
                     .attr('value', this.Id)
                     .attr('selected', selected)
                     .text(this.Label);
-                    
+
                 if (this.IsGroup) {
                     optionElement.attr('disabled', 1);
                     optionElement.attr('style', 'color: #006DCC;');

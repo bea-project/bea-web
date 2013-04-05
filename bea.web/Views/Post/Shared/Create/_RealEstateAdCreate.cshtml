@@ -1,51 +1,36 @@
 ﻿@model Bea.Models.Create.AdvancedAdCreateModel
-
 @Html.HiddenFor(model => model.Type)
-
-<div class="row">
-        <div class="span3">
-            <label class="control-label" for="inputBrand">Type de bien:</label>
-            <div class="controls">
-                @Html.DropDownListFor(model => model.SelectedRealEstateTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Choisissez un type", new { @class = "input-large" })
-                @Html.ValidationMessageFor(model => model.SelectedRealEstateTypeId, String.Empty, new { @class = "label label-important" })
+<div class="row-fluid">
+    <div class="span6">
+        <dt>Type de bien:</dt>
+        <dd>
+           @Html.DropDownListFor(model => model.SelectedRealEstateTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Choisissez un type", new { @class = "input-large" })
+           @Html.ValidationMessageFor(model => model.SelectedRealEstateTypeId, String.Empty, new { @class = "label label-important" })
+        </dd>
+        <dt>Quartier:</dt>
+        <dd>
+            @Html.DropDownListFor(model => model.SelectedDistrictId, (IEnumerable<SelectListItem>)ViewBag.Districts, "Choisissez un quartier", new { @class = "input-large" })
+            @Html.ValidationMessageFor(model => model.SelectedDistrictId, String.Empty, new { @class = "label label-important" })
+        </dd>
+        <dt>Superficie:</dt>
+        <dd>
+            <div class="input-prepend">
+                @Html.TextBoxFor(model => model.SurfaceArea, new { @class = "input- input-mini" })
+                <span class="add-on">m²</span>
             </div>
-        </div>
-        <div class="span1"></div>
-        <div class="span3">
-            <label class="control-label" for="inputFuel">Quartier:</label>
-            <div class="controls">
-                @Html.DropDownListFor(model => model.SelectedDistrictId, (IEnumerable<SelectListItem>)ViewBag.Districts, "Choisissez un quartier", new { @class = "input-large" })
-                @Html.ValidationMessageFor(model => model.SelectedDistrictId, String.Empty, new { @class = "label label-important" })
-            </div>
-        </div>
+            @Html.ValidationMessageFor(model => model.SurfaceArea, String.Empty, new { @class = "label label-important" })
+        </dd>
     </div>
-    <div class="row">
-        <div class="span3">
-            <label class="control-label" for="inputKm">Superficie:</label>
-            <div class="controls">
-                <div class="input-prepend">
-                    @Html.TextBoxFor(model => model.SurfaceArea, new { @class = "input- input-medium" })
-                    <span class="add-on">m²</span>
-                </div>
-                @Html.ValidationMessageFor(model => model.SurfaceArea, String.Empty, new { @class = "label label-important" })
-            </div>
-        </div>
-        <div class="span1"></div>
-        <div class="span3">
-                <label class="control-label" for="inputKm">Nombre de pieces:</label>
-                <div class="controls">
-                    @Html.TextBoxFor(model => model.RoomNb, new { @class = "input-large" })
-                    @Html.ValidationMessageFor(model => model.RoomNb, String.Empty, new { @class = "label label-important" })
-                </div>
-        </div>
-     </div>
-
-
-        <label class="control-label" for="inputIsOffer">Meublé:</label>
-        <div class="controls controls-row">
+    <div class="span6">
+        <dt>Nombre de pieces:</dt>
+        <dd>
+            @Html.TextBoxFor(model => model.RoomNb, new { @class = "input-mini" })
+            @Html.ValidationMessageFor(model => model.RoomNb, String.Empty, new { @class = "label label-important" })
+        </dd>
+        <dt>Meublé:</dt>
+        <dd>
             <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsFurnished, true, new { @checked = "checked", @style = "vertical-align: top" }) Meublé</label>
             <label class="checkbox inline">@Html.RadioButtonFor(model => model.IsFurnished, false, new { @style = "vertical-align: top" }) Non Meublé</label>
-
-        </div>
-
-
+        </dd>
+    </div>
+</div>
