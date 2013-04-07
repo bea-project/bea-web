@@ -66,7 +66,7 @@ namespace Bea.Web.NhibernateHelper
                 noumea.Label = "Nouméa";
                 noumea.LabelUrlPart = "Noumea";
 
-                noumea.AddDistrict(new District { Label = "Centre-Ville"});
+                noumea.AddDistrict(new District { Label = "Centre-Ville" });
                 noumea.AddDistrict(new District { Label = "Nouville" });
                 noumea.AddDistrict(new District { Label = "Quartier Latin" });
                 noumea.AddDistrict(new District { Label = "Vallée du Génie" });
@@ -168,7 +168,7 @@ namespace Bea.Web.NhibernateHelper
 
                 _repository.Flush();
             }
-             
+
         }
 
         public void InsertReferences()
@@ -367,7 +367,7 @@ namespace Bea.Web.NhibernateHelper
             _repository.Save(new DeletionReason { Label = "J'ai vendu / loué mon bien sur un autre site" });
             _repository.Save(new DeletionReason { Label = "J'ai vendu / loué mon bien par un autre moyen" });
             _repository.Save(new DeletionReason { Label = "Je souhaite renouveler mon annonce pour la faire apparaitre en tête de liste" });
-            
+
             _repository.Flush();
         }
 
@@ -380,30 +380,30 @@ namespace Bea.Web.NhibernateHelper
             vehicles.ImageName = "car";
             vehicles.Label = "Véhicules";
             vehicles.LabelUrlPart = "Vehicules";
-            vehicles.AddCategory(new Category {ImageName = "car", Label = "Voitures", LabelUrlPart = "Voitures", Type = AdTypeEnum.CarAd });
-            vehicles.AddCategory(new Category {ImageName = "car", Label = "Motos", LabelUrlPart = "Motos", Type = AdTypeEnum.MotoAd });
-            vehicles.AddCategory(new Category {ImageName = "car", Label = "Voiturettes", LabelUrlPart = "Voiturettes", Type = AdTypeEnum.VehiculeAd });
-            vehicles.AddCategory(new Category {ImageName = "car", Label = "4 x 4", LabelUrlPart = "4x4-Tout-Terrain", Type = AdTypeEnum.CarAd });
-            vehicles.AddCategory(new Category {ImageName = "car", Label = "Autres Véhicules", LabelUrlPart = "AutresVehicules", Type = AdTypeEnum.OtherVehiculeAd });
-            vehicles.AddCategory(new Category {ImageName = "car", Label = "Equipement auto", LabelUrlPart = "Equipement-Auto", Type = AdTypeEnum.Ad });
-            vehicles.AddCategory(new Category {ImageName = "car", Label = "Equipement moto", LabelUrlPart = "Equipement-Moto", Type = AdTypeEnum.Ad });
-            vehicles.AddCategory(new Category {ImageName = "car", Label = "Tuning", LabelUrlPart = "Tuning", Type = AdTypeEnum.Ad });
+            vehicles.AddCategory(new Category { ImageName = "car", Label = "Voitures", LabelUrlPart = "Voitures", Type = AdTypeEnum.CarAd });
+            vehicles.AddCategory(new Category { ImageName = "car", Label = "Motos & Scooters", LabelUrlPart = "Motos-Scooters", Type = AdTypeEnum.MotoAd });
+            vehicles.AddCategory(new Category { ImageName = "car", Label = "Voiturettes", LabelUrlPart = "Voiturettes", Type = AdTypeEnum.VehiculeAd });
+            vehicles.AddCategory(new Category { ImageName = "car", Label = "4 x 4", LabelUrlPart = "4x4-Tout-Terrain", Type = AdTypeEnum.CarAd });
+            vehicles.AddCategory(new Category { ImageName = "car", Label = "Autres Véhicules", LabelUrlPart = "AutresVehicules", Type = AdTypeEnum.OtherVehiculeAd });
+            vehicles.AddCategory(new Category { ImageName = "car", Label = "Equipement auto", LabelUrlPart = "Equipement-Auto", Type = AdTypeEnum.Ad });
+            vehicles.AddCategory(new Category { ImageName = "car", Label = "Equipement moto", LabelUrlPart = "Equipement-Moto", Type = AdTypeEnum.Ad });
+            vehicles.AddCategory(new Category { ImageName = "car", Label = "Tuning", LabelUrlPart = "Tuning", Type = AdTypeEnum.Ad });
             _sessionFactory.GetCurrentSession().Save(vehicles);
 
             Category nautisme = new Category();
             nautisme.ImageName = "ship";
             nautisme.Label = "Nautisme";
             nautisme.LabelUrlPart = "Nautisme";
-            nautisme.AddCategory(new Category {ImageName = "ship", Label = "Bateaux à moteur", LabelUrlPart = "BateauxMoteur", Type = AdTypeEnum.MotorBoatAd });
-            nautisme.AddCategory(new Category {ImageName = "ship", Label = "Propulseurs", LabelUrlPart = "Propulseurs", Type = AdTypeEnum.MotorBoatEngineAd });
-            nautisme.AddCategory(new Category {ImageName = "ship", Label = "Voiliers", LabelUrlPart = "Voiliers", Type = AdTypeEnum.SailingBoatAd });
-            nautisme.AddCategory(new Category {ImageName = "ship", Label = "Accastillage / Sécurité", LabelUrlPart = "Accastillage-Securite", Type = AdTypeEnum.Ad });
-            nautisme.AddCategory(new Category {ImageName = "ship", Label = "Remorques", LabelUrlPart = "Remorques", Type = AdTypeEnum.Ad });
-            nautisme.AddCategory(new Category {ImageName = "ship", Label = "Sports / Loisirs", LabelUrlPart = "Sports-Loisirs", Type = AdTypeEnum.WaterSportAd });
-            nautisme.AddCategory(new Category {ImageName = "ship", Label = "Matériel de pêche", LabelUrlPart = "Peche", Type = AdTypeEnum.Ad });
-            nautisme.AddCategory(new Category {ImageName = "ship", Label = "Moto Marines", LabelUrlPart = "MotoMarines", Type = AdTypeEnum.Ad });
-            nautisme.AddCategory(new Category {ImageName = "ship", Label = "Equipement / Electronique", LabelUrlPart = "Equipement-Electronique", Type = AdTypeEnum.Ad });
-            nautisme.AddCategory(new Category {ImageName = "ship", Label = "Divers", LabelUrlPart = "Divers", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { ImageName = "ship", Label = "Bateaux à moteur", LabelUrlPart = "BateauxMoteur", Type = AdTypeEnum.MotorBoatAd });
+            nautisme.AddCategory(new Category { ImageName = "ship", Label = "Propulseurs", LabelUrlPart = "Propulseurs", Type = AdTypeEnum.MotorBoatEngineAd });
+            nautisme.AddCategory(new Category { ImageName = "ship", Label = "Voiliers", LabelUrlPart = "Voiliers", Type = AdTypeEnum.SailingBoatAd });
+            nautisme.AddCategory(new Category { ImageName = "ship", Label = "Accastillage / Sécurité", LabelUrlPart = "Accastillage-Securite", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { ImageName = "ship", Label = "Remorques", LabelUrlPart = "Remorques", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { ImageName = "ship", Label = "Sports / Loisirs", LabelUrlPart = "Sports-Loisirs", Type = AdTypeEnum.WaterSportAd });
+            nautisme.AddCategory(new Category { ImageName = "ship", Label = "Matériel de pêche", LabelUrlPart = "Peche", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { ImageName = "ship", Label = "Moto Marines", LabelUrlPart = "MotoMarines", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { ImageName = "ship", Label = "Equipement / Electronique", LabelUrlPart = "Equipement-Electronique", Type = AdTypeEnum.Ad });
+            nautisme.AddCategory(new Category { ImageName = "ship", Label = "Divers", LabelUrlPart = "Divers", Type = AdTypeEnum.Ad });
 
             _sessionFactory.GetCurrentSession().Save(nautisme);
 
@@ -411,60 +411,74 @@ namespace Bea.Web.NhibernateHelper
             realEstate.ImageName = "building";
             realEstate.Label = "Immobilier";
             realEstate.LabelUrlPart = "Immobilier";
-            realEstate.AddCategory(new Category {ImageName = "building", Label = "Locations", LabelUrlPart = "Locations", Type = AdTypeEnum.RealEstateAd });
-            realEstate.AddCategory(new Category {ImageName = "building", Label = "Ventes immobilières", LabelUrlPart = "Ventes", Type = AdTypeEnum.RealEstateAd });
-            realEstate.AddCategory(new Category {ImageName = "building", Label = "Colocations", LabelUrlPart = "Colocations", Type = AdTypeEnum.RealEstateAd });
-            realEstate.AddCategory(new Category {ImageName = "building", Label = "Locations de vacances", LabelUrlPart = "Vacances", Type = AdTypeEnum.RealEstateAd });
-            realEstate.AddCategory(new Category {ImageName = "building", Label = "Gardiennage", LabelUrlPart = "Gardiennage", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { ImageName = "building", Label = "Locations", LabelUrlPart = "Locations", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { ImageName = "building", Label = "Ventes immobilières", LabelUrlPart = "Ventes", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { ImageName = "building", Label = "Colocations", LabelUrlPart = "Colocations", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { ImageName = "building", Label = "Locations de vacances", LabelUrlPart = "Vacances", Type = AdTypeEnum.RealEstateAd });
+            realEstate.AddCategory(new Category { ImageName = "building", Label = "Gardiennage", LabelUrlPart = "Gardiennage", Type = AdTypeEnum.RealEstateAd });
             _sessionFactory.GetCurrentSession().Save(realEstate);
 
             Category multimedia = new Category();
+            multimedia.ImageName = "tv";
             multimedia.Label = "Multimedia";
             multimedia.LabelUrlPart = "Multimedia";
-            multimedia.AddCategory(new Category { Label = "Informatique", LabelUrlPart = "Informatique", Type = AdTypeEnum.Ad });
-            multimedia.AddCategory(new Category { Label = "Consoles & Jeux vidéo", LabelUrlPart = "Jeux-Videos-Consoles", Type = AdTypeEnum.Ad });
-            multimedia.AddCategory(new Category { Label = "Image & Son", LabelUrlPart = "Image-Son", Type = AdTypeEnum.Ad });
-            multimedia.AddCategory(new Category { Label = "Téléphonie", LabelUrlPart = "Telephonie", Type = AdTypeEnum.Ad });
+            multimedia.AddCategory(new Category { ImageName = "tv", Label = "Informatique", LabelUrlPart = "Informatique", Type = AdTypeEnum.Ad });
+            multimedia.AddCategory(new Category { ImageName = "tv", Label = "Consoles & Jeux vidéo", LabelUrlPart = "Jeux-Videos-Consoles", Type = AdTypeEnum.Ad });
+            multimedia.AddCategory(new Category { ImageName = "tv", Label = "Image & Son", LabelUrlPart = "Image-Son", Type = AdTypeEnum.Ad });
+            multimedia.AddCategory(new Category { ImageName = "tv", Label = "Téléphonie", LabelUrlPart = "Telephonie", Type = AdTypeEnum.Ad });
+            multimedia.AddCategory(new Category { ImageName = "tv", Label = "DVD & Films", LabelUrlPart = "DVD-Films", Type = AdTypeEnum.Ad });
+            multimedia.AddCategory(new Category { ImageName = "tv", Label = "CD & Musique", LabelUrlPart = "CD-Musique", Type = AdTypeEnum.Ad });
             _sessionFactory.GetCurrentSession().Save(multimedia);
 
             Category maison = new Category();
             maison.ImageName = "home";
             maison.Label = "Maison";
             maison.LabelUrlPart = "Maison";
-            maison.AddCategory(new Category {ImageName = "home", Label = "Meubles", LabelUrlPart = "Meubles", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category {ImageName = "home", Label = "Electroménager", LabelUrlPart = "Electromenager", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category {ImageName = "home", Label = "Arts de la table", LabelUrlPart = "Arts-Table", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category {ImageName = "home", Label = "Décoration", LabelUrlPart = "Decoration", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category {ImageName = "home", Label = "Linge de maison", LabelUrlPart = "Linge-Maison", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category {ImageName = "home", Label = "Bricolage", LabelUrlPart = "Bricolage", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category {ImageName = "home", Label = "Jardin", LabelUrlPart = "Jardin", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category {ImageName = "home", Label = "Vêtements", LabelUrlPart = "Vetements", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category {ImageName = "home", Label = "Chaussures", LabelUrlPart = "Chassures", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category {ImageName = "home", Label = "Accessoires & Bagagerie", LabelUrlPart = "Accessoires-Bagagerie", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category {ImageName = "home", Label = "Montres & Bijoux", LabelUrlPart = "Montres-Bijoux", Type = AdTypeEnum.Ad });
-            maison.AddCategory(new Category {ImageName = "home", Label = "Bébé", LabelUrlPart = "Bebe", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { ImageName = "home", Label = "Meubles", LabelUrlPart = "Meubles", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { ImageName = "home", Label = "Electroménager", LabelUrlPart = "Electromenager", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { ImageName = "home", Label = "Arts de la table", LabelUrlPart = "Arts-Table", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { ImageName = "home", Label = "Décoration", LabelUrlPart = "Decoration", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { ImageName = "home", Label = "Linge de maison", LabelUrlPart = "Linge-Maison", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { ImageName = "home", Label = "Jardin & Bricolage", LabelUrlPart = "Bricolage", Type = AdTypeEnum.Ad });
+            maison.AddCategory(new Category { ImageName = "home", Label = "Bébé", LabelUrlPart = "Bebe", Type = AdTypeEnum.Ad });
             _sessionFactory.GetCurrentSession().Save(maison);
+
+            Category beaute = new Category();
+            beaute.ImageName = "hanger";
+            beaute.Label = "Beauté & Mode";
+            beaute.LabelUrlPart = "Beaute-Mode";
+            beaute.AddCategory(new Category { ImageName = "home", Label = "Vêtements", LabelUrlPart = "Vetements", Type = AdTypeEnum.Ad });
+            beaute.AddCategory(new Category { ImageName = "home", Label = "Chaussures", LabelUrlPart = "Chassures", Type = AdTypeEnum.Ad });
+            beaute.AddCategory(new Category { ImageName = "home", Label = "Accessoires & Bagagerie", LabelUrlPart = "Accessoires-Bagagerie", Type = AdTypeEnum.Ad });
+            beaute.AddCategory(new Category { ImageName = "home", Label = "Montres & Bijoux", LabelUrlPart = "Montres-Bijoux", Type = AdTypeEnum.Ad });
+            _sessionFactory.GetCurrentSession().Save(beaute);
 
             Category loisirs = new Category();
             loisirs.ImageName = "ball";
             loisirs.Label = "Loisirs";
             loisirs.LabelUrlPart = "Loisirs";
-            loisirs.AddCategory(new Category {ImageName = "ball", Label = "DVD & Films", LabelUrlPart = "DVD-Films", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category {ImageName = "ball", Label = "CD & Musique", LabelUrlPart = "CD-Musique", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category {ImageName = "ball", Label = "Livres", LabelUrlPart = "Livres", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category {ImageName = "ball", Label = "Animaux", LabelUrlPart = "Animaux", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category {ImageName = "ball", Label = "Vélos", LabelUrlPart = "Velos", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category {ImageName = "ball", Label = "Sports & Hobbies", LabelUrlPart = "Sports-Hobbies", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category {ImageName = "ball", Label = "Instruments de musique", LabelUrlPart = "Instruments-Musique", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category {ImageName = "ball", Label = "Collections", LabelUrlPart = "Collections", Type = AdTypeEnum.Ad });
-            loisirs.AddCategory(new Category {ImageName = "ball", Label = "Jeux & Jouets", LabelUrlPart = "Jeux-Jouets", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { ImageName = "ball", Label = "Livres", LabelUrlPart = "Livres", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { ImageName = "ball", Label = "Animaux", LabelUrlPart = "Animaux", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { ImageName = "ball", Label = "Vélos", LabelUrlPart = "Velos", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { ImageName = "ball", Label = "Sports & Hobbies", LabelUrlPart = "Sports-Hobbies", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { ImageName = "ball", Label = "Instruments de musique", LabelUrlPart = "Instruments-Musique", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { ImageName = "ball", Label = "Collections", LabelUrlPart = "Collections", Type = AdTypeEnum.Ad });
+            loisirs.AddCategory(new Category { ImageName = "ball", Label = "Jeux & Jouets", LabelUrlPart = "Jeux-Jouets", Type = AdTypeEnum.Ad });
             _sessionFactory.GetCurrentSession().Save(loisirs);
 
-            Category autre = new Category();
-            autre.Label = "Autres";
-            autre.LabelUrlPart = "Autres";
-            autre.AddCategory(new Category { Label = "Autres", LabelUrlPart = "Autres", Type = AdTypeEnum.Ad });
-            _sessionFactory.GetCurrentSession().Save(autre);
+            Category service = new Category();
+            service.ImageName = "shake";
+            service.Label = "Emplois & Services";
+            service.LabelUrlPart = "Emplois-services";
+            service.AddCategory(new Category { ImageName = "shake", Label = "Offres d'emplois", LabelUrlPart = "Offres-Emplois", Type = AdTypeEnum.Ad });
+            service.AddCategory(new Category { ImageName = "shake", Label = "Offres de service", LabelUrlPart = "Offres-Service", Type = AdTypeEnum.Ad });
+            _sessionFactory.GetCurrentSession().Save(service);
+
+            //Category autre = new Category();
+            //autre.Label = "Autres";
+            //autre.LabelUrlPart = "Autres";
+            //autre.AddCategory(new Category { Label = "Autres", LabelUrlPart = "Autres", Type = AdTypeEnum.Ad });
+            //_sessionFactory.GetCurrentSession().Save(autre);
         }
 
         public void InsertReferenceData()
@@ -539,10 +553,10 @@ namespace Bea.Web.NhibernateHelper
                     ad = new Ad();
                     normalCategories[Faker.RandomNumber.Next(0, nbCategories - 1)].AddAd(ad);
 
-                    Faker.Lorem.Words(3).ForEach(s => ad.Title += " "+s);
+                    Faker.Lorem.Words(3).ForEach(s => ad.Title += " " + s);
                     ad.Body = Faker.Lorem.Paragraph();
                     ad.IsOffer = true;
-                    
+
                     ad.CreationDate = DateTime.Now
                         .AddDays(Faker.RandomNumber.Next(-7, 0))
                         .AddHours(Faker.RandomNumber.Next(1, 23))
@@ -560,7 +574,7 @@ namespace Bea.Web.NhibernateHelper
                     ad.ActivationToken = "activateme";
 
                     _repository.Get<City>(Faker.RandomNumber.Next(1, nbCities)).AddAd(ad);
-                    
+
                     _sessionFactory.GetCurrentSession().Save(ad);
 
                 }
