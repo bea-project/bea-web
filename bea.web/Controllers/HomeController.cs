@@ -21,11 +21,8 @@ namespace Bea.Web.Controllers
         private IEmailServices _emailService;
 
         public HomeController(ISearchServices searchServices, ICategoryServices categoryServices, ILocationServices locationServices, IReferenceServices referenceServices, IEmailServices emailService)
-            :base(locationServices,referenceServices)
+            : base(locationServices, referenceServices)
         {
-            if (searchServices == null)
-                throw new ArgumentNullException("searchServices");
-
             _searchServices = searchServices;
             _categoryServices = categoryServices;
             _emailService = emailService;
@@ -73,7 +70,7 @@ namespace Bea.Web.Controllers
 
                 case AdTypeEnum.OtherVehiculeAd:
                     return PartialView("Shared/Search/_OtherVehicleAdSearch", model);
-                
+
                 case AdTypeEnum.RealEstateAd:
                     return PartialView("Shared/Search/_RealEstateAdSearch", model);
 

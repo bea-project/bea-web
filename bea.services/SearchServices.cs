@@ -81,6 +81,7 @@ namespace Bea.Services
                 {
                     model.CategorySelectedId = c.Id;
                     model.CategorySelectedLabel = c.Label;
+                    model.CategoryImagePath = c.ImageName;
                 }
             }
 

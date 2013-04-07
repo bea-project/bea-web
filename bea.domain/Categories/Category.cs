@@ -13,6 +13,7 @@ namespace Bea.Domain.Categories
         public virtual String LabelUrlPart { get; set; }
         public virtual IList<BaseAd> Ads { get; set; }
         public virtual AdTypeEnum Type { get; set; }
+        public virtual String ImageName { get; set; }
 
         public virtual Category ParentCategory { get; set; }
         public virtual IList<Category> SubCategories { get; set; }

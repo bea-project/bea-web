@@ -1,0 +1,145 @@
+﻿@model Bea.Models.Search.AdSearchModel
+
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+            <div class="row-fluid" style="margin:10px">
+                <div class="span1">
+                    <img src="@String.Format("/Content/images/{0}.png", Model.CategoryImagePath)" />
+                </div>
+                <div class="span11">
+                    @using (Html.BeginForm("AdvancedSearch", "Home", FormMethod.Get, new { @class = "navbar-form" }))
+                    {
+                        <div class="controls controls-row">
+                            <ul class="nav">
+                                <li class="bea-nav-li">
+                                    @Html.TextBoxFor(x => x.SearchString, new { @class = "input-xlarge", @size = 60, @placeholder = "Vous recherchez..." })
+                                </li>
+
+                                <li class="bea-nav-li">
+                                    @Html.DropDownListFor(
+                                        x => x.CategorySelectedId,
+                                        Enumerable.Empty<SelectListItem>(),
+                                        "Toutes les catégories",
+                                        new { id = "categories" })
+                                </li>
+
+                                <li class="bea-nav-li">
+                                    @Html.DropDownListFor(
+                                        x => x.CitySelectedId,
+                                        Enumerable.Empty<SelectListItem>(),
+                                        "Toutes les villes",
+                                        new { id = "cities" })
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="row-fluid">
+                            <div id="parameters" class="span10">
+                            </div>
+                            <div class="span2">
+                                <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i>&nbsp;CHERCHER</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //Refreshes the city list when user changes province
+        $('#provinces').change(function () {
+            $(this).reloadCities();
+        });
+    });
+
+    $.getUrlVars = function () {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+    $.loadAdditionalParameters = function () {
+        var categoryId = $('#categories').val();
+
+        if (!categoryId)
+            return;
+
+        var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Home", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function (data, textStatus, jqXHR) {
+                $('#parameters').html("");
+                if (jqXHR.responseText == "")
+                    return;
+
+                $('#parameters').html(data);
+
+                // for all the select elements, pre fill in the values present in URL
+                var vars = $.getUrlVars();
+                $('#parameters').find('select').each(function () {
+                    $('#' + this.id).val(vars[this.name]);
+                });
+
+            }
+        });
+    }
+
+
+
+    $('#categories').change(function () { $.loadAdditionalParameters(); });
+
+    $(function () {
+        $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategoriesAndGroups" })', function (result) {
+            var ddl = $('#categories');
+            ddl.empty();
+            $(document.createElement('option'))
+                    .attr('value', "")
+                    .text("Toutes les catégories")
+                    .appendTo(ddl);
+            $(result).each(function () {
+                var selected = (this.Id == "@Model.CategorySelectedId");
+                $(document.createElement('option'))
+                    .attr('value', this.Id)
+                    .attr('selected', selected)
+                    .attr('style', this.IsGroup ? 'color: #006DCC;' : '')
+                    .text(this.Label)
+                    .appendTo(ddl);
+            });
+            $.loadAdditionalParameters();
+        });
+    });
+
+    $(function () {
+        $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "LocationApi", action = "GetAllCities" })', function (result) {
+            var ddl = $('#cities');
+            ddl.empty();
+            $(document.createElement('option'))
+                            .attr('value', "")
+                            .text("Toutes les villes")
+                            .appendTo(ddl);
+            $(result).each(function () {
+                var selected = (this.Id == "@Model.CitySelectedId");
+                $(document.createElement('option'))
+                    .attr('value', this.Id)
+                    .attr('selected', selected)
+                    .text(this.Label)
+                    .appendTo(ddl);
+            });
+        });
+    });
+
+</script>

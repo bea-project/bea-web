@@ -49,8 +49,6 @@ namespace Bea.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-
         #region Consult
 
         //
@@ -64,6 +62,10 @@ namespace Bea.Web.Controllers
 
             return View(result);
         }
+
+        #endregion
+
+        #region Activate
 
         //
         // GET: /Post/Activate/{id}/{activationToken}
@@ -254,6 +256,8 @@ namespace Bea.Web.Controllers
         }
         #endregion
 
+        #region Contact
+
         public ActionResult Contact(long id)
         {
             var result = _adServices.GetAdById(id);
@@ -288,5 +292,7 @@ namespace Bea.Web.Controllers
             }
             return View(model);
         }
+
+        #endregion
     }
 }

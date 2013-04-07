@@ -20,7 +20,8 @@ namespace Bea.Test.Models
                 SearchString = "toto",
                 CitySelectedId = 12,
                 CategorySelectedId = 7,
-                CategorySelectedLabel = "Véhicules"
+                CategorySelectedLabel = "Véhicules",
+                CategoryImagePath = "thepath"
             };
 
             // When
@@ -31,6 +32,7 @@ namespace Bea.Test.Models
             Assert.AreEqual(searchModel.CitySelectedId, instance.CitySelectedId);
             Assert.AreEqual(searchModel.CategorySelectedLabel, instance.CategorySelectedLabel);
             Assert.AreEqual(searchModel.CategorySelectedId, instance.CategorySelectedId);
+            Assert.AreEqual(searchModel.CategoryImagePath, instance.CategoryImagePath);
         }
     }
 }

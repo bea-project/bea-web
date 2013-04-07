@@ -17,14 +17,9 @@ namespace Bea.Models.Search
         }
 
         public AdSearchResultModel(AdSearchModel searchModel)
-            : this()
+            : base(searchModel)
         {
-            this.SearchString = searchModel.SearchString;
-            this.CitySelectedId = searchModel.CitySelectedId;
-            this.CategorySelectedId = searchModel.CategorySelectedId;
-            this.CategorySelectedLabel = searchModel.CategorySelectedLabel;
-
-            // TODO: add other properties !!
+            SearchResult = new List<AdSearchResultItemModel>();
         }
     }
 }

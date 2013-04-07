@@ -236,6 +236,36 @@ namespace Bea.Test.services
         }
 
         [TestMethod]
+        public void SearchAdsFromUrl_CategoryIsSelected_ReturnParentCategoryLabelUrlPartAsImagePath()
+        {
+            // Given
+            Category cat = new Category { Id = 12, LabelUrlPart = "cat-url-label", Label = "Label", ImageName = "image" };
+
+            var adRepoMock = new Moq.Mock<ISearchRepository>();
+            adRepoMock.Setup(r => r.SearchAds(null, null, It.Is<int[]>(x => x[0] == cat.Id))).Returns(new List<SearchAdCache>());
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(r => r.Get<Category>(cat.Id)).Returns(cat);
+
+            var catRepoMock = new Moq.Mock<ICategoryRepository>();
+            catRepoMock.Setup(r => r.GetCategoryFromUrlPart("cat-url-label")).Returns(cat);
+
+            SearchServices service = new SearchServices(repoMock.Object, catRepoMock.Object, adRepoMock.Object, null, null);
+
+            // When
+            AdSearchResultModel result = service.SearchAdsFromUrl(null, "cat-url-label");
+
+            // Then
+            Assert.IsNull(result.SearchString);
+            Assert.IsNull(result.CitySelectedId);
+            Assert.AreEqual(12, result.CategorySelectedId);
+            Assert.AreEqual("image", result.CategoryImagePath);
+            Assert.AreEqual("Label", result.CategorySelectedLabel);
+
+            adRepoMock.VerifyAll();
+        }
+
+        [TestMethod]
         public void AdvancedSearchAds_SearchThroughAds_CallSearchRepoOnAds()
         {
             // Given

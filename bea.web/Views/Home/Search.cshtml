@@ -5,7 +5,7 @@
 }
 
 @*Adding the search nav bar*@
-@Html.Partial("_SearchAdNavBarPartial", Model)
+@Html.Partial("_SpecificSearchFormPartial", Model)
 
 @*If this is a search, display the number of results*@
 @if (!String.IsNullOrEmpty(Model.SearchString))
