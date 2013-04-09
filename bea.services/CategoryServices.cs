@@ -55,17 +55,6 @@ namespace Bea.Services
             return result;
         }
 
-        //public IList<String> GetCategoryChildrenLabelFromParentLabel(String parentLabel)
-        //{
-        //    Category parentCategory = _categoryRepo.GetCategoryFromLabel(parentLabel);
-        //    if (parentCategory.SubCategories.Count == 0)
-        //        return null;
-        //    List<String> childrenLabels = new List<String>();
-        //    foreach (Category child in parentCategory.SubCategories)
-        //        childrenLabels.Add(child.Label.ToUpper());
-        //    return childrenLabels;
-        //}
-
         public IList<String> GetCategoryChildrenLabelFromParentId(int parentId)
         {
             Category parentCategory = _repository.Get<Category>(parentId);

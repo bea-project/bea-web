@@ -25,12 +25,10 @@ namespace Bea.Dal.Map.Ads.WaterSport
             References<City>(x => x.City).Not.Nullable();
             References<Category>(x => x.Category).Not.Nullable();
 
-
             Map(x => x.Year);
             Map(x => x.Hp);
-            
 
-            References<MotorBoatEngineType>(x => x.Type);
+            References<MotorBoatEngineType>(x => x.MotorType);
         }
     }
 }

@@ -142,6 +142,33 @@ namespace Bea.Dal.Repository
             if (parameters.MaxSurfaceArea.HasValue)
                 crit.Add(Restrictions.Le("SurfaceArea", parameters.MaxSurfaceArea));
 
+            if (parameters.MotorBoatTypeId.HasValue)
+                crit.Add(Restrictions.Eq("MotorBoatType.Id", parameters.MotorBoatTypeId));
+
+            if (parameters.MotorEngineTypeId.HasValue)
+                crit.Add(Restrictions.Eq("MotorType.Id", parameters.MotorEngineTypeId));
+
+            if (parameters.MinLength.HasValue)
+                crit.Add(Restrictions.Ge("Length", parameters.MinLength));
+
+            if (parameters.MaxLength.HasValue)
+                crit.Add(Restrictions.Le("Length", parameters.MaxLength));
+
+            if (parameters.MinHp.HasValue)
+                crit.Add(Restrictions.Ge("Hp", parameters.MinHp));
+
+            if (parameters.MaxHp.HasValue)
+                crit.Add(Restrictions.Le("Hp", parameters.MaxHp));
+
+            if (parameters.SailingBoatTypeId.HasValue)
+                crit.Add(Restrictions.Eq("SailingBoatType.Id", parameters.SailingBoatTypeId));
+
+            if (parameters.HullTypeId.HasValue)
+                crit.Add(Restrictions.Eq("HullType.Id", parameters.HullTypeId));
+
+            if (parameters.WaterTypeId.HasValue)
+                crit.Add(Restrictions.Eq("Type.Id", parameters.WaterTypeId));
+
             crit.SetProjection(Projections.Property("Id"));
 
             return crit;

@@ -1,6 +1,6 @@
-﻿@model Bea.Models.Search.WaterSport.WaterSportAdSearchModel
+﻿@model Bea.Models.Search.AdvancedAdSearchModel
 
 <h6><i class="  icon-pencil"></i>&nbsp; Filtrer les annonces</h6>
 <div class="controls controls-row">
-        @Html.DropDownListFor(Model => Model.SelectedTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Discipline", new { @class = "input-medium" })
+    @Html.DropDownListFor(Model => Model.SelectedWaterTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Discipline", new { @class = "input-medium" })
 </div>

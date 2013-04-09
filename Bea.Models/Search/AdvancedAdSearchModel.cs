@@ -30,19 +30,16 @@ namespace Bea.Models.Search
         public int? SurfaceAreaBracketSelectedId { get; set; }
         public Boolean? IsFurnished { get; set; }
 
-        //TODO: later v--------------------------v
-
         // WaterSport
-        public int? SelectedHullTypeId { get; set; }
-        public int? MinYearSelectedId { get; set; }
-        public int? MaxYearSelectedId { get; set; }
-        public int? MinLengthSelectedId { get; set; }
-        public int? MaxLengthSelectedId { get; set; }
-        public int? MinHpSelectedId { get; set; }
-        public int? MaxHpSelectedId { get; set; }
+        public int? SelectedWaterTypeId { get; set; }
+        public int? SelectedMotorBoatTypeId { get; set; }
         public int? SelectedMotorTypeId { get; set; }
-
-        //TODO: later ^--------------------------^
+        public int? SelectedSailingBoatTypeId { get; set; }
+        public int? SelectedHullTypeId { get; set; }
+        public int? MinLength { get; set; }
+        public int? MaxLength { get; set; }
+        public int? MinHp { get; set; }
+        public int? MaxHp { get; set; }
 
         public AdvancedAdSearchModel()
         {
@@ -76,13 +73,14 @@ namespace Bea.Models.Search
             this.SurfaceAreaBracketSelectedId = searchModel.SurfaceAreaBracketSelectedId;
             this.IsFurnished = searchModel.IsFurnished;
 
+            this.SelectedWaterTypeId = searchModel.SelectedWaterTypeId;
+            this.SelectedMotorBoatTypeId = searchModel.SelectedMotorBoatTypeId;
+            this.SelectedSailingBoatTypeId = searchModel.SelectedSailingBoatTypeId;
             this.SelectedHullTypeId = searchModel.SelectedHullTypeId;
-            this.MinYearSelectedId = searchModel.MinYearSelectedId;
-            this.MaxYearSelectedId = searchModel.MaxYearSelectedId;
-            this.MinLengthSelectedId = searchModel.MinLengthSelectedId;
-            this.MaxLengthSelectedId = searchModel.MaxLengthSelectedId;
-            this.MinHpSelectedId = searchModel.MinHpSelectedId;
-            this.MaxHpSelectedId = searchModel.MaxHpSelectedId;
+            this.MinLength = searchModel.MinLength;
+            this.MaxLength = searchModel.MaxLength;
+            this.MinHp = searchModel.MinHp;
+            this.MaxHp = searchModel.MaxHp;
             this.SelectedMotorTypeId = searchModel.SelectedMotorTypeId;
         }
     }

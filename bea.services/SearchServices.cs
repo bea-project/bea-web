@@ -11,6 +11,7 @@ using Bea.Domain.Search;
 using Bea.Domain.Categories;
 using Bea.Models.Search;
 using Bea.Tools;
+using Bea.Domain.Ads.WaterSport;
 
 namespace Bea.Services
 {
@@ -116,11 +117,19 @@ namespace Bea.Services
                 case AdTypeEnum.RealEstateAd:
                     searchResult = _searchRepository.AdvancedSearchAds<RealEstateAd>(searchParameters);
                     break;
-                    
-                //TODO: add the other types
-
+                case AdTypeEnum.MotorBoatAd:
+                    searchResult = _searchRepository.AdvancedSearchAds<MotorBoatAd>(searchParameters);
+                    break;
+                case AdTypeEnum.SailingBoatAd:
+                    searchResult = _searchRepository.AdvancedSearchAds<SailingBoatAd>(searchParameters);
+                    break;
+                case AdTypeEnum.MotorBoatEngineAd:
+                    searchResult = _searchRepository.AdvancedSearchAds<MotorBoatEngineAd>(searchParameters);
+                    break;
+                case AdTypeEnum.WaterSportAd:
+                    searchResult = _searchRepository.AdvancedSearchAds<WaterSportAd>(searchParameters);
+                    break;
                 case AdTypeEnum.Ad:
-                default:
                     searchResult = _searchRepository.AdvancedSearchAds<Ad>(searchParameters);
                     break;
             }
@@ -185,6 +194,17 @@ namespace Bea.Services
                 parameters.MinSurfaceArea = _referenceServices.GetAllSurfaceAreaBrackets()[searchQuery.SurfaceAreaBracketSelectedId.Value].LowValue;
                 parameters.MaxSurfaceArea = _referenceServices.GetAllSurfaceAreaBrackets()[searchQuery.SurfaceAreaBracketSelectedId.Value].HighValue;
             }
+
+            //-- Water sport specific properties --//
+            parameters.MotorBoatTypeId = searchQuery.SelectedMotorBoatTypeId;
+            parameters.MotorEngineTypeId = searchQuery.SelectedMotorTypeId;
+            parameters.SailingBoatTypeId = searchQuery.SelectedSailingBoatTypeId;
+            parameters.HullTypeId = searchQuery.SelectedHullTypeId;
+            parameters.WaterTypeId = searchQuery.SelectedWaterTypeId;
+            parameters.MinLength = searchQuery.MinLength;
+            parameters.MaxLength = searchQuery.MaxLength;
+            parameters.MinHp = searchQuery.MinHp;
+            parameters.MaxHp = searchQuery.MaxHp;
 
             return parameters;
         }

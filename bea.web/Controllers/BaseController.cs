@@ -56,17 +56,17 @@ namespace Bea.Web.Controllers
                     ViewBag.FurnishedList = new List<SelectListItem>() { new SelectListItem { Text = "Meublé", Value = "true" }, new SelectListItem { Text = "Non meublé", Value = "false" } };
                     break;
                 case AdTypeEnum.MotorBoatAd:
-                    ViewBag.Years = _referenceServices.GetAllYears().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
+                    ViewBag.AgeBrackets = _referenceServices.GetAllAgeBrackets().Select(x => new SelectListItem { Text = x.Value.Label, Value = x.Key.ToString() });
                     ViewBag.Types = _referenceServices.GetAllMotorBoatTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     ViewBag.MotorTypes = _referenceServices.GetAllMotorBoatEngineTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;
                 case AdTypeEnum.SailingBoatAd:
-                    ViewBag.Years = _referenceServices.GetAllYears().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
+                    ViewBag.AgeBrackets = _referenceServices.GetAllAgeBrackets().Select(x => new SelectListItem { Text = x.Value.Label, Value = x.Key.ToString() });
                     ViewBag.Types = _referenceServices.GetAllSailingBoatTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     ViewBag.HullTypes = _referenceServices.GetAllSailingBoatHullTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;
                 case AdTypeEnum.MotorBoatEngineAd:
-                    ViewBag.Years = _referenceServices.GetAllYears().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
+                    ViewBag.AgeBrackets = _referenceServices.GetAllAgeBrackets().Select(x => new SelectListItem { Text = x.Value.Label, Value = x.Key.ToString() });
                     ViewBag.Types = _referenceServices.GetAllMotorBoatEngineTypes().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
                     break;
                 case AdTypeEnum.WaterSportAd:

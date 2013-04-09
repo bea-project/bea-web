@@ -6,6 +6,7 @@ using Bea.Core.Dal;
 using Bea.Dal.Repository;
 using Bea.Domain;
 using Bea.Domain.Ads;
+using Bea.Domain.Ads.WaterSport;
 using Bea.Domain.Categories;
 using Bea.Domain.Location;
 using Bea.Domain.Reference;
@@ -778,7 +779,7 @@ namespace Bea.Test.Dal.repository
                     IsFurnished = true,
                     SurfaceArea = 45
                 };
-                
+
                 repo.Save(t1);
                 repo.Save(d);
                 repo.Save(p1);
@@ -910,7 +911,7 @@ namespace Bea.Test.Dal.repository
                 repo.Save(u);
                 repo.Save(loc);
                 repo.Save(a);
-                
+
                 SearchAdCache a2 = new SearchAdCache
                 {
                     AdId = 2,
@@ -947,6 +948,404 @@ namespace Bea.Test.Dal.repository
 
                 // When
                 IList<SearchAdCache> result = adRepo.AdvancedSearchAds<Ad>(param);
+
+                // Then
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(a, result[0]);
+            }
+        }
+
+        [TestMethod]
+        public void AdvancedSearchAds_MotorBoatAd_MotorBoatProperties_ReturnMotorBoatAd()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            SearchRepository adRepo = new SearchRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                // Given
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city",
+                    LabelUrlPart = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Bateau à moteur",
+                    LabelUrlPart = "Bateau"
+                };
+
+                SearchAdCache a = new SearchAdCache
+                {
+                    AdId = 1,
+                    Title = "bateau",
+                    Body = "la desc du bateau",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
+                };
+
+                MotorBoatType mbt = new MotorBoatType()
+                {
+                    Id = 5,
+                    Label = "Bois"
+                };
+
+                MotorBoatEngineType mt = new MotorBoatEngineType()
+                {
+                    Id = 7,
+                    Label = "4 temps"
+                };
+
+                MotorBoatAd bat = new MotorBoatAd
+                {
+                    Id = 1,
+                    Title = "bateau",
+                    Body = "la desc du bateau",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    CreatedBy = u,
+                    Price = 1000,
+                    Hp = 100,
+                    Length = 6,
+                    MotorBoatType = mbt,
+                    MotorType = mt,
+                    Year = 2005
+                };
+
+                repo.Save(mbt);
+                repo.Save(mt);
+                repo.Save(p1);
+                repo.Save(c);
+                repo.Save(cat);
+                repo.Save(u);
+                repo.Save(bat);
+                repo.Save(a);
+
+                repo.Flush();
+
+                #endregion
+
+                AdSearchParameters param = new AdSearchParameters
+                {
+                    MotorBoatTypeId = 1,
+                    MotorEngineTypeId = 1,
+                    MinHp = 99,
+                    MaxHp = 100,
+                    MinLength = 6,
+                    MaxLength = 10,
+                    MinYear = 2004,
+                    MaxYear = 2006
+                };
+
+                // When
+                IList<SearchAdCache> result = adRepo.AdvancedSearchAds<MotorBoatAd>(param);
+
+                // Then
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(a, result[0]);
+            }
+        }
+
+        [TestMethod]
+        public void AdvancedSearchAds_MotorBoatEngineAd_MotorBoatEngineProperties_ReturnMotorBoatEngineAd()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            SearchRepository adRepo = new SearchRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                // Given
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city",
+                    LabelUrlPart = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Bateau à moteur",
+                    LabelUrlPart = "Bateau"
+                };
+
+                SearchAdCache a = new SearchAdCache
+                {
+                    AdId = 1,
+                    Title = "bateau",
+                    Body = "la desc du bateau",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
+                };
+
+                MotorBoatEngineType mt = new MotorBoatEngineType()
+                {
+                    Id = 7,
+                    Label = "4 temps"
+                };
+
+                MotorBoatEngineAd bat = new MotorBoatEngineAd
+                {
+                    Id = 1,
+                    Title = "moteur",
+                    Body = "la desc du bateau",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    CreatedBy = u,
+                    Price = 1000,
+                    Hp = 100,
+                    Year = 2005,
+                    MotorType = mt
+                };
+
+                repo.Save(mt);
+                repo.Save(p1);
+                repo.Save(c);
+                repo.Save(cat);
+                repo.Save(u);
+                repo.Save(bat);
+                repo.Save(a);
+
+                repo.Flush();
+
+                #endregion
+
+                AdSearchParameters param = new AdSearchParameters
+                {
+                    MotorEngineTypeId = 1,
+                    MinHp = 99,
+                    MaxHp = 100,
+                    MinYear = 2004,
+                    MaxYear = 2006
+                };
+
+                // When
+                IList<SearchAdCache> result = adRepo.AdvancedSearchAds<MotorBoatEngineAd>(param);
+
+                // Then
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(a, result[0]);
+            }
+        }
+
+        [TestMethod]
+        public void AdvancedSearchAds_SailingBoatAd_SailingBoatProperties_ReturnSailingBoatAd()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            SearchRepository adRepo = new SearchRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                // Given
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city",
+                    LabelUrlPart = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Bateau à moteur",
+                    LabelUrlPart = "Bateau"
+                };
+
+                SearchAdCache a = new SearchAdCache
+                {
+                    AdId = 1,
+                    Title = "bateau",
+                    Body = "la desc du bateau",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
+                };
+
+                SailingBoatHullType ht = new SailingBoatHullType()
+                {
+                    Label = "Bois"
+                };
+
+                SailingBoatType st = new SailingBoatType()
+                {
+                    Label = "Cata"
+                };
+
+                SailingBoatAd bat = new SailingBoatAd
+                {
+                    Id = 1,
+                    Title = "bateau",
+                    Body = "la desc du bateau",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    CreatedBy = u,
+                    Length = 12,
+                    Year = 2005,
+                    HullType = ht,
+                    SailingBoatType = st
+                };
+
+                repo.Save(ht);
+                repo.Save(st);
+                repo.Save(p1);
+                repo.Save(c);
+                repo.Save(cat);
+                repo.Save(u);
+                repo.Save(bat);
+                repo.Save(a);
+
+                repo.Flush();
+
+                #endregion
+
+                AdSearchParameters param = new AdSearchParameters
+                {
+                    SailingBoatTypeId = 1,
+                    HullTypeId = 1,
+                    MinLength = 10,
+                    MaxLength = 12,
+                    MinYear = 2004,
+                    MaxYear = 2006
+                };
+
+                // When
+                IList<SearchAdCache> result = adRepo.AdvancedSearchAds<SailingBoatAd>(param);
+
+                // Then
+                Assert.AreEqual(1, result.Count);
+                Assert.AreEqual(a, result[0]);
+            }
+        }
+
+        [TestMethod]
+        public void AdvancedSearchAds_WaterSportAd_WaterSportProperties_ReturnWaterSportAd()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            SearchRepository adRepo = new SearchRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                // Given
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city",
+                    LabelUrlPart = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Bateau à moteur",
+                    LabelUrlPart = "Bateau"
+                };
+
+                SearchAdCache a = new SearchAdCache
+                {
+                    AdId = 1,
+                    Title = "bateau",
+                    Body = "la desc du bateau",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
+                };
+
+                WaterSportType st = new WaterSportType()
+                {
+                    Label = "pmt"
+                };
+
+                WaterSportAd bat = new WaterSportAd
+                {
+                    Id = 1,
+                    Title = "bateau",
+                    Body = "la desc du bateau",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    CreatedBy = u,
+                    Type = st
+                };
+
+                repo.Save(st);
+                repo.Save(p1);
+                repo.Save(c);
+                repo.Save(cat);
+                repo.Save(u);
+                repo.Save(bat);
+                repo.Save(a);
+
+                repo.Flush();
+
+                #endregion
+
+                AdSearchParameters param = new AdSearchParameters
+                {
+                    WaterTypeId = 1
+                };
+
+                // When
+                IList<SearchAdCache> result = adRepo.AdvancedSearchAds<WaterSportAd>(param);
 
                 // Then
                 Assert.AreEqual(1, result.Count);

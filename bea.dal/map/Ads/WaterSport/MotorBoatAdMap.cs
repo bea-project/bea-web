@@ -12,9 +12,9 @@ using Bea.Domain.Ads.WaterSport;
 
 namespace Bea.Dal.Map.Ads.WaterSport
 {
-    public class MotorBoatMap : SubclassMap<MotorBoatAd>
+    public class MotorBoatAdMap : SubclassMap<MotorBoatAd>
     {
-        public MotorBoatMap()
+        public MotorBoatAdMap()
         {
             Map(x => x.Title).Not.Nullable();
             Map(x => x.Body).Not.Nullable();

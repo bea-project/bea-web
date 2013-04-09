@@ -30,5 +30,15 @@ namespace Bea.Core.Dal
         public Boolean? IsFurnished { get; set; }
         public int? MinSurfaceArea { get; set; }
         public int? MaxSurfaceArea { get; set; }
+
+        public int? WaterTypeId { get; set; }
+        public int? MotorEngineTypeId { get; set; }
+        public int? HullTypeId { get; set; }
+        public int? MotorBoatTypeId { get; set; }
+        public int? SailingBoatTypeId { get; set; }
+        public int? MinHp { get; set; }
+        public int? MaxHp { get; set; }
+        public double? MinLength { get; set; }
+        public double? MaxLength { get; set; }
     }
 }

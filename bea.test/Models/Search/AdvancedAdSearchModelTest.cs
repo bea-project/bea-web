@@ -35,12 +35,12 @@ namespace Bea.Test.Models.Search
                 IsFurnished = true,
 
                 SelectedHullTypeId = 13,
-                MinYearSelectedId = 14,
-                MaxYearSelectedId = 15,
-                MinLengthSelectedId = 16,
-                MaxLengthSelectedId = 17,
-                MinHpSelectedId = 18,
-                MaxHpSelectedId = 19,
+                SelectedWaterTypeId = 14,
+                SelectedMotorBoatTypeId = 15,
+                MinLength = 16,
+                MaxLength = 17,
+                MinHp = 18,
+                MaxHp = 19,
                 SelectedMotorTypeId = 20
             };
 
@@ -67,12 +67,12 @@ namespace Bea.Test.Models.Search
             Assert.IsTrue(actual.IsFurnished.Value);
 
             Assert.AreEqual(actual.SelectedHullTypeId, 13);
-            Assert.AreEqual(actual.MinYearSelectedId, 14);
-            Assert.AreEqual(actual.MaxYearSelectedId, 15);
-            Assert.AreEqual(actual.MinLengthSelectedId, 16);
-            Assert.AreEqual(actual.MaxLengthSelectedId, 17);
-            Assert.AreEqual(actual.MinHpSelectedId, 18);
-            Assert.AreEqual(actual.MaxHpSelectedId, 19);
+            Assert.AreEqual(actual.SelectedWaterTypeId, 14);
+            Assert.AreEqual(actual.SelectedMotorBoatTypeId, 15);
+            Assert.AreEqual(actual.MinLength, 16);
+            Assert.AreEqual(actual.MaxLength, 17);
+            Assert.AreEqual(actual.MinHp, 18);
+            Assert.AreEqual(actual.MaxHp, 19);
             Assert.AreEqual(actual.SelectedMotorTypeId, 20);
         }
     }
