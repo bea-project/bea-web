@@ -49,8 +49,6 @@ namespace Bea.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-
         #region Consult
 
         //
@@ -64,6 +62,10 @@ namespace Bea.Web.Controllers
 
             return View(result);
         }
+
+        #endregion
+
+        #region Activate
 
         //
         // GET: /Post/Activate/{id}/{activationToken}
@@ -254,16 +256,8 @@ namespace Bea.Web.Controllers
         }
         #endregion
 
-        //public ActionResult Contact(long id)
-        //{
-        //    var result = _adServices.GetAdById(id);
 
-        //    if (result == null)
-        //        return HttpNotFound("Cette annonce n'existe pas ou est désactivée");
-
-        //    ContactUserFormModel contactUserFormModel = new ContactUserFormModel(result.Title, result.CreatedBy.Firstname, result.CreatedBy.Id, result.Id);
-        //    return View(contactUserFormModel);
-        //}
+        #region Contact
 
         [HttpPost]
         public PartialViewResult Contact(ContactUserFormModel model)
@@ -290,5 +284,7 @@ namespace Bea.Web.Controllers
             }
             return PartialView("_Contact",model);
         }
+
+        #endregion
     }
 }

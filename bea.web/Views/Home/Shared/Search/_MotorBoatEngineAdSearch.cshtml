@@ -1,10 +1,9 @@
-﻿@model Bea.Models.Search.WaterSport.MotorBoatEngineAdSearchModel
+﻿@model Bea.Models.Search.AdvancedAdSearchModel
 
 <h6><i class="  icon-pencil"></i>&nbsp; Filtrer les annonces</h6>
 <div class="controls controls-row">
-        @Html.DropDownListFor(Model => Model.SelectedTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Type", new { @class = "input-medium" })
-        @Html.DropDownListFor(Model => Model.MinHpSelectedId, (IEnumerable<SelectListItem>)ViewBag.Hps, "Min CV", new { @class = "input-medium" })
-        @Html.DropDownListFor(Model => Model.MaxHpSelectedId, (IEnumerable<SelectListItem>)ViewBag.Hps, "Max CV", new { @class = "input-medium" })
-        @Html.DropDownListFor(Model => Model.MinYearSelectedId, (IEnumerable<SelectListItem>)ViewBag.Years, "Min Annee", new { @class = "input-medium" })
-        @Html.DropDownListFor(Model => Model.MaxYearSelectedId, (IEnumerable<SelectListItem>)ViewBag.Years, "Max Annee", new { @class = "input-medium" })
+    @Html.DropDownListFor(Model => Model.SelectedMotorTypeId, (IEnumerable<SelectListItem>)ViewBag.Types, "Type", new { @class = "input-medium" })
+    @Html.DropDownListFor(Model => Model.AgeBracketSelectedId, (IEnumerable<SelectListItem>)ViewBag.AgeBrackets, "Age", new { @class = "input-medium" })
+    @Html.TextBoxFor(Model => Model.MinHp, "Min CV", new { @class = "input-small", @placeholder = "CV min..." })
+    @Html.TextBoxFor(Model => Model.MaxHp, "Max CV", new { @class = "input-small", @placeholder = "CV max..." })
 </div>

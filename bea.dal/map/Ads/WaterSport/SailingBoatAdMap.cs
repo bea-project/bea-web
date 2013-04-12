@@ -28,7 +28,7 @@ namespace Bea.Dal.Map.Ads.WaterSport
             Map(x => x.Length);
             Map(x => x.Year);
 
-            References<SailingBoatType>(x => x.Type);
+            References<SailingBoatType>(x => x.SailingBoatType);
             References<SailingBoatHullType>(x => x.HullType);
         }
     }

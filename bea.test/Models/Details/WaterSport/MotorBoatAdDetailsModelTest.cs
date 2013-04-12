@@ -24,7 +24,7 @@ namespace Bea.Test.Models.Details.WaterSport
                 MotorBoatType = new Bea.Domain.Reference.MotorBoatType { Label = "type" },
                 MotorType = new Bea.Domain.Reference.MotorBoatEngineType { Label = "motor type" },
                 Year = 2012,
-                Length = 15.80000M,
+                Length = 15.80000d,
                 Hp = 89,
                 City = new City(),
                 CreatedBy = new User()

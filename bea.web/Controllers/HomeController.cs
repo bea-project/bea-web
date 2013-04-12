@@ -9,7 +9,6 @@ using Bea.Models;
 using Bea.Domain.Categories;
 using Bea.Domain.Ads;
 using Bea.Models.Search;
-using Bea.Models.Search.WaterSport;
 using System.Threading.Tasks;
 
 namespace Bea.Web.Controllers
@@ -21,11 +20,8 @@ namespace Bea.Web.Controllers
         private IEmailServices _emailService;
 
         public HomeController(ISearchServices searchServices, ICategoryServices categoryServices, ILocationServices locationServices, IReferenceServices referenceServices, IEmailServices emailService)
-            :base(locationServices,referenceServices)
+            : base(locationServices, referenceServices)
         {
-            if (searchServices == null)
-                throw new ArgumentNullException("searchServices");
-
             _searchServices = searchServices;
             _categoryServices = categoryServices;
             _emailService = emailService;
@@ -73,29 +69,21 @@ namespace Bea.Web.Controllers
 
                 case AdTypeEnum.OtherVehiculeAd:
                     return PartialView("Shared/Search/_OtherVehicleAdSearch", model);
-                
+
                 case AdTypeEnum.RealEstateAd:
                     return PartialView("Shared/Search/_RealEstateAdSearch", model);
 
                 case AdTypeEnum.MotorBoatAd:
-                    ViewBag.Hps = base._referenceServices.GetAllHps().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    ViewBag.Lengths = base._referenceServices.GetAllMotorBoatLength().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    MotorBoatAdSearchModel motorBoatModel = new MotorBoatAdSearchModel();
-                    return PartialView("Shared/Search/_MotorBoatAdSearch", motorBoatModel);
+                    return PartialView("Shared/Search/_MotorBoatAdSearch", model);
 
                 case AdTypeEnum.SailingBoatAd:
-                    ViewBag.Lengths = base._referenceServices.GetAllSailingBoatLength().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    SailingBoatAdSearchModel sailingBoatModel = new SailingBoatAdSearchModel();
-                    return PartialView("Shared/Search/_SailingBoatAdSearch", sailingBoatModel);
+                    return PartialView("Shared/Search/_SailingBoatAdSearch", model);
 
                 case AdTypeEnum.MotorBoatEngineAd:
-                    ViewBag.Hps = base._referenceServices.GetAllHps().Select(x => new SelectListItem { Text = x.Value, Value = x.Key.ToString() }).ToList();
-                    MotorBoatEngineAdSearchModel motorBoatEngineModel = new MotorBoatEngineAdSearchModel();
-                    return PartialView("Shared/Search/_MotorBoatEngineAdSearch", motorBoatEngineModel);
+                    return PartialView("Shared/Search/_MotorBoatEngineAdSearch", model);
 
                 case AdTypeEnum.WaterSportAd:
-                    WaterSportAdSearchModel waterSportModel = new WaterSportAdSearchModel();
-                    return PartialView("Shared/Search/_WaterSportAdSearch", waterSportModel);
+                    return PartialView("Shared/Search/_WaterSportAdSearch", model);
             }
 
             return null;

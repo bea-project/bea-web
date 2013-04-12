@@ -159,7 +159,7 @@ namespace Bea.Services.Ads
             if (model.Length.HasValue)
                 ad.Length = model.Length.Value;
             if(model.SelectedSailingBoatTypeId.HasValue)
-                ad.Type = _repository.Get<SailingBoatType>(model.SelectedSailingBoatTypeId);
+                ad.SailingBoatType = _repository.Get<SailingBoatType>(model.SelectedSailingBoatTypeId);
             if (model.SelectedHullTypeId.HasValue)
                 ad.HullType = _repository.Get<SailingBoatHullType>(model.SelectedHullTypeId);
             if (model.SelectedMotorBoatTypeId.HasValue)
@@ -167,7 +167,7 @@ namespace Bea.Services.Ads
             if (model.Hp.HasValue)
                 ad.Hp = model.Hp.Value;
             if (model.SelectedMotorBoatEngineTypeId.HasValue)
-                ad.Type = _repository.Get<MotorBoatEngineType>(model.SelectedMotorBoatEngineTypeId);
+                ad.MotorType = _repository.Get<MotorBoatEngineType>(model.SelectedMotorBoatEngineTypeId);
 
             return ad;
         }

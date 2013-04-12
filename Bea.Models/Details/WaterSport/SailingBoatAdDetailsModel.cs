@@ -17,7 +17,7 @@ namespace Bea.Models.Details.WaterSport
         public SailingBoatAdDetailsModel(SailingBoatAd ad, IHelperService helper)
             : base(ad)
         {
-            BoatType = ad.Type != null ? ad.Type.Label : String.Empty;
+            BoatType = ad.SailingBoatType != null ? ad.SailingBoatType.Label : String.Empty;
             HullType = ad.HullType != null ? ad.HullType.Label : String.Empty;
             Year = ad.Year != 0 ? ad.Year : (int?) null;
             Length = ad.Length != 0 ? String.Format(helper.GetCulture(), "{0:F2} Mtr", ad.Length) : String.Empty;

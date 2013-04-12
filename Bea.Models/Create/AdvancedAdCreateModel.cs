@@ -41,7 +41,7 @@ namespace Bea.Models.Create
         public int? EngineSize { get; set; }
 
         //WaterSport
-        public Decimal? Length { get; set; }
+        public Double? Length { get; set; }
         public int? SelectedMotorTypeId { get; set; }
         public int? Hp { get; set; }
         public int? SelectedHullTypeId { get; set; }

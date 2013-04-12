@@ -61,7 +61,7 @@
     <Compile Include="Map\Ads\MotoAdMap.cs" />
     <Compile Include="Map\Ads\VehicleAdMap.cs" />
     <Compile Include="Map\Ads\WaterSport\MotorBoatEngineAdMap.cs" />
-    <Compile Include="Map\Ads\WaterSport\MotorBoatMap.cs" />
+    <Compile Include="Map\Ads\WaterSport\MotorBoatAdMap.cs" />
     <Compile Include="Map\Ads\OtherVehicleAdMap.cs" />
     <Compile Include="Map\Ads\RealEstateAdMap.cs" />
     <Compile Include="Map\Ads\WaterSport\SailingBoatAdMap.cs" />

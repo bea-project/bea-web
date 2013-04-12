@@ -87,8 +87,8 @@
     <Compile Include="Domain\SearchAdCacheTest.cs" />
     <Compile Include="Models\AdCreate\AdCreateModelTest.cs" />
     <Compile Include="Models\AdDetailsModelTest.cs" />
-    <Compile Include="Models\AdSearchResultItemModelTest.cs" />
-    <Compile Include="Models\AdSearchResultModelTest.cs" />
+    <Compile Include="Models\Search\AdSearchResultItemModelTest.cs" />
+    <Compile Include="Models\Search\AdSearchResultModelTest.cs" />
     <Compile Include="Models\Details\CarAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\OtherVehicleAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\MotoAdDetailsModelTest.cs" />
@@ -97,6 +97,7 @@
     <Compile Include="Models\Details\WaterSport\MotorBoatEngineAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\WaterSport\SailingBoatAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\WaterSport\WaterSportAdDetailsModelTest.cs" />
+    <Compile Include="Models\Search\AdvancedAdSearchModelTest.cs" />
     <Compile Include="Services\Ads\AdActivationServicesTest.cs" />
     <Compile Include="Services\Ads\AdDataConsistencyServicesTest.cs" />
     <Compile Include="Services\Ads\AdDeletionServicesTest.cs" />

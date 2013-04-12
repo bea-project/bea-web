@@ -21,10 +21,10 @@ namespace Bea.Test.Models.Details.WaterSport
             SailingBoatAd ad = new SailingBoatAd
             {
                 Title = "title",
-                Type = new Bea.Domain.Reference.SailingBoatType { Label = "type" },
+                SailingBoatType = new Bea.Domain.Reference.SailingBoatType { Label = "type" },
                 HullType = new Bea.Domain.Reference.SailingBoatHullType { Label = "hull" },
                 Year = 2012,
-                Length = new Decimal(15.75000),
+                Length = 15.75000,
                 City = new City(),
                 CreatedBy = new User()
             };
@@ -37,7 +37,7 @@ namespace Bea.Test.Models.Details.WaterSport
 
             // Then
             Assert.AreEqual(ad.Title, actual.Title);
-            Assert.AreEqual(ad.Type.Label, actual.BoatType);
+            Assert.AreEqual(ad.SailingBoatType.Label, actual.BoatType);
             Assert.AreEqual(ad.HullType.Label, actual.HullType);
             Assert.AreEqual(ad.Year, actual.Year);
             Assert.AreEqual("15,75 Mtr", actual.Length);

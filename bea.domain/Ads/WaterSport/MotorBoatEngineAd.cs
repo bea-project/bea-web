@@ -8,7 +8,7 @@ namespace Bea.Domain.Ads.WaterSport
 {
     public class MotorBoatEngineAd : BaseAd
     {
-        public virtual MotorBoatEngineType Type { get; set; }
+        public virtual MotorBoatEngineType MotorType { get; set; }
         public virtual int Hp { get; set; }
         public virtual int Year { get; set; }
         
