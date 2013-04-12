@@ -8,7 +8,7 @@ namespace Bea.Models
 {
     public class ContactUserFormModel
     {
-        public int UserId { get; set; }
+        //public int UserId { get; set; }
         public long AdId { get; set; }
         public String EmailTo { get; set; } //To be filled later in the process
         public String FirstName { get; set; }
@@ -26,11 +26,8 @@ namespace Bea.Models
 
         public ContactUserFormModel() { }
 
-        public ContactUserFormModel(String AdTitle, String FirstName, int UserId, long AdId)
+        public ContactUserFormModel(long AdId)
         {
-            this.UserId = UserId;
-            this.AdTitle = AdTitle;
-            this.FirstName = FirstName;
             this.AdId = AdId;
         }
     }

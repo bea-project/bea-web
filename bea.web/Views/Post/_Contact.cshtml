@@ -1,0 +1,56 @@
+﻿@model Bea.Models.ContactUserFormModel
+<script type="text/javascript">
+    //    Show the loading bar
+    function sending() {
+        document.getElementById('progressBar').style.display = "block";
+    }
+</script>
+
+@if(ViewBag.Message!=null)
+{
+    <div>
+        Message envoyé!
+    </div>
+}
+else
+{
+@*@AjaxOptions contactOptions = new AjaxOptions { HttpMethod = "Post", OnBegin = "sending", OnSuccess = "onSendingSuccess"}; *@
+using (Ajax.BeginForm("Contact", "Post",new {}, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "contact",OnBegin = "sending" }))
+{ 
+    <div id="contactForm">
+    @Html.HiddenFor(model => model.AdId)
+    <div class="control-group">
+        <div class="controls controls-row">
+            @Html.TextBoxFor(model => model.Name, new { @class = "input-medium",placeholder="Votre nom..." })
+            @Html.ValidationMessageFor(model => model.Name, String.Empty, new { @class = "label label-important" })
+        </div>
+        <div class="controls controls-row">
+            @Html.TextBoxFor(model => model.Email, new { @class = "input-medium",placeholder="Votre e-mail..." })
+            @Html.ValidationMessageFor(model => model.Email, String.Empty, new { @class = "label label-important" })
+        </div>
+        <div class="controls controls-row">
+            @Html.TextBoxFor(model => model.Telephone, new { @class = "input-medium",placeholder="Votre téléphone..." })
+            @Html.ValidationMessageFor(model => model.Telephone, String.Empty, new { @class = "label label-important" })
+        </div>
+        <div class="controls controls-row">
+            @Html.TextAreaFor(model => model.EmailBody, new { @rows = 10, @class = "input-large", style = "resize: none;",placeholder="Votre message..." })
+            @Html.ValidationMessageFor(model => model.EmailBody, String.Empty, new { @class = "label label-important" })
+        </div>
+        <label class="control-label" for="inputCopy">@Html.LabelFor(model => model.CopySender)</label>
+        <div class="controls controls-row">
+            @Html.CheckBoxFor(model => model.CopySender)
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button id="submitButton" type="submit" class="btn btn-primary">Envoyer</button>
+        </div>
+    </div>
+        </div>
+}
+<div class="fluid">
+    <div id="progressBar" style="display: none;">
+        <img src="@Url.Content("~/Content/images/ajax-loader.gif")" alt="Loading..."/>
+    </div>
+</div>
+}

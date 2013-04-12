@@ -77,6 +77,20 @@
             <div class="legend-like">
                 <h4>Contacter</h4>
             </div>
+            <div class="accordion" id="accordion2">
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                    <i class="icon-envelope"></i>Envoyer un message
+                  </a>
+                </div>
+                <div id="collapseOne" class="accordion-body collapse">
+                  <div id="contact" class="accordion-inner">
+                    @Html.Partial("_Contact", new Bea.Models.ContactUserFormModel() { AdId = Model.AdId })
+                  </div>
+                </div>
+              </div>
+            </div>
             <i class="icon-envelope"></i>&nbsp;@Html.ActionLink("Envoyer un message", "Contact", new { Id = Model.AdId })<br />
             <i class="icon-comment"></i>&nbsp;@Html.ActionLink(String.Format("Appeler {0} au {1}", Model.UserFirstName, Model.UserPhoneNumber), "#")<br />
             <i class="icon-bullhorn"></i>&nbsp;@Html.ActionLink("Partager avec un ami", "#")<br />

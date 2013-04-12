@@ -254,26 +254,27 @@ namespace Bea.Web.Controllers
         }
         #endregion
 
-        public ActionResult Contact(long id)
-        {
-            var result = _adServices.GetAdById(id);
+        //public ActionResult Contact(long id)
+        //{
+        //    var result = _adServices.GetAdById(id);
 
-            if (result == null)
-                return HttpNotFound("Cette annonce n'existe pas ou est désactivée");
+        //    if (result == null)
+        //        return HttpNotFound("Cette annonce n'existe pas ou est désactivée");
 
-            ContactUserFormModel contactUserFormModel = new ContactUserFormModel(result.Title, result.CreatedBy.Firstname, result.CreatedBy.Id, result.Id);
-            return View(contactUserFormModel);
-        }
+        //    ContactUserFormModel contactUserFormModel = new ContactUserFormModel(result.Title, result.CreatedBy.Firstname, result.CreatedBy.Id, result.Id);
+        //    return View(contactUserFormModel);
+        //}
 
         [HttpPost]
-        public ActionResult Contact(ContactUserFormModel model)
+        public PartialViewResult Contact(ContactUserFormModel model)
         {
             IDictionary<string, string> errors = _adConsistencyServices.GetDataConsistencyErrors(model);
             foreach (string key in errors.Keys)
                 ModelState.AddModelError(key, errors[key]);
             if (ModelState.IsValid)
             {
-                var user = _userServices.GetUserFromId(model.UserId);
+                Ad ad = _adServices.GetAdById(model.AdId);
+                var user = _userServices.GetUserFromId(ad.CreatedBy.Id);
                 model.EmailTo = user.Email;
                 _adActivationServices.SendEmailToUser(model);
                 if (model.CopySender)
@@ -281,12 +282,13 @@ namespace Bea.Web.Controllers
                     model.EmailTo = model.Email;
                     _adActivationServices.SendEmailToUser(model);
                 }
-                AdMessageModel messageModel = new AdMessageModel();
-                messageModel.AdId = model.AdId;
-                messageModel.InfoMessage = "Votre email a été envoyé !";
-                return View("MessageSent", messageModel);
+                //AdMessageModel messageModel = new AdMessageModel();
+                //messageModel.AdId = model.AdId;
+                //messageModel.InfoMessage = "Votre email a été envoyé !";
+                ViewBag.Message = "Votre email a été envoyé !";
+                return PartialView("_Contact", model);
             }
-            return View(model);
+            return PartialView("_Contact",model);
         }
     }
 }

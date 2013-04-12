@@ -19,7 +19,7 @@
         @using (Html.BeginForm("Contact", "Post", FormMethod.Post, new { @class = "well form-horizontal" }))
         {
             <h4><i class="icon-envelope"></i>&nbsp;Envoyer un message à @Model.FirstName</h4>
-            @Html.HiddenFor(model => model.UserId)
+            //@Html.HiddenFor(model => model.UserId)
             @Html.HiddenFor(model => model.AdId)
              @Html.HiddenFor(model => model.AdTitle)
             <div class="control-group">
