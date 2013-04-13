@@ -22,13 +22,13 @@ namespace Bea.Web
             routes.MapRoute(
                 name: "FrenchRouteWithCategory",
                 url: "Annonces/{categoryLabel}",
-                defaults: new { controller = "Home", action = "SearchFromUrl" }
+                defaults: new { controller = "Search", action = "SearchFromUrl" }
             );
 
             routes.MapRoute(
                 name: "FrenchRouteWithCityAndCategory",
                 url: "Annonces/{cityLabel}/{categoryLabel}",
-                defaults: new { controller = "Home", action = "SearchFromUrl" }
+                defaults: new { controller = "Search", action = "SearchFromUrl" }
             );
 
             routes.MapRoute(

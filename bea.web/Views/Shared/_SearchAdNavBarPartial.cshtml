@@ -44,7 +44,7 @@
 </ul>*@
 <div class="navbar">
     <div class="navbar-inner">
-        @using (Html.BeginForm("AdvancedSearch", "Home", FormMethod.Get, new { @class = "navbar-form" }))
+        @using (Html.BeginForm("AdvancedSearch", "Search", FormMethod.Get, new { @class = "navbar-form" }))
         {
             <div class="controls controls-row">
             <ul class="nav">
@@ -79,13 +79,7 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        //Refreshes the city list when user changes province
-        $('#provinces').change(function () {
-            $(this).reloadCities();
-        });
-    });
-
+    
     $.getUrlVars = function () {
         var vars = [], hash;
         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -103,7 +97,7 @@
         if (!categoryId)
             return;
 
-        var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Home", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
+        var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Search", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
         $.ajax({
             url: url,
             type: 'GET',
@@ -123,8 +117,6 @@
             }
         });
     }
-
-    
 
     $('#categories').change(function () { $.loadAdditionalParameters(); });
 

@@ -12,12 +12,12 @@ namespace Bea.Services
     public class CategoryServices : ICategoryServices
     {
         private readonly IRepository _repository;
-        //private readonly ICategoryRepository _categoryRepo;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryServices(IRepository repository)
+        public CategoryServices(IRepository repository, ICategoryRepository categoryRepository)
         {
             _repository = repository;
-            
+            _categoryRepository = categoryRepository;
         }
 
         /// <summary>
@@ -66,6 +66,57 @@ namespace Bea.Services
             foreach (Category child in parentCategory.SubCategories)
                 childrenLabels.Add(child.Label.ToUpper());
             return childrenLabels;
+        }
+
+
+        public IList<CategoryItemModel> GetAllCategoriesOfAGroup(int? categoryId)
+        {
+            if (!categoryId.HasValue)
+                return null;
+
+            Category c = _repository.Get<Category>(categoryId);
+
+            return GetAllCategoriesOfAGroup(c);
+        }
+
+        public IList<CategoryItemModel> GetAllCategoriesOfAGroupFromUrlPart(string categoryUrlPart)
+        {
+            if (String.IsNullOrEmpty(categoryUrlPart))
+                return null;
+
+            Category c = _categoryRepository.GetCategoryFromUrlPart(categoryUrlPart);
+
+            return GetAllCategoriesOfAGroup(c);
+        }
+
+        private IList<CategoryItemModel> GetAllCategoriesOfAGroup(Category c)
+        {
+            if (c == null)
+                return null;
+
+            IList<CategoryItemModel> result = new List<CategoryItemModel>();
+
+            if (c.SubCategories.Count == 0)
+                c = c.ParentCategory;
+
+            result.Add(new CategoryItemModel
+            {
+                Id = c.Id,
+                Label = c.Label.ToUpper(),
+                IsGroup = true
+            });
+
+            foreach (Category subC in c.SubCategories)
+            {
+                result.Add(new CategoryItemModel
+                {
+                    Id = subC.Id,
+                    Label = subC.Label,
+                    IsGroup = false
+                });
+            }
+
+            return result;
         }
     }
 }

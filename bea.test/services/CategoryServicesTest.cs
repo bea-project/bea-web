@@ -33,7 +33,7 @@ namespace Bea.Test.Services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(x => x.GetAll<Category>()).Returns(new List<Category>() { g1, g2, g3 });
 
-            CategoryServices service = new CategoryServices(repoMock.Object);
+            CategoryServices service = new CategoryServices(repoMock.Object, null);
 
             // When
             IList<CategoryItemModel> result = service.GetAllCategoriesAndGroups();
@@ -86,7 +86,7 @@ namespace Bea.Test.Services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(x => x.Get<Category>(1)).Returns(g1);
 
-            CategoryServices service = new CategoryServices(repoMock.Object);
+            CategoryServices service = new CategoryServices(repoMock.Object, null);
 
             // When
             IList<String> result = service.GetCategoryChildrenLabelFromParentId(1);
@@ -107,13 +107,115 @@ namespace Bea.Test.Services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(x => x.Get<Category>(1)).Returns(g1);
 
-            CategoryServices service = new CategoryServices(repoMock.Object);
+            CategoryServices service = new CategoryServices(repoMock.Object, null);
 
             // When
             IList<String> result = service.GetCategoryChildrenLabelFromParentId(1);
 
             // Then
             Assert.AreEqual(null, result);
+        }
+
+        [TestMethod]
+        public void GetAllCategoriesOfAGroup_aGroupItem_ReturnAllItsSubCategories()
+        {
+            // Given
+            Category group = new Category
+            {
+                Id = 7,
+                Label = "huhu"
+            };
+            Category subC1 = new Category
+            {
+                Id = 8,
+                ParentCategory = group,
+                Label = "toto"
+            };
+            group.SubCategories.Add(subC1);
+            Category subC2 = new Category
+            {
+                Id = 9,
+                ParentCategory = group,
+                Label = "titi"
+            };
+            group.SubCategories.Add(subC2);
+            Category subC3 = new Category
+            {
+                Id = 13,
+                ParentCategory = group,
+                Label = "tutu"
+            };
+            group.SubCategories.Add(subC3);
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(r => r.Get<Category>(7)).Returns(group);
+
+            CategoryServices service = new CategoryServices(repoMock.Object, null);
+
+            // When
+            IList<CategoryItemModel> result = service.GetAllCategoriesOfAGroup(7);
+
+            // Then
+            Assert.AreEqual(4, result.Count);
+            Assert.AreEqual(7, result[0].Id);
+            Assert.AreEqual(8, result[1].Id);
+            Assert.AreEqual(9, result[2].Id);
+            Assert.AreEqual(13, result[3].Id);
+            Assert.AreEqual("HUHU", result[0].Label);
+            Assert.AreEqual("toto", result[1].Label);
+            Assert.AreEqual("titi", result[2].Label);
+            Assert.AreEqual("tutu", result[3].Label);
+        }
+
+        [TestMethod]
+        public void GetAllCategoriesOfAGroup_aCategoryItem_ReturnAllSubCategoriesUnderParentCategory()
+        {
+            // Given
+            Category group = new Category
+            {
+                Id = 7,
+                Label = "huhu"
+            };
+            Category subC1 = new Category
+            {
+                Id = 8,
+                ParentCategory = group,
+                Label = "toto"
+            };
+            group.SubCategories.Add(subC1);
+            Category subC2 = new Category
+            {
+                Id = 9,
+                ParentCategory = group,
+                Label = "titi"
+            };
+            group.SubCategories.Add(subC2);
+            Category subC3 = new Category
+            {
+                Id = 13,
+                ParentCategory = group,
+                Label = "tutu"
+            };
+            group.SubCategories.Add(subC3);
+
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(r => r.Get<Category>(9)).Returns(subC2);
+
+            CategoryServices service = new CategoryServices(repoMock.Object, null);
+
+            // When
+            IList<CategoryItemModel> result = service.GetAllCategoriesOfAGroup(9);
+
+            // Then
+            Assert.AreEqual(4, result.Count);
+            Assert.AreEqual(7, result[0].Id);
+            Assert.AreEqual(8, result[1].Id);
+            Assert.AreEqual(9, result[2].Id);
+            Assert.AreEqual(13, result[3].Id);
+            Assert.AreEqual("HUHU", result[0].Label);
+            Assert.AreEqual("toto", result[1].Label);
+            Assert.AreEqual("titi", result[2].Label);
+            Assert.AreEqual("tutu", result[3].Label);
         }
     }
 }

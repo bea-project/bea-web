@@ -8,7 +8,7 @@
                     <img src="@String.Format("/Content/images/{0}.png", Model.CategoryImagePath)" />
                 </div>
                 <div class="span11">
-                    @using (Html.BeginForm("AdvancedSearch", "Home", FormMethod.Get, new { @class = "navbar-form" }))
+                    @using (Html.BeginForm("AdvancedSearch", "Search", FormMethod.Get, new { @class = "navbar-form" }))
                     {
                         <div class="controls controls-row">
                             <ul class="nav">
@@ -19,8 +19,7 @@
                                 <li class="bea-nav-li">
                                     @Html.DropDownListFor(
                                         x => x.CategorySelectedId,
-                                        Enumerable.Empty<SelectListItem>(),
-                                        "Toutes les catégories",
+                                        (IEnumerable<SelectListItem>) ViewBag.Categories,
                                         new { id = "categories" })
                                 </li>
 
@@ -53,13 +52,7 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        //Refreshes the city list when user changes province
-        $('#provinces').change(function () {
-            $(this).reloadCities();
-        });
-    });
-
+    
     $.getUrlVars = function () {
         var vars = [], hash;
         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -77,7 +70,7 @@
         if (!categoryId)
             return;
 
-        var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Home", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
+        var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Search", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
         $.ajax({
             url: url,
             type: 'GET',
@@ -98,30 +91,9 @@
         });
     }
 
-
+    $($.loadAdditionalParameters);
 
     $('#categories').change(function () { $.loadAdditionalParameters(); });
-
-    $(function () {
-        $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategoriesAndGroups" })', function (result) {
-            var ddl = $('#categories');
-            ddl.empty();
-            $(document.createElement('option'))
-                    .attr('value', "")
-                    .text("Toutes les catégories")
-                    .appendTo(ddl);
-            $(result).each(function () {
-                var selected = (this.Id == "@Model.CategorySelectedId");
-                $(document.createElement('option'))
-                    .attr('value', this.Id)
-                    .attr('selected', selected)
-                    .attr('style', this.IsGroup ? 'color: #006DCC;' : '')
-                    .text(this.Label)
-                    .appendTo(ddl);
-            });
-            $.loadAdditionalParameters();
-        });
-    });
 
     $(function () {
         $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "LocationApi", action = "GetAllCities" })', function (result) {

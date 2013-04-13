@@ -23,7 +23,6 @@ namespace Bea.Services
         private readonly IHelperService _helperService;
         private readonly IReferenceServices _referenceServices;
 
-
         public SearchServices(IRepository repository, ICategoryRepository categoryRepository, ISearchRepository searchRepository, IHelperService helperService, IReferenceServices referenceServices)
         {
             _repository = repository;
@@ -86,6 +85,8 @@ namespace Bea.Services
                 }
             }
 
+            //TODO: Search for city and add it to model
+
             return SearchAds(model);
         }
 
@@ -95,15 +96,19 @@ namespace Bea.Services
             if (!searchQuery.CategorySelectedId.HasValue)
                 return SearchAds(searchQuery);
 
+            Category selectedCategory = _repository.Get<Category>(searchQuery.CategorySelectedId);
+
+            // If this is a group category search, redirect to the base search through all this group ads
+            if (selectedCategory.SubCategories.Count != 0)
+                return SearchAds(searchQuery);
+
             // create search parameters object from AdvancedAdSearchModel
             AdSearchParameters searchParameters = CreateSearchParameters(searchQuery);
 
-            Category selectedCategory = _repository.Get<Category>(searchQuery.CategorySelectedId);
-
             // call repo with Type T based on switch on category with parameters (same for all objects)
-            IList<SearchAdCache> searchResult = null;
+            IList<SearchAdCache> searchResult = new List<SearchAdCache>();
 
-            switch(selectedCategory.Type)
+            switch (selectedCategory.Type)
             {
                 case AdTypeEnum.CarAd:
                     searchResult = _searchRepository.AdvancedSearchAds<CarAd>(searchParameters);
@@ -136,6 +141,7 @@ namespace Bea.Services
 
             // Create models for search results
             AdSearchResultModel model = new AdSearchResultModel(searchQuery);
+            model.CategoryImagePath = selectedCategory.ImageName;
             model.SearchResultTotalCount = searchResult.Count;
             model.SearchResult = searchResult.Select(a => new AdSearchResultItemModel(a)).ToList();
 

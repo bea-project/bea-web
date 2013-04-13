@@ -10,12 +10,6 @@ namespace Bea.Core.Services
     public interface ICategoryServices
     {
         /// <summary>
-        /// Get all the Category Groups with the categories
-        /// </summary>
-        /// <returns>A list of Category Groups</returns>
-        //List<Category> GetAllCategoryGroupsWithCategories();
-
-        /// <summary>
         /// Get all the Category by Id
         /// </summary>
         /// <returns>A Category</returns>
@@ -34,10 +28,12 @@ namespace Bea.Core.Services
         IList<CategoryItemModel> GetAllCategoriesAndGroups();
 
         /// <summary>
-        /// List all children of a category
+        /// Lists all the categories adding groups as non selectable
         /// </summary>
-        /// <returns>The list of children labels</returns>
-        //IList<String> GetCategoryChildrenLabelFromParentLabel(String parentLabel);
+        /// <param name="categoryId">The category of which to return the same group's categories</param>
+        /// <returns>The list of categories with groups</returns>
+        IList<CategoryItemModel> GetAllCategoriesOfAGroup(int? categoryId);
+        IList<CategoryItemModel> GetAllCategoriesOfAGroupFromUrlPart(String categoryUrlPart);
 
         /// <summary>
         /// List all children of a category

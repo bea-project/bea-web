@@ -42,6 +42,17 @@ namespace Bea.Web.Controllers.API
             return response;
         }
 
+        public HttpResponseMessage GetAllCategoriesOfAGroup(int categoryId)
+        {
+            HttpResponseMessage response;
+
+            var list = _categoryServices.GetAllCategoriesOfAGroup(categoryId);
+
+            response = Request.CreateResponse(HttpStatusCode.OK, list);
+
+            return response;
+        }
+
         public HttpResponseMessage GetAllCategoryChildrenLabels(int parentId)
         {
             HttpResponseMessage response;

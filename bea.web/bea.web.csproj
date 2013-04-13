@@ -160,6 +160,7 @@
     <Compile Include="Controllers\API\ReferenceAPIController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\API\LocationApiController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TestDataController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -275,9 +276,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Search.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Post\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -350,33 +348,6 @@
     <Content Include="Views\Post\Shared\Create\_RealEstateAdCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Shared\Search\_CarAdSearch.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Shared\Search\_MotoAdSearch.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Shared\Search\_VehicleAdSearch.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Shared\Search\_OtherVehicleAdSearch.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Shared\Search\_WaterSportAdSearch.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Shared\Search\_MotorBoatAdSearch.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Shared\Search\_MotorBoatEngineAdSearch.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Shared\Search\_SailingBoatAdSearch.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Shared\Search\_RealEstateAdSearch.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Post\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -428,6 +399,36 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Post\_Contact.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\Shared\_CarAdSearch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\Shared\_MotoAdSearch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\Shared\_MotorBoatAdSearch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\Shared\_MotorBoatEngineAdSearch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\Shared\_OtherVehicleAdSearch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\Shared\_RealEstateAdSearch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\Shared\_SailingBoatAdSearch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\Shared\_VehicleAdSearch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Search\Shared\_WaterSportAdSearch.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
