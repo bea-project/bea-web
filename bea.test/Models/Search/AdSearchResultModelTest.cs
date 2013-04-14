@@ -5,6 +5,7 @@ using System.Text;
 using Bea.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Bea.Models.Search;
+using Bea.Domain.Categories;
 
 namespace Bea.Test.Models
 {
@@ -24,15 +25,20 @@ namespace Bea.Test.Models
                 CategoryImagePath = "thepath"
             };
 
+            Category cat = new Category
+            {
+                Id = 16,
+                Label = "Voitures",
+                ImageName = "car.png"
+            };
+
             // When
-            AdSearchResultModel instance = new AdSearchResultModel(searchModel);
+            searchModel.SetCategory(cat);
 
             // Then
-            Assert.AreEqual(searchModel.SearchString, instance.SearchString);
-            Assert.AreEqual(searchModel.CitySelectedId, instance.CitySelectedId);
-            Assert.AreEqual(searchModel.CategorySelectedLabel, instance.CategorySelectedLabel);
-            Assert.AreEqual(searchModel.CategorySelectedId, instance.CategorySelectedId);
-            Assert.AreEqual(searchModel.CategoryImagePath, instance.CategoryImagePath);
+            Assert.AreEqual(16, searchModel.CategorySelectedId);
+            Assert.AreEqual("Voitures", searchModel.CategorySelectedLabel);
+            Assert.AreEqual("car.png", searchModel.CategoryImagePath);
         }
     }
 }

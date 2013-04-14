@@ -1,4 +1,5 @@
 ﻿@model Bea.Models.Search.AdSearchModel
+
 @*<ul class="nav nav-tabs">
   <li class="active">
     <a href="#vehicles" data-toggle="tab">
@@ -42,9 +43,10 @@
   </li>
   
 </ul>*@
+
 <div class="navbar">
     <div class="navbar-inner">
-        @using (Html.BeginForm("AdvancedSearch", "Search", FormMethod.Get, new { @class = "navbar-form" }))
+        @using (Html.BeginForm("Search", "Search", FormMethod.Get, new { @class = "navbar-form" }))
         {
             <div class="controls controls-row">
             <ul class="nav">

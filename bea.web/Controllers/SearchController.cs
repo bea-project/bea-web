@@ -31,6 +31,19 @@ namespace Bea.Web.Controllers
             return View(new AdSearchResultModel());
         }
 
+
+        //
+        // GET: /Search/Search
+        public ActionResult Search(AdvancedAdSearchModel model)
+        {
+            AdSearchResultModel result = _searchServices.SearchAds(model);
+            ViewBag.Categories = _categoryServices.GetAllCategoriesOfAGroup(model.CategorySelectedId)
+                .Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() });
+            return View("Index", result);
+        }
+
+        //
+        // GET: /Search/SearchFromUrl
         public ActionResult SearchFromUrl(String cityLabel, String categoryLabel)
         {
             AdSearchResultModel result = _searchServices.SearchAdsFromUrl(cityLabel, categoryLabel);
@@ -39,20 +52,8 @@ namespace Bea.Web.Controllers
             return View("Index", result);
         }
 
-        public ActionResult Search(AdSearchModel model)
-        {
-            AdSearchResultModel result = _searchServices.SearchAds(model);
-            return View("Index", result);
-        }
-
-        public ActionResult AdvancedSearch(AdvancedAdSearchModel model)
-        {
-            AdSearchResultModel result = _searchServices.AdvancedSearchAds(model);
-            ViewBag.Categories = _categoryServices.GetAllCategoriesOfAGroup(model.CategorySelectedId)
-                .Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() });
-            return View("Index", result);
-        }
-
+        //
+        // GET: /Search/AddParamters
         public PartialViewResult AddParamters(int categoryId)
         {
             Category selectedCategory = _categoryServices.GetCategoryById(categoryId);

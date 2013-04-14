@@ -34,6 +34,42 @@ namespace Bea.Services
 
         public AdSearchResultModel SearchAds(AdSearchModel searchQuery)
         {
+            // If this is a broad search, redirect to the base search through all ads
+            if (!searchQuery.CategorySelectedId.HasValue)
+                return LightSearchAds(searchQuery);
+
+            Category selectedCategory = _repository.Get<Category>(searchQuery.CategorySelectedId);
+            searchQuery.SetCategory(selectedCategory);
+
+            // If this is a group category search, redirect to the base search through all this group ads
+            if (selectedCategory.SubCategories.Count != 0)
+                return LightSearchAds(searchQuery);
+
+            return AdvancedSearchAds(searchQuery as AdvancedAdSearchModel);
+        }
+
+        public AdSearchResultModel SearchAdsFromUrl(string cityLabel, string categoryLabel)
+        {
+            AdSearchModel model = new AdSearchModel();
+
+            if (!String.IsNullOrEmpty(categoryLabel))
+            {
+                Category c = _categoryRepository.GetCategoryFromUrlPart(categoryLabel);
+                if (c != null)
+                {
+                    model.CategorySelectedId = c.Id;
+                    model.CategorySelectedLabel = c.Label;
+                    model.CategoryImagePath = c.ImageName;
+                }
+            }
+
+            //TODO: Search for city and add it to model
+
+            return LightSearchAds(model);
+        }
+
+        internal AdSearchResultModel LightSearchAds(AdSearchModel searchQuery)
+        {
             String[] andSearchStrings = null;
 
             if (!String.IsNullOrEmpty(searchQuery.SearchString))
@@ -51,56 +87,11 @@ namespace Bea.Services
 
             return model;
         }
-
-        private int[] GetCategoryIdsFromQuery(int? categorySelectedId)
+  
+        internal AdSearchResultModel AdvancedSearchAds(AdvancedAdSearchModel searchQuery)
         {
-            int[] categories = null;
-
-            if (!categorySelectedId.HasValue)
-                return categories;
-
-            Category selectedCategory = _repository.Get<Category>(categorySelectedId);
-
-            // If this is a parent category
-            if (selectedCategory.SubCategories.Count != 0)
-                categories = selectedCategory.SubCategories.Select(x => x.Id).ToArray();
-            else
-                categories = new int[] { categorySelectedId.Value };
-
-            return categories;
-        }
-
-        public AdSearchResultModel SearchAdsFromUrl(string cityLabel, string categoryLabel)
-        {
-            AdvancedAdSearchModel model = new AdvancedAdSearchModel();
-
-            if (!String.IsNullOrEmpty(categoryLabel))
-            {
-                Category c = _categoryRepository.GetCategoryFromUrlPart(categoryLabel);
-                if (c != null)
-                {
-                    model.CategorySelectedId = c.Id;
-                    model.CategorySelectedLabel = c.Label;
-                    model.CategoryImagePath = c.ImageName;
-                }
-            }
-
-            //TODO: Search for city and add it to model
-
-            return SearchAds(model);
-        }
-
-        public AdSearchResultModel AdvancedSearchAds(AdvancedAdSearchModel searchQuery)
-        {
-            // If this is a broad search, redirect to the base search through all ads
-            if (!searchQuery.CategorySelectedId.HasValue)
-                return SearchAds(searchQuery);
-
+            // This search relies on a selected category
             Category selectedCategory = _repository.Get<Category>(searchQuery.CategorySelectedId);
-
-            // If this is a group category search, redirect to the base search through all this group ads
-            if (selectedCategory.SubCategories.Count != 0)
-                return SearchAds(searchQuery);
 
             // create search parameters object from AdvancedAdSearchModel
             AdSearchParameters searchParameters = CreateSearchParameters(searchQuery);
@@ -141,14 +132,31 @@ namespace Bea.Services
 
             // Create models for search results
             AdSearchResultModel model = new AdSearchResultModel(searchQuery);
-            model.CategoryImagePath = selectedCategory.ImageName;
             model.SearchResultTotalCount = searchResult.Count;
             model.SearchResult = searchResult.Select(a => new AdSearchResultItemModel(a)).ToList();
 
             return model;
         }
 
-        public AdSearchParameters CreateSearchParameters(AdvancedAdSearchModel searchQuery)
+        private int[] GetCategoryIdsFromQuery(int? categorySelectedId)
+        {
+            int[] categories = null;
+
+            if (!categorySelectedId.HasValue)
+                return categories;
+
+            Category selectedCategory = _repository.Get<Category>(categorySelectedId);
+
+            // If this is a parent category
+            if (selectedCategory.SubCategories.Count != 0)
+                categories = selectedCategory.SubCategories.Select(x => x.Id).ToArray();
+            else
+                categories = new int[] { categorySelectedId.Value };
+
+            return categories;
+        }
+
+        private AdSearchParameters CreateSearchParameters(AdvancedAdSearchModel searchQuery)
         {
             AdSearchParameters parameters = new AdSearchParameters();
 

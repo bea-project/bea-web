@@ -53,7 +53,7 @@ namespace Bea.Test.services
             SearchServices service = new SearchServices(null, null, adRepoMock.Object, null, null);
 
             // When
-            AdSearchResultModel result = service.SearchAds(model);
+            AdSearchResultModel result = service.LightSearchAds(model);
 
             // Then
             Assert.AreEqual("title", result.SearchString);
@@ -96,7 +96,7 @@ namespace Bea.Test.services
             SearchServices service = new SearchServices(null, null, adRepoMock.Object, null, null);
 
             // When
-            AdSearchResultModel result = service.SearchAds(model);
+            AdSearchResultModel result = service.LightSearchAds(model);
 
             // Then
             Assert.AreEqual("ship computer", result.SearchString);
@@ -138,7 +138,7 @@ namespace Bea.Test.services
             SearchServices service = new SearchServices(repoMock.Object, null, adRepoMock.Object, null, null);
 
             // When
-            AdSearchResultModel result = service.SearchAds(model);
+            AdSearchResultModel result = service.LightSearchAds(model);
 
             // Then
             Assert.AreEqual("ship", result.SearchString);
@@ -183,7 +183,7 @@ namespace Bea.Test.services
             SearchServices service = new SearchServices(repoMock.Object, null, adRepoMock.Object, null, null);
 
             // When
-            AdSearchResultModel result = service.SearchAds(model);
+            AdSearchResultModel result = service.LightSearchAds(model);
 
             // Then
             Assert.AreEqual("ship", result.SearchString);
@@ -294,7 +294,7 @@ namespace Bea.Test.services
             SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, null);
 
             // When
-            AdSearchResultModel result = service.SearchAds(model);
+            AdSearchResultModel result = service.LightSearchAds(model);
 
             // Then
             Assert.AreEqual(1, result.SearchResultTotalCount);

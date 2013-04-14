@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bea.Domain.Ads;
+using Bea.Domain.Categories;
 
 namespace Bea.Models.Search
 {
@@ -26,6 +27,13 @@ namespace Bea.Models.Search
             this.CategorySelectedId = adSearchModel.CategorySelectedId;
             this.CategorySelectedLabel = adSearchModel.CategorySelectedLabel;
             this.CategoryImagePath = adSearchModel.CategoryImagePath;
+        }
+
+        public void SetCategory(Category category)
+        {
+            this.CategorySelectedId = category.Id;
+            this.CategorySelectedLabel = category.Label;
+            this.CategoryImagePath = category.ImageName;
         }
     }
 }

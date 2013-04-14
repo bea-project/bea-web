@@ -8,7 +8,7 @@
                     <img src="@String.Format("/Content/images/{0}.png", Model.CategoryImagePath)" />
                 </div>
                 <div class="span11">
-                    @using (Html.BeginForm("AdvancedSearch", "Search", FormMethod.Get, new { @class = "navbar-form" }))
+                    @using (Html.BeginForm("Search", "Search", FormMethod.Get, new { @class = "navbar-form" }))
                     {
                         <div class="controls controls-row">
                             <ul class="nav">
