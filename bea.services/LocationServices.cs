@@ -18,15 +18,15 @@ namespace Bea.Services
             _repository = repository;
             _locationRepository = locationRepository;
         }
-        
-        public City GetCityFromLabel(string label)
+
+        public City GetCityFromLabelUrlPart(string labelUrlPart)
         {
-            return _locationRepository.GetCityFromLabel(label);
+            return _locationRepository.GetCityFromLabelUrlPart(labelUrlPart);
         }
 
         public City GetCityFromId(int cityId)
         {
-            return _locationRepository.GetCityFromId(cityId);
+            return _repository.Get<City>(cityId);
         }
 
         public IList<Province> GetAllProvinces()

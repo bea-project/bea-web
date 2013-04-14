@@ -16,12 +16,6 @@ namespace Bea.Core.Services
         Category GetCategoryById(int categoryId);
 
         /// <summary>
-        /// Returns all categories
-        /// </summary>
-        /// <returns></returns>
-        IList<Category> GetAllCategories();
-
-        /// <summary>
         /// Lists all the categories adding groups as non selectable
         /// </summary>
         /// <returns>The list of categories with groups</returns>
@@ -31,7 +25,7 @@ namespace Bea.Core.Services
         /// Lists all the categories adding groups as non selectable
         /// </summary>
         /// <param name="categoryId">The category of which to return the same group's categories</param>
-        /// <returns>The list of categories with groups</returns>
+        /// <returns>The list of categories with their group</returns>
         IList<CategoryItemModel> GetAllCategoriesOfAGroup(int? categoryId);
         IList<CategoryItemModel> GetAllCategoriesOfAGroupFromUrlPart(String categoryUrlPart);
 

@@ -8,17 +8,11 @@ namespace Bea.Core.Dal
 {
     public interface ILocationRepository
     {
-        /// Get the City from the label
+        /// Get the City from the label Url part
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>The user with the email</returns>
-        City GetCityFromLabel(string label);
-
-        /// Get the City from the id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>The user with the email</returns>
-        City GetCityFromId(int cityId);
+        /// <returns></returns>
+        City GetCityFromLabelUrlPart(string labelUrlPart);
 
         /// Get All provinces
         /// Required to create the AdCreateModel

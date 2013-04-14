@@ -29,11 +29,6 @@ namespace Bea.Services
             return _repository.Get<Category>(categoryId);
         }
 
-        public IList<Category> GetAllCategories()
-        {
-            return _repository.GetAll<Category>();
-        }
-
         public IList<CategoryItemModel> GetAllCategoriesAndGroups()
         {
             IList<CategoryItemModel> result = new List<CategoryItemModel>();
@@ -72,7 +67,7 @@ namespace Bea.Services
         public IList<CategoryItemModel> GetAllCategoriesOfAGroup(int? categoryId)
         {
             if (!categoryId.HasValue)
-                return null;
+                return new List<CategoryItemModel>();
 
             Category c = _repository.Get<Category>(categoryId);
 
@@ -92,7 +87,7 @@ namespace Bea.Services
         private IList<CategoryItemModel> GetAllCategoriesOfAGroup(Category c)
         {
             if (c == null)
-                return null;
+                return new List<CategoryItemModel>();
 
             IList<CategoryItemModel> result = new List<CategoryItemModel>();
 

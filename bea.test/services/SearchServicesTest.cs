@@ -50,7 +50,7 @@ namespace Bea.Test.services
                 CitySelectedId = 98
             };
 
-            SearchServices service = new SearchServices(null, null, adRepoMock.Object, null, null);
+            SearchServices service = new SearchServices(null, null, adRepoMock.Object, null, null, null);
 
             // When
             AdSearchResultModel result = service.LightSearchAds(model);
@@ -93,7 +93,7 @@ namespace Bea.Test.services
                 CitySelectedId = 98
             };
 
-            SearchServices service = new SearchServices(null, null, adRepoMock.Object, null, null);
+            SearchServices service = new SearchServices(null, null, adRepoMock.Object, null, null, null);
 
             // When
             AdSearchResultModel result = service.LightSearchAds(model);
@@ -135,7 +135,7 @@ namespace Bea.Test.services
                 CategorySelectedId = 12
             };
 
-            SearchServices service = new SearchServices(repoMock.Object, null, adRepoMock.Object, null, null);
+            SearchServices service = new SearchServices(repoMock.Object, null, adRepoMock.Object, null, null, null);
 
             // When
             AdSearchResultModel result = service.LightSearchAds(model);
@@ -180,7 +180,7 @@ namespace Bea.Test.services
                 CategorySelectedId = 12
             };
 
-            SearchServices service = new SearchServices(repoMock.Object, null, adRepoMock.Object, null, null);
+            SearchServices service = new SearchServices(repoMock.Object, null, adRepoMock.Object, null, null, null);
 
             // When
             AdSearchResultModel result = service.LightSearchAds(model);
@@ -219,7 +219,7 @@ namespace Bea.Test.services
             var catRepoMock = new Moq.Mock<ICategoryRepository>();
             catRepoMock.Setup(r => r.GetCategoryFromUrlPart("cat-url-label")).Returns(cat);
 
-            SearchServices service = new SearchServices(repoMock.Object, catRepoMock.Object, adRepoMock.Object, null, null);
+            SearchServices service = new SearchServices(repoMock.Object, catRepoMock.Object, adRepoMock.Object, null, null, null);
 
             // When
             AdSearchResultModel result = service.SearchAdsFromUrl(null, "cat-url-label");
@@ -251,7 +251,7 @@ namespace Bea.Test.services
             var catRepoMock = new Moq.Mock<ICategoryRepository>();
             catRepoMock.Setup(r => r.GetCategoryFromUrlPart("cat-url-label")).Returns(cat);
 
-            SearchServices service = new SearchServices(repoMock.Object, catRepoMock.Object, adRepoMock.Object, null, null);
+            SearchServices service = new SearchServices(repoMock.Object, catRepoMock.Object, adRepoMock.Object, null, null, null);
 
             // When
             AdSearchResultModel result = service.SearchAdsFromUrl(null, "cat-url-label");
@@ -262,6 +262,41 @@ namespace Bea.Test.services
             Assert.AreEqual(12, result.CategorySelectedId);
             Assert.AreEqual("image", result.CategoryImagePath);
             Assert.AreEqual("Label", result.CategorySelectedLabel);
+
+            adRepoMock.VerifyAll();
+        }
+
+        [TestMethod]
+        public void SearchAdsFromUrl_CityIsSelected_RunSearchWithCity()
+        {
+            // Given
+            City city = new City { Id = 12, LabelUrlPart = "city-url-label", Label = "Label" };
+
+            IList<SearchAdCache> searchResult = new List<SearchAdCache>();
+            searchResult.Add(new SearchAdCache
+            {
+                Title = "ship",
+                City = city,
+                Category = new Category { Label = "pouet" }
+            });
+
+            var adRepoMock = new Moq.Mock<ISearchRepository>();
+            adRepoMock.Setup(r => r.SearchAds(null, city.Id, null)).Returns(searchResult);
+
+            var catLocationServiceMock = new Moq.Mock<ILocationServices>();
+            catLocationServiceMock.Setup(r => r.GetCityFromLabelUrlPart("city-url-label")).Returns(city);
+
+            SearchServices service = new SearchServices(null, null, adRepoMock.Object, null, null, catLocationServiceMock.Object);
+
+            // When
+            AdSearchResultModel result = service.SearchAdsFromUrl("city-url-label", null);
+
+            // Then
+            Assert.IsNull(result.SearchString);
+            Assert.AreEqual(12, result.CitySelectedId);
+            Assert.AreEqual(1, result.SearchResult.Count);
+            Assert.AreEqual(1, result.SearchResultTotalCount);
+            Assert.AreEqual("ship", result.SearchResult[0].Title);
 
             adRepoMock.VerifyAll();
         }
@@ -291,7 +326,7 @@ namespace Bea.Test.services
             var searchRepoMock = new Moq.Mock<ISearchRepository>();
             searchRepoMock.Setup(r => r.SearchAds(It.Is<String[]>(x => x[0] == "toto"), 12, It.Is<int[]>(x => x[0] == 1))).Returns(searchResult);
 
-            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, null);
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, null, null);
 
             // When
             AdSearchResultModel result = service.LightSearchAds(model);
@@ -354,7 +389,7 @@ namespace Bea.Test.services
                     && p.FueldId == 89
                     && p.IsAuto.Value))).Returns(searchResult);
 
-            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object, null);
 
             // When
             AdSearchResultModel result = service.AdvancedSearchAds(model);
@@ -418,7 +453,7 @@ namespace Bea.Test.services
                     && p.MinEngineSize == 250
                     && p.MaxEngineSize == 650))).Returns(searchResult);
 
-            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object, null);
 
             // When
             AdSearchResultModel result = service.AdvancedSearchAds(model);
@@ -476,7 +511,7 @@ namespace Bea.Test.services
                     && p.MaxYear == 2013
                     && p.FueldId == 89))).Returns(searchResult);
 
-            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object, null);
 
             // When
             AdSearchResultModel result = service.AdvancedSearchAds(model);
@@ -539,7 +574,7 @@ namespace Bea.Test.services
                     && p.IsFurnished.Value
                     && p.DistrictId == 71))).Returns(searchResult);
 
-            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, refMock.Object);
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, refMock.Object, null);
 
             // When
             AdSearchResultModel result = service.AdvancedSearchAds(model);
@@ -600,7 +635,7 @@ namespace Bea.Test.services
                     && p.MinYear == 2003
                     && p.MaxYear == 2013))).Returns(searchResult);
 
-            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object, null);
 
             // When
             AdSearchResultModel result = service.AdvancedSearchAds(model);
@@ -643,7 +678,7 @@ namespace Bea.Test.services
                     && p.MaxHp == 38
                     && p.MotorEngineTypeId == 2))).Returns(searchResult);
 
-            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, null);
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, null, null);
 
             // When
             AdSearchResultModel result = service.AdvancedSearchAds(model);
@@ -700,7 +735,7 @@ namespace Bea.Test.services
                     && p.MinYear == 2002
                     && p.MaxYear == 2013))).Returns(searchResult);
 
-            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object);
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, helperMock.Object, refMock.Object, null);
 
             // When
             AdSearchResultModel result = service.AdvancedSearchAds(model);
@@ -739,7 +774,7 @@ namespace Bea.Test.services
                     p.AndSearchStrings[0].Equals("kite")
                     && p.WaterTypeId == 9))).Returns(searchResult);
 
-            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, null);
+            SearchServices service = new SearchServices(repoMock.Object, null, searchRepoMock.Object, null, null, null);
 
             // When
             AdSearchResultModel result = service.AdvancedSearchAds(model);

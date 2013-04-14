@@ -8,12 +8,11 @@ namespace Bea.Core.Services
 {
     public interface ILocationServices
     {
-        City GetCityFromLabel(string label);
+        City GetCityFromLabelUrlPart(string labelUrlPart);
         City GetCityFromId(int cityId);
         IList<Province> GetAllProvinces();
         IList<City> GetAllCities();
         IList<City> GetCitiesFromProvince(int provinceId);
         IList<District> GetAllDistricts();
-
     }
 }

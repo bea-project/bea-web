@@ -12,6 +12,7 @@ using Bea.Domain.Categories;
 using Bea.Models.Search;
 using Bea.Tools;
 using Bea.Domain.Ads.WaterSport;
+using Bea.Domain.Location;
 
 namespace Bea.Services
 {
@@ -22,14 +23,21 @@ namespace Bea.Services
         private readonly ISearchRepository _searchRepository;
         private readonly IHelperService _helperService;
         private readonly IReferenceServices _referenceServices;
+        private readonly ILocationServices _locationServices;
 
-        public SearchServices(IRepository repository, ICategoryRepository categoryRepository, ISearchRepository searchRepository, IHelperService helperService, IReferenceServices referenceServices)
+        public SearchServices(IRepository repository, 
+            ICategoryRepository categoryRepository, 
+            ISearchRepository searchRepository, 
+            IHelperService helperService, 
+            IReferenceServices referenceServices,
+            ILocationServices locationServices)
         {
             _repository = repository;
             _categoryRepository = categoryRepository;
             _searchRepository = searchRepository;
             _helperService = helperService;
             _referenceServices = referenceServices;
+            _locationServices = locationServices;
         }
 
         public AdSearchResultModel SearchAds(AdSearchModel searchQuery)
@@ -63,7 +71,12 @@ namespace Bea.Services
                 }
             }
 
-            //TODO: Search for city and add it to model
+            if (!String.IsNullOrEmpty(cityLabel))
+            {
+                City city = _locationServices.GetCityFromLabelUrlPart(cityLabel);
+                if (city != null)
+                    model.CitySelectedId = city.Id;
+            }
 
             return LightSearchAds(model);
         }

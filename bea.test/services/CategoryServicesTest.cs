@@ -99,7 +99,7 @@ namespace Bea.Test.Services
         }
 
         [TestMethod]
-        public void GetCategoryChildrenLabelFromParentLabel_NoChildren_Returns_Null()
+        public void GetCategoryChildrenLabelFromParentLabel_NoChildren_Returns_null()
         {
             // Given
             Category g1 = new Category { Id = 1, Label = "first" };
@@ -113,11 +113,41 @@ namespace Bea.Test.Services
             IList<String> result = service.GetCategoryChildrenLabelFromParentId(1);
 
             // Then
-            Assert.AreEqual(null, result);
+            Assert.IsNull(result);
         }
 
         [TestMethod]
-        public void GetAllCategoriesOfAGroup_aGroupItem_ReturnAllItsSubCategories()
+        public void GetAllCategoriesOfAGroup_idIsNull_ReturnEmptyList()
+        {
+            // Given
+            CategoryServices service = new CategoryServices(null, null);
+
+            // When
+            IList<CategoryItemModel> result = service.GetAllCategoriesOfAGroup(null);
+
+            // Then
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [TestMethod]
+        public void GetAllCategoriesOfAGroup_groupDoesNotExists_ReturnEmptyList()
+        {
+            // Given
+            
+            var repoMock = new Moq.Mock<IRepository>();
+            repoMock.Setup(r => r.Get<Category>(7)).Returns(null as Category);
+
+            CategoryServices service = new CategoryServices(repoMock.Object, null);
+
+            // When
+            IList<CategoryItemModel> result = service.GetAllCategoriesOfAGroup(7);
+
+            // Then
+            Assert.AreEqual(0, result.Count);
+        }
+
+        [TestMethod]
+        public void GetAllCategoriesOfAGroup_aGroupItem_ReturnItselfAndSubCategories()
         {
             // Given
             Category group = new Category
@@ -168,7 +198,7 @@ namespace Bea.Test.Services
         }
 
         [TestMethod]
-        public void GetAllCategoriesOfAGroup_aCategoryItem_ReturnAllSubCategoriesUnderParentCategory()
+        public void GetAllCategoriesOfAGroup_aCategoryItem_ReturnAllSubCategoriesAndParentCategory()
         {
             // Given
             Category group = new Category

@@ -20,17 +20,6 @@ namespace Bea.Web.Controllers.API
             _categoryServices = categoryServices;
         }
 
-        public HttpResponseMessage GetAllCategories()
-        {
-            HttpResponseMessage response;
-
-            var list = _categoryServices.GetAllCategories().ToList().Select(x => new { Id = x.Id, Label = x.Label });
-
-            response = Request.CreateResponse(HttpStatusCode.OK, list);
-
-            return response;
-        }
-
         public HttpResponseMessage GetAllCategoriesAndGroups()
         {
             HttpResponseMessage response;

@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Catégorie introuvable !";
+}
+
+<h3>Votre recherche a été effectuée dans une catégorie qui n'existe pas sur le site !</h3>
+<p>
+    Si vous souhaitez la voir apparaître, n'hésitez pas à nous le faire savoir ... <br />
+    En attendant, nous vous proposons de retourner à la page d'accueil afin de relancer une recherche...
+</p>
+
+
+<h4>@Html.ActionLink("Retourner à la page d'accueil", "Index", new { controller = "Home" })</h4>

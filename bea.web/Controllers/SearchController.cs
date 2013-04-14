@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Bea.Core.Services;
 using Bea.Domain.Ads;
 using Bea.Domain.Categories;
+using Bea.Models.References;
 using Bea.Models.Search;
 
 namespace Bea.Web.Controllers
@@ -31,14 +32,15 @@ namespace Bea.Web.Controllers
             return View(new AdSearchResultModel());
         }
 
-
         //
         // GET: /Search/Search
         public ActionResult Search(AdvancedAdSearchModel model)
         {
-            AdSearchResultModel result = _searchServices.SearchAds(model);
             ViewBag.Categories = _categoryServices.GetAllCategoriesOfAGroup(model.CategorySelectedId)
                 .Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() });
+
+            AdSearchResultModel result = _searchServices.SearchAds(model);
+            
             return View("Index", result);
         }
 
@@ -46,9 +48,14 @@ namespace Bea.Web.Controllers
         // GET: /Search/SearchFromUrl
         public ActionResult SearchFromUrl(String cityLabel, String categoryLabel)
         {
+            IList<CategoryItemModel> categoryGroup = _categoryServices.GetAllCategoriesOfAGroupFromUrlPart(categoryLabel);
+                
+            if (categoryGroup.Count == 0)
+                return View("CategoryDoesNotExists");
+
             AdSearchResultModel result = _searchServices.SearchAdsFromUrl(cityLabel, categoryLabel);
-            ViewBag.Categories = _categoryServices.GetAllCategoriesOfAGroupFromUrlPart(categoryLabel)
-                .Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() });
+            ViewBag.Categories = categoryGroup.Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() });
+
             return View("Index", result);
         }
 

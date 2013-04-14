@@ -21,12 +21,12 @@ namespace Bea.Dal.Repository
 
         public City GetCityFromLabel(string label)
         {
-            return _sessionFactory.GetCurrentSession().Query<City>().Where(x => x.Label.Equals(label)).FirstOrDefault();
+            return _sessionFactory.GetCurrentSession().Query<City>().Where(x => x.Label.Equals(label)).SingleOrDefault();
         }
 
-        public City GetCityFromId(int cityId)
+        public City GetCityFromLabelUrlPart(string labelUrlPart)
         {
-            return _sessionFactory.GetCurrentSession().Query<City>().Where(x => x.Id==cityId).FirstOrDefault();
+            return _sessionFactory.GetCurrentSession().Query<City>().Where(x => x.LabelUrlPart.Equals(labelUrlPart)).SingleOrDefault();
         }
 
         public IEnumerable<Province> GetAllProvinces()
