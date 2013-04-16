@@ -347,9 +347,6 @@
     <Content Include="Views\Post\Shared\Create\_RealEstateAdCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Post\Contact.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Post\MessageSent.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />

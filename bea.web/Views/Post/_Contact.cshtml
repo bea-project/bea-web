@@ -1,16 +1,16 @@
-﻿@model Bea.Models.ContactUserFormModel
+﻿@model Bea.Models.Contact.ContactAdModel
 <script type="text/javascript">
     //    Show the loading bar
     function sending() {
         document.getElementById('progressBar').style.display = "block";
+        document.getElementById('submitButton').style.display = "none";
     }
+    
 </script>
 
-@if(ViewBag.Message!=null)
+@if (@Model.InfoMessage != null)
 {
-    <div>
-        Message envoyé!
-    </div>
+    <p>@Model.InfoMessage</p>
 }
 else
 {
@@ -36,10 +36,10 @@ using (Ajax.BeginForm("Contact", "Post",new {}, new AjaxOptions { HttpMethod = "
             @Html.TextAreaFor(model => model.EmailBody, new { @rows = 10, @class = "input-large", style = "resize: none;",placeholder="Votre message..." })
             @Html.ValidationMessageFor(model => model.EmailBody, String.Empty, new { @class = "label label-important" })
         </div>
-        <label class="control-label" for="inputCopy">@Html.LabelFor(model => model.CopySender)</label>
-        <div class="controls controls-row">
-            @Html.CheckBoxFor(model => model.CopySender)
-        </div>
+        <dl class="dl-horizontal">
+            <dt style="font-weight:normal">Recevoir une copie ?</dt>
+            <dd>@Html.CheckBoxFor(model => model.CopySender)</dd>
+        </dl>
     </div>
     <div class="control-group">
         <div class="controls">

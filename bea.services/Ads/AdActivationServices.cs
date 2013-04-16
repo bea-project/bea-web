@@ -91,20 +91,20 @@ namespace Bea.Services.Ads
             _emailService.SendEmail(subject, body, ad.CreatedBy.Email);
         }
 
-        public void SendEmailToUser(ContactUserFormModel model)
-        {
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(model.Email);
-            mail.To.Add(model.EmailTo);
-            mail.Subject = String.Format("Bea.nc - Notification : \"{0}\"", model.AdTitle);
-            mail.Body = String.Format("Bonjour,"
-                 + "un utilisateur du site bea.nc, {0}, vous envoie le message suivant. Vous pouvez lui repondre directement à partir de cet email ou par telephone: {1}.\n\n"
-                 + "---------------------------------------------------------------\n\n"
-                 + model.EmailBody + "\n\n"
-                 + "---------------------------------------------------------------\n\n"
-                 + "http://bea.nc/Post/Details/{2}", model.Name, (String.IsNullOrEmpty(model.Telephone)) ? "non communiqué" : model.Telephone, model.AdId);
-            SmtpClient SmtpServer = new SmtpClient();
-            SmtpServer.SendAsync(mail, null);
-        }
+        //public void SendEmailToUser(ContactUserFormModel model)
+        //{
+        //    MailMessage mail = new MailMessage();
+        //    mail.From = new MailAddress(model.Email);
+        //    mail.To.Add(model.EmailTo);
+        //    mail.Subject = String.Format("Bea.nc - Notification : \"{0}\"", model.AdTitle);
+        //    mail.Body = String.Format("Bonjour,"
+        //         + "un utilisateur du site bea.nc, {0}, vous envoie le message suivant. Vous pouvez lui repondre directement à partir de cet email ou par telephone: {1}.\n\n"
+        //         + "---------------------------------------------------------------\n\n"
+        //         + model.EmailBody + "\n\n"
+        //         + "---------------------------------------------------------------\n\n"
+        //         + "http://bea.nc/Post/Details/{2}", model.Name, (String.IsNullOrEmpty(model.Telephone)) ? "non communiqué" : model.Telephone, model.AdId);
+        //    SmtpClient SmtpServer = new SmtpClient();
+        //    SmtpServer.SendAsync(mail, null);
+        //}
     }
 }

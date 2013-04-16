@@ -9,6 +9,7 @@ using Bea.Domain.Ads.WaterSport;
 using Bea.Models;
 using Bea.Core.Services.Ads;
 using Bea.Models.Create;
+using Bea.Models.Contact;
 
 namespace Bea.Services.Ads
 {
@@ -277,7 +278,7 @@ namespace Bea.Services.Ads
             return errors;
         }
 
-        public Dictionary<string, string> GetDataConsistencyErrors(ContactUserFormModel model)
+        public Dictionary<string, string> GetDataConsistencyErrors(ContactAdModel model)
         {
             Dictionary<string, string> errors = new Dictionary<string, string>();
             if (String.IsNullOrEmpty(model.Name))

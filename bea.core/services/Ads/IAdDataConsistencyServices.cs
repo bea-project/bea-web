@@ -5,6 +5,7 @@ using System.Text;
 using Bea.Domain.Ads;
 using Bea.Models;
 using Bea.Models.Create;
+using Bea.Models.Contact;
 
 namespace Bea.Core.Services.Ads
 {
@@ -12,7 +13,7 @@ namespace Bea.Core.Services.Ads
     {
         //IDictionary<string, string> GetAdDataConsistencyErrors(BaseAd ad);
         IDictionary<string, string> GetAdDataConsistencyErrors(AdvancedAdCreateModel model);
-        Dictionary<string, string> GetDataConsistencyErrors(ContactUserFormModel model);
+        Dictionary<string, string> GetDataConsistencyErrors(ContactAdModel model);
         Boolean IsEmailValid(String email);
     }
 }

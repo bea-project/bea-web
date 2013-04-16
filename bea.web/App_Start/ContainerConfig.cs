@@ -45,6 +45,7 @@ namespace Bea.Web.App_Start
             builder.RegisterType<HelperService>().As<IHelperService>().SingleInstance();
             builder.RegisterType<ReferenceServices>().As<IReferenceServices>().SingleInstance();
             builder.RegisterType<CategoryServices>().As<ICategoryServices>().SingleInstance();
+            builder.RegisterType<AdContactServices>().As<IAdContactServices>().SingleInstance();
             builder.RegisterType<AdDataConsistencyServices>().As<IAdDataConsistencyServices>().SingleInstance();
             builder.RegisterType<AdRequestServices>().As<IAdRequestServices>().SingleInstance();
             builder.RegisterType<AdActivationServices>().As<IAdActivationServices>().SingleInstance();

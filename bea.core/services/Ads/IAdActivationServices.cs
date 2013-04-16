@@ -30,6 +30,6 @@ namespace Bea.Core.Services.Ads
         /// <param name="ad">The ad to send the activation mail to</param>
         void SendActivationEmail(BaseAd ad);
 
-        void SendEmailToUser(ContactUserFormModel model);
+        //void SendEmailToUser(ContactUserFormModel model);
     }
 }

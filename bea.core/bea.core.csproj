@@ -48,6 +48,7 @@
     <Compile Include="Dal\ISearchRepository.cs" />
     <Compile Include="Dal\IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Ads\IAdContactServices.cs" />
     <Compile Include="Services\Ads\IAdDeletionServices.cs" />
     <Compile Include="Services\Ads\IAdActivationServices.cs" />
     <Compile Include="Services\Ads\IAdDataConsistencyServices.cs" />

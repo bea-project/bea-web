@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ads\AdActivationServices.cs" />
+    <Compile Include="Ads\AdContactServices.cs" />
     <Compile Include="Ads\AdDataConsistencyServices.cs" />
     <Compile Include="Ads\AdDeletionServices.cs" />
     <Compile Include="Ads\AdDetailsServices.cs" />

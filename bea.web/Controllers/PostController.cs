@@ -12,6 +12,7 @@ using Bea.Models;
 using Bea.Models.Delete;
 using Bea.Models.Request;
 using System;
+using Bea.Models.Contact;
 
 namespace Bea.Web.Controllers
 {
@@ -27,8 +28,9 @@ namespace Bea.Web.Controllers
         private IAdActivationServices _adActivationServices;
         private IAdDeletionServices _adDeletionServices;
         private IAdRequestServices _adRequestServices;
+        private IAdContactServices _adContactServices;
 
-        public PostController(IAdServices adServices, IAdDetailsServices adDetailsServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices, IAdDeletionServices adDeletionServices, IAdRequestServices adRequestServices)
+        public PostController(IAdServices adServices, IAdDetailsServices adDetailsServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices, IAdDeletionServices adDeletionServices, IAdRequestServices adRequestServices, IAdContactServices adContactServices)
         {
             _adServices = adServices;
             _adDetailsServices = adDetailsServices;
@@ -40,6 +42,7 @@ namespace Bea.Web.Controllers
             _adActivationServices = adActivationServices;
             _adDeletionServices = adDeletionServices;
             _adRequestServices = adRequestServices;
+            _adContactServices = adContactServices;
         }
 
         //
@@ -139,11 +142,11 @@ namespace Bea.Web.Controllers
             return View(model);
         }
 
-        public ActionResult CreateNew()
-        {
-            AdvancedAdCreateModel model = new AdvancedAdCreateModel();
-            return View(model);
-        }
+        //public ActionResult CreateNew()
+        //{
+        //    AdvancedAdCreateModel model = new AdvancedAdCreateModel();
+        //    return View(model);
+        //}
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -260,27 +263,15 @@ namespace Bea.Web.Controllers
         #region Contact
 
         [HttpPost]
-        public PartialViewResult Contact(ContactUserFormModel model)
+        public PartialViewResult Contact(ContactAdModel model)
         {
+            //ContactAdModel result = model;
             IDictionary<string, string> errors = _adConsistencyServices.GetDataConsistencyErrors(model);
             foreach (string key in errors.Keys)
                 ModelState.AddModelError(key, errors[key]);
             if (ModelState.IsValid)
             {
-                Ad ad = _adServices.GetAdById(model.AdId);
-                var user = _userServices.GetUserFromId(ad.CreatedBy.Id);
-                model.EmailTo = user.Email;
-                _adActivationServices.SendEmailToUser(model);
-                if (model.CopySender)
-                {
-                    model.EmailTo = model.Email;
-                    _adActivationServices.SendEmailToUser(model);
-                }
-                //AdMessageModel messageModel = new AdMessageModel();
-                //messageModel.AdId = model.AdId;
-                //messageModel.InfoMessage = "Votre email a été envoyé !";
-                ViewBag.Message = "Votre email a été envoyé !";
-                return PartialView("_Contact", model);
+                model = _adContactServices.ContactAd(model);
             }
             return PartialView("_Contact",model);
         }
