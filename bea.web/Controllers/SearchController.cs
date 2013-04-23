@@ -49,7 +49,7 @@ namespace Bea.Web.Controllers
         public ActionResult SearchFromUrl(String cityLabel, String categoryLabel)
         {
             IList<CategoryItemModel> categoryGroup = _categoryServices.GetAllCategoriesOfAGroupFromUrlPart(categoryLabel);
-                
+
             if (categoryGroup.Count == 0)
                 return View("CategoryDoesNotExists");
 
