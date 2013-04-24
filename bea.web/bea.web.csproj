@@ -436,9 +436,14 @@
   <ItemGroup>
     <Content Include="Views\Search\CategoryDoesNotExists.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Post\Shared\Share\_AdShareTwitter.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Post\Shared\Share\_AdShareFb.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Post\Shared\Share\_AdShareGooglePlus.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

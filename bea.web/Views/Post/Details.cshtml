@@ -1,5 +1,25 @@
 ﻿@model Bea.Models.Details.AdDetailsModel
-
+<script type="text/javascript">
+    $('#bookmark').click(function (e) {
+        console.log("hello");
+        e.preventDefault();
+        var bookmarkURL = this.href;
+        var bookmarkTitle = this.title;
+        try {
+            if (window.sidebar) { // moz
+                window.sidebar.addPanel(bookmarkTitle, bookmarkURL, "");
+            } else if (window.external || document.all) { // ie
+                window.external.AddFavorite(bookmarkURL, bookmarkTitle);
+            } else if (window.opera) { // duh
+                $('#bookmark').attr('href', bookmarkURL);
+                $('#bookmark').attr('title', bookmarkTitle);
+                $('#bookmark').attr('rel', 'sidebar');
+            }
+        } catch (err) { // catch all incl webkit
+            alert('Sorry. Your browser does not support this bookmark action. Please bookmark this page manually.');
+        }
+    });
+</script>
 @{
     ViewBag.Title = String.Format("{0} - {1} - {2}", Model.Title, Model.Location, "BEA");
 }
@@ -103,12 +123,13 @@
             </div>
             <i class="icon-comment"></i>&nbsp;@Html.ActionLink(String.Format("Appeler {0} au {1}", Model.UserFirstName, Model.UserPhoneNumber), "#")<br /><br />
             <div class="legend-like">
-                <h4>Actions</h4>
+                <h4>Partager cette annonce</h4>
             </div>
-            @*<i class="icon-pencil"></i>&nbsp;@Html.ActionLink("Modifier", "#")<br />
-            <i class="icon-trash"></i>&nbsp;@Html.ActionLink("Supprimer", "Delete", new { Id = @Model.AdId })<br />*@
-             <i class="icon-bullhorn"></i>&nbsp;@Html.ActionLink("Partager avec un ami", "#")<br /><br />
-            @Html.Partial("Shared/Share/_AdShareFb")
+            <a href="#" id="bookmark" >Ajouter à vos favoris</a><br />
+            <i class="icon-bullhorn"></i>&nbsp;@Html.ActionLink("Partager avec un ami", "#")<br /><br />
+            @Html.Partial("Shared/Share/_AdShareFb")<br />
+            @Html.Partial("Shared/Share/_AdShareTwitter")<br />
+            @Html.Partial("Shared/Share/_AdShareGooglePlus")
         </div>
     </div>
 
