@@ -28,7 +28,9 @@ namespace Bea.Test.Services
                 SelectedCityId = 1,
                 SelectedCategoryId = 1,
                 Name = "My Name",
-                Email = "name@isp.com"
+                Email = "name@isp.com",
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             //When
@@ -49,7 +51,9 @@ namespace Bea.Test.Services
                 SelectedCityId = 1,
                 SelectedCategoryId = 1,
                 Name = "My Name",
-                Email = "name@isp.com"
+                Email = "name@isp.com",
+                Password  = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -71,7 +75,9 @@ namespace Bea.Test.Services
                 SelectedCityId = 1,
                 SelectedCategoryId = 1,
                 Name = "My Name",
-                Email = "name@isp.com"
+                Email = "name@isp.com",
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -93,7 +99,9 @@ namespace Bea.Test.Services
                 Title = "My Title",
                 SelectedCityId = 1,
                 Name = "My Name",
-                Email = "name@isp.com"
+                Email = "name@isp.com",
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -115,7 +123,9 @@ namespace Bea.Test.Services
                 Title = "My Title",
                 SelectedCategoryId = 1,
                 Name = "My Name",
-                Email = "name@isp.com"
+                Email = "name@isp.com",
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -125,6 +135,131 @@ namespace Bea.Test.Services
             Assert.AreEqual(1, actual.Count);
             Assert.IsTrue(actual.Keys.Contains("SelectedCityId"));
         }
+        #endregion
+
+        #region GetUserAdDataConsistencyErrors
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_Ad_NoName_ReturnsDictionaryWithNameError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Email = "name@isp.com",
+                Password = "Password",
+                PasswordConfirm = "Password"
+            };
+
+            // When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Name"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_Ad_NoEmail_ReturnsDictionaryWithEmailError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Password = "Password",
+                PasswordConfirm = "Password"
+            };
+
+            //When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Email"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_Ad_NoPassword_ReturnsDictionaryWithPasswordError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                PasswordConfirm = "Password"
+            };
+
+            //When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("Password"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_Ad_NoPasswordConfirm_ReturnsDictionaryWithPasswordConfirmError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                Password = "Password"
+            };
+
+            //When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("PasswordConfirm"));
+        }
+
+        [TestMethod]
+        public void GetAdDataConsistencyErrors_Ad_Password_And_PasswordConfirm_Different_ReturnsDictionaryWithPasswordConfirmError()
+        {
+            // Given
+            AdDataConsistencyServices service = new AdDataConsistencyServices();
+            AdvancedAdCreateModel model = new AdvancedAdCreateModel()
+            {
+                Body = "My Body",
+                Title = "My Title",
+                SelectedCityId = 1,
+                SelectedCategoryId = 1,
+                Name = "My Name",
+                Email = "name@isp.com",
+                Password = "Password",
+                PasswordConfirm = "Not Password"
+            };
+
+            //When
+            IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
+
+            // Then
+            Assert.AreEqual(1, actual.Count);
+            Assert.IsTrue(actual.Keys.Contains("PasswordConfirm"));
+        }
+
         #endregion
 
         #region CheckEmailConsistency
@@ -191,7 +326,9 @@ namespace Bea.Test.Services
                 SelectedCarBrandId = 1,
                 SelectedYearId = 2008,
                 Km=55000,
-                Type=AdTypeEnum.CarAd
+                Type = AdTypeEnum.CarAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -217,7 +354,9 @@ namespace Bea.Test.Services
                 SelectedFuelId = 1,
                 SelectedCarBrandId = 1,
                 SelectedYearId = 2008,
-                Type = AdTypeEnum.CarAd
+                Type = AdTypeEnum.CarAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -245,7 +384,9 @@ namespace Bea.Test.Services
                 SelectedCarBrandId = 1,
                 SelectedYearId = 2008,
                 Km = -55000,
-                Type = AdTypeEnum.CarAd
+                Type = AdTypeEnum.CarAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -272,7 +413,9 @@ namespace Bea.Test.Services
                 SelectedCarBrandId = 1,
                 SelectedYearId = 2008,
                 Km = 55000,
-                Type = AdTypeEnum.CarAd
+                Type = AdTypeEnum.CarAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -299,7 +442,9 @@ namespace Bea.Test.Services
                 SelectedFuelId = 1,
                 SelectedYearId = 2008,
                 Km = 55000,
-                Type = AdTypeEnum.CarAd
+                Type = AdTypeEnum.CarAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -326,7 +471,9 @@ namespace Bea.Test.Services
                 SelectedFuelId = 1,
                 SelectedCarBrandId = 1,
                 Km = 55000,
-                Type = AdTypeEnum.CarAd
+                Type = AdTypeEnum.CarAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -357,7 +504,9 @@ namespace Bea.Test.Services
                 SelectedYearId = 2008,
                 Km = 55000,
                 EngineSize=600,
-                Type = AdTypeEnum.MotoAd
+                Type = AdTypeEnum.MotoAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -382,7 +531,9 @@ namespace Bea.Test.Services
                 SelectedMotoBrandId = 1,
                 SelectedYearId = 2008,
                 EngineSize = 600,
-                Type = AdTypeEnum.MotoAd
+                Type = AdTypeEnum.MotoAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -410,7 +561,9 @@ namespace Bea.Test.Services
                 SelectedYearId = 2008,
                 EngineSize = 600,
                 Km = -55000,
-                Type = AdTypeEnum.MotoAd
+                Type = AdTypeEnum.MotoAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -437,7 +590,9 @@ namespace Bea.Test.Services
                 SelectedMotoBrandId = 1,
                 SelectedYearId = 2008,
                 Km = 55000,
-                Type = AdTypeEnum.MotoAd
+                Type = AdTypeEnum.MotoAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -465,7 +620,9 @@ namespace Bea.Test.Services
                 SelectedYearId = 2008,
                 Km = 55000,
                 EngineSize = -600,
-                Type = AdTypeEnum.MotoAd
+                Type = AdTypeEnum.MotoAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -492,7 +649,9 @@ namespace Bea.Test.Services
                 SelectedMotoBrandId = 1,
                 Km = 55000,
                 EngineSize = 600,
-                Type = AdTypeEnum.MotoAd
+                Type = AdTypeEnum.MotoAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -518,7 +677,9 @@ namespace Bea.Test.Services
                 SelectedYearId = 2008,
                 Km = 55000,
                 EngineSize = 600,
-                Type = AdTypeEnum.MotoAd
+                Type = AdTypeEnum.MotoAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -547,7 +708,9 @@ namespace Bea.Test.Services
                 Email = "name@isp.com",
                 SelectedYearId = 2008,
                 Km = 55000,
-                Type = AdTypeEnum.VehiculeAd
+                Type = AdTypeEnum.VehiculeAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -557,7 +720,7 @@ namespace Bea.Test.Services
         }
 
         [TestMethod]
-        public void GetAdDataConsistencyErrors_VehicleAd__NoKiliometer_ReturnsDictionaryWithKmError()
+        public void GetAdDataConsistencyErrors_VehicleAd_NoKiliometer_ReturnsDictionaryWithKmError()
         {
             // Given
             AdDataConsistencyServices service = new AdDataConsistencyServices();
@@ -570,7 +733,9 @@ namespace Bea.Test.Services
                 Name = "My Name",
                 Email = "name@isp.com",
                 SelectedYearId = 2008,
-                Type = AdTypeEnum.VehiculeAd
+                Type = AdTypeEnum.VehiculeAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -595,7 +760,9 @@ namespace Bea.Test.Services
                 Email = "name@isp.com",
                 SelectedYearId = 2008,
                 Km = -55000,
-                Type = AdTypeEnum.VehiculeAd
+                Type = AdTypeEnum.VehiculeAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -619,7 +786,9 @@ namespace Bea.Test.Services
                 Name = "My Name",
                 Email = "name@isp.com",
                 Km = 55000,
-                Type = AdTypeEnum.VehiculeAd
+                Type = AdTypeEnum.VehiculeAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -649,7 +818,9 @@ namespace Bea.Test.Services
                 SelectedYearId = 2008,
                 Km = 55000,
                 SelectedFuelId = 1,
-                Type = AdTypeEnum.OtherVehiculeAd
+                Type = AdTypeEnum.OtherVehiculeAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -673,7 +844,9 @@ namespace Bea.Test.Services
                 Email = "name@isp.com",
                 SelectedYearId = 2008,
                 SelectedFuelId = 1,
-                Type = AdTypeEnum.OtherVehiculeAd
+                Type = AdTypeEnum.OtherVehiculeAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -699,7 +872,9 @@ namespace Bea.Test.Services
                 SelectedYearId = 2008,
                 SelectedFuelId = 1,
                 Km = -55000,
-                Type = AdTypeEnum.OtherVehiculeAd
+                Type = AdTypeEnum.OtherVehiculeAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -724,7 +899,9 @@ namespace Bea.Test.Services
                 Email = "name@isp.com",
                 Km = 55000,
                 SelectedFuelId = 1,
-                Type = AdTypeEnum.OtherVehiculeAd
+                Type = AdTypeEnum.OtherVehiculeAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -749,7 +926,9 @@ namespace Bea.Test.Services
                 Email = "name@isp.com",
                 SelectedYearId = 2008,
                 Km = 55000,
-                Type = AdTypeEnum.OtherVehiculeAd
+                Type = AdTypeEnum.OtherVehiculeAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
             // When
             IDictionary<string, string> actual = service.GetAdDataConsistencyErrors(model);
@@ -781,7 +960,9 @@ namespace Bea.Test.Services
                 SurfaceArea = 50,
                 SelectedRealEstateTypeId = 1,
                 IsFurnished = true,
-                Type = AdTypeEnum.RealEstateAd
+                Type = AdTypeEnum.RealEstateAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -807,7 +988,9 @@ namespace Bea.Test.Services
                 SurfaceArea = 50,
                 SelectedRealEstateTypeId = 1,
                 IsFurnished = true,
-                Type = AdTypeEnum.RealEstateAd
+                Type = AdTypeEnum.RealEstateAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -835,7 +1018,9 @@ namespace Bea.Test.Services
                 SelectedRealEstateTypeId = 1,
                 IsFurnished = true,
                 RoomNb = -5,
-                Type = AdTypeEnum.RealEstateAd
+                Type = AdTypeEnum.RealEstateAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -862,7 +1047,9 @@ namespace Bea.Test.Services
                 RoomNb = 5,
                 SelectedRealEstateTypeId = 1,
                 IsFurnished = true,
-                Type = AdTypeEnum.RealEstateAd
+                Type = AdTypeEnum.RealEstateAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -890,7 +1077,9 @@ namespace Bea.Test.Services
                 SelectedRealEstateTypeId = 1,
                 IsFurnished = true,
                 SurfaceArea = -50,
-                Type = AdTypeEnum.RealEstateAd
+                Type = AdTypeEnum.RealEstateAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -917,7 +1106,9 @@ namespace Bea.Test.Services
                 RoomNb = 5,
                 SurfaceArea = 50,
                 IsFurnished = true,
-                Type = AdTypeEnum.RealEstateAd
+                Type = AdTypeEnum.RealEstateAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -944,7 +1135,9 @@ namespace Bea.Test.Services
                 RoomNb = 5,
                 SurfaceArea = 50,
                 SelectedRealEstateTypeId = 1,
-                Type = AdTypeEnum.RealEstateAd
+                Type = AdTypeEnum.RealEstateAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -978,7 +1171,9 @@ namespace Bea.Test.Services
                 SelectedYearId = 2011,
                 SelectedMotorTypeId = 1,
                 Hp=200,
-                Type = AdTypeEnum.MotorBoatAd
+                Type = AdTypeEnum.MotorBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1006,7 +1201,9 @@ namespace Bea.Test.Services
                 SelectedYearId = 2011,
                 SelectedMotorTypeId = 1,
                 Hp = -200,
-                Type = AdTypeEnum.MotorBoatAd
+                Type = AdTypeEnum.MotorBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1034,7 +1231,9 @@ namespace Bea.Test.Services
                 Length = 5,
                 SelectedYearId = 2011,
                 SelectedMotorTypeId = 1,
-                Type = AdTypeEnum.MotorBoatAd
+                Type = AdTypeEnum.MotorBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1062,7 +1261,9 @@ namespace Bea.Test.Services
                 SelectedYearId = 2011,
                 SelectedMotorTypeId = 1,
                 Hp = 220,
-                Type = AdTypeEnum.MotorBoatAd
+                Type = AdTypeEnum.MotorBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1091,7 +1292,9 @@ namespace Bea.Test.Services
                 SelectedYearId = 2011,
                 SelectedMotorTypeId = 1,
                 Hp = 220,
-                Type = AdTypeEnum.MotorBoatAd
+                Type = AdTypeEnum.MotorBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1119,7 +1322,9 @@ namespace Bea.Test.Services
                 SelectedYearId = 2011,
                 SelectedMotorTypeId = 1,
                 Hp = 220,
-                Type = AdTypeEnum.MotorBoatAd
+                Type = AdTypeEnum.MotorBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1147,7 +1352,9 @@ namespace Bea.Test.Services
                 Length = 5,
                 SelectedMotorTypeId = 1,
                 Hp = 200,
-                Type = AdTypeEnum.MotorBoatAd
+                Type = AdTypeEnum.MotorBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1175,7 +1382,9 @@ namespace Bea.Test.Services
                 Length = 5,
                 SelectedYearId = 2011,
                 Hp = 200,
-                Type = AdTypeEnum.MotorBoatAd
+                Type = AdTypeEnum.MotorBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1207,7 +1416,9 @@ namespace Bea.Test.Services
                 Length = 5,
                 SelectedYearId = 2011,
                 SelectedHullTypeId = 1,
-                Type = AdTypeEnum.SailingBoatAd
+                Type = AdTypeEnum.SailingBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1233,7 +1444,9 @@ namespace Bea.Test.Services
                 Length = 5,
                 SelectedYearId = 2011,
                 SelectedHullTypeId = 1,
-                Type = AdTypeEnum.SailingBoatAd
+                Type = AdTypeEnum.SailingBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1260,7 +1473,9 @@ namespace Bea.Test.Services
                 SelectedSailingBoatTypeId = 1,
                 SelectedYearId = 2011,
                 SelectedHullTypeId = 1,
-                Type = AdTypeEnum.SailingBoatAd
+                Type = AdTypeEnum.SailingBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1288,7 +1503,9 @@ namespace Bea.Test.Services
                 Length = -5,
                 SelectedYearId = 2011,
                 SelectedHullTypeId = 1,
-                Type = AdTypeEnum.SailingBoatAd
+                Type = AdTypeEnum.SailingBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1315,7 +1532,9 @@ namespace Bea.Test.Services
                 SelectedSailingBoatTypeId = 1,
                 Length = 5,
                 SelectedHullTypeId = 1,
-                Type = AdTypeEnum.SailingBoatAd
+                Type = AdTypeEnum.SailingBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1342,7 +1561,9 @@ namespace Bea.Test.Services
                 SelectedSailingBoatTypeId = 1,
                 Length = 5,
                 SelectedYearId = 2011,
-                Type = AdTypeEnum.SailingBoatAd
+                Type = AdTypeEnum.SailingBoatAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1373,7 +1594,9 @@ namespace Bea.Test.Services
                 SelectedMotorBoatEngineTypeId =1,
                 Hp=500,
                 SelectedYearId=2011,
-                Type = AdTypeEnum.MotorBoatEngineAd
+                Type = AdTypeEnum.MotorBoatEngineAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1398,7 +1621,9 @@ namespace Bea.Test.Services
                 Email = "name@isp.com",
                 Hp = 500,
                 SelectedYearId = 2011,
-                Type = AdTypeEnum.MotorBoatEngineAd
+                Type = AdTypeEnum.MotorBoatEngineAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1424,7 +1649,9 @@ namespace Bea.Test.Services
                 Email = "name@isp.com",
                 SelectedMotorBoatEngineTypeId = 1,
                 SelectedYearId = 2011,
-                Type = AdTypeEnum.MotorBoatEngineAd
+                Type = AdTypeEnum.MotorBoatEngineAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1451,7 +1678,9 @@ namespace Bea.Test.Services
                 SelectedMotorBoatEngineTypeId = 1,
                 Hp = -500,
                 SelectedYearId = 2011,
-                Type = AdTypeEnum.MotorBoatEngineAd
+                Type = AdTypeEnum.MotorBoatEngineAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1477,7 +1706,9 @@ namespace Bea.Test.Services
                 Email = "name@isp.com",
                 SelectedMotorBoatEngineTypeId = 1,
                 Hp = 500,
-                Type = AdTypeEnum.MotorBoatEngineAd
+                Type = AdTypeEnum.MotorBoatEngineAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1506,7 +1737,9 @@ namespace Bea.Test.Services
                 Name = "My Name",
                 Email = "name@isp.com",
                 SelectedWaterSportTypeId = 1,
-                Type = AdTypeEnum.WaterSportAd
+                Type = AdTypeEnum.WaterSportAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
@@ -1529,7 +1762,9 @@ namespace Bea.Test.Services
                 SelectedCategoryId = 1,
                 Name = "My Name",
                 Email = "name@isp.com",
-                Type = AdTypeEnum.WaterSportAd
+                Type = AdTypeEnum.WaterSportAd,
+                Password = "Password",
+                PasswordConfirm = "Password"
             };
 
             // When
