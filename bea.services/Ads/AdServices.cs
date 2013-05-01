@@ -60,6 +60,7 @@ namespace Bea.Services.Ads
             using (TransactionScope scope = new TransactionScope())
             {
                 _repository.Save(ad.CreatedBy);
+                _repository.Save(ad.City);
                 _repository.Save(ad);
                 _repository.Flush();
                 _adActivationServices.SendActivationEmail(ad);
@@ -71,14 +72,18 @@ namespace Bea.Services.Ads
 
         public BaseAd GetAdFromAdCreateModel(AdvancedAdCreateModel model)
         {
-            BaseAd baseAd = GetBaseAdFromCreateModel(model);
+            BaseAd baseAd=null;
+            Category selectedCategory=null;
+            //Should not happened, category is mandatory
             if (!model.SelectedCategoryId.HasValue)
                 return baseAd;
-            Category selectedCategory = _repository.Get<Category>(model.SelectedCategoryId);
-            if(selectedCategory.Type == AdTypeEnum.Ad)
-                return baseAd;
+            else
+                selectedCategory = _repository.Get<Category>(model.SelectedCategoryId);
             switch (selectedCategory.Type)
             {
+                case AdTypeEnum.Ad:
+                    baseAd = GetAdFromCreateModel<Ad>(baseAd, model);
+                    break;
                 case AdTypeEnum.CarAd:
                     baseAd = GetAdFromCreateModel<CarAd>(baseAd, model);
                     break;
@@ -170,59 +175,7 @@ namespace Bea.Services.Ads
                 ad.MotorType = _repository.Get<MotorBoatEngineType>(model.SelectedMotorBoatEngineTypeId);
 
             return ad;
-        }
-
-        private BaseAd GetBaseAdFromCreateModel(AdvancedAdCreateModel model)
-        {
-            BaseAd baseAd = new BaseAd();
-            if (model.SelectedCityId.HasValue)
-                baseAd.City = _repository.Get<City>(model.SelectedCityId.Value);
-            if (model.SelectedCategoryId.HasValue)
-                baseAd.Category = _repository.Get<Category>(model.SelectedCategoryId.Value);
-            baseAd.Body = model.Body;
-            baseAd.CreationDate = DateTime.Now;
-            baseAd.Price = model.Price.GetValueOrDefault();
-            baseAd.Title = model.Title;
-            baseAd.IsOffer = model.IsOffer;
-            baseAd.PhoneNumber = model.Telephone;
-            baseAd.ActivationToken = _adActivationServices.GenerateActivationToken();
-            User createdBy = new User();
-            createdBy.Firstname = model.Name;
-            createdBy.Email = model.Email;
-            createdBy.Password = "Password";
-            baseAd.CreatedBy = createdBy;
-            GetAdPicturesFromModel(baseAd, model.ImageIds);
-            return baseAd;
-        }
-
-        private BaseAd GetCommonAdFromModel(BaseAd ad, AdCreateModel model)
-        {
-            if (model.SelectedCityId.HasValue)
-                ad.City = _repository.Get<City>(model.SelectedCityId.Value);
-
-            if (model.SelectedCategoryId.HasValue)
-                ad.Category = _repository.Get<Category>(model.SelectedCategoryId.Value);
-
-            ad.Body = model.Body;
-            ad.CreationDate = DateTime.Now;
-            ad.Price = model.Price.GetValueOrDefault();
-            ad.Title = model.Title;
-            ad.IsOffer = model.IsOffer;
-            ad.PhoneNumber = model.Telephone;
-            ad.ActivationToken = _adActivationServices.GenerateActivationToken();
-
-            User createdBy = new User();
-            createdBy.Firstname = model.Name;
-            createdBy.Email = model.Email;
-            createdBy.Password = "Password";
-            ad.CreatedBy = createdBy;
-
-            GetAdPicturesFromModel(ad, model.ImageIds);
-
-            return ad;
-        }
-
-        
+        }        
 
         public BaseAd GetAdPicturesFromModel(BaseAd ad, String imageIds)
         {

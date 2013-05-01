@@ -142,12 +142,6 @@ namespace Bea.Web.Controllers
             return View(model);
         }
 
-        //public ActionResult CreateNew()
-        //{
-        //    AdvancedAdCreateModel model = new AdvancedAdCreateModel();
-        //    return View(model);
-        //}
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(AdvancedAdCreateModel model)

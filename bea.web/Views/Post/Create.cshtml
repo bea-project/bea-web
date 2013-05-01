@@ -18,17 +18,12 @@
     <dl class="dl-horizontal">
         <div class="row">
             <div class="span7">
-                <div class="legend-like"><i class="icon-globe"></i>&nbsp;&nbsp;Localisation</div>
+@*                <div class="legend-like"><i class="icon-globe"></i>&nbsp;&nbsp;Localisation</div>
                 <dt>Province:</dt>
                 <dd>
                     @Html.DropDownListFor(model => model.SelectedProvinceId, Enumerable.Empty<SelectListItem>(), "Choisissez la province", new { @class = "input-large" })
                     @Html.ValidationMessageFor(model => model.SelectedProvinceId, String.Empty, new { @class = "label label-important" })
-                </dd>
-                <dt>Ville:</dt>
-                <dd>
-                    @Html.DropDownListFor(model => model.SelectedCityId, Enumerable.Empty<SelectListItem>(), "Choisissez la ville", new { @class = "input-large" })
-                    @Html.ValidationMessageFor(model => model.SelectedCityId, String.Empty, new { @class = "label label-important" })
-                </dd>
+                </dd>*@
 
                 <div class="legend-like"><i class="icon-user"></i>&nbsp;&nbsp;Vos informations</div>
                 <dt>Votre nom:</dt>
@@ -46,7 +41,11 @@
                     @Html.TextBoxFor(model => model.Telephone, new { @class = "input-large", rel = "tooltip" })
                     @Html.ValidationMessageFor(model => model.Telephone, String.Empty, new { @class = "label label-important" })
                 </dd>
-
+                <dt>Ville:</dt>
+                <dd>
+                    @Html.DropDownListFor(model => model.SelectedCityId, Enumerable.Empty<SelectListItem>(), "Choisissez la ville", new { @class = "input-large", id = "cities" })
+                    @Html.ValidationMessageFor(model => model.SelectedCityId, String.Empty, new { @class = "label label-important" })
+                </dd>
                 <div class="legend-like"><i class="icon-th-list"></i>&nbsp;&nbsp;Categorie</div>
                 <dt>Catégorie:</dt>
                 <dd>
@@ -212,9 +211,28 @@
 
 <script type="text/javascript">
     var isLoad = false;
+    $(function () {
+        $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "LocationApi", action = "GetAllCities" })', function (result) {
+           var ddl = $('#cities');
+           ddl.empty();
+           $(document.createElement('option'))
+                           .attr('value', "")
+                           .text("Choisissez la ville")
+                           .appendTo(ddl);
+           $(result).each(function () {
+               var selected = (this.Id == "@Model.SelectedCityId");
+                $(document.createElement('option'))
+                    .attr('value', this.Id)
+                    .attr('selected', selected)
+                    .text(this.Label)
+                    .appendTo(ddl);
+            });
+        });
+    });
+
     $(document).ready(function () {
         //Refreshes the city list when user chenges province
-        $('#SelectedProvinceId').change(function () {
+        @*$('#SelectedProvinceId').change(function () {
             if ($(this).val()) {
                 //The user selected a province
                 var provinceId = $('#SelectedProvinceId').val();
@@ -250,7 +268,7 @@
                     text: "Choisissez la ville"
                 }));
             }
-        });
+        });*@
 
         $('#categories').change(function () {
             if ($(this).val()) {

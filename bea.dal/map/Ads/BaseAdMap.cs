@@ -25,6 +25,7 @@ namespace Bea.Dal.Map.Ads
 
             References<User>(x => x.CreatedBy).Not.Nullable();
             References<Category>(x => x.Category);
+            References<City>(x => x.City);
             HasMany<AdImage>(x => x.Images).Inverse().LazyLoad().Cascade.AllDeleteOrphan();
         }
     }
