@@ -120,8 +120,21 @@
                 </dd>
                 <dt>Prix:</dt>
                 <dd>
-                    @Html.TextBoxFor(model => model.Price, new { @class = "input-large" })
+                    <div class="input-prepend">
+                        @Html.TextBoxFor(model => model.Price, new { @class = "input-medium"})
+                        <span class="add-on">CFP</span>
+                    </div>
                     @Html.ValidationMessageFor(model => model.Price, String.Empty, new { @class = "label label-important" })
+                </dd>
+                <dt>Mot de passe:</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.Password, new { @class = "input-medium", type="password" })
+                    @Html.ValidationMessageFor(model => model.Password, String.Empty, new { @class = "label label-important" })
+                </dd>
+                <dt>Confirmation du</dt><dt>mot de passe:</dt>
+                <dd>
+                    @Html.TextBoxFor(model => model.PasswordConfirm, new { @class = "input-medium", type="password" })
+                    @Html.ValidationMessageFor(model => model.PasswordConfirm, String.Empty, new { @class = "label label-important" })
                 </dd>
             </div>
         </div>

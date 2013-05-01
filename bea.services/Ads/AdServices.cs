@@ -130,7 +130,7 @@ namespace Bea.Services.Ads
             User createdBy = new User();
             createdBy.Firstname = model.Name;
             createdBy.Email = model.Email;
-            createdBy.Password = "Password";
+            createdBy.Password = model.Password;
             ad.CreatedBy = createdBy;
             GetAdPicturesFromModel(ad, model.ImageIds);
             

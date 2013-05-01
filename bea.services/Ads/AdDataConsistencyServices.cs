@@ -274,7 +274,17 @@ namespace Bea.Services.Ads
                     errors.Add("Email", "Veuillez insérer une adresse email.");
             else
                 if (!_emailRegex.IsMatch(model.Email))
-                            errors.Add("Email", "Email invalide.");
+                    errors.Add("Email", "Email invalide.");
+            if (String.IsNullOrEmpty(model.Password))
+                errors.Add("Password", "Veuillez saisir votre mot de passe.");
+            else
+            {
+                if (String.IsNullOrEmpty(model.PasswordConfirm))
+                    errors.Add("PasswordConfirm", "Veuillez confirmer le mot de passe.");
+                else
+                    if (!model.Password.Equals(model.PasswordConfirm))
+                        errors.Add("PasswordConfirm", "Les mots de passe saisis sont différents.");
+            }
             return errors;
         }
 

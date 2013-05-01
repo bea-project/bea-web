@@ -18,6 +18,8 @@ namespace Bea.Models.Create
         public String Name { get; set; }
         public String Email { get; set; }
         public String Telephone { get; set; }
+        public String Password { get; set; }
+        public String PasswordConfirm { get; set; }
         public int? SelectedProvinceId { get; set; }
         public int? SelectedCityId { get; set; }
         public Boolean IsOffer { get; set; }
