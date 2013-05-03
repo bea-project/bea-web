@@ -1,0 +1,35 @@
+﻿@model Bea.Models.Search.AdSearchResultItemModel
+
+
+<dl class="dl-horizontal">
+        <div class="row">
+            <div class="span2 pagination-centered">
+                @if (!String.IsNullOrEmpty(Model.MainImageId))
+                {
+                    <img alt="@Model.Title" src="@Url.Content(String.Format("~/Content/PostImages/{0}.small.jpg", Model.MainImageId))" class="img-polaroid">
+                }
+                else
+                {
+                    <img alt="Pas de photo" src="@Url.Content("~/Content/images/no_picture_available_thumb.png")" class="img-polaroid">
+                }
+            </div>
+            <div class="span5">
+                 <h4>@Model.Title</h4>
+                 <h5>@Model.Price</h5>
+            </div>
+            <div class="span4 pagination-right">
+                <h5>@Model.Category</h5>
+                <h5>@String.Format("Disponible à {0}",Model.Location.ToUpper())</h5>
+                @if (@Model.CreationDate.Date == DateTime.Today)
+                {
+                    <h5>@String.Format("Postée il y à moins de {0} heure(s)",(DateTime.Now-Model.CreationDate).Hours+1)</h5>
+                }
+                else
+                {
+                    <h5>@String.Format("Postée le {0}",@Model.CreationDate.ToShortDateString())</h5>
+                }
+                
+                 @*<h5>@Html.Display(String.Format("{0}/{1}/{2}",Model.CreationDate.Day,Model.CreationDate.Month,Model.CreationDate.Year))</h5>*@
+            </div>
+        </div>
+</dl>

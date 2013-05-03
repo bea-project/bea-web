@@ -13,61 +13,36 @@
     <h3>Recherche (@Model.SearchResultTotalCount annonces)</h3>
 }
 
-<table class="table table-bordered table-condensed table-striped">
-    <tr>
-        <th>
-             @Html.DisplayName("Image")
-        </th>
-        <th>
-            @Html.DisplayName("Date")
-        </th>
-        <th>
-            @Html.DisplayName("Ville")
-        </th>
-        <th>
-            @Html.DisplayName("Catégorie")
-        </th>
-        <th>
-            @Html.DisplayName("Titre")
-        </th>
-        <th>
-            @Html.DisplayName("Prix")
-        </th>
-        <th></th>
-    </tr>
+@foreach (var item in Model.SearchResult)
+{
+    Html.DisplayFor(x => item.Title);
+    
+}
 
+@*<table class="table table-bordered table-condensed table-striped">
     @foreach (var item in Model.SearchResult)
     {
         <tr>
             <td>
-                @if (!String.IsNullOrEmpty(item.MainImageId))
-                {
-                    <img alt="@item.Title" src="@Url.Content(String.Format("~/Content/PostImages/{0}.small.jpg", item.MainImageId))" class="img-polaroid">
-                }
+                <a href=@Url.Action("Details","Post",new{id=item.AdId})>
+                    @Html.DisplayFor(x => item)
+                </a>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-
-            <td>
-                @Html.ActionLink("Details", "Details", new { controller = "Post", id = item.AdId })
-            </td>
-
         </tr>
     }
-</table>
+</table>*@
+
+
+    @foreach (var item in Model.SearchResult)
+    {
+        <div>
+            <a href=@Url.Action("Details","Post",new{id=item.AdId})>
+                @Html.DisplayFor(x => item)
+            </a>
+        </div>
+        <hr>
+    }
+
 
 <div>
     @Html.Partial("_TestData")

@@ -196,6 +196,8 @@
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\hanger.png" />
     <Content Include="Content\images\home.png" />
+    <Content Include="Content\images\no_picture_available_large.png" />
+    <Content Include="Content\images\no_picture_available_thumb.png" />
     <Content Include="Content\images\shake.png" />
     <Content Include="Content\images\ship.png" />
     <Content Include="Content\images\tv.png" />
@@ -445,6 +447,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Post\Shared\Share\_AdShareGooglePlus.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Shared\DisplayTemplates\AdSearchResultItemModel.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

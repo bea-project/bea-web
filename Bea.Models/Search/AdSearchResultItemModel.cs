@@ -5,6 +5,7 @@ using System.Text;
 using Bea.Domain;
 using Bea.Domain.Ads;
 using Bea.Domain.Search;
+using System.Globalization;
 
 namespace Bea.Models.Search
 {
@@ -28,7 +29,7 @@ namespace Bea.Models.Search
             Title = ad.Title;
             Location = ad.City.Label;
             Category = ad.Category.Label;
-            Price = String.Format("{0} Francs", ad.Price);
+            Price = String.Format("{0} Francs", ad.Price.ToString("N0",CultureInfo.CreateSpecificCulture("sv-SE")));
             CreationDate = ad.CreationDate;
             MainImageId = ad.AdImageId;
         }

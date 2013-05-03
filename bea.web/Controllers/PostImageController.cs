@@ -39,8 +39,8 @@ namespace Bea.Web.Controllers
             _postImageResizeSettings.Mode = FitMode.Max;
 
             _postImageThumbnailResizeSettings = new ResizeSettings();
-            _postImageThumbnailResizeSettings.MaxWidth = 120;
-            _postImageThumbnailResizeSettings.Height = 70;
+            _postImageThumbnailResizeSettings.MaxWidth = 160;
+            _postImageThumbnailResizeSettings.Height = 120;
             _postImageThumbnailResizeSettings.Format = "jpg";
             _postImageThumbnailResizeSettings.Mode = FitMode.Max;
         }
