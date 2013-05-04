@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Core.Dal;
 using Bea.Domain.Ads;
+using Bea.Domain.Categories;
 using Bea.Domain.Search;
 using NHibernate;
 using NHibernate.Criterion;
@@ -172,6 +173,24 @@ namespace Bea.Dal.Repository
             crit.SetProjection(Projections.Property("Id"));
 
             return crit;
+        }
+
+        public IDictionary<Category, int> CountByCategory(string[] andSearchStrings = null, int? cityId = null)
+        {
+            ICriteria query = createRootCriteria(andSearchStrings, cityId, null);
+
+            query.SetProjection(Projections.ProjectionList()
+                                .Add(Projections.Alias(Projections.GroupProperty("Category"), "CategoryId"))
+                                .Add(Projections.Alias(Projections.Count("AdId"), "TotalSearchCount")));
+
+            var r = query.List();
+
+            IDictionary<Category, int> result = new Dictionary<Category, int>();
+
+            foreach (Object[] re in r)
+                result.Add((Category)re[0], (int)re[1]);
+
+            return result;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Bea.Domain.Ads;
+using Bea.Domain.Categories;
 using Bea.Domain.Search;
 
 namespace Bea.Core.Dal
@@ -27,6 +28,14 @@ namespace Bea.Core.Dal
         /// <param name="parameters">The list of parameters for the search</param>
         /// <returns>The list of ads of type T as SearchAdCache matching the restrictions</returns>
         IList<SearchAdCache> AdvancedSearchAds<T>(AdSearchParameters parameters) where T : BaseAd;
+
+        /// <summary>
+        /// Counts through the SearchAdCache table by grouping them by category
+        /// </summary>
+        /// <param name="andSearchStrings"></param>
+        /// <param name="cityId"></param>
+        /// <returns>A dictionary of category and count of ads</returns>
+        IDictionary<Category, int> CountByCategory(string[] andSearchStrings = null, int? cityId = null);
 
     }
 }

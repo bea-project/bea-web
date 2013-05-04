@@ -1352,5 +1352,89 @@ namespace Bea.Test.Dal.repository
                 Assert.AreEqual(a, result[0]);
             }
         }
+
+        [TestMethod]
+        public void CountByCategory_NoSearchString_Returnwholecount()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            SearchRepository searchRepo = new SearchRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                // Given
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city",
+                    LabelUrlPart = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Voilier",
+                    LabelUrlPart = "Bateau"
+                };
+
+                SearchAdCache a = new SearchAdCache
+                {
+                    AdId = 1,
+                    Title = "bateau 1",
+                    Body = "la desc du bateau",
+                    City = c,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat
+                };
+
+                Category cat2 = new Category
+                {
+                    Label = "Bateau à moteur",
+                    LabelUrlPart = "Bateau"
+                };
+
+                SearchAdCache a2 = new SearchAdCache
+                {
+                    AdId = 2,
+                    Title = "poupou",
+                    Body = "la desc du bateau",
+                    City = c,
+                    CreationDate = new DateTime(2012, 06, 11, 23, 52, 18),
+                    Category = cat2
+                };
+
+                repo.Save(p1);
+                repo.Save(c);
+                repo.Save(cat);
+                repo.Save(u);
+                repo.Save(a);
+                repo.Save(cat2);
+                repo.Save(a2);
+
+                repo.Flush();
+
+                #endregion
+
+                // When
+                IDictionary<Category, int> result = searchRepo.CountByCategory(new String[] { "bateau" }, null);
+
+                // Then
+                Assert.AreEqual(2, result.Count);
+                Assert.AreEqual(cat2, result.First().Key);
+                Assert.AreEqual(cat, result.Last().Key);
+            }
+        }
     }
 }
