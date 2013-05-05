@@ -9,13 +9,12 @@ namespace Bea.Services
 {
     public class EmailServices : IEmailServices
     {
-        public void SendEmail(string subject, string content, string toAddress)
+        public void SendEmail(string subject, string content, string toAddress, string replyToAddress)
         {
             MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("beaprojectnc@gmail.com");
             mail.To.Add(toAddress);
             mail.Subject = subject;
-            mail.ReplyToList.Add("no-reply@bea.nc");
+            mail.ReplyToList.Add(replyToAddress);
             mail.IsBodyHtml = true;
             mail.BodyEncoding = Encoding.UTF8;
             mail.Body = content;

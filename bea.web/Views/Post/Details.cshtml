@@ -16,7 +16,7 @@
                 $('#bookmark').attr('rel', 'sidebar');
             }
         } catch (err) { // catch all incl webkit
-            alert('Sorry. Your browser does not support this bookmark action. Please bookmark this page manually.');
+            alert('Oups! Il semble que votre navigateur ne nous permette pas de mettre cette page en favoris ! Veuillez essayer manuellement !');
         }
     });
 </script>
@@ -125,7 +125,7 @@
             <div class="legend-like">
                 <h4>Partager cette annonce</h4>
             </div>
-            <a href="#" id="bookmark" >Ajouter à vos favoris</a><br />
+            <i class="icon-bookmark"></i>&nbsp;<a href="#" id="bookmark" >Ajouter à vos favoris</a><br />
             <i class="icon-bullhorn"></i>&nbsp;@Html.ActionLink("Partager avec un ami", "#")<br /><br />
             @Html.Partial("Shared/Share/_AdShareFb")<br />
             @Html.Partial("Shared/Share/_AdShareTwitter")<br />

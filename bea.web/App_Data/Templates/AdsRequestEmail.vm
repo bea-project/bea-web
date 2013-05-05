@@ -7,15 +7,15 @@
 
 		<h3>Bonjour $name</h3>
 		<p>
-			Voici la liste de vos $adCount annonce(s) actuellement consultable sur bea.nc
+			Voici la liste de vos $adCount annonce(s) actuellement consultable sur $websiteAddress
 		</p>
 		#foreach($ad in $ads)
 			<p>
-				<a href="http://bea.nc/Post/$ad.Id">$ad.Category.Label - $ad.Title</a>
+				<a href="http://www.$websiteAddress/Post/$ad.Id">$ad.Category.Label - $ad.Title</a>
 			</p>
 		#end
 		<p>
-			L'équipe de <b>BEA</b> vous souhaite une bonne vente !
+			L'équipe de <b>$websiteName</b> vous souhaite une bonne vente !
 		</p>
 
 	</body>

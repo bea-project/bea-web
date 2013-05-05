@@ -13,6 +13,7 @@ using Bea.Models.Create;
 using Bea.Services;
 using Bea.Services.Ads;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Bea.Test.Services
 {
@@ -28,7 +29,7 @@ namespace Bea.Test.Services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(x => x.Get<BaseAd>(78)).Returns(ad);
 
-            AdActivationServices service = new AdActivationServices(repoMock.Object, null, null);
+            AdActivationServices service = new AdActivationServices(repoMock.Object, null, null, null);
 
             // When
             AdActivationResultModel model = service.ActivateAd(78, null);
@@ -55,7 +56,7 @@ namespace Bea.Test.Services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(x => x.Get<BaseAd>(adId)).Returns(ad);
 
-            AdActivationServices service = new AdActivationServices(repoMock.Object, null, null);
+            AdActivationServices service = new AdActivationServices(repoMock.Object, null, null, null);
 
             // When
             AdActivationResultModel model = service.ActivateAd(78, null);
@@ -83,7 +84,7 @@ namespace Bea.Test.Services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(x => x.Get<BaseAd>(adId)).Returns(ad);
 
-            AdActivationServices service = new AdActivationServices(repoMock.Object, null, null);
+            AdActivationServices service = new AdActivationServices(repoMock.Object, null, null, null);
 
             // When
             AdActivationResultModel model = service.ActivateAd(adId, "BBB");
@@ -113,7 +114,7 @@ namespace Bea.Test.Services
             var repoMock = new Moq.Mock<IRepository>();
             repoMock.Setup(x => x.Get<BaseAd>(adId)).Returns(ad);
 
-            AdActivationServices service = new AdActivationServices(repoMock.Object, null, null);
+            AdActivationServices service = new AdActivationServices(repoMock.Object, null, null, null);
 
             // When
             AdActivationResultModel model = service.ActivateAd(78, "AAA");
@@ -140,17 +141,22 @@ namespace Bea.Test.Services
             };
 
             var templatingMock = new Moq.Mock<ITemplatingService>();
-            templatingMock.Setup(x => x.GetTemplatedDocument("ActivationEmail.vm", Moq.It.IsAny<IDictionary<String, String>>(),null)).Returns(templatedMail);
+            templatingMock.Setup(x => x.GetTemplatedDocument("ActivationEmail.vm", Moq.It.IsAny<IDictionary<String, String>>(), null)).Returns(templatedMail);
+            
+            var appSettingsMock = new Moq.Mock<IApplicationSettingsProvider>();
+            appSettingsMock.Setup(x => x.WebsiteAddress).Returns("beaproject.com");
+            appSettingsMock.Setup(x => x.WebsiteName).Returns("BEA");
 
             var emailMock = new Moq.Mock<IEmailServices>();
-            
-            AdActivationServices service = new AdActivationServices(null, templatingMock.Object, emailMock.Object);
+            emailMock.Setup(x => x.SendEmail("BEA Activez votre annonce \"ss\"", "plouf", "@@", "no-reply@bea.nc")).Verifiable();
+
+            AdActivationServices service = new AdActivationServices(null, templatingMock.Object, emailMock.Object, appSettingsMock.Object);
 
             // When
             service.SendActivationEmail(ad);
 
             // Then
-            //emailMock.Verify(x => x.SendEmail(subject, templatedMail, toAddress));
+            emailMock.Verify(x => x.SendEmail("BEA Activez votre annonce \"ss\"", "plouf", "@@", "no-reply@bea.nc"), Times.Once());
         }
     }
 }

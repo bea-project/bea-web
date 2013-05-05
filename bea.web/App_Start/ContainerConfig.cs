@@ -19,6 +19,7 @@ using Bea.Core.Services.Ads;
 using System.Web.Hosting;
 using System.IO;
 using Bea.Tools;
+using Bea.Web.Providers;
 
 namespace Bea.Web.App_Start
 {
@@ -54,6 +55,7 @@ namespace Bea.Web.App_Start
             builder.RegisterType<EmailServices>().As<IEmailServices>().SingleInstance();
             builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().SingleInstance();
             builder.Register<ITemplatingService>(x => new TemplatingService(Path.Combine(HostingEnvironment.ApplicationPhysicalPath, "App_Data\\Templates"))).SingleInstance();
+            builder.RegisterType<ApplicationSettingsProvider>().As<IApplicationSettingsProvider>().SingleInstance();
             
             // Register the inMemoryData singleton to inject data
             builder.Register(x => new InMemoryDataInjector(x.Resolve<ISessionFactory>(), x.Resolve<IRepository>())).SingleInstance();

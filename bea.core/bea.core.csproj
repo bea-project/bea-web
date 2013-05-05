@@ -56,6 +56,7 @@
     <Compile Include="Services\Ads\IAdImageServices.cs" />
     <Compile Include="Services\Ads\IAdRequestServices.cs" />
     <Compile Include="Services\Ads\IAdServices.cs" />
+    <Compile Include="Services\IApplicationSettingsProvider.cs" />
     <Compile Include="Services\ICategoryServices.cs" />
     <Compile Include="Services\IEmailService.cs" />
     <Compile Include="Services\ILocationServices.cs" />

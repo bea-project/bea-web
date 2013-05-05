@@ -41,7 +41,7 @@ namespace Bea.Services.Ads
             IDictionary<String, object[]> list = new Dictionary<String, object[]>();
             list.Add("ads", ads.ToArray());
             String body = _templatingServices.GetTemplatedDocument("AdsRequestEmail.vm", data, list);
-            _emailServices.SendEmail(subject, body, model.Email);
+            _emailServices.SendEmail(subject, body, model.Email, "no-reply@bea.nc");
             result.InfoMessage = "Un email vient de vous etre envoye avec la liste de vos annonces";
             return result;
         }

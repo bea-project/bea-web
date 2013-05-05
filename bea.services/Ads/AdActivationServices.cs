@@ -19,12 +19,14 @@ namespace Bea.Services.Ads
         private readonly IRepository _repository;
         private readonly IEmailServices _emailService;
         private readonly ITemplatingService _templatingService;
+        private readonly IApplicationSettingsProvider _appSettingsProvider;
 
-        public AdActivationServices(IRepository repository, ITemplatingService templatingService, IEmailServices emailService)
+        public AdActivationServices(IRepository repository, ITemplatingService templatingService, IEmailServices emailService, IApplicationSettingsProvider appSettingsProvider)
         {
             _repository = repository;
             _templatingService = templatingService;
             _emailService = emailService;
+            _appSettingsProvider = appSettingsProvider;
         }
 
         public AdActivationResultModel ActivateAd(long adId, String activationToken)
@@ -84,27 +86,13 @@ namespace Bea.Services.Ads
             data.Add("title", ad.Title);
             data.Add("id", ad.Id.ToString());
             data.Add("activationToken", ad.ActivationToken);
+            data.Add("websiteAddress", _appSettingsProvider.WebsiteAddress);
+            data.Add("websiteName", _appSettingsProvider.WebsiteName);
 
-            String subject = String.Format("BEA Activez votre annonce\"{0}\"", ad.Title);
+            String subject = String.Format("BEA Activez votre annonce \"{0}\"", ad.Title);
             String body = _templatingService.GetTemplatedDocument("ActivationEmail.vm", data);
 
-            _emailService.SendEmail(subject, body, ad.CreatedBy.Email);
+            _emailService.SendEmail(subject, body, ad.CreatedBy.Email, "no-reply@bea.nc");
         }
-
-        //public void SendEmailToUser(ContactUserFormModel model)
-        //{
-        //    MailMessage mail = new MailMessage();
-        //    mail.From = new MailAddress(model.Email);
-        //    mail.To.Add(model.EmailTo);
-        //    mail.Subject = String.Format("Bea.nc - Notification : \"{0}\"", model.AdTitle);
-        //    mail.Body = String.Format("Bonjour,"
-        //         + "un utilisateur du site bea.nc, {0}, vous envoie le message suivant. Vous pouvez lui repondre directement à partir de cet email ou par telephone: {1}.\n\n"
-        //         + "---------------------------------------------------------------\n\n"
-        //         + model.EmailBody + "\n\n"
-        //         + "---------------------------------------------------------------\n\n"
-        //         + "http://bea.nc/Post/Details/{2}", model.Name, (String.IsNullOrEmpty(model.Telephone)) ? "non communiqué" : model.Telephone, model.AdId);
-        //    SmtpClient SmtpServer = new SmtpClient();
-        //    SmtpServer.SendAsync(mail, null);
-        //}
     }
 }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using Bea.Core.Services;
 
 namespace Bea.Services.Ads
 {
@@ -15,11 +16,15 @@ namespace Bea.Services.Ads
     {
         private readonly IAdRepository _adRepository;
         private readonly IRepository _repository;
+        private readonly IApplicationSettingsProvider _appSettingsProvider;
+        private readonly IEmailServices _emailService;
 
-        public AdContactServices(IAdRepository adRepository, IRepository repository)
+        public AdContactServices(IAdRepository adRepository, IRepository repository, IApplicationSettingsProvider appSettingsProvider, IEmailServices emailService)
         {
             _adRepository = adRepository;
             _repository = repository;
+            _appSettingsProvider = appSettingsProvider;
+            _emailService = emailService;
         }
 
         public ContactAdModel ContactAd(ContactAdModel model)
@@ -60,18 +65,14 @@ namespace Bea.Services.Ads
 
         public void SendEmailToUser(ContactAdModel model)
         {
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress(model.Email);
-            mail.To.Add(model.EmailTo);
-            mail.Subject = String.Format("Bea.nc - Notification : \"{0}\"", model.AdTitle);
-            mail.Body = String.Format("Bonjour,"
-                 + "un utilisateur du site bea.nc, {0}, vous envoie le message suivant. Vous pouvez lui repondre directement à partir de cet email ou par telephone: {1}.\n\n"
+            String subject = String.Format("{0} - Notification : \"{1}\"", _appSettingsProvider.WebsiteName, model.AdTitle);
+            String body = String.Format("Bonjour,"
+                 + "un utilisateur du site {0}, {1}, vous envoie le message suivant. Vous pouvez lui repondre directement à partir de cet email ou par telephone: {2}.\n\n"
                  + "---------------------------------------------------------------\n\n"
                  + model.EmailBody + "\n\n"
                  + "---------------------------------------------------------------\n\n"
-                 + "http://bea.nc/Post/Details/{2}", model.Name, (String.IsNullOrEmpty(model.Telephone)) ? "non communiqué" : model.Telephone, model.AdId);
-            SmtpClient SmtpServer = new SmtpClient();
-            SmtpServer.SendAsync(mail, null);
+                 + "http://www.{0}/Post/Details/{3}", _appSettingsProvider.WebsiteAddress, model.Name, (String.IsNullOrEmpty(model.Telephone)) ? "non communiqué" : model.Telephone, model.AdId);
+            _emailService.SendEmail(subject, body, model.EmailTo, model.Email);
         }
     }
 }

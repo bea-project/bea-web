@@ -8,3 +8,4 @@ packages/*
 *.user
 *.dmgl
 **/Content/PostImages/*.jpg
+bea.web/bea.zip

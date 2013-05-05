@@ -178,6 +178,7 @@
     <Compile Include="NhibernateHelper\NHibernateSessionWebApiActionFilterAttribute.cs" />
     <Compile Include="NhibernateHelper\SQLiteWebSessionFactoryFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\ApplicationSettingsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -448,7 +449,10 @@
   <ItemGroup>
     <Content Include="Views\Post\Shared\Share\_AdShareGooglePlus.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\BEA.aspwebhosting.pubxml" />
+    <None Include="Properties\PublishProfiles\BEA.zip.pubxml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\DisplayTemplates\AdSearchResultItemModel.cshtml" />
   </ItemGroup>

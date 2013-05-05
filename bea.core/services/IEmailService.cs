@@ -7,6 +7,6 @@ namespace Bea.Core.Services
 {
     public interface IEmailServices
     {
-        void SendEmail(String subject, String content, String toAddress);
+        void SendEmail(String subject, String content, String toAddress, String replyToAddress);
     }
 }
