@@ -1,5 +1,6 @@
 TestResults/*
 packages/*
+bea.web/*
 */bin/*
 */obj/*
 *.suo
