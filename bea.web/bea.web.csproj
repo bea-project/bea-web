@@ -452,6 +452,7 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\BEA.aspwebhosting.pubxml" />
     <None Include="Properties\PublishProfiles\BEA.zip.pubxml" />
+    <Content Include="Views\Search\QuickSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\DisplayTemplates\AdSearchResultItemModel.cshtml" />

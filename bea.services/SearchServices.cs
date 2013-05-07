@@ -235,5 +235,47 @@ namespace Bea.Services
 
             return parameters;
         }
+
+        public AdHomeSearchResultModel QuickSearch(AdSearchModel searchQuery)
+        {
+            String[] andSearchStrings = null;
+
+            if (!String.IsNullOrEmpty(searchQuery.SearchString))
+                andSearchStrings = searchQuery.SearchString.Trim().Split(' ');
+
+            IDictionary<Category, int> searchResult = _searchRepository.CountByCategory(andSearchStrings, searchQuery.CitySelectedId);
+
+            AdHomeSearchResultModel result = new AdHomeSearchResultModel(searchQuery);
+            IList<Category> processedParentCategories = new List<Category>();
+
+            // Loop through all the parent categories
+            foreach (KeyValuePair<Category, int> r in searchResult)
+            {
+                Category parentCategory = r.Key.ParentCategory;
+
+                if (processedParentCategories.Contains(parentCategory))
+                    continue;
+                
+                processedParentCategories.Add(parentCategory);
+
+                AdHomeSearchResultItemModel m = new AdHomeSearchResultItemModel(parentCategory);
+                result.Results.Add(m);
+
+                foreach (Category c in parentCategory.SubCategories)
+                {
+                    if (!searchResult.ContainsKey(c))
+                        continue;
+
+                    AdHomeSearchResultItemModel r1 = new AdHomeSearchResultItemModel(c);
+                    r1.ResultCount = searchResult[c];
+                    m.ResultCount += r1.ResultCount;
+                    m.SubCategoriesResults.Add(r1);
+                }
+
+                result.SearchResultTotalCount += m.ResultCount;
+            }
+
+            return result;
+        }
     }
 }

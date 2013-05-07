@@ -783,5 +783,11 @@ namespace Bea.Test.services
             Assert.AreEqual(1, result.SearchResultTotalCount);
         }
 
+        [TestMethod]
+        public void QuickSearch_Test()
+        {
+
+        }
     }
+
 }

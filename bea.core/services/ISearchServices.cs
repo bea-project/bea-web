@@ -25,5 +25,12 @@ namespace Bea.Core.Services
         /// <param name="categoryLabel">Category name</param>
         /// <returns>The list of matching ads (for a category or group and a city)</returns>
         AdSearchResultModel SearchAdsFromUrl(String cityLabel, String categoryLabel);
+        
+        /// <summary>
+        /// Quick searches through all categories and return the number of results per category
+        /// </summary>
+        /// <param name="searchQuery">The AdSearchModel containig search parameters</param>
+        /// <returns>The count of matchings ads per category group and sub categories</returns>
+        AdHomeSearchResultModel QuickSearch(AdSearchModel searchQuery);
     }
 }

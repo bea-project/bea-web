@@ -45,6 +45,19 @@ namespace Bea.Web.Controllers
         }
 
         //
+        // GET: /Search/QuickSearch/
+        public ActionResult QuickSearch(AdSearchModel model)
+        {
+            ViewBag.Categories = _categoryServices.GetAllCategoriesOfAGroup(model.CategorySelectedId)
+                .Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() });
+
+            AdHomeSearchResultModel result = _searchServices.QuickSearch(model);
+
+            return View(result);
+        }
+
+
+        //
         // GET: /Search/SearchFromUrl
         public ActionResult SearchFromUrl(String cityLabel, String categoryLabel)
         {
