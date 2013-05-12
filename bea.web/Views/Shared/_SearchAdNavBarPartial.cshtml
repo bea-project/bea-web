@@ -1,79 +1,78 @@
 ﻿@model Bea.Models.Search.AdSearchModel
 
-@*<ul class="nav nav-tabs">
-  <li class="active">
-    <a href="#vehicles" data-toggle="tab">
-        <div><img src="~/Content/images/car.png" /></div>
-    </a>
-  </li>
-  <li>
-    <a href="#ship" data-toggle="tab">
-        <div><img src="~/Content/images/ship.png" /></div>
-    </a>
-  </li>
-  <li>
-    <a href="#building" data-toggle="tab">
-        <img src="~/Content/images/building.png" />
-    </a>
-  </li>
+<ul class="nav nav-tabs">
+    <li class="active">
+        <a href="#vehicles" data-toggle="tab">
+            <img src="~/Content/images/car.png" />
+        </a>
+    </li>
     <li>
-    <a href="#home" data-toggle="tab">
-        <img src="~/Content/images/home.png" />
-    </a>
-  </li>
+        <a href="#ship" data-toggle="tab">
+            <img src="~/Content/images/ship.png" />
+        </a>
+    </li>
     <li>
-    <a href="#tv" data-toggle="tab">
-        <img src="~/Content/images/tv.png" />
-    </a>
-  </li>
+        <a href="#building" data-toggle="tab">
+            <img src="~/Content/images/building.png" />
+        </a>
+    </li>
     <li>
-    <a href="#ball" data-toggle="tab">
-        <img src="~/Content/images/ball.png" />
-    </a>
-  </li>
+        <a href="#home" data-toggle="tab">
+            <img src="~/Content/images/home.png" />
+        </a>
+    </li>
     <li>
-    <a href="#hanger" data-toggle="tab">
-        <img src="~/Content/images/hanger.png" />
-    </a>
-  </li>
+        <a href="#tv" data-toggle="tab">
+            <img src="~/Content/images/tv.png" />
+        </a>
+    </li>
     <li>
-    <a href="#shake" data-toggle="tab">
-        <img src="~/Content/images/shake.png" />
-    </a>
-  </li>
-  
-</ul>*@
+        <a href="#ball" data-toggle="tab">
+            <img src="~/Content/images/ball.png" />
+        </a>
+    </li>
+    <li>
+        <a href="#hanger" data-toggle="tab">
+            <img src="~/Content/images/hanger.png" />
+        </a>
+    </li>
+    <li>
+        <a href="#shake" data-toggle="tab">
+            <img src="~/Content/images/shake.png" />
+        </a>
+    </li>
+</ul>
 
 <div class="navbar">
     <div class="navbar-inner">
-        @using (Html.BeginForm("QuickSearch", "Search", FormMethod.Get, new { @class = "navbar-form" }))
+        @using (Html.BeginRouteForm("FrenchRouteToSearch", FormMethod.Get, new { @class = "navbar-form" }))
         {
             <div class="controls controls-row">
-            <ul class="nav">
-                <li class="bea-nav-li">
-                    @Html.TextBoxFor(x => x.SearchString, new { @class = "input-xlarge", @size = 60, @placeholder = "Vous recherchez..." })
-                </li>
-                
-                <li class="bea-nav-li">
-                    @Html.DropDownListFor(
+                <ul class="nav">
+                    <li class="bea-nav-li">
+                        @Html.TextBoxFor(x => x.SearchString, new { @class = "input-xlarge", @size = 60, @placeholder = "Vous recherchez..." })
+                    </li>
+
+                    <li class="bea-nav-li">
+                        @Html.DropDownListFor(
                         x => x.CategorySelectedId,
                         Enumerable.Empty<SelectListItem>(),
                         "Toutes les catégories",
                         new { id = "categories" })
-                </li>
+                    </li>
 
-                <li class="bea-nav-li">
-                    @Html.DropDownListFor(
+                    <li class="bea-nav-li">
+                        @Html.DropDownListFor(
                         x => x.CitySelectedId,
                         Enumerable.Empty<SelectListItem>(),
                         "Toutes les villes",
                         new { id = "cities" })
-                </li>
-                
-                <li>
-                    <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i>&nbsp;CHERCHER</button>
-                </li>
-            </ul>
+                    </li>
+
+                    <li>
+                        <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"></i>&nbsp;CHERCHER</button>
+                    </li>
+                </ul>
             </div>
             <div id="parameters"></div>
         }
@@ -81,7 +80,7 @@
 </div>
 
 <script type="text/javascript">
-    
+
     $.getUrlVars = function () {
         var vars = [], hash;
         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
@@ -93,7 +92,7 @@
         return vars;
     }
 
-    $.loadAdditionalParameters = function() {
+    $.loadAdditionalParameters = function () {
         var categoryId = $('#categories').val();
 
         if (!categoryId)

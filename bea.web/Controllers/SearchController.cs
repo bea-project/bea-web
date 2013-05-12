@@ -27,9 +27,23 @@ namespace Bea.Web.Controllers
 
         //
         // GET: /Search/
-        public ActionResult Index()
+        public ActionResult Index(AdvancedAdSearchModel model)
         {
-            return View(new AdSearchResultModel());
+            ViewBag.Categories = _categoryServices.GetAllCategoriesOfAGroup(model.CategorySelectedId)
+                .Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() });
+
+            // Equivalent to Search/Search?
+            if (model.CategorySelectedId.HasValue)
+            {
+                AdSearchResultModel result = _searchServices.SearchAds(model);
+                return View(result);
+            }
+            // Equivalent to Search/QuickSearch? (when no categories)
+            else
+            {
+                AdHomeSearchResultModel result = _searchServices.QuickSearch(model);
+                return View("QuickSearch", result);
+            }
         }
 
         //

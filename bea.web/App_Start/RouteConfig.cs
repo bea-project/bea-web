@@ -28,7 +28,7 @@ namespace Bea.Web
             routes.MapRoute(
                 name: "FrenchRouteToSearch",
                 url: "Recherche/",
-                defaults: new { controller = "Search", action = "Search" }
+                defaults: new { controller = "Search", action = "Index" }
             );
 
             routes.MapRoute(
