@@ -8,6 +8,7 @@ namespace Bea.Models.Search
 {
     public class AdHomeSearchResultItemModel
     {
+        public int CategoryId { get; set; }
         public String CategoryLabel { get; set; }
         public String CategoryUrlPart { get; set; }
         public String CategoryImageName { get; set; }
@@ -18,6 +19,7 @@ namespace Bea.Models.Search
         public AdHomeSearchResultItemModel(Category category)
             : this()
         {
+            CategoryId = category.Id;
             CategoryLabel = category.Label;
             CategoryUrlPart = category.LabelUrlPart;
             CategoryImageName = category.ImageName;

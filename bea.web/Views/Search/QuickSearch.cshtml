@@ -10,17 +10,25 @@
 
 <div class="show-grid row-fluid">
 
+    @{
+        var templateSearchQuery = new Bea.Models.Search.AdSearchModel(Model as Bea.Models.Search.AdSearchModel);
+    }
+
     @foreach (Bea.Models.Search.AdHomeSearchResultItemModel item in Model.Results)
     {
         <div class="span2" style="padding-top: 20px;">
             <img src="@String.Format("/Content/images/{0}.png", item.CategoryImageName)" />
             <div>
                 <br />
-                <a href="~/Annonces/@item.CategoryUrlPart">@String.Format("{0} ({1})", item.CategoryLabel.ToUpper(), item.ResultCount)</a>
+                @{
+                    templateSearchQuery.CategorySelectedId = item.CategoryId;
+                }
+                @Html.RouteLink(String.Format("{0} ({1})", item.CategoryLabel.ToUpper(), item.ResultCount), "FrenchRouteToSearch", templateSearchQuery)
                 <br />
                 @foreach (Bea.Models.Search.AdHomeSearchResultItemModel subItem in item.SubCategoriesResults)
                 {
-                    <a href="~/Annonces/@subItem.CategoryUrlPart">@String.Format("{0} ({1})", subItem.CategoryLabel, subItem.ResultCount)</a>
+                    templateSearchQuery.CategorySelectedId = subItem.CategoryId;
+                    @Html.RouteLink(String.Format("{0} ({1})", subItem.CategoryLabel, subItem.ResultCount), "FrenchRouteToSearch", templateSearchQuery);
                     <br />
                 }
             </div>
