@@ -14,9 +14,21 @@ namespace Bea.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "PostActivationRoute",
-                url: "Post/Activate/{id}/{activationToken}",
+                name: "FrenchRouteToActivation",
+                url: "Annonce/Activation/{id}/{activationToken}",
                 defaults: new { controller = "Post", action = "Activate" }
+            );
+
+            routes.MapRoute(
+                name: "FrenchRouteToPost",
+                url: "Annonce/{action}/{id}",
+                defaults: new { controller = "Post" }
+            );
+
+            routes.MapRoute(
+                name: "FrenchRouteToSearch",
+                url: "Recherche/",
+                defaults: new { controller = "Search", action = "Search" }
             );
 
             routes.MapRoute(

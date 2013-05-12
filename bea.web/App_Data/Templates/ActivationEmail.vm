@@ -14,7 +14,7 @@
 		</p>
 
 		<p>
-			<a href="http://www.$websiteAddress/Post/Activate/$id/$activationToken">http://www.$websiteAddress/Post/Activate/$id/$activationToken</a>
+			<a href="http://www.$websiteAddress/Annonce/Activation/$id/$activationToken">http://www.$websiteAddress/Annonce/Activation/$id/$activationToken</a>
 		</p>
 
 		<p>
