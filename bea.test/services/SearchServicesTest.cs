@@ -786,7 +786,75 @@ namespace Bea.Test.services
         [TestMethod]
         public void QuickSearch_Test()
         {
+            // Given
+            AdSearchModel sM = new AdSearchModel();
+            sM.SearchString = "verre";
+            sM.CitySelectedId = 45;
 
+            Category c1 = new Category
+            {
+                Label = "Vehicule",
+            };
+            Category c2 = new Category
+            {
+                Label = "Voiture",
+            };
+            c1.AddCategory(c2);
+            Category c3 = new Category
+            {
+                Label = "Moto",
+            };
+            c1.AddCategory(c3);
+
+            Category c4 = new Category
+            {
+                Label = "Maison",
+            };
+            Category c5 = new Category
+            {
+                Label = "Meuble",
+            };
+            c4.AddCategory(c5);
+            Category c6 = new Category
+            {
+                Label = "Vaisselle",
+            };
+            c4.AddCategory(c6);
+
+            IDictionary<Category, int> res = new Dictionary<Category, int>();
+            res.Add(c2, 2);
+            res.Add(c3, 1);
+            res.Add(c6, 6);
+
+            var searchRepoMock = new Moq.Mock<ISearchRepository>();
+            searchRepoMock.Setup(x => 
+                x.CountByCategory(It.Is<string[]>(b => b[0] == sM.SearchString), It.Is<int?>(i => i.Value == sM.CitySelectedId)))
+                .Returns(res);
+
+            SearchServices service = new SearchServices(null, null, searchRepoMock.Object, null, null, null);
+
+            // When
+            AdHomeSearchResultModel ress = service.QuickSearch(sM);
+
+            // Then
+            Assert.AreEqual(sM.CitySelectedId, ress.CitySelectedId);
+            Assert.AreEqual(sM.SearchString, ress.SearchString);
+            Assert.AreEqual(9, ress.SearchResultTotalCount);
+            Assert.AreEqual(2, ress.Results.Count);
+            Assert.AreEqual(3, ress.Results[0].ResultCount);
+            Assert.AreEqual("Vehicule", ress.Results[0].CategoryLabel);
+            Assert.AreEqual("Voiture", ress.Results[0].SubCategoriesResults[0].CategoryLabel);
+            Assert.AreEqual(2, ress.Results[0].SubCategoriesResults[0].ResultCount);
+            Assert.AreEqual(0, ress.Results[0].SubCategoriesResults[0].SubCategoriesResults.Count);
+            Assert.AreEqual("Moto", ress.Results[0].SubCategoriesResults[1].CategoryLabel);
+            Assert.AreEqual(1, ress.Results[0].SubCategoriesResults[1].ResultCount);
+            Assert.AreEqual(0, ress.Results[0].SubCategoriesResults[1].SubCategoriesResults.Count);
+
+            Assert.AreEqual(6, ress.Results[1].ResultCount);
+            Assert.AreEqual("Maison", ress.Results[1].CategoryLabel);
+            Assert.AreEqual("Vaisselle", ress.Results[1].SubCategoriesResults[0].CategoryLabel);
+            Assert.AreEqual(6, ress.Results[1].SubCategoriesResults[0].ResultCount);
+            Assert.AreEqual(0, ress.Results[1].SubCategoriesResults[0].SubCategoriesResults.Count);
         }
     }
 
