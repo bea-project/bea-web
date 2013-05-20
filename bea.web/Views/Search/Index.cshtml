@@ -19,20 +19,6 @@
     
 }
 
-@*<table class="table table-bordered table-condensed table-striped">
-    @foreach (var item in Model.SearchResult)
-    {
-        <tr>
-            <td>
-                <a href=@Url.Action("Details","Post",new{id=item.AdId})>
-                    @Html.DisplayFor(x => item)
-                </a>
-            </td>
-        </tr>
-    }
-</table>*@
-
-
     @foreach (var item in Model.SearchResult)
     {
         <div>
