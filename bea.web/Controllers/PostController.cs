@@ -13,6 +13,7 @@ using Bea.Models.Delete;
 using Bea.Models.Request;
 using System;
 using Bea.Models.Contact;
+using CaptchaMvc.HtmlHelpers;
 
 namespace Bea.Web.Controllers
 {
@@ -150,6 +151,9 @@ namespace Bea.Web.Controllers
 
             foreach (string key in errors.Keys)
                 ModelState.AddModelError(key, errors[key]);
+
+            // This line validates the captcha code and creates a ModelError if not valid
+            this.IsCaptchaValid("Code invalide");
 
             if (ModelState.IsValid)
             {

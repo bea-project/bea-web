@@ -54,6 +54,9 @@
     <Reference Include="Autofac.Integration.WebApi">
       <HintPath>..\packages\Autofac.WebApi.2.6.2.859\lib\NET40\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
+    <Reference Include="CaptchaMvc">
+      <HintPath>..\packages\CaptchaMvc.Mvc4.1.3.0\lib\net40-full\CaptchaMvc.dll</HintPath>
+    </Reference>
     <Reference Include="Facebook">
       <HintPath>..\packages\Facebook.6.4.0\lib\net40-client\Facebook.dll</HintPath>
     </Reference>
@@ -453,6 +456,7 @@
     <None Include="Properties\PublishProfiles\BEA.aspwebhosting.pubxml" />
     <None Include="Properties\PublishProfiles\BEA.zip.pubxml" />
     <Content Include="Views\Search\QuickSearch.cshtml" />
+    <Content Include="Views\Post\Shared\Create\_Captcha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\DisplayTemplates\AdSearchResultItemModel.cshtml" />

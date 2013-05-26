@@ -1,0 +1,30 @@
+﻿@model CaptchaMvc.Models.DefaultBuildInfoModel
+<img id="@Model.ImageElementId" src="@Model.ImageUrl" />
+@Html.Hidden(Model.TokenElementId, Model.TokenValue)
+<br />
+@{
+    string id = Guid.NewGuid().ToString("N");
+    string functionName = string.Format("______{0}________()", Guid.NewGuid().ToString("N"));
+    <script type="text/javascript">
+        $(function () {
+            $('#@id').show();
+        });
+
+        function @functionName {
+            $('#@id').hide();
+            $.post("@Model.RefreshUrl", { @Model.TokenParameterName: $('#@Model.TokenElementId').val() }, 
+            function () {
+                $('#@id').show();
+            });
+            return false;
+        }
+        
+    </script>
+}
+
+@Html.TextBox(Model.InputElementId, String.Empty, new { @style = "width: 165px;" })
+<a href="#@Model.ImageElementId" id="@id" onclick="@functionName" style="display: none;"><i class="icon-refresh"></i></a> 
+@Html.ValidationMessage(Model.InputElementId, String.Empty, new { @class = "label label-important" })
+<script type="text/javascript">
+    $('#@id').tooltip({ 'title': 'Vous pouvez générer un nouveau code si celui-ci est illisible.', 'placement': 'right' });
+</script>
