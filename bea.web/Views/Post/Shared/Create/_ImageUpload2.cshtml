@@ -110,13 +110,14 @@
             },
 
             add: function (e, data) {
-                nbPhotos++;
-                checkMaxPhotoNumber();
 
                 if (data.files[data.files.length - 1].size > 1048576) {
                     alert('L\'image est trop grosse. Veuillez en choisir une de moins d\'1 Mo.');
                     return;
                 }
+
+                nbPhotos++;
+                checkMaxPhotoNumber();
 
                 var div = $('<div id="up' + nbPhotos + '" class="imageZone"/>').appendTo('#buttons');
                 div.append('<span>' + data.files[data.files.length - 1].name + '</span>&nbsp;&nbsp;');
