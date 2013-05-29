@@ -40,7 +40,7 @@ var nbPhotos = 0;
         paramname: 'userfile',
         allowedfiletypes: ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'],
         maxfiles: 5,           // Ignored if queuefiles is set > 0
-        maxfilesize: 1,         // MB file size limit
+        maxfilesize: 3,         // MB file size limit
         queuefiles: 0,          // Max files before queueing (for large volume uploads)
         queuewait: 200,         // Queue wait time if full
         data: {},

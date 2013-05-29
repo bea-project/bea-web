@@ -15,7 +15,7 @@ namespace Bea.Services.Ads
         private readonly IHelperService _helper;
         private readonly Regex _fileExtensionMatcher = new Regex(@"\.jpe{0,1}g|\.png", RegexOptions.IgnoreCase);
         private readonly Regex _contentTypeExtensionMatcher = new Regex(@"image/jpe{0,1}g|image/png", RegexOptions.IgnoreCase);
-        private readonly int _maxImageSizeInBytes = 1048576;
+        private readonly int _maxImageSizeInBytes = 3145728;
 
         public AdImageServices(IRepository repository, IHelperService helper)
         {
