@@ -216,6 +216,17 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\upload\app.js" />
+    <Content Include="Scripts\upload\bootstrap.file-input.js" />
+    <Content Include="Scripts\upload\jquery.fileupload-angular.js" />
+    <Content Include="Scripts\upload\jquery.fileupload-process.js" />
+    <Content Include="Scripts\upload\jquery.fileupload-resize.js" />
+    <Content Include="Scripts\upload\jquery.fileupload-ui.js" />
+    <Content Include="Scripts\upload\jquery.fileupload-validate.js" />
+    <Content Include="Scripts\upload\jquery.fileupload.js" />
+    <Content Include="Scripts\upload\jquery.iframe-transport.js" />
+    <Content Include="Scripts\upload\jquery.ui.widget.js" />
+    <Content Include="Scripts\upload\main.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -457,10 +468,12 @@
     <None Include="Properties\PublishProfiles\BEA.zip.pubxml" />
     <Content Include="Views\Search\QuickSearch.cshtml" />
     <Content Include="Views\Post\Shared\Create\_Captcha.cshtml" />
+    <Content Include="Views\Post\Shared\Create\_ImageUpload2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\DisplayTemplates\AdSearchResultItemModel.cshtml" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

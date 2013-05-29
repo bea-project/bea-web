@@ -16,8 +16,8 @@ namespace Bea.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             FilterConfig.RegisterWebApiGlobalFilters(System.Web.Http.GlobalConfiguration.Configuration.Filters);
             WebApiConfig.Register(GlobalConfiguration.Configuration);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            
+            RouteConfig.RegisterRoutes(RouteTable.Routes);            
+
             // Enable log4net configuration
             log4net.Config.XmlConfigurator.Configure();
         }
