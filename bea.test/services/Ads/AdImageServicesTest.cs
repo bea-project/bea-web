@@ -107,7 +107,7 @@ namespace Bea.Test.Services
             AdImageServices service = new AdImageServices(null, null);
 
             // Then
-            Assert.IsFalse(service.ValidateImageForUpload(contentType, 1048577));
+            Assert.IsFalse(service.ValidateImageForUpload(contentType, 5048577));
         }
 
         [TestMethod]
