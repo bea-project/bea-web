@@ -58,6 +58,7 @@
     <Compile Include="Details\WaterSport\SailingBoatAdDetailsModel.cs" />
     <Compile Include="Details\WaterSport\WaterSportAdDetailsModel.cs" />
     <Compile Include="Request\AdRequestModel.cs" />
+    <Compile Include="Request\SpamAdRequestModel.cs" />
     <Compile Include="Search\AdHomeSearchResultItemModel.cs" />
     <Compile Include="Search\AdHomeSearchResultModel.cs" />
     <Compile Include="Search\AdSearchModel.cs" />

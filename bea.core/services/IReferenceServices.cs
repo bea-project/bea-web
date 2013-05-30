@@ -18,6 +18,7 @@ namespace Bea.Core.Services
         IList<WaterSportType> GetAllWaterSportTypes();
         IList<RealEstateType> GetAllRealEstateTypes();
         IList<DeletionReason> GetAllDeletionReasons();
+        IList<T> GetAllReferences<T>();
         
         // Static lists
         Dictionary<int, string> GetAllHps();

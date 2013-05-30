@@ -148,6 +148,11 @@ namespace Bea.Services
             return _repository.GetAll<DeletionReason>();
         }
 
+        public IList<T> GetAllReferences<T>()
+        {
+            return _repository.GetAll<T>();
+        }
+
         #region static lists
 
         private IDictionary<int, BracketItemReference> _kmBrackets;

@@ -94,10 +94,10 @@
                     <a class="btn btn-primary btn-small" href="#"><i class="icon-pencil icon-white"></i>&nbsp;MODIFIER</a>
                 </div>
                 <div class="span4">
-                    <a class="btn btn-primary btn-small" href="@Url.Action("Delete",new { Id = @Model.AdId })"><i class="icon-trash icon-white"></i>&nbsp;SUPPRIMER</a>
+                    <a class="btn btn-primary btn-small" href="@Url.Action("Delete", new { Id = @Model.AdId })"><i class="icon-trash icon-white"></i>&nbsp;SUPPRIMER</a>
                 </div>
                 <div class="span4">
-                    <a class="btn btn-primary btn-small" href="#"><i class="icon-warning-sign icon-white"></i>&nbsp;SIGNALER CONTENU ABUSIF</a>
+                    <a class="btn btn-primary btn-small" href="@Url.Action("Signaler" ,new { Id = @Model.AdId })"><i class="icon-warning-sign icon-white"></i>&nbsp;SIGNALER CONTENU ABUSIF</a>
                 </div>
             </div>
         </div>

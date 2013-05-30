@@ -14,6 +14,7 @@ using Bea.Models.Request;
 using System;
 using Bea.Models.Contact;
 using CaptchaMvc.HtmlHelpers;
+using Bea.Domain.Reference;
 
 namespace Bea.Web.Controllers
 {
@@ -273,6 +274,29 @@ namespace Bea.Web.Controllers
             }
             return PartialView("_Contact",model);
         }
+
+        #endregion
+
+        #region SpamAdRequest
+
+        //
+        // GET: /Post/SpamAdRequest/{id}
+        [ActionName("Signaler")]
+        public ActionResult SpamAdRequest(long id)
+        {
+            var result = new SpamAdRequestModel();
+            ViewBag.SpamAdTypes = _referenceServices.GetAllReferences<SpamAdType>().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+            return View("SpamAdRequest", result);
+        }
+
+        //
+        // POST: /Post/SpamAdRequest/{DeleteAdModel}
+        [HttpPost]
+        [ActionName("Signaler")]
+        public ActionResult SpamAdRequest(SpamAdRequestModel model)
+        {
+            return View("SpamAdRequest");
+        } 
 
         #endregion
     }

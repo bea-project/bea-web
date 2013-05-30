@@ -1,0 +1,56 @@
+﻿@model Bea.Models.Request.SpamAdRequestModel
+
+@{
+    ViewBag.Title = "Signaler un contenu abusif";
+}
+
+<div class="legend-like">Signaler un contenu abusif</div>
+
+@if (!Model.IsAlreadySignaled)
+{
+    using (Html.BeginForm())
+    {
+    
+    <p>Nous vous remercions de nous signaler une annonce abusive! C'est grâce à votre aide que nous ferons de BEA un endroit sûr.</p>
+        
+    <dl class="dl-horizontal">
+
+        <dd>&nbsp;</dd>
+
+        <dt>Type de fraude</dt>
+        <dd>
+            @Html.DropDownListFor(model => model.SelectedSpamAdTypeId, (IEnumerable<SelectListItem>) ViewBag.SpamAdTypes, "Choisissez la raison", new { @class = "input-large span4" })
+            @Html.ValidationMessageFor(model => model.SelectedSpamAdTypeId, String.Empty, new { @class = "label label-important" })
+        </dd>
+
+        <dt>Email</dt>
+        <dd>
+            @Html.TextBoxFor(model => model.RequestorEmail, new { @class = "input-large span4" })
+            @Html.ValidationMessageFor(model => model.RequestorEmail, String.Empty, new { @class = "label label-important" })
+        </dd>
+
+        <dt>Message</dt>
+        <dd>
+            @Html.TextAreaFor(model => model.Description, new { @class = "input-large span6", rows = "6" })
+        </dd>
+
+        <dd>&nbsp;
+            @Html.HiddenFor(x => x.AdId)
+        </dd>
+
+        <dd>
+            @Html.ActionLink("Annuler", "Index", new { controller = "Home" }, new { @class = "btn" })
+            <input type="submit" value="Signaler" class="btn btn-primary" />
+        </dd>
+    </dl>
+    }
+}
+else
+{
+    <p>@Model.InfoMessage</p>
+    <div>
+        @Html.ActionLink("Retour aux annonces", "Index", new { controller = "Home" })
+    </div>
+}
+
+
