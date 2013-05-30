@@ -297,6 +297,12 @@ namespace Bea.Web.Controllers
         [ActionName("Signaler")]
         public ActionResult SpamAdRequest(SpamAdRequestModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.SpamAdTypes = _referenceServices.GetAllReferences<SpamAdType>().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
+                return View("SpamAdRequest", model);
+            }
+
             var result = _spamAdServices.SpamRequestAd(model);
             return View("SpamAdRequest", result);
         } 
