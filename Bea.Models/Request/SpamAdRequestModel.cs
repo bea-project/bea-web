@@ -14,7 +14,9 @@ namespace Bea.Models.Request
 
         [Required(ErrorMessage = "Quel est le motif de votre signalement ?")]
         public int? SelectedSpamAdTypeId { get; set; }
-        [Required(ErrorMessage = "Nous avons besoin de votre adresse email !")]
+
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Nous avons besoin de votre adresse email !")]
+        //[Required(ErrorMessage = "Nous avons besoin de votre adresse email !")]
         public String RequestorEmail { get; set; }
         public String Description { get; set; }
     }
