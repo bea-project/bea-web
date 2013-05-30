@@ -6,6 +6,7 @@ using Bea.Domain.Location;
 using Bea.Domain;
 using Bea.Domain.Ads;
 using Bea.Domain.Search;
+using Bea.Domain.Admin;
 
 namespace Bea.Core.Dal
 {
@@ -56,5 +57,12 @@ namespace Bea.Core.Dal
         /// <returns>true or false depending on the possibility</returns>
         Boolean CanDeleteAd(long adId);
 
+        /// <summary>
+        /// Returns whether or not an ad can be requested as spam
+        /// (based on whether it exists and if it's not already been requested)
+        /// </summary>
+        /// <param name="adId">The ad id to check</param>
+        /// <returns>true or false depending on the possibility</returns>
+        SpamAdRequest GetSpamRequestAd(long adId);
     }
 }

@@ -11,6 +11,7 @@ using NHibernate;
 using Bea.Domain.Categories;
 using Bea.Domain.Ads;
 using Bea.Domain.Search;
+using Bea.Domain.Admin;
 
 namespace Bea.Test.dal.repository
 {
@@ -314,7 +315,6 @@ namespace Bea.Test.dal.repository
             }
         }
 
-        
         [TestMethod]
         public void GetAdById_GetAd_ReturnAdObject()
         {
@@ -698,6 +698,7 @@ namespace Bea.Test.dal.repository
                 Assert.IsTrue(adRepo.CanDeleteAd(id));
             }
         }
+        
         [TestMethod]
         public void GetAdsByEmail_ReturnListOfAds_WithUserAndCategoryFetched()
         {
@@ -813,6 +814,142 @@ namespace Bea.Test.dal.repository
             AdRepository adRepo = new AdRepository(sessionFactory);
             List<BaseAd> ads = adRepo.GetAdsByEmail("unknown Email").ToList();
             Assert.AreEqual(0, ads.Count);
+        }
+
+        [TestMethod]
+        public void GetSpamRequestAd_AdDoesExistInTable_ReturnFalse()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            AdRepository adRepo = new AdRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                #region test data
+
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city",
+                    LabelUrlPart = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Informatique",
+                    LabelUrlPart = "Informatique",
+                    Type = AdTypeEnum.Ad
+                };
+
+                Ad a = new Ad
+                {
+                    Title = "video game",
+                    Body = "the best!!",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    IsDeleted = false
+                };
+                c.AddAd(a);
+                cat.AddAd(a);
+                repo.Save<Province>(p1);
+                repo.Save<City>(c);
+                repo.Save<Category>(cat);
+                long id = repo.Save<Ad, long>(a);
+
+                #endregion
+
+                SpamAdRequest adR = new SpamAdRequest(a);
+
+                repo.Save(adR);
+
+                repo.Flush();
+
+                #endregion
+
+                Assert.AreEqual(adR, adRepo.GetSpamRequestAd(id));
+            }
+        }
+
+        [TestMethod]
+        public void GetSpamRequestAd_AdNotSpam_ReturnTrue()
+        {
+            ISessionFactory sessionFactory = NhibernateHelper.SessionFactory;
+            Repository repo = new Repository(sessionFactory);
+            AdRepository adRepo = new AdRepository(sessionFactory);
+
+            using (ITransaction transaction = sessionFactory.GetCurrentSession().BeginTransaction())
+            {
+                #region test data
+
+                #region test data
+                Province p1 = new Province
+                {
+                    Label = "p1"
+                };
+
+                User u = new User
+                {
+                    Email = "test@test.com",
+                    Password = "hihi"
+                };
+                repo.Save<User>(u);
+
+                City c = new City
+                {
+                    Label = "city",
+                    LabelUrlPart = "city"
+                };
+                p1.AddCity(c);
+
+                Category cat = new Category
+                {
+                    Label = "Informatique",
+                    LabelUrlPart = "Informatique",
+                    Type = AdTypeEnum.Ad
+                };
+
+                Ad a = new Ad
+                {
+                    Title = "video game",
+                    Body = "the best!!",
+                    CreatedBy = u,
+                    CreationDate = new DateTime(2012, 01, 16, 23, 52, 18),
+                    Category = cat,
+                    IsDeleted = false
+                };
+                c.AddAd(a);
+                cat.AddAd(a);
+                repo.Save<Province>(p1);
+                repo.Save<City>(c);
+                repo.Save<Category>(cat);
+                long id = repo.Save<Ad, long>(a);
+
+                #endregion
+
+                SpamAdRequest adR = new SpamAdRequest(a);
+
+                repo.Save(adR);
+
+                repo.Flush();
+
+                #endregion
+
+                Assert.IsNull(adRepo.GetSpamRequestAd(999));
+            }
         }
     }
 }

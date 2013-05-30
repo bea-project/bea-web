@@ -11,5 +11,7 @@ namespace Bea.Core.Services
         String WebsiteName { get; }
         String FromEmailAddress { get; }
         String NoReplyEmailAddress { get; }
+        bool RebuildSchema { get; }
+        String TemplatesPath { get; }
     }
 }

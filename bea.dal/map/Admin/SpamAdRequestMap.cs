@@ -13,6 +13,11 @@ namespace Bea.Dal.Map.Admin
         {
             Id(x => x.Id).GeneratedBy.Identity();
             Map(x => x.IsSpam);
+            Map(x => x.Description);
+            Map(x => x.RequestorEmailAddress);
+            Map(x => x.RequestDate);
+            Map(x => x.ReviewDate);
+            References(x => x.SpamType);
             References(x => x.Ad);
         }
     }

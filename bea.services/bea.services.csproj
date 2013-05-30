@@ -53,6 +53,7 @@
     <Compile Include="Ads\AdImageServices.cs" />
     <Compile Include="Ads\AdRequestServices.cs" />
     <Compile Include="Ads\AdServices.cs" />
+    <Compile Include="Admin\SpamAdServices.cs" />
     <Compile Include="CategoryServices.cs" />
     <Compile Include="EmailServices.cs" />
     <Compile Include="LocationServices.cs" />

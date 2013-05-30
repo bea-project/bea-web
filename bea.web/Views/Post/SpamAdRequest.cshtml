@@ -6,7 +6,7 @@
 
 <div class="legend-like">Signaler un contenu abusif</div>
 
-@if (!Model.IsAlreadySignaled)
+@if (Model.CanSignal)
 {
     using (Html.BeginForm())
     {

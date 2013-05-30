@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Bea.Core.Dal;
 using Bea.Domain;
+using Bea.Domain.Admin;
 using Bea.Domain.Ads;
 using Bea.Domain.Location;
 using Bea.Domain.Search;
@@ -93,6 +94,13 @@ namespace Bea.Dal.Repository
                 query = query.Where(a => a.Title.Contains(searchString));
 
             return query.OrderByDescending(a => a.CreationDate).ToList();
+        }
+
+        public SpamAdRequest GetSpamRequestAd(long adId)
+        {
+            return _sessionFactory.GetCurrentSession().Query<SpamAdRequest>()
+                .Where(x => x.Ad.Id == adId)
+                .SingleOrDefault();
         }
     }
 }

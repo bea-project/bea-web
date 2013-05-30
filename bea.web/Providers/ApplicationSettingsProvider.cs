@@ -28,5 +28,15 @@ namespace Bea.Web.Providers
         {
             get { return WebConfigurationManager.AppSettings["noReplyEmailAddress"]; }
         }
+
+        public bool RebuildSchema
+        {
+            get { return WebConfigurationManager.AppSettings["rebuildSchema"] == null ? false : bool.Parse(WebConfigurationManager.AppSettings["rebuildSchema"]); }
+        }
+
+        public string TemplatesPath
+        {
+            get { return WebConfigurationManager.AppSettings["templatesPath"]; }
+        }
     }
 }

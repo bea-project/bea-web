@@ -100,6 +100,7 @@
     <Compile Include="Models\Details\WaterSport\SailingBoatAdDetailsModelTest.cs" />
     <Compile Include="Models\Details\WaterSport\WaterSportAdDetailsModelTest.cs" />
     <Compile Include="Models\Search\AdvancedAdSearchModelTest.cs" />
+    <Compile Include="Services\Admin\SpamAdServicesTest.cs" />
     <Compile Include="Services\Ads\AdActivationServicesTest.cs" />
     <Compile Include="Services\Ads\AdDataConsistencyServicesTest.cs" />
     <Compile Include="Services\Ads\AdDeletionServicesTest.cs" />

@@ -15,6 +15,7 @@ using System;
 using Bea.Models.Contact;
 using CaptchaMvc.HtmlHelpers;
 using Bea.Domain.Reference;
+using Bea.Core.Services.Admin;
 
 namespace Bea.Web.Controllers
 {
@@ -31,8 +32,9 @@ namespace Bea.Web.Controllers
         private IAdDeletionServices _adDeletionServices;
         private IAdRequestServices _adRequestServices;
         private IAdContactServices _adContactServices;
+        private ISpamAdServices _spamAdServices;
 
-        public PostController(IAdServices adServices, IAdDetailsServices adDetailsServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices, IAdDeletionServices adDeletionServices, IAdRequestServices adRequestServices, IAdContactServices adContactServices)
+        public PostController(IAdServices adServices, IAdDetailsServices adDetailsServices, ILocationServices locationServices, IUserServices userServices, ICategoryServices categoryServices, IAdDataConsistencyServices adConsistencyServices, IReferenceServices referenceServices, IAdActivationServices adActivationServices, IAdDeletionServices adDeletionServices, IAdRequestServices adRequestServices, IAdContactServices adContactServices, ISpamAdServices spamAdServices)
         {
             _adServices = adServices;
             _adDetailsServices = adDetailsServices;
@@ -45,6 +47,7 @@ namespace Bea.Web.Controllers
             _adDeletionServices = adDeletionServices;
             _adRequestServices = adRequestServices;
             _adContactServices = adContactServices;
+            _spamAdServices = spamAdServices;
         }
 
         //
@@ -258,7 +261,6 @@ namespace Bea.Web.Controllers
         }
         #endregion
 
-
         #region Contact
 
         [HttpPost]
@@ -284,7 +286,7 @@ namespace Bea.Web.Controllers
         [ActionName("Signaler")]
         public ActionResult SpamAdRequest(long id)
         {
-            var result = new SpamAdRequestModel();
+            var result = _spamAdServices.CanSpamRequestAd(id);
             ViewBag.SpamAdTypes = _referenceServices.GetAllReferences<SpamAdType>().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();
             return View("SpamAdRequest", result);
         }
@@ -295,7 +297,8 @@ namespace Bea.Web.Controllers
         [ActionName("Signaler")]
         public ActionResult SpamAdRequest(SpamAdRequestModel model)
         {
-            return View("SpamAdRequest");
+            var result = _spamAdServices.SpamRequestAd(model);
+            return View("SpamAdRequest", result);
         } 
 
         #endregion
