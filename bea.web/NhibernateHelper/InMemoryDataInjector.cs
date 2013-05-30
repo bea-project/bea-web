@@ -368,6 +368,13 @@ namespace Bea.Web.NhibernateHelper
             _repository.Save(new DeletionReason { Label = "J'ai vendu / loué mon bien par un autre moyen" });
             _repository.Save(new DeletionReason { Label = "Je souhaite renouveler mon annonce pour la faire apparaitre en tête de liste" });
 
+            _repository.Save(new SpamAdType { Label = "Annonce commerciale" });
+            _repository.Save(new SpamAdType { Label = "Mauvaise rubrique" });
+            _repository.Save(new SpamAdType { Label = "Contenu à caractère diffamatoire" });
+            _repository.Save(new SpamAdType { Label = "Contenu vulgaire" });
+            _repository.Save(new SpamAdType { Label = "Fraude" });
+            _repository.Save(new SpamAdType { Label = "Autre" });
+
             _repository.Flush();
         }
 

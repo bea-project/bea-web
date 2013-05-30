@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\SpamAdRequest.cs" />
     <Compile Include="Ads\Ad.cs" />
     <Compile Include="AdImage.cs" />
     <Compile Include="Ads\BaseAd.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Reference\RealEstateType.cs" />
     <Compile Include="Reference\SailingBoatHullType.cs" />
     <Compile Include="Reference\SailingBoatType.cs" />
+    <Compile Include="Reference\SpamAdType.cs" />
     <Compile Include="Reference\VehicleBrand.cs" />
     <Compile Include="Reference\CarFuel.cs" />
     <Compile Include="Reference\WaterSportType.cs" />

@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Configuration\CustomLongLastingSQLiteConnectionProvider.cs" />
     <Compile Include="Map\AdImageMap.cs" />
+    <Compile Include="Map\Admin\SpamAdRequestMap.cs" />
     <Compile Include="Map\Ads\AdMap.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -81,6 +82,7 @@
     <Compile Include="Map\Reference\RealEstateTypeMap.cs" />
     <Compile Include="Map\Reference\SailingBoatHullTypeMap.cs" />
     <Compile Include="Map\Reference\SailingBoatTypeMap.cs" />
+    <Compile Include="Map\Reference\SpamAdTypeMap.cs" />
     <Compile Include="Map\Reference\WaterSportTypeMap.cs" />
     <Compile Include="Map\Search\SearchAdCacheMap.cs" />
     <Compile Include="Map\UserMap.cs">
