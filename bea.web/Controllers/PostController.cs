@@ -297,6 +297,9 @@ namespace Bea.Web.Controllers
         [ActionName("Signaler")]
         public ActionResult SpamAdRequest(SpamAdRequestModel model)
         {
+            // This line validates the captcha code and creates a ModelError if not valid
+            this.IsCaptchaValid("Code invalide");
+
             if (!ModelState.IsValid)
             {
                 ViewBag.SpamAdTypes = _referenceServices.GetAllReferences<SpamAdType>().Select(x => new SelectListItem { Text = x.Label, Value = x.Id.ToString() }).ToList();

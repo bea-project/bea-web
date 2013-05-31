@@ -1,4 +1,5 @@
-﻿@model Bea.Models.Request.SpamAdRequestModel
+﻿@using CaptchaMvc.HtmlHelpers
+@model Bea.Models.Request.SpamAdRequestModel
 
 @{
     ViewBag.Title = "Signaler un contenu abusif";
@@ -32,6 +33,11 @@
         <dt>Message</dt>
         <dd>
             @Html.TextAreaFor(model => model.Description, new { @class = "input-large span6", rows = "6" })
+        </dd>
+
+        <dt>Code</dt>
+        <dd>
+            @Html.Captcha(5, "Shared/Create/_Captcha")
         </dd>
 
         <dd>&nbsp;
