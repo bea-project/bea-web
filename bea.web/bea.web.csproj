@@ -207,6 +207,7 @@
     <Content Include="Content\images\tv.png" />
     <Content Include="Content\PostImages\Index.html" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\bea.addToFavs.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.8.3-vsdoc.js" />
@@ -462,6 +463,9 @@
     <Content Include="Views\Post\Shared\Create\_Captcha.cshtml" />
     <Content Include="Views\Post\Shared\Create\_ImageUpload2.cshtml" />
     <Content Include="Views\Post\SpamAdRequest.cshtml" />
+    <None Include="Web.BEA.aspwebhosting.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\DisplayTemplates\AdSearchResultItemModel.cshtml" />

@@ -15,7 +15,7 @@
 @using (Html.BeginForm("Create", "Post", FormMethod.Post))
 {   
     
-    <dl class="dl-horizontal">
+    <div class="dl-horizontal">
         <div class="row">
             <div class="span7">
                 <div class="legend-like"><i class="icon-user"></i>&nbsp;&nbsp;Vos informations</div>
@@ -58,7 +58,7 @@
                 <div class="legend-like"><i class="icon-camera"></i>&nbsp;&nbsp;Vos photos</div>
                 @*@Html.Partial("Shared/Create/_ImageUpload", Model)*@
                 @Html.Partial("Shared/Create/_ImageUpload2", Model)
-                
+
             </div>
         </div>
         <div class="row">
@@ -70,43 +70,43 @@
                     @Html.ValidationMessageFor(model => model.Title, String.Empty, new { @class = "label label-important" })
                 </dd>
                 <div id="parameters">
-            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.CarAd)
-            {
-                @Html.Partial("Shared/Create/_CarAdCreate", Model);
-            }
-            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.MotoAd)
-            {
-                @Html.Partial("Shared/Create/_MotoAdCreate", Model);
-            }
-            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.OtherVehiculeAd)
-            {
-                @Html.Partial("Shared/Create/_OtherVehicleAdCreate", Model);
-            }
-            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.VehiculeAd)
-            {
-                @Html.Partial("Shared/Create/_VehicleAdCreate", Model);
-            }
-            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.MotorBoatAd)
-            {
-                @Html.Partial("Shared/Create/_MotorBoatAdCreate", Model);
-            }
-            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.SailingBoatAd)
-            {
-                @Html.Partial("Shared/Create/_SailingBoatAdCreate", Model);
-            }
-            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.MotorBoatEngineAd)
-            {
-                @Html.Partial("Shared/Create/_MotorBoatEngineAdCreate", Model);
-            }
-            @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.WaterSportAd)
-            {
-                @Html.Partial("Shared/Create/_WaterSportAdCreate", Model);
-            }
-             @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.RealEstateAd)
-            {
-                @Html.Partial("Shared/Create/_RealEstateAdCreate", Model);
-            }
-        </div>
+                    @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.CarAd)
+                    {
+                        @Html.Partial("Shared/Create/_CarAdCreate", Model);
+                    }
+                    @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.MotoAd)
+                    {
+                        @Html.Partial("Shared/Create/_MotoAdCreate", Model);
+                    }
+                    @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.OtherVehiculeAd)
+                    {
+                        @Html.Partial("Shared/Create/_OtherVehicleAdCreate", Model);
+                    }
+                    @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.VehiculeAd)
+                    {
+                        @Html.Partial("Shared/Create/_VehicleAdCreate", Model);
+                    }
+                    @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.MotorBoatAd)
+                    {
+                        @Html.Partial("Shared/Create/_MotorBoatAdCreate", Model);
+                    }
+                    @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.SailingBoatAd)
+                    {
+                        @Html.Partial("Shared/Create/_SailingBoatAdCreate", Model);
+                    }
+                    @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.MotorBoatEngineAd)
+                    {
+                        @Html.Partial("Shared/Create/_MotorBoatEngineAdCreate", Model);
+                    }
+                    @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.WaterSportAd)
+                    {
+                        @Html.Partial("Shared/Create/_WaterSportAdCreate", Model);
+                    }
+                    @if (Model.Type == Bea.Domain.Ads.AdTypeEnum.RealEstateAd)
+                    {
+                        @Html.Partial("Shared/Create/_RealEstateAdCreate", Model);
+                    }
+                </div>
                 <dt>Corps de l'annonce:</dt>
                 <dd>
                     @Html.TextAreaFor(model => model.Body, new { @rows = 10, @class = "input-xxlarge", style = "resize: none;" })
@@ -115,19 +115,20 @@
                 <dt>Prix:</dt>
                 <dd>
                     <div class="input-append">
-                        @Html.TextBoxFor(model => model.Price, new { @class = "input-medium"})
+                        @Html.TextBoxFor(model => model.Price, new { @class = "input-medium" })
                         <span class="add-on">CFP</span>
                     </div>
                     @Html.ValidationMessageFor(model => model.Price, String.Empty, new { @class = "label label-important" })
                 </dd>
                 <dt>Mot de passe:</dt>
                 <dd>
-                    @Html.TextBoxFor(model => model.Password, new { @class = "input-medium", type="password" })
+                    @Html.TextBoxFor(model => model.Password, new { @class = "input-medium", type = "password" })
                     @Html.ValidationMessageFor(model => model.Password, String.Empty, new { @class = "label label-important" })
                 </dd>
-                <dt>Confirmation du</dt><dt>mot de passe:</dt>
+                <dt>Confirmation du</dt>
+                <dt>mot de passe:</dt>
                 <dd>
-                    @Html.TextBoxFor(model => model.PasswordConfirm, new { @class = "input-medium", type="password" })
+                    @Html.TextBoxFor(model => model.PasswordConfirm, new { @class = "input-medium", type = "password" })
                     @Html.ValidationMessageFor(model => model.PasswordConfirm, String.Empty, new { @class = "label label-important" })
                 </dd>
             </div>
@@ -143,7 +144,7 @@
             @Html.ActionLink("Annuler", "Index", new { controller = "Home" }, new { @class = "btn" })
             <button id="submitButton" type="submit" class="btn btn-primary">Valider</button>
         </dd>
-    </dl>
+    </div>
         
 }
 
@@ -152,30 +153,30 @@
     var isLoad = false;
     $(function () {
         $.getJSON('@Url.RouteUrl("ActionApi", new { httproute = "", controller = "LocationApi", action = "GetAllCities" })', function (result) {
-           var ddl = $('#cities');
-           ddl.empty();
-           $(document.createElement('option'))
-                           .attr('value', "")
-                           .text("Choisissez la ville")
-                           .appendTo(ddl);
-           $(result).each(function () {
-               var selected = (this.Id == "@Model.SelectedCityId");
-                $(document.createElement('option'))
-                    .attr('value', this.Id)
-                    .attr('selected', selected)
-                    .text(this.Label)
-                    .appendTo(ddl);
-            });
+            var ddl = $('#cities');
+            ddl.empty();
+            $(document.createElement('option'))
+                            .attr('value', "")
+                            .text("Choisissez la ville")
+                            .appendTo(ddl);
+            $(result).each(function () {
+                var selected = (this.Id == "@Model.SelectedCityId");
+               $(document.createElement('option'))
+                   .attr('value', this.Id)
+                   .attr('selected', selected)
+                   .text(this.Label)
+                   .appendTo(ddl);
+           });
         });
     });
 
-    $(document).ready(function () {
+   $(document).ready(function () {
 
-        $('#categories').change(function () {
-            if ($(this).val()) {
-                //The user selected a province
-                var categoryId = $('#categories').val();
-                var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Post", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
+       $('#categories').change(function () {
+           if ($(this).val()) {
+               //The user selected a province
+               var categoryId = $('#categories').val();
+               var url = '@Url.RouteUrl("DefaultWithParameter", new { httproute = "", controller = "Post", action = "AddParamters", categoryId = "id" })'.replace("id", categoryId);
                 $.ajax({
                     url: url,
                     type: 'GET',
