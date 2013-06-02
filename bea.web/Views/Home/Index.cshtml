@@ -121,7 +121,34 @@
     });
 
     function details_in_popup(popup_div_id, div_id) {
-        var url = '@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategoryChildrenLabels", parentId = "id" })'.replace("id", div_id);
+        var item = sessionStorage.getItem(div_id);
+        if (item != null)
+        {
+            //console.log(item);
+            $('#' + popup_div_id).empty();
+            //$('#' + popup_div_id).append(item);
+            return '<div id="' + popup_div_id + '">' + item + '</div>'
+        }
+        else
+        {
+            //console.log('no stored data');
+            var popupContent = new String();
+            var url = '@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategoryChildrenLabels", parentId = "id" })'.replace("id", div_id);
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                success: function (response) {
+                    $('#' + popup_div_id).empty();
+                    $(response).each(function () {
+                        popupContent = popupContent + this + '<br\> ';
+                        $('#' + popup_div_id).append(this + '<br\> ');
+                    })
+                    sessionStorage.setItem(div_id, popupContent);
+                }
+            });
+
+        }
+@*        var url = '@Url.RouteUrl("ActionApi", new { httproute = "", controller = "CategoryApi", action = "GetAllCategoryChildrenLabels", parentId = "id" })'.replace("id", div_id);
         $.ajax({
             url: url,
             dataType: 'json',
@@ -131,7 +158,7 @@
                     $('#' + popup_div_id).append(this + '<br\> ');
                 })
             }
-        });
+        });'*@
         return '<div id="' + popup_div_id + '">Chargement...</div>'
     }
 </script>
